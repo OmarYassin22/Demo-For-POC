@@ -154,9 +154,11 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/OfficeList.css';
-import Header from './Header';
-import Footer from './Footer';
+ import Navbar from './Navbar/Navbar.jsx';
+import Footer from './Footer/Footer';
 import DataTable from './DataTable'; // Import DataTable component
+import { useApp } from '../context/AppContext.js';
+import { translations } from '../translations.js';
 
 interface Office {
   Name: string;
@@ -167,6 +169,10 @@ const OfficeList: React.FC = () => {
   const [offices, setOffices] = useState<Office[]>([]);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
+
+  const { theme, language, toggleTheme, toggleLanguage } = useApp();
+  const t = translations[language];
+
 
   // Check if the user is logged in, if not redirect to login page
   useEffect(() => {
@@ -216,8 +222,8 @@ const OfficeList: React.FC = () => {
 
   return (
     <div className="min-h-screen">
-      <Header />
-
+      {/* <Navbar theme={theme} language={language} toggleTheme={toggleTheme} toggleLanguage={toggleLanguage} t={t} />
+      */}
       <div className="container">
         {error ? (
           <div className="error-message">{error}</div>
@@ -226,7 +232,7 @@ const OfficeList: React.FC = () => {
         )}
       </div>
 
-      <Footer />
+      {/* <Footer   language={language} /> */}
     </div>
   );
 };

@@ -2,7 +2,7 @@ import Layout from "./layout";
 import Home from "./Components/Home/Home";
 import Login from "./Components/Login/Login";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Offices from "./Components/Offices/Offices";
+import Offices from "./Components/OfficeList";
 import Requests from "./Components/Offices/requests/Requests";
 function App() {
   // const { theme, language, toggleTheme, toggleLanguage } = useApp();
