@@ -64,7 +64,7 @@ function App() {
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {[
-              { icon: < />, number: '250+', label: t.stats.projects },
+              { icon: <Trophy />, number: '250+', label: t.stats.projects },
               { icon: <Users />, number: '1500+', label: t.stats.clients },
               { icon: <Star />, number: '25+', label: t.stats.experience },
               { icon: <BarChart />, number: '50+', label: t.stats.awards },

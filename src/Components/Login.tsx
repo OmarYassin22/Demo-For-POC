@@ -6,7 +6,7 @@ export default function Login() {
       {/* Background Image Section */}
       <div className="login-page-left">
         <img
-          src="/path/to/your/image.png" // Replace with your image path
+          src="../../dist/assets/almltqy-alhndsy-min_0.jpg" // Replace with your image path
           alt="City Background"
           className="background-image"
         />
