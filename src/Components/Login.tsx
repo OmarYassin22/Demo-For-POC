@@ -43,7 +43,9 @@ export default function Login() {
         navigate("/offices");
       } else {
         // Show error message if credentials are incorrect
+
         setErrorMessage("رقم الهوية أو كلمة المرور غير صحيحه.");
+
       }
     },
   });
@@ -58,9 +60,6 @@ export default function Login() {
           alt="City Background"
           className="background-image"
         />
-
-        {/* Background Image (uncomment the line below if you want to use it) */}
-        {/* <ReactSVG src="../assets/MoMH.svg" /> */}
 
       </div>
 
