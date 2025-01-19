@@ -1,13 +1,30 @@
-import React from 'react';
-import { Building2, Hammer, Phone, Mail, HardHat, Ruler, Clock, Shield, UserCircle, Sun, Moon, Languages, Trophy, Users, Star, BarChart, Link } from 'lucide-react';
-import { useApp } from './context/AppContext';
-import { translations } from './translations';
+import Layout from "./layout";
+import Home from "./Components/Home/Home";
+import Login from "./Components/Login/Login";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 function App() {
-  const { theme, language, toggleTheme, toggleLanguage } = useApp();
-  const t = translations[language];
+  // const { theme, language, toggleTheme, toggleLanguage } = useApp();
+  // const t = translations[language];
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Layout />,
+      children: [
+        {
+          index:true,
+          element: <Home />,
+        },
+        {
+          path: "/login",
+          element: <Login />,
+        },
+      ],
+    },
+  ]);
 
   return (
+<<<<<<< HEAD
     <div className={`min-h-screen ${theme === 'dark' ? 'dark:bg-gray-900 dark:text-white' : 'bg-white'}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
       {/* Hero Section */}
       <header className="relative h-screen">
@@ -125,6 +142,11 @@ function App() {
         </div>
       </footer>
     </div>
+=======
+    <>
+      <RouterProvider router={router} />
+    </>
+>>>>>>> 183add15a9777a3dcd25be174a2b1ea161d4f6b4
   );
 }
 
