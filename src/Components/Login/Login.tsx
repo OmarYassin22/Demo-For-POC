@@ -17,7 +17,7 @@ export default function Login() {
       {/* Background Image Section */}
       <div className="login-page-left">
         <img
-          src={bg}
+          src={bg} 
           alt="balady background"
           className="background-image"
         />
