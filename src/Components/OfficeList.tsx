@@ -201,13 +201,13 @@ const OfficeList: React.FC = () => {
   const columns = [
     {
       header: 'المكتب',
-      accessorKey: 'Name', // Use accessorKey to define the field for the column
+      accessorKey: 'name', // Use accessorKey to define the field for the column
     },
     {
       header: '',
       id: 'actions',
       cell: ({ row }: { row: any }) => (
-        <button onClick={() => handleOfficeRequests(row.original.Id)} className="details-btn">
+        <button onClick={() => handleOfficeRequests(row.original.id)} className="details-btn">
           طلبات التفويض
         </button>
       ),
