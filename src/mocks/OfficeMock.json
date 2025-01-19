@@ -9,7 +9,7 @@
     "responseId": "01-7767-38182104-2",
     "result": [
       {
-        "id": "64ed91f79d5cf006de8e3471",
+   "id": "64ed91f79d5cf006de8e3471",
         "name": "رواق الخليج للأستشارات الهندسيه المعماريه",
         "supportedServicesCount": 27,
         "tags": []
@@ -26,6 +26,7 @@
         "supportedServicesCount": 36,
         "tags": []
     }
+
     ]
   }
 }
