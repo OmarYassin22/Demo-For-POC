@@ -3,7 +3,8 @@ import Home from "./Components/Home/Home";
 import Login from "./Components/Login/Login";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Offices from "./Components/Offices/Offices";
-import Requests from "./Components/Offices/requests/Requests";
+import Requests from "./Components/requests/Requests";
+import RequestDetails from './Components/requests/Request/RequestDetails/RequestDetails';
 function App() {
   // const { theme, language, toggleTheme, toggleLanguage } = useApp();
   // const t = translations[language];
@@ -23,13 +24,8 @@ function App() {
         {
           path: "/offices",
           element: <Offices />,
-          children: [
-            // {
-            //   path: "/offices/:id",
-            //   element: <OfficeDetails />, // Replace with your custom OfficeDetails page
-            // },
-          ],
         },
+        {path: "/offices/:id/request/:requestid", element:<RequestDetails/>},
         { path: "/offices/:id/requests", element: <Requests /> },
         {
           path: "*",

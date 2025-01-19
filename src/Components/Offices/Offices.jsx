@@ -1,63 +1,106 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Building2, MapPin, Phone } from "lucide-react";
+import { Building2, MapPin, Phone, Search, ChevronRight, ChevronLeft } from "lucide-react";
 import { useApp } from "../../Context/AppContext";
+import data from "../../mocks/OfficeMock.json";
+
 export default function Offices() {
   const { language } = useApp();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
 
-  const offices = [
-    {
-      id: "64ed91f79d5cf006de8e3471",
-      name: "رواق الخليج للأستشارات الهندسيه المعماريه",
-      supportedServicesCount: 27,
-      tags: [],
-    },
-    {
-      id: "64ed920d9d5cf006de8e34ef",
-      name: "شركة عبدالرحمن احمد الجعفري وشركاه للاستشارات الهندسية",
-      supportedServicesCount: 27,
-      tags: [],
-    },
-    {
-      id: "63c6a7422fac9a1c4020ac1d",
-      name: "صروح البناء للاستشارات الهندسية",
-      supportedServicesCount: 36,
-      tags: [],
-    },
-  ];
+  const offices = Object.entries(data)
+    .map(([id, office]) => ({
+      id,
+      name: office.name,
+      requestCount: office.requests.length,
+      activeRequests: office.requests.filter(r => !r.waitingApproval).length
+    }))
+    .filter(office => 
+      office.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+  const totalPages = Math.ceil(offices.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedOffices = offices.slice(startIndex, startIndex + itemsPerPage);
 
   return (
-    <div
-      className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8"
-      dir={language === "ar" ? "rtl" : "ltr"}
-    >
+    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8"
+         dir={language === "ar" ? "rtl" : "ltr"}>
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-4xl font-bold text-primary mb-12 text-center">
-          {language === "ar" ? "مكاتبنا" : "Our Offices"}
-        </h1>
-
-        <div className="grid md:grid-cols-3 gap-8">
-          {offices.map((office) => (
-            <div
-              key={office.id}
-              className="bg-white rounded-lg shadow-lg overflow-hidden"
-            >
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">
-                  {office.name}
-                </h3>
-
-                <Link
-                  to={`/offices/${office.id}/requests`}
-                  className="mt-6 block text-center bg-primary text-white py-2 px-4 rounded-md hover:bg-primary/90 transition duration-300"
-                >
-                  {language === "ar"
-                    ? " عرض طلبات المكتب"
-                    : "Show Office Requests"}
-                </Link>
-              </div>
+        <div className="mb-12 space-y-6">
+          <h1 className="text-4xl font-bold text-primary text-center">
+            {language === "ar" ? "المكاتب" : "Offices"}
+          </h1>
+          
+          <div className="max-w-md mx-auto">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+              <input
+                type="text"
+                placeholder={language === "ar" ? "ابحث عن مكتب..." : "Search offices..."}
+                className="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
             </div>
+          </div>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {paginatedOffices.map((office) => (
+            <Link to={`/offices/${office.id}/requests`} key={office.id}>
+              <div className="bg-white rounded-xl shadow-sm hover:shadow-lg transition-shadow p-6 border border-gray-100">
+                <div className="flex items-center gap-3 mb-4">
+                  <Building2 className="w-6 h-6 text-primary" />
+                  <h3 className="text-xl font-semibold text-gray-900">
+                    {office.name}
+                  </h3>
+                </div>
+                
+                <div className="flex justify-between text-sm text-gray-600 mt-4">
+                  <div>
+                    <span className="font-medium">{office.requestCount}</span> طلب
+                  </div>
+                  <div>
+                    <span className="font-medium">{office.activeRequests}</span> نشط
+                  </div>
+                </div>
+              </div>
+            </Link>
           ))}
+        </div>
+
+        <div className="flex justify-center items-center gap-2 mt-8">
+          <button
+            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+            className="p-2 rounded-lg border disabled:opacity-50 hover:bg-gray-50"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+            <button
+              key={page}
+              onClick={() => setCurrentPage(page)}
+              className={`w-10 h-10 rounded-lg border ${
+                currentPage === page 
+                  ? 'bg-primary text-white' 
+                  : 'hover:bg-gray-50'
+              }`}
+            >
+              {page}
+            </button>
+          ))}
+
+          <button
+            onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+            disabled={currentPage === totalPages}
+            className="p-2 rounded-lg border disabled:opacity-50 hover:bg-gray-50"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
         </div>
       </div>
     </div>

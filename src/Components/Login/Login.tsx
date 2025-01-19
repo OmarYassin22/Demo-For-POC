@@ -14,7 +14,6 @@ export default function Login() {
         theme === "dark" ? "dark:bg-gray-900 dark:text-white" : "bg-white"
       }`}
     >
-      {/* Background Image Section */}
       <div className="login-page-left">
         <img
           src={bg} 
@@ -23,7 +22,6 @@ export default function Login() {
         />
       </div>
 
-      {/* Login Form Section */}
       <div className="login-page-right my-5">
         <h2 className="login-title">{t.login.title}</h2>
         <p className="login-subtitle">{t.login.subtitle}</p>

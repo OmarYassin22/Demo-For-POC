@@ -32,7 +32,6 @@ export default function Home() {
       }`}
       dir={language === "ar" ? "rtl" : "ltr"}
     >
-      {/* Hero Section */}
       <header className="relative h-screen">
         <div className="absolute inset-0">
           <img
@@ -63,7 +62,6 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Statistics Section */}
       <section className="py-16 bg-primary text-white">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
@@ -83,7 +81,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Projects Section */}
       <section id="projects" className="py-20 bg-gray-50 dark:bg-gray-800">
         <div className="container mx-auto px-6">
           <h2 className="text-4xl font-bold text-center mb-16 text-primary dark:text-white">
