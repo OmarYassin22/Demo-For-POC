@@ -133,7 +133,26 @@
           "amanaName": "أمانة محافظة الطائف",
           "baladiaId": 310,
           "baladiaName": "بلدية الطائف الجديد الفرعية",
-          "krokiNo": 46079867650
+          "krokiNo": 46079867650,
+          "LandNumber": "995",
+          "MainUsedName": "سكني",
+          "SubUsedName": "فيلا",
+          "LandsListData": [
+            {
+              "LandNumber": "80191421",
+              "LandArea": 34758.74492,
+              "RealestateID": null,
+              "LandAreaAccordingToScheme": null,
+              "partNumber": null
+            },
+            {
+              "LandNumber": "80191421",
+              "LandArea": 34758.74492,
+              "RealestateID": null,
+              "LandAreaAccordingToScheme": null,
+              "partNumber": null
+            }
+          ]
         }
       },
       {
@@ -158,7 +177,26 @@
           "amanaName": "أمانة محافظة الطائف",
           "baladiaId": 315,
           "baladiaName": "بلدية الهدا الفرعية",
-          "krokiNo": 46079867606
+          "krokiNo": 46079867606,
+          "LandNumber": "995",
+          "MainUsedName": "سكني",
+          "SubUsedName": "فيلا",
+          "LandsListData": [
+            {
+              "LandNumber": "80191421",
+              "LandArea": 34758.74492,
+              "RealestateID": null,
+              "LandAreaAccordingToScheme": null,
+              "partNumber": null
+            },
+            {
+              "LandNumber": "80191421",
+              "LandArea": 34758.74492,
+              "RealestateID": null,
+              "LandAreaAccordingToScheme": null,
+              "partNumber": null
+            }
+          ]
         }
       },
       {
@@ -183,7 +221,26 @@
           "amanaName": "أمانة محافظة الطائف",
           "baladiaId": 317,
           "baladiaName": "بلدية الشفا الفرعية",
-          "krokiNo": 46079867557
+          "krokiNo": 46079867557,
+          "LandNumber": "995",
+          "MainUsedName": "سكني",
+          "SubUsedName": "فيلا",
+          "LandsListData": [
+            {
+              "LandNumber": "80191421",
+              "LandArea": 34758.74492,
+              "RealestateID": null,
+              "LandAreaAccordingToScheme": null,
+              "partNumber": null
+            },
+            {
+              "LandNumber": "80191421",
+              "LandArea": 34758.74492,
+              "RealestateID": null,
+              "LandAreaAccordingToScheme": null,
+              "partNumber": null
+            }
+          ]
         }
       },
       {
@@ -208,7 +265,26 @@
           "amanaName": "أمانة منطقة حائل",
           "baladiaId": 40,
           "baladiaName": "بلدية الوسط",
-          "krokiNo": 46079867586
+          "krokiNo": 46079867586,
+          "LandNumber": "995",
+          "MainUsedName": "سكني",
+          "SubUsedName": "فيلا",
+          "LandsListData": [
+            {
+              "LandNumber": "80191421",
+              "LandArea": 34758.74492,
+              "RealestateID": null,
+              "LandAreaAccordingToScheme": null,
+              "partNumber": null
+            },
+            {
+              "LandNumber": "80191421",
+              "LandArea": 34758.74492,
+              "RealestateID": null,
+              "LandAreaAccordingToScheme": null,
+              "partNumber": null
+            }
+          ]
         }
       },
       {
@@ -233,7 +309,26 @@
           "amanaName": "أمانة المنطقة الشرقية",
           "baladiaId": 3,
           "baladiaName": "بلدية محافظة الخبر",
-          "krokiNo": 46079866017
+          "krokiNo": 46079866017,
+          "LandNumber": "995",
+          "MainUsedName": "سكني",
+          "SubUsedName": "فيلا",
+          "LandsListData": [
+            {
+              "LandNumber": "80191421",
+              "LandArea": 34758.74492,
+              "RealestateID": null,
+              "LandAreaAccordingToScheme": null,
+              "partNumber": null
+            },
+            {
+              "LandNumber": "80191488",
+              "LandArea": 34758.74492,
+              "RealestateID": null,
+              "LandAreaAccordingToScheme": null,
+              "partNumber": null
+            }
+          ]
         }
       },
       {
@@ -258,7 +353,10 @@
           "amanaName": "أمانة المنطقة الشرقية",
           "baladiaId": 96,
           "baladiaName": "القطيف",
-          "krokiNo": 46079866277
+          "krokiNo": 46079866277,
+          "LandNumber": "995",
+          "MainUsedName": "سكني",
+          "SubUsedName": "فيلا"
         }
       },
       {
@@ -283,7 +381,10 @@
           "amanaName": "أمانة منطقة القصيم",
           "baladiaId": 115,
           "baladiaName": "بلدية عنيزة",
-          "krokiNo": 46079866192
+          "krokiNo": 46079866192,
+          "LandNumber": "995",
+          "MainUsedName": "سكني",
+          "SubUsedName": "فيلا"
         }
       },
       {
@@ -308,7 +409,10 @@
           "amanaName": "أمانة محافظة جدة",
           "baladiaId": 414,
           "baladiaName": "بلدية أبحر",
-          "krokiNo": 46079866190
+          "krokiNo": 46079866190,
+          "LandNumber": "995",
+          "MainUsedName": "سكني",
+          "SubUsedName": "فيلا"
         }
       },
       {
@@ -333,7 +437,10 @@
           "amanaName": "أمانة محافظة جدة",
           "baladiaId": 415,
           "baladiaName": "بلدية أم السلم",
-          "krokiNo": 46079866137
+          "krokiNo": 46079866137,
+          "LandNumber": "995",
+          "MainUsedName": "سكني",
+          "SubUsedName": "فيلا"
         }
       },
       {
@@ -358,7 +465,10 @@
           "amanaName": "أمانة منطقة الجوف",
           "baladiaId": 386,
           "baladiaName": "بلدية دومة الجندل",
-          "krokiNo": 46069864463
+          "krokiNo": 46069864463,
+          "LandNumber": "995",
+          "MainUsedName": "سكني",
+          "SubUsedName": "فيلا"
         }
       },
       {
@@ -411,7 +521,10 @@
           "amanaName": "أمانة منطقة المدينة المنورة",
           "baladiaId": 215,
           "baladiaName": "بلدية قباء",
-          "krokiNo": 46079866080
+          "krokiNo": 46079866080,
+          "LandNumber": "995",
+          "MainUsedName": "سكني",
+          "SubUsedName": "فيلا"
         }
       },
       {
@@ -436,7 +549,10 @@
           "amanaName": "أمانة العاصمة المقدسة",
           "baladiaId": 492,
           "baladiaName": "بلدية جنوب مكة",
-          "krokiNo": 46069865813
+          "krokiNo": 46069865813,
+          "LandNumber": "995",
+          "MainUsedName": "سكني",
+          "SubUsedName": "فيلا"
         }
       },
       {
@@ -461,7 +577,10 @@
           "amanaName": "أمانة منطقة القصيم",
           "baladiaId": 115,
           "baladiaName": "بلدية عنيزة",
-          "krokiNo": 46079865821
+          "krokiNo": 46079865821,
+          "LandNumber": "995",
+          "MainUsedName": "سكني",
+          "SubUsedName": "فيلا"
         }
       },
       {
@@ -486,7 +605,10 @@
           "amanaName": "أمانة منطقة المدينة المنورة",
           "baladiaId": 215,
           "baladiaName": "بلدية قباء",
-          "krokiNo": 46069865815
+          "krokiNo": 46069865815,
+          "LandNumber": "995",
+          "MainUsedName": "سكني",
+          "SubUsedName": "فيلا"
         }
       },
       {
@@ -525,7 +647,10 @@
           "amanaName": "أمانة المنطقة الشرقية",
           "baladiaId": 8,
           "baladiaName": "أمانة المنطقة الشرقية",
-          "krokiNo": 46059859328
+          "krokiNo": 46059859328,
+          "LandNumber": "995",
+          "MainUsedName": "سكني",
+          "SubUsedName": "فيلا"
         }
       },
       {
@@ -550,7 +675,10 @@
           "amanaName": "أمانة المنطقة الشرقية",
           "baladiaId": 5,
           "baladiaName": "بلدية وسط الدمام",
-          "krokiNo": 46069865216
+          "krokiNo": 46069865216,
+          "LandNumber": "995",
+          "MainUsedName": "سكني",
+          "SubUsedName": "فيلا"
         }
       },
       {
@@ -575,7 +703,10 @@
           "amanaName": "أمانة المنطقة الشرقية",
           "baladiaId": 5,
           "baladiaName": "بلدية وسط الدمام",
-          "krokiNo": 46069865215
+          "krokiNo": 46069865215,
+          "LandNumber": "995",
+          "MainUsedName": "سكني",
+          "SubUsedName": "فيلا"
         }
       },
       {
@@ -600,7 +731,10 @@
           "amanaName": "أمانة المنطقة الشرقية",
           "baladiaId": 5,
           "baladiaName": "بلدية وسط الدمام",
-          "krokiNo": 46069865211
+          "krokiNo": 46069865211,
+          "LandNumber": "995",
+          "MainUsedName": "سكني",
+          "SubUsedName": "فيلا"
         }
       },
       {
@@ -625,7 +759,10 @@
           "amanaName": "أمانة المنطقة الشرقية",
           "baladiaId": 5,
           "baladiaName": "بلدية وسط الدمام",
-          "krokiNo": 46069865097
+          "krokiNo": 46069865097,
+          "LandNumber": "995",
+          "MainUsedName": "سكني",
+          "SubUsedName": "فيلا"
         }
       },
       {
@@ -650,7 +787,10 @@
           "amanaName": "أمانة منطقة الاحساء",
           "baladiaId": 197,
           "baladiaName": "بلدية المبرز",
-          "krokiNo": 46069864891
+          "krokiNo": 46069864891,
+          "LandNumber": "995",
+          "MainUsedName": "سكني",
+          "SubUsedName": "فيلا"
         }
       },
       {
@@ -675,7 +815,10 @@
           "amanaName": "أمانة منطقة الاحساء",
           "baladiaId": 197,
           "baladiaName": "بلدية المبرز",
-          "krokiNo": 46069864891
+          "krokiNo": 46069864891,
+          "LandNumber": "995",
+          "MainUsedName": "سكني",
+          "SubUsedName": "فيلا"
         }
       },
       {
@@ -710,7 +853,10 @@
             "amanaName": "أمانة منطقة الباحة",
             "baladiaId": 148,
             "baladiaName": "بلدية بني حسن",
-            "krokiNo": 46069864683
+            "krokiNo": 46069864683,
+            "LandNumber": "995",
+            "MainUsedName": "سكني",
+            "SubUsedName": "فيلا"
           }
         }
       },
@@ -736,7 +882,10 @@
           "amanaName": "أمانة منطقة الباحة",
           "baladiaId": 148,
           "baladiaName": "بلدية بني حسن",
-          "krokiNo": 46069864683
+          "krokiNo": 46069864683,
+          "LandNumber": "995",
+          "MainUsedName": "سكني",
+          "SubUsedName": "فيلا"
         }
       },
       {
