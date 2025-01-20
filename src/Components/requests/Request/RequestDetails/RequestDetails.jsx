@@ -61,6 +61,8 @@ export default function RequestDetails() {
   const [activeTab, setActiveTab] = useState("details");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 20; // Number of conditions per page
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
@@ -79,14 +81,19 @@ export default function RequestDetails() {
   const ConditionsModal = () => {
     if (!isModalOpen) return null;
 
+    // Pagination calculations
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = conditionsData?.conditions?.slice(indexOfFirstItem, indexOfLastItem);
+    const totalPages = Math.ceil((conditionsData?.conditions?.length || 0) / itemsPerPage);
+
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
     return (
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-        <div
-          className="bg-white rounded-lg p-6 max-w-4xl w-full max-h-[80vh] overflow-y-auto"
-          style={{ direction: "rtl" }}
-        >
+        <div className="bg-white rounded-lg p-6 max-w-4xl w-full max-h-[80vh] overflow-y-auto" style={{ direction: "rtl" }}>
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-bold">الشروط </h2>
+            <h2 className="text-xl font-bold">الشروط والأحكام</h2>
             <button
               onClick={() => setIsModalOpen(false)}
               className="text-gray-500 hover:text-gray-700"
@@ -94,14 +101,12 @@ export default function RequestDetails() {
               <X className="w-6 h-6" />
             </button>
           </div>
-
+          
           <div className="space-y-4">
-            {conditionsData?.conditions?.map((condition, index) => (
+            {currentItems?.map((condition, index) => (
               <div key={index} className="border rounded-lg p-4">
                 <div className="flex justify-between items-center mb-2">
-                  <h3 className="font-semibold text-lg">
-                    شرط: {condition.code}
-                  </h3>
+                  <h3 className="font-semibold text-lg">كود {condition.code}</h3>
                   <span className="text-sm text-gray-500">
                     {condition.place}
                   </span>
@@ -116,7 +121,51 @@ export default function RequestDetails() {
             ))}
           </div>
 
-          <div className="mt-6 flex justify-end gap-4">
+          {/* Pagination Controls */}
+          <div className="mt-6 flex justify-center items-center gap-2 border-t pt-4">
+            <button
+              onClick={() => paginate(currentPage - 1)}
+              disabled={currentPage === 1}
+              className={`px-3 py-1 rounded ${
+                currentPage === 1 
+                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                  : 'bg-blue-50 text-blue-600 hover:bg-blue-100'
+              }`}
+            >
+              السابق
+            </button>
+            
+            <div className="flex gap-2">
+              {[...Array(totalPages)].map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => paginate(idx + 1)}
+                  className={`w-8 h-8 rounded-full ${
+                    currentPage === idx + 1
+                      ? 'bg-blue-600 text-white'
+                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  }`}
+                >
+                  {idx + 1}
+                </button>
+              ))}
+            </div>
+
+            <button
+              onClick={() => paginate(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className={`px-3 py-1 rounded ${
+                currentPage === totalPages
+                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                  : 'bg-blue-50 text-blue-600 hover:bg-blue-100'
+              }`}
+            >
+              التالي
+            </button>
+          </div>
+
+          {/* Modal Footer */}
+          <div className="mt-6 flex justify-end gap-4 border-t pt-4">
             <button
               onClick={() => setIsModalOpen(false)}
               className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
@@ -130,7 +179,7 @@ export default function RequestDetails() {
               }}
               className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
             >
-              موافق وبدء الخدمة
+                بدء الخدمة
             </button>
           </div>
         </div>
@@ -373,6 +422,7 @@ export default function RequestDetails() {
                       <input
                         type="text"
                         disabled
+            
                         id="first_name"
                         value={request?.result?.SubUsedName || "لا يوجد"}
                         className="mt-1  bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
@@ -395,15 +445,11 @@ export default function RequestDetails() {
                 <div className="bg-gray-100 p-4 rounded-lg mb-6">
                   <div className="grid grid-cols-2 gap-6">
                     <div className="flex items-center gap-2">
-                      <label htmlFor="test1">
-                        التحقق من المخططات المعمارىة
-                      </label>
+                      <label htmlFor="test1">التحقق من المخططات المعمارىة</label>
                       <input type="checkbox" id="test1" name="test1" />
                     </div>
                     <div className="flex items-center gap-2">
-                      <label htmlFor="test2">
-                        التحقق من المخططات الانشائية
-                      </label>
+                      <label htmlFor="test2">التحقق من المخططات الانشائية</label>
                       <input type="checkbox" id="test2" name="test2" />
                     </div>
                   </div>
@@ -430,3 +476,11 @@ export default function RequestDetails() {
     </div>
   );
 }
+
+//           )}
+//         </div>
+//       </div>
+//       <ConditionsModal />
+//     </div>
+//   );
+// }
