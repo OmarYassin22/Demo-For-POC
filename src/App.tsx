@@ -25,8 +25,10 @@ function App() {
           path: "/offices",
           element: <Offices />,
         },
-        {path: "/offices/:id/request/:requestid", element:<RequestDetails/>},
         { path: "/offices/:id/requests", element: <Requests /> },
+        {path: "/offices/:id/request/:requestid", element:<RequestDetails/>},
+        // { path: "/offices/:id/requests/:requestid/", element: <RequestDetails /> }
+        
         {
           path: "*",
           element: <h1>Page Not Found</h1>, // Replace with your custom 404 page
