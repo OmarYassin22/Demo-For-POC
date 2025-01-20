@@ -308,10 +308,10 @@ export default function RequestDetails() {
                       <input type="checkbox" id="test1" name="test1" />
                     </div>
                     <div className="flex items-center gap-2">
-                      <label htmlFor="test1">
+                      <label htmlFor="test2">
                         التحقق من المخططات الانشائية
                       </label>
-                      <input type="checkbox" id="test1" name="test1" />
+                      <input type="checkbox" id="test2" name="test2" />
                     </div>
                   </div>
                 </div>
