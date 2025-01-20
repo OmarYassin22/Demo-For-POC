@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
   User,
@@ -16,6 +16,12 @@ import conditionsData from "../../../../mocks/ConditionMock.json";
 import { Link } from "react-router-dom";
 
 export default function RequestDetails() {
+
+    useEffect(() => {
+      if (localStorage.getItem("isLoggedIn") !== "true") {
+        navigate("/login");
+      }
+    });
   const { id, requestid } = useParams();
   const navigate = useNavigate();
   const office = data[id];
@@ -91,7 +97,36 @@ export default function RequestDetails() {
 
     return (
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-        <div className="bg-white rounded-lg p-6 max-w-4xl w-full max-h-[80vh] overflow-y-auto" style={{ direction: "rtl" }}>
+        <div className="bg-white rounded-lg p-6 max-w-4xl w-full max-h-[80vh] overflow-y-auto custom-scrollbar" 
+          style={{ 
+            direction: "rtl",
+            // Custom scrollbar styles
+            scrollbarWidth: 'thin',
+            scrollbarColor: '#94A3B8 #E2E8F0',
+          }}>
+          
+          <style jsx>{`
+            .custom-scrollbar::-webkit-scrollbar {
+              width: 8px;
+              height: 8px;
+            }
+            .custom-scrollbar::-webkit-scrollbar-track {
+              background: #E2E8F0;
+              border-radius: 4px;
+            }
+            .custom-scrollbar::-webkit-scrollbar-thumb {
+              background: #94A3B8;
+              border-radius: 4px;
+            }
+            .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+              background: #64748B;
+            }
+            .custom-scrollbar {
+              scrollbar-width: thin;
+              scrollbar-color: #94A3B8 #E2E8F0;
+            }
+          `}</style>
+
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-bold">الشروط والأحكام</h2>
             <button
@@ -476,11 +511,3 @@ export default function RequestDetails() {
     </div>
   );
 }
-
-//           )}
-//         </div>
-//       </div>
-//       <ConditionsModal />
-//     </div>
-//   );
-// }

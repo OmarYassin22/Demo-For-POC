@@ -1,19 +1,16 @@
-
-import { useApp } from "../../context/AppContext";
-import { translations } from "../../translations";
-import bg from "../../Assets/image/Screenshot_18-1-2025_133036_ssoapp.balady.gov.sa.jpeg";
+import bg from "../../Assets/image/Screenshot_18-1-2025_133036_ssoapp.balady.gov.sa.jpeg"; // Import background image
 import React from "react";
-import { ReactSVG } from 'react-svg';
 import { useNavigate } from "react-router-dom"; // Import useNavigate for redirecting
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { Lock, UserCircle2 } from 'lucide-react'; // Add Lucide icons
 
 // Define Yup validation schema
 const validationSchema = Yup.object({
   username: Yup.string()
     .required("رقم الهوية مطلوب")
-     .min(9, "رقم الهوية لايقل عن 9 حروف")
-    ,
+    .min(9, "رقم الهوية لايقل عن 9 حروف")
+  ,
   password: Yup.string()
     .required("كلمة المرور مطلوبة"),
 });
@@ -55,71 +52,107 @@ export default function Login() {
     },
   });
 
-
-  const { theme, language, toggleTheme, toggleLanguage } = useApp();
-  const t = translations[language];
-
   return (
-    <div
-      dir={language === "ar" ? "rtl" : "ltr"}
-      className={`login-page  ${
-        theme === "dark" ? "dark:bg-gray-900 dark:text-white" : "bg-white"
-      }`}
-    >
-      <div className="login-page-left">
+    <div className="min-h-screen relative" style={{direction: 'rtl'}}>
+      <div className="absolute inset-0 z-0">
         <img
-          src={bg} 
+          src={bg}
           alt="balady background"
-          className="background-image"
+          className="w-full h-full object-cover"
         />
+        <div className="absolute inset-0  " />
       </div>
 
-      <div className="login-page-right my-5">
-        <h2 className="login-title">{t.login.title}</h2>
-        <p className="login-subtitle">{t.login.subtitle}</p>
-        <form onSubmit={formik.handleSubmit}>
-            <div className="form-group">
-              <input
-                type="text"
-                placeholder="رقم الهوية / الاقامة"
-                className="login-input"
-                id="username"
-                name="username"
-                value={formik.values.username}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-              />
-              {/* Display validation error for username */}
-              {formik.touched.username && formik.errors.username && (
-                <div className="error-message">{formik.errors.username}</div>
-              )}
+      {/* Content */}
+      <div className="relative z-10 min-h-screen flex justify-center items-center p-8">
+        <div className="w-full max-w-md bg-white/95 backdrop-blur-sm rounded-xl shadow-2xl p-8 space-y-8">
+          {/* Header */}
+          <div className="text-center">
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">
+              تسجيل الدخول
+            </h2>
+            <p className="text-gray-600">
+              الدخول الموحد، وزارة البلديات والإسكان
+            </p>
+          </div>
+
+          {/* Form */}
+          <form onSubmit={formik.handleSubmit} className="space-y-6">
+            <div className="space-y-4">
+              {/* Username Input */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  رقم الهوية / الاقامة
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 right-0 flex items-center pr-3">
+                    <UserCircle2 className="h-5 w-5 text-gray-400" />
+                  </div>
+                  <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    value={formik.values.username}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    className={`block w-full pr-10 py-3 text-gray-900 border rounded-lg focus:ring-2 focus:ring-blue-500 ${formik.touched.username && formik.errors.username
+                      ? 'border-red-500'
+                      : 'border-gray-300'
+                      }`}
+                    placeholder="أدخل رقم الهوية"
+                  />
+                </div>
+                {formik.touched.username && formik.errors.username && (
+                  <p className="mt-1 text-sm text-red-600">{formik.errors.username}</p>
+                )}
+              </div>
+
+              {/* Password Input */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  كلمة المرور
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 right-0 flex items-center pr-3">
+                    <Lock className="h-5 w-5 text-gray-400" />
+                  </div>
+                  <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    className={`block w-full pr-10 py-3 text-gray-900 border rounded-lg focus:ring-2 focus:ring-blue-500 ${formik.touched.password && formik.errors.password
+                      ? 'border-red-500'
+                      : 'border-gray-300'
+                      }`}
+                    placeholder="أدخل كلمة المرور"
+                  />
+                </div>
+                {formik.touched.password && formik.errors.password && (
+                  <p className="mt-1 text-sm text-red-600">{formik.errors.password}</p>
+                )}
+              </div>
             </div>
 
-            <div className="form-group">
-              <input
-                type="password"
-                id="password"
-                name="password"
-                placeholder="أدخل كلمة المرور هنا"
-                className="login-input"
-                value={formik.values.password}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-              />
-              {/* Display validation error for password */}
-              {formik.touched.password && formik.errors.password && (
-                <div className="error-message">{formik.errors.password}</div>
-              )}
-            </div>
+            {/* Error Message */}
+            {errorMessage && (
+              <div className="p-3 bg-red-50 border border-red-200 rounded-lg">
+                <p className="text-sm text-red-600">{errorMessage}</p>
+              </div>
+            )}
 
-            {/* Show custom error message if username or password is incorrect */}
-            {errorMessage && <div className="error-message">{errorMessage}</div>}
-
-            <button type="submit" className="login-button">
+            {/* Submit Button */}
+            <button
+              type="submit"
+              className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150"
+            >
               تسجيل الدخول
             </button>
+
           </form>
-      
+        </div>
       </div>
     </div>
   );

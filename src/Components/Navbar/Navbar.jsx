@@ -1,62 +1,102 @@
-import { Building2, Languages, Moon,Sun, UserCircle } from 'lucide-react'
-import React from 'react'
-import { useApp } from '../../Context/AppContext';
-import { translations } from '../../translations';
-import { Link } from 'react-router-dom';
+import {
+  Building2,
+  Languages,
+  LogOut,
+  Moon,
+  Sun,
+  UserCircle,
+} from "lucide-react";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-export default function Navbar({theme, language, toggleTheme, toggleLanguage,t}) {
+export default function Navbar({
+  theme,
+  language,
+  toggleTheme,
+  toggleLanguage,
+  t,
+}) {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
-  return (  
+  useEffect(() => {
+    const loginStatus = localStorage.getItem("isLoggedIn");
+    setIsLoggedIn(loginStatus === "true");
+  }, );
+
+  const handleLogout = () => {
+    localStorage.removeItem("isLoggedIn");
+    setIsLoggedIn(false);
+    navigate("/login");
+  };
+
+  return (
     <>
-      <nav className="relative z-10 flex items-center justify-between px-6 py-4 bg-primary"  dir={language === "ar" ? "rtl" : "ltr"}>
-          <div className="flex items-center space-x-2 space-x-reverse">
-            <Building2 className="h-8 w-8 text-white" />
-            <Link to="/" className="text-white text-2xl font-bold">
-              {language === "ar" ? "البناء برو" : "BuildPro"}
-            </Link> 
-          </div>
-          <div className="flex items-center space-x-8 space-x-reverse">
+      <nav
+        className="relative z-10 flex items-center justify-between px-6 py-4 bg-primary"
+        dir={language === "ar" ? "rtl" : "ltr"}
+      >
+        <div className="flex items-center space-x-2 space-x-reverse">
+          <Building2 className="h-8 w-8 text-white" />
+          <Link
+            to={isLoggedIn ? "/offices" : "/"}
+            className="text-white text-2xl font-bold"
+          >
+            {language === "ar" ? "البناء برو" : "BuildPro"}
+          </Link>
+        </div>
+        <div className="flex items-center space-x-8 space-x-reverse">
+          {/* Show navigation links only when not logged in */}
+          {!isLoggedIn && (
             <div className="hidden md:flex space-x-8 space-x-reverse">
               <a
                 href="#services"
-                className="text-white text-3xl mx-4 hover:text-gray-200"
+                className="text-white text-xl mx-4 hover:text-gray-200"
               >
-                {t.nav.services}
+                خدماتنا
               </a>
               <a
                 href="#projects"
-                className="text-white text-3xl ml-4 hover:text-gray-200"
+                className="text-white text-xl ml-4 hover:text-gray-200"
               >
-                {t.nav.projects}
+                مشاريعنا
               </a>
               <a
                 href="#contact"
-                className="text-white text-3xl ml-4 hover:text-gray-200"
+                className="text-white text-xl ml-4 hover:text-gray-200"
               >
-                {t.nav.contact}
+                اتصل بنا
               </a>
             </div>
-            <button
-              onClick={toggleTheme}
-              className="text-white hover:text-gray-200"
+          )}
+          {isLoggedIn && (
+            <Link
+              to="/offices"
+              className="text-white text-xl mx-4 hover:text-gray-200"
             >
-              {theme === "light" ? (
-                <Moon className="h-6 w-6" />
-              ) : (
-                <Sun className="h-6 w-6" />
-              )}
-            </button>
-            <button
-              onClick={toggleLanguage}
-              className="text-white hover:text-gray-200"
-            >
-              <Languages className="h-6 w-6" />
-            </button>
-            <Link to="/login" className="text-white hover:text-gray-200">
-              <UserCircle className="h-6 w-6" />
+              المكاتب
             </Link>
-          </div>
-        </nav>
+          )}
+
+          {isLoggedIn ? (
+            <button
+              onClick={handleLogout}
+              className="flex items-center gap-2 text-white hover:text-gray-200"
+            >
+              <LogOut className="h-6 w-6" />
+              <span className="text-sm">تسجيل خروج</span>
+            </button>
+          ) : (
+            <Link
+              to="/login"
+              className="flex items-center gap-2 text-white hover:text-gray-200"
+            >
+              <UserCircle className="h-6 w-6" />
+              <span className="text-sm">تسجيل دخول</span>
+            </Link>
+          )}
+        </div>
+      </nav>
     </>
-  )
+  );
 }

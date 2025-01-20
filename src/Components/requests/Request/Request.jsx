@@ -1,8 +1,16 @@
 import { Card } from "flowbite-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { User, Calendar, Hash, Check, X } from "lucide-react"; // Import icons
+import { useEffect } from "react";
 
 export default function Component({data, officeId}) {
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    if (localStorage.getItem("isLoggedIn") !== "true") {
+      navigate("/login");
+    }
+  });
   const { ownerName, number, platformName, ownerId,waitingApproval, creationTime } = data;
   const formattedDate = new Date(creationTime).toLocaleDateString('ar-SA', {
     year: 'numeric',

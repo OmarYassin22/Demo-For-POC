@@ -1,10 +1,17 @@
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import data from "../../mocks/OfficeMock.json";
 import Component from "./Request/Request";
 import { Building2, ChevronRight, ChevronLeft, Search } from "lucide-react";
 
 export default function Requests() {
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    if (localStorage.getItem("isLoggedIn") !== "true") {
+      navigate("/login");
+    }
+  });
   const { id } = useParams();
   const office = data[id];
   const [currentPage, setCurrentPage] = useState(1);
