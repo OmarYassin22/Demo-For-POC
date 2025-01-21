@@ -1,0 +1,803 @@
+[
+    {
+        "OldLicense": "",
+        "KrookiNumber": 45109841307,
+        "KrookiHijriIssueDate": "1445/10/05",
+        "KrookiIssueDate": "2024/04/14",
+        "PurposeID": 111,
+        "Area": 1799.99,
+        "PurposeName": "اصدار رخصة بناء",
+        "Note": null,
+        "MainUsedCode": 13,
+        "MainUsedName": "سكني",
+        "SubUsedCode": 26,
+        "SubUsedName": "فيلا",
+        "LandType": 113,
+        "LandTypeName": "مخططة",
+        "LandUsed": null,
+        "LandUsedName": null,
+        "HasNeighborhood": false,
+        "IsLandMobtra": false,
+        "IsFawry": false,
+        "SiteType": 165,
+        "SiteTypeName": "مبني قائم",
+        "LocationData": {
+            "AmanahCode": "f5bbf80f-1b10-497c-a69c-5c6337ecdd57",
+            "AmanahName": "أمانة منطقة حائل",
+            "BaladiyaCode": "ca2d988f-93a2-4c5f-a1ac-f21d3aaf529b",
+            "BaladiyaName": "بلدية الجنوب",
+            "IssuerCode": "04fb1bed-91de-47d4-8f84-2d868bd79253",
+            "IssuerName": "أمانة منطقة حائل",
+            "DistrictCode": 2873,
+            "DistrictName": "إشبيليا",
+            "PlanNumber": "1299",
+            "BlockNumber": "بدون",
+            "RegionNumber": null,
+            "RegionName": null,
+            "CityNumber": 11,
+            "CityName": "حائل                          "
+        },
+        "OwnershipData": {
+            "OwnershipDocCode": 664,
+            "OwnershipDocName": "عقد استثماري - تخصيص حكومي",
+            "OwnershipDocNumber": " 4517312082",
+            "OwnershipDocDate": "1445/10/01"
+        },
+        "EngOfficeData": {
+            "OfficeLicense": "159",
+            "OfficeName": "شركة عبدالرحمن احمد الجعفري وشركاه للاستشارات الهندسية"
+        },
+        "Attachments": [
+            {
+                "KrookiFile": "https://apiservicesstg.balady.gov.sa/v1/attachment/license-file/a1f18e7d8b124539a025bd0cb89bb977",
+                "KrookiCoordFile": null
+            }
+        ],
+        "LocationBordersListData": [
+            {
+                "Side": 3,
+                "Boundary": "الحد حسب الطبيعةالجنوب",
+                "DeedBoundary": null,
+                "BorderLength": 29.99,
+                "DeedBorderLength": null,
+                "Truncate": null,
+                "LessReflections": null,
+                "MaxOutcropping": null,
+                "BorderType": 1291,
+                "BorderTypeName": "قطعة",
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": [
+                    {
+                        "length": 29.99,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    }
+                ]
+            },
+            {
+                "Side": 2,
+                "Boundary": "الحد حسب الطبيعةالشرق",
+                "DeedBoundary": null,
+                "BorderLength": 59.98,
+                "DeedBorderLength": null,
+                "Truncate": null,
+                "LessReflections": null,
+                "MaxOutcropping": null,
+                "BorderType": 1291,
+                "BorderTypeName": "قطعة",
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": [
+                    {
+                        "length": 29.99,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    },
+                    {
+                        "length": 29.99,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    }
+                ]
+            },
+            {
+                "Side": 4,
+                "Boundary": "الحد حسب الطبيعةالغرب",
+                "DeedBoundary": null,
+                "BorderLength": 59.98,
+                "DeedBorderLength": null,
+                "Truncate": null,
+                "LessReflections": null,
+                "MaxOutcropping": null,
+                "BorderType": 1291,
+                "BorderTypeName": "قطعة",
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": [
+                    {
+                        "length": 29.99,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    },
+                    {
+                        "length": 29.99,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    }
+                ]
+            },
+            {
+                "Side": 1,
+                "Boundary": "الحد حسب الطبيعةالشمال",
+                "DeedBoundary": null,
+                "BorderLength": 29.99,
+                "DeedBorderLength": null,
+                "Truncate": null,
+                "LessReflections": null,
+                "MaxOutcropping": null,
+                "BorderType": 1296,
+                "BorderTypeName": "وادي",
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": [
+                    {
+                        "length": 29.99,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    }
+                ]
+            }
+        ],
+        "CoordinatesListData": [
+            {
+                "CoordinateNumber": 12630232,
+                "Longitude": "41.68288909600005",
+                "Latitude": "27.468414462000055"
+            },
+            {
+                "CoordinateNumber": 12630233,
+                "Longitude": "41.683289510000066",
+                "Latitude": "27.468550721000042"
+            },
+            {
+                "CoordinateNumber": 12630230,
+                "Longitude": "41.68261234200003",
+                "Latitude": "27.468525304000025"
+            },
+            {
+                "CoordinateNumber": 12630231,
+                "Longitude": "41.683289510000066",
+                "Latitude": "27.468550721000042"
+            },
+            {
+                "CoordinateNumber": 12630236,
+                "Longitude": "41.68301275400006",
+                "Latitude": "27.468661568000073"
+            },
+            {
+                "CoordinateNumber": 12630234,
+                "Longitude": "41.68316585300005",
+                "Latitude": "27.468303615000025"
+            },
+            {
+                "CoordinateNumber": 12630235,
+                "Longitude": "41.68273599200006",
+                "Latitude": "27.468772414000057"
+            }
+        ],
+        "LandsListData": [
+            {
+                "LandNumber": "995",
+                "LandArea": 0,
+                "RealestateID": null,
+                "LandAreaAccordingToScheme": 1000,
+                "partNumber": null
+            }
+        ],
+        "OwnersListData": [
+            {
+                "OwnerIdentifierType": 1,
+                "OwnerIdentifierTypeName": "هوية وطنية",
+                "OwnerIdentifier": "1000100873",
+                "OwnerName": "شاكر محمد مبارك القحطاني"
+            }
+        ],
+        "BuildCondListData": {
+            "BuildingPercentage": null,
+            "MaxBuildingHeight": null,
+            "FloorsNumber": null,
+            "ConstructionFactor": null
+        },
+        "DeedListData": null,
+        "UrbanBoundary": "1445",
+        "RequestId": 4517312082
+    },
+    {
+        "OldLicense": "3505500131",
+        "KrookiNumber": 44035991169,
+        "KrookiHijriIssueDate": "1435/11/07",
+        "KrookiIssueDate": "2014/09/02",
+        "PurposeID": 111,
+        "Area": 34758.74492,
+        "PurposeName": "اصدار رخصة بناء",
+        "Note": null,
+        "MainUsedCode": 13,
+        "MainUsedName": "سكني",
+        "SubUsedCode": 28,
+        "SubUsedName": "عمارة سكنية",
+        "LandType": 150,
+        "LandTypeName": "غير مخططة",
+        "LandUsed": null,
+        "LandUsedName": null,
+        "HasNeighborhood": false,
+        "IsLandMobtra": false,
+        "IsFawry": false,
+        "SiteType": null,
+        "SiteTypeName": null,
+        "LocationData": {
+            "AmanahCode": "7861fcdd-4c80-410a-8f18-6d28e029dc21",
+            "AmanahName": "أمانة العاصمة المقدسة",
+            "BaladiyaCode": "11100b04-27a9-4352-a221-58381c08a068",
+            "BaladiyaName": "بلدية الشوقية الفرعية",
+            "IssuerCode": null,
+            "IssuerName": null,
+            "DistrictCode": 11111,
+            "DistrictName": "حلة الاحوس",
+            "PlanNumber": "بدون",
+            "BlockNumber": "بدون",
+            "RegionNumber": null,
+            "RegionName": null,
+            "CityNumber": 3,
+            "CityName": "مكه المكرمه                   "
+        },
+        "OwnershipData": {
+            "OwnershipDocCode": 112,
+            "OwnershipDocName": "صك",
+            "OwnershipDocNumber": "171/237/3",
+            "OwnershipDocDate": "1416/06/08"
+        },
+        "EngOfficeData": {
+            "OfficeLicense": "MAK-43",
+            "OfficeName": "التصاميم العصرية للاستشارات الهندسية"
+        },
+        "Attachments": null,
+        "LocationBordersListData": [
+            {
+                "Side": 3,
+                "Boundary": "جار مصنع بلك",
+                "DeedBoundary": null,
+                "BorderLength": 137.377,
+                "DeedBorderLength": null,
+                "Truncate": null,
+                "LessReflections": null,
+                "MaxOutcropping": null,
+                "BorderType": null,
+                "BorderTypeName": null,
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": [
+                    {
+                        "length": 137.377,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    }
+                ]
+            },
+            {
+                "Side": 1,
+                "Boundary": "سكة مسفلته نافذة بعرض 10.50م شرقاً وغرباً",
+                "DeedBoundary": null,
+                "BorderLength": 121.82,
+                "DeedBorderLength": null,
+                "Truncate": null,
+                "LessReflections": null,
+                "MaxOutcropping": null,
+                "BorderType": null,
+                "BorderTypeName": null,
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": [
+                    {
+                        "length": 121.82,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    }
+                ]
+            },
+            {
+                "Side": 4,
+                "Boundary": "جار مصنع خرسانة جاهزة",
+                "DeedBoundary": null,
+                "BorderLength": 247.73,
+                "DeedBorderLength": null,
+                "Truncate": null,
+                "LessReflections": null,
+                "MaxOutcropping": null,
+                "BorderType": null,
+                "BorderTypeName": null,
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": [
+                    {
+                        "length": 247.73,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    }
+                ]
+            },
+            {
+                "Side": 2,
+                "Boundary": "طريق العكيشية بعرض 70.81م شمالاً و 43.76م جنوباً حتى محور الطريق",
+                "DeedBoundary": null,
+                "BorderLength": null,
+                "DeedBorderLength": null,
+                "Truncate": null,
+                "LessReflections": null,
+                "MaxOutcropping": null,
+                "BorderType": null,
+                "BorderTypeName": null,
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": null
+            }
+        ],
+        "CoordinatesListData": [
+            {
+                "CoordinateNumber": 11129685,
+                "Longitude": "39.805951044986",
+                "Latitude": "21.3465200308814"
+            },
+            {
+                "CoordinateNumber": 11129655,
+                "Longitude": "39.806390450882",
+                "Latitude": "21.3454197194953"
+            },
+            {
+                "CoordinateNumber": 11119815,
+                "Longitude": "39.8061015145556",
+                "Latitude": "21.3462393532954"
+            },
+            {
+                "CoordinateNumber": 11129656,
+                "Longitude": "39.8061478414655",
+                "Latitude": "21.3461403284346"
+            },
+            {
+                "CoordinateNumber": 11115385,
+                "Longitude": "39.8063507333437",
+                "Latitude": "21.3455775099908"
+            },
+            {
+                "CoordinateNumber": 11130503,
+                "Longitude": "39.8061913075912",
+                "Latitude": "21.346040169893"
+            },
+            {
+                "CoordinateNumber": 11120570,
+                "Longitude": "39.8064021871468",
+                "Latitude": "21.3453668106517"
+            },
+            {
+                "CoordinateNumber": 11112502,
+                "Longitude": "39.8063204923255",
+                "Latitude": "21.3456818242683"
+            },
+            {
+                "CoordinateNumber": 11130428,
+                "Longitude": "39.804791281159",
+                "Latitude": "21.3463446090545"
+            },
+            {
+                "CoordinateNumber": 11129502,
+                "Longitude": "39.8064702968523",
+                "Latitude": "21.3449571342341"
+            },
+            {
+                "CoordinateNumber": 11122391,
+                "Longitude": "39.8060772878805",
+                "Latitude": "21.3462884281262"
+            },
+            {
+                "CoordinateNumber": 11130523,
+                "Longitude": "39.8063647288523",
+                "Latitude": "21.3455250781762"
+            },
+            {
+                "CoordinateNumber": 11122381,
+                "Longitude": "39.8062510762859",
+                "Latitude": "21.3458879840568"
+            },
+            {
+                "CoordinateNumber": 11106378,
+                "Longitude": "39.8059734008766",
+                "Latitude": "21.3464815445796"
+            },
+            {
+                "CoordinateNumber": 11118896,
+                "Longitude": "39.8060004120385",
+                "Latitude": "21.3464337573893"
+            },
+            {
+                "CoordinateNumber": 11130461,
+                "Longitude": "39.8061699320582",
+                "Latitude": "21.3460903784515"
+            },
+            {
+                "CoordinateNumber": 11121547,
+                "Longitude": "39.8064346222765",
+                "Latitude": "21.3451964247024"
+            },
+            {
+                "CoordinateNumber": 11130429,
+                "Longitude": "39.8065039685772",
+                "Latitude": "21.3447184135151"
+            },
+            {
+                "CoordinateNumber": 11136679,
+                "Longitude": "39.806593582362",
+                "Latitude": "21.3442416421122"
+            },
+            {
+                "CoordinateNumber": 11135837,
+                "Longitude": "39.8060267366719",
+                "Latitude": "21.3463856392079"
+            },
+            {
+                "CoordinateNumber": 11136646,
+                "Longitude": "39.8064131510945",
+                "Latitude": "21.3453137519256"
+            },
+            {
+                "CoordinateNumber": 11120571,
+                "Longitude": "39.8065440879181",
+                "Latitude": "21.3444807550234"
+            },
+            {
+                "CoordinateNumber": 11107276,
+                "Longitude": "39.8062119583725",
+                "Latitude": "21.3459896937711"
+            },
+            {
+                "CoordinateNumber": 11130430,
+                "Longitude": "39.8063042466662",
+                "Latitude": "21.3457336796278"
+            },
+            {
+                "CoordinateNumber": 11105496,
+                "Longitude": "39.8062311332431",
+                "Latitude": "21.3459409051683"
+            },
+            {
+                "CoordinateNumber": 11129657,
+                "Longitude": "39.8062695435676",
+                "Latitude": "21.3458367775679"
+            },
+            {
+                "CoordinateNumber": 11106420,
+                "Longitude": "39.8061250356151",
+                "Latitude": "21.3461899837045"
+            },
+            {
+                "CoordinateNumber": 11122390,
+                "Longitude": "39.8064227720696",
+                "Latitude": "21.3452637623801"
+            },
+            {
+                "CoordinateNumber": 11135887,
+                "Longitude": "39.8052722367531",
+                "Latitude": "21.3441523216749"
+            },
+            {
+                "CoordinateNumber": 11104735,
+                "Longitude": "39.8063359846041",
+                "Latitude": "21.3456297556921"
+            },
+            {
+                "CoordinateNumber": 11108122,
+                "Longitude": "39.8063779712295",
+                "Latitude": "21.3454724783175"
+            },
+            {
+                "CoordinateNumber": 11135886,
+                "Longitude": "39.806287267011",
+                "Latitude": "21.3457853397467"
+            },
+            {
+                "CoordinateNumber": 11119814,
+                "Longitude": "39.806052365134",
+                "Latitude": "21.3463371900817"
+            }
+        ],
+        "LandsListData": [
+            {
+                "LandNumber": "80191421",
+                "LandArea": 34758.74492,
+                "RealestateID": null,
+                "LandAreaAccordingToScheme": null,
+                "partNumber": null
+            }
+        ],
+        "OwnersListData": [
+            {
+                "OwnerIdentifierType": 1,
+                "OwnerIdentifierTypeName": "هوية وطنية",
+                "OwnerIdentifier": "1005830086",
+                "OwnerName": "عبدالله شافي عقيل العنزي"
+            }
+        ],
+        "BuildCondListData": {
+            "BuildingPercentage": null,
+            "MaxBuildingHeight": null,
+            "FloorsNumber": null,
+            "ConstructionFactor": null
+        },
+        "DeedListData": [
+            {
+                "DeedNumber": "171/237/3",
+                "DeedDate": null,
+                "DeedArea": 34758.74492,
+                "DeedPlan": null,
+                "DeedLand": null,
+                "DeedCity": null,
+                "DeedCityName": null,
+                "DeedBoundryListData": [
+                    {
+                        "Side": 1,
+                        "DeedBoundary": "سكة مسفلتة نافذة",
+                        "DeedBorderLength": 121.82,
+                        "DeedBorderLengthDetailed": "121.82"
+                    },
+                    {
+                        "Side": 4,
+                        "DeedBoundary": "جار",
+                        "DeedBorderLength": 247.73,
+                        "DeedBorderLengthDetailed": "247.73"
+                    },
+                    {
+                        "Side": 2,
+                        "DeedBoundary": "طريق العكيشية",
+                        "DeedBorderLength": null,
+                        "DeedBorderLengthDetailed": null
+                    },
+                    {
+                        "Side": 3,
+                        "DeedBoundary": "جار",
+                        "DeedBorderLength": 137.38,
+                        "DeedBorderLengthDetailed": "137.38"
+                    }
+                ]
+            }
+        ],
+        "UrbanBoundary": null,
+        "RequestId": 4415834869
+    },
+    {
+        "OldLicense": "45333339838507",
+        "KrookiNumber": 46079867650,
+        "KrookiHijriIssueDate": "1446/07/01",
+        "KrookiIssueDate": "2025/01/01",
+        "PurposeID": 111,
+        "Area": 50412971.3,
+        "PurposeName": "اصدار رخصة بناء",
+        "Note": null,
+        "MainUsedCode": 13,
+        "MainUsedName": "سكني",
+        "SubUsedCode": 24,
+        "SubUsedName": "دبلكس",
+        "LandType": 113,
+        "LandTypeName": "مخططة",
+        "LandUsed": 653,
+        "LandUsedName": "سكني",
+        "HasNeighborhood": false,
+        "IsLandMobtra": false,
+        "IsFawry": false,
+        "SiteType": null,
+        "SiteTypeName": null,
+        "LocationData": {
+            "AmanahCode": "b65ec706-882f-492b-9eda-2e00b894cb11",
+            "AmanahName": "أمانة محافظة الطائف",
+            "BaladiyaCode": "c3a35173-ff1f-4809-b2d8-1e13ce108569",
+            "BaladiyaName": "بلدية الطائف الجديد الفرعية",
+            "IssuerCode": "778d00f0-96db-494c-a3e9-4281de9e8a5e",
+            "IssuerName": "أمانة محافظة الطائف",
+            "DistrictCode": 9324,
+            "DistrictName": "المطار الدولي الجديد",
+            "PlanNumber": "2012",
+            "BlockNumber": "بدون",
+            "RegionNumber": null,
+            "RegionName": null,
+            "CityNumber": 4,
+            "CityName": "الطائف                        "
+        },
+        "OwnershipData": {
+            "OwnershipDocCode": 146,
+            "OwnershipDocName": "عقد اسكان",
+            "OwnershipDocNumber": "4564564747",
+            "OwnershipDocDate": "1430/07/01"
+        },
+        "EngOfficeData": {
+            "OfficeLicense": "5100001892",
+            "OfficeName": "صروح البناء للاستشارات الهندسية"
+        },
+        "Attachments": [
+            {
+                "KrookiFile": "https://apiservicesstg.balady.gov.sa/v1/attachment/license-file/A283D862-BB21-4057-9CF0-6DBA1C1BAFC5",
+                "KrookiCoordFile": null
+            }
+        ],
+        "LocationBordersListData": [
+            {
+                "Side": 4,
+                "Boundary": "رقم 477",
+                "DeedBoundary": null,
+                "BorderLength": 5632.46,
+                "DeedBorderLength": null,
+                "Truncate": 1.5,
+                "LessReflections": 15,
+                "MaxOutcropping": 12,
+                "BorderType": null,
+                "BorderTypeName": null,
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": [
+                    {
+                        "length": 5632.46,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    }
+                ]
+            },
+            {
+                "Side": 1,
+                "Boundary": "رقم 478",
+                "DeedBoundary": null,
+                "BorderLength": 8545.97,
+                "DeedBorderLength": null,
+                "Truncate": 0.5,
+                "LessReflections": 2.9,
+                "MaxOutcropping": 12.02,
+                "BorderType": null,
+                "BorderTypeName": null,
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": [
+                    {
+                        "length": 8545.97,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    }
+                ]
+            },
+            {
+                "Side": 3,
+                "Boundary": "الجنوب",
+                "DeedBoundary": null,
+                "BorderLength": 8451.32,
+                "DeedBorderLength": null,
+                "Truncate": 1,
+                "LessReflections": 11,
+                "MaxOutcropping": 14,
+                "BorderType": null,
+                "BorderTypeName": null,
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": [
+                    {
+                        "length": 8451.32,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    }
+                ]
+            },
+            {
+                "Side": 2,
+                "Boundary": "الشرق",
+                "DeedBoundary": null,
+                "BorderLength": 5517.26,
+                "DeedBorderLength": null,
+                "Truncate": 12,
+                "LessReflections": 3.9,
+                "MaxOutcropping": 13,
+                "BorderType": null,
+                "BorderTypeName": null,
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": [
+                    {
+                        "length": 5517.26,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    }
+                ]
+            }
+        ],
+        "CoordinatesListData": [
+            {
+                "CoordinateNumber": 12645794,
+                "Longitude": "40.67558481900005",
+                "Latitude": "21.38298846300006"
+            },
+            {
+                "CoordinateNumber": 12645787,
+                "Longitude": "40.64852645900004",
+                "Latitude": "21.425485330000072"
+            },
+            {
+                "CoordinateNumber": 12645790,
+                "Longitude": "40.64752088400007",
+                "Latitude": "21.420533197000054"
+            },
+            {
+                "CoordinateNumber": 12645795,
+                "Longitude": "40.74381558400006",
+                "Latitude": "21.422131600000057"
+            },
+            {
+                "CoordinateNumber": 12645791,
+                "Longitude": "40.71272960300007",
+                "Latitude": "21.46520941500006"
+            },
+            {
+                "CoordinateNumber": 12645789,
+                "Longitude": "40.744845491000035",
+                "Latitude": "21.42715803400006"
+            },
+            {
+                "CoordinateNumber": 12645793,
+                "Longitude": "40.68098424500005",
+                "Latitude": "21.382062740000038"
+            },
+            {
+                "CoordinateNumber": 12645792,
+                "Longitude": "40.71811058500003",
+                "Latitude": "21.46420721900006"
+            },
+            {
+                "CoordinateNumber": 12645788,
+                "Longitude": "40.64852645900004",
+                "Latitude": "21.425485330000072"
+            }
+        ],
+        "LandsListData": [
+            {
+                "LandNumber": "بدون",
+                "LandArea": 50412971.3,
+                "RealestateID": null,
+                "LandAreaAccordingToScheme": 50412971.3,
+                "partNumber": null
+            }
+        ],
+        "OwnersListData": [
+            {
+                "OwnerIdentifierType": 1,
+                "OwnerIdentifierTypeName": "هوية وطنية",
+                "OwnerIdentifier": "1000100873",
+                "OwnerName": "شاكر محمد مبارك القحطاني"
+            }
+        ],
+        "BuildCondListData": {
+            "BuildingPercentage": null,
+            "MaxBuildingHeight": null,
+            "FloorsNumber": null,
+            "ConstructionFactor": null
+        },
+        "DeedListData": null,
+        "UrbanBoundary": null,
+        "RequestId": 4617356084
+    }
+   
+
+]
