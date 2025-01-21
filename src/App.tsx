@@ -1,10 +1,10 @@
-import Layout from "./layout";
-import Home from "./Components/Home/Home";
+import Layout from "./Layout";
 import Login from "./Components/Login/Login";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Offices from "./Components/Offices/Offices";
 import Requests from "./Components/requests/Requests";
 import RequestDetails from './Components/requests/Request/RequestDetails/RequestDetails';
+import Home from "./Components/Home/Home";
+import Offices from "./Components/Offices/Offices";
 function App() {
   // const { theme, language, toggleTheme, toggleLanguage } = useApp();
   // const t = translations[language];

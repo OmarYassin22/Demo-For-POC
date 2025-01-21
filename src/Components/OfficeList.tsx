@@ -154,8 +154,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/OfficeList.css';
- import Navbar from './Navbar/Navbar.jsx';
-import Footer from './Footer/Footer';
+ import Navbar from './Navbar/Navbar.js';
+import Footer from './Footer/Footer.js';
 import DataTable from './DataTable'; // Import DataTable component
 import { useApp } from '../context/AppContext.js';
 import { translations } from '../translations.js';

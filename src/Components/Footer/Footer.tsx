@@ -1,9 +1,8 @@
 import { Building2 } from "lucide-react";
-import React from "react";
-import { useApp } from "../../Context/AppContext";
 
-export default function Footer({language}) {
-      
+
+export default function Footer() {
+
   return (
     <>
       <footer className="bg-gray-900 text-white py-8">
@@ -11,12 +10,12 @@ export default function Footer({language}) {
           <div className="flex items-center justify-center space-x-2 space-x-reverse mb-4">
             <Building2 className="h-6 w-6" />
             <span className="text-xl font-bold">
-              {language === "ar" ? "تيم الباك" : "Back-end Team"}
+              تيم الباك
             </span>
           </div>
           <p className="text-gray-400">
-            © 2024 {language === "ar" ? "تيم الباك" : "Back-end Team"}.{" "}
-            {language === "ar" ? "جميع الحقوق محفوظة" : "All rights reserved"}.
+            © 2024 تيم الباك
+            جميع الحقوق محفوظة
           </p>
         </div>
       </footer>

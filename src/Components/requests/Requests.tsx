@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import data from "../../mocks/OfficeMock.json";
 import Component from "./Request/Request";
@@ -13,7 +13,7 @@ export default function Requests() {
     }
   });
   const { id } = useParams();
-  const office = data[id];
+  const office = id ? data[id as keyof typeof data] : undefined;
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
   const itemsPerPage = 9;
@@ -64,7 +64,7 @@ export default function Requests() {
             <Component 
               key={request.platformRequestId} 
               data={request} 
-              officeId={id} 
+              officeId={id || ''} 
             />
           ))}
         </div>

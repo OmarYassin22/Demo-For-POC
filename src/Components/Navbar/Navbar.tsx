@@ -1,28 +1,20 @@
 import {
   Building2,
-  Languages,
   LogOut,
-  Moon,
-  Sun,
+
   UserCircle,
 } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function Navbar({
-  theme,
-  language,
-  toggleTheme,
-  toggleLanguage,
-  t,
-}) {
+export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     const loginStatus = localStorage.getItem("isLoggedIn");
     setIsLoggedIn(loginStatus === "true");
-  }, );
+  },);
 
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");
@@ -34,7 +26,7 @@ export default function Navbar({
     <>
       <nav
         className="relative z-10 flex items-center justify-between px-6 py-4 bg-primary"
-        dir={language === "ar" ? "rtl" : "ltr"}
+        dir={"rtl"}
       >
         <div className="flex items-center space-x-2 space-x-reverse">
           <Building2 className="h-8 w-8 text-white" />
@@ -42,7 +34,7 @@ export default function Navbar({
             to={isLoggedIn ? "/offices" : "/"}
             className="text-white text-2xl font-bold"
           >
-            {language === "ar" ? "البناء برو" : "BuildPro"}
+            البناء برو
           </Link>
         </div>
         <div className="flex items-center space-x-8 space-x-reverse">
