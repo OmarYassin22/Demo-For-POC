@@ -797,7 +797,4699 @@
         "DeedListData": null,
         "UrbanBoundary": null,
         "RequestId": 4617356084
-    }
+    },
+    {
+        "OldLicense": "48651320561320",
+        "KrookiNumber": 46079867606,
+        "KrookiHijriIssueDate": "1446/07/06",
+        "KrookiIssueDate": "2025/01/06",
+        "PurposeID": 111,
+        "Area": 1809.81,
+        "PurposeName": "اصدار رخصة بناء",
+        "Note": null,
+        "MainUsedCode": 13,
+        "MainUsedName": "سكني",
+        "SubUsedCode": 699,
+        "SubUsedName": "فيلا منفصلة",
+        "LandType": 113,
+        "LandTypeName": "مخططة",
+        "LandUsed": 653,
+        "LandUsedName": "سكني",
+        "HasNeighborhood": false,
+        "IsLandMobtra": false,
+        "IsFawry": false,
+        "SiteType": null,
+        "SiteTypeName": null,
+        "LocationData": {
+            "AmanahCode": "b65ec706-882f-492b-9eda-2e00b894cb11",
+            "AmanahName": "أمانة محافظة الطائف",
+            "BaladiyaCode": "7bcc4425-6761-4265-94e9-9e374904a0a5",
+            "BaladiyaName": "بلدية الهدا الفرعية",
+            "IssuerCode": "7bcc4425-6761-4265-94e9-9e374904a0a5",
+            "IssuerName": "بلدية الهدا الفرعية",
+            "DistrictCode": 9351,
+            "DistrictName": "حي الهدا",
+            "PlanNumber": "بدون",
+            "BlockNumber": "بدون",
+            "RegionNumber": null,
+            "RegionName": null,
+            "CityNumber": 4,
+            "CityName": "الطائف                        "
+        },
+        "OwnershipData": {
+            "OwnershipDocCode": 146,
+            "OwnershipDocName": "عقد اسكان",
+            "OwnershipDocNumber": "4617355937",
+            "OwnershipDocDate": "1446/07/02"
+        },
+        "EngOfficeData": {
+            "OfficeLicense": "3077",
+            "OfficeName": "رواق الخليج للأستشارات الهندسيه المعماريه"
+        },
+        "Attachments": [
+            {
+                "KrookiFile": "https://apiservicesstg.balady.gov.sa/v1/attachment/license-file/51BC065A-EC48-4971-9C76-1C7D79CE47A5",
+                "KrookiCoordFile": null
+            }
+        ],
+        "LocationBordersListData": [
+            {
+                "Side": 4,
+                "Boundary": "0",
+                "DeedBoundary": null,
+                "BorderLength": 39.86,
+                "DeedBorderLength": null,
+                "Truncate": 0,
+                "LessReflections": 0,
+                "MaxOutcropping": 0,
+                "BorderType": null,
+                "BorderTypeName": null,
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": [
+                    {
+                        "length": 39.86,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    }
+                ]
+            },
+            {
+                "Side": 2,
+                "Boundary": "0",
+                "DeedBoundary": null,
+                "BorderLength": 55.21,
+                "DeedBorderLength": null,
+                "Truncate": 0,
+                "LessReflections": 0,
+                "MaxOutcropping": 0,
+                "BorderType": null,
+                "BorderTypeName": null,
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": [
+                    {
+                        "length": 55.21,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    }
+                ]
+            },
+            {
+                "Side": 3,
+                "Boundary": "0",
+                "DeedBoundary": null,
+                "BorderLength": 47.01,
+                "DeedBorderLength": null,
+                "Truncate": 0,
+                "LessReflections": 0,
+                "MaxOutcropping": 0,
+                "BorderType": null,
+                "BorderTypeName": null,
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": [
+                    {
+                        "length": 47.010000000000005,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    }
+                ]
+            },
+            {
+                "Side": 1,
+                "Boundary": "0",
+                "DeedBoundary": null,
+                "BorderLength": 26.77,
+                "DeedBorderLength": null,
+                "Truncate": 0,
+                "LessReflections": 0,
+                "MaxOutcropping": 0,
+                "BorderType": null,
+                "BorderTypeName": null,
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": [
+                    {
+                        "length": 26.770000000000003,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    }
+                ]
+            }
+        ],
+        "CoordinatesListData": [
+            {
+                "CoordinateNumber": 12645761,
+                "Longitude": "40.28218742200005",
+                "Latitude": "21.35412391600005"
+            },
+            {
+                "CoordinateNumber": 12645772,
+                "Longitude": "40.28196473600008",
+                "Latitude": "21.353616515000056"
+            },
+            {
+                "CoordinateNumber": 12645768,
+                "Longitude": "40.28182035100008",
+                "Latitude": "21.35396540100004"
+            },
+            {
+                "CoordinateNumber": 12645766,
+                "Longitude": "40.282169673000055",
+                "Latitude": "21.354117760000065"
+            },
+            {
+                "CoordinateNumber": 12645771,
+                "Longitude": "40.28234030300007",
+                "Latitude": "21.353812712000035"
+            },
+            {
+                "CoordinateNumber": 12645767,
+                "Longitude": "40.28205630900004",
+                "Latitude": "21.35407788400005"
+            },
+            {
+                "CoordinateNumber": 12645770,
+                "Longitude": "40.281945749000045",
+                "Latitude": "21.354038890000027"
+            },
+            {
+                "CoordinateNumber": 12645762,
+                "Longitude": "40.281896596000024",
+                "Latitude": "21.353781164000054"
+            },
+            {
+                "CoordinateNumber": 12645760,
+                "Longitude": "40.28188153100007",
+                "Latitude": "21.35381756700008"
+            },
+            {
+                "CoordinateNumber": 12645769,
+                "Longitude": "40.282203372000026",
+                "Latitude": "21.353723819000038"
+            },
+            {
+                "CoordinateNumber": 12645763,
+                "Longitude": "40.28195587500005",
+                "Latitude": "21.353637923000065"
+            },
+            {
+                "CoordinateNumber": 12645764,
+                "Longitude": "40.28181022200005",
+                "Latitude": "21.35398987800005"
+            },
+            {
+                "CoordinateNumber": 12645765,
+                "Longitude": "40.28181022200005",
+                "Latitude": "21.35398987800005"
+            }
+        ],
+        "LandsListData": [
+            {
+                "LandNumber": "بدون",
+                "LandArea": 1809.81,
+                "RealestateID": null,
+                "LandAreaAccordingToScheme": 1809.81,
+                "partNumber": null
+            }
+        ],
+        "OwnersListData": [
+            {
+                "OwnerIdentifierType": 1,
+                "OwnerIdentifierTypeName": "هوية وطنية",
+                "OwnerIdentifier": "1000100873",
+                "OwnerName": "شاكر محمد مبارك القحطاني"
+            }
+        ],
+        "BuildCondListData": {
+            "BuildingPercentage": null,
+            "MaxBuildingHeight": null,
+            "FloorsNumber": null,
+            "ConstructionFactor": null
+        },
+        "DeedListData": null,
+        "UrbanBoundary": null,
+        "RequestId": 4617355937
+    },
+    {
+        "OldLicense": "7894561230",
+        "KrookiNumber": 46079867557,
+        "KrookiHijriIssueDate": "1446/07/01",
+        "KrookiIssueDate": "2025/01/01",
+        "PurposeID": 111,
+        "Area": 10506.75,
+        "PurposeName": "اصدار رخصة بناء",
+        "Note": null,
+        "MainUsedCode": 13,
+        "MainUsedName": "سكني",
+        "SubUsedCode": 699,
+        "SubUsedName": "فيلا منفصلة",
+        "LandType": 113,
+        "LandTypeName": "مخططة",
+        "LandUsed": 653,
+        "LandUsedName": "سكني",
+        "HasNeighborhood": false,
+        "IsLandMobtra": false,
+        "IsFawry": false,
+        "SiteType": null,
+        "SiteTypeName": null,
+        "LocationData": {
+            "AmanahCode": "b65ec706-882f-492b-9eda-2e00b894cb11",
+            "AmanahName": "أمانة محافظة الطائف",
+            "BaladiyaCode": "6c00a806-baa2-4862-b401-a8c85d26e66f",
+            "BaladiyaName": "بلدية الشفا الفرعية",
+            "IssuerCode": "6c00a806-baa2-4862-b401-a8c85d26e66f",
+            "IssuerName": "بلدية الشفا الفرعية",
+            "DistrictCode": 9320,
+            "DistrictName": "الشفاء",
+            "PlanNumber": "412506",
+            "BlockNumber": "بدون",
+            "RegionNumber": null,
+            "RegionName": null,
+            "CityNumber": 4,
+            "CityName": "الطائف                        "
+        },
+        "OwnershipData": {
+            "OwnershipDocCode": 146,
+            "OwnershipDocName": "عقد اسكان",
+            "OwnershipDocNumber": "4617355915",
+            "OwnershipDocDate": "1446/07/01"
+        },
+        "EngOfficeData": {
+            "OfficeLicense": "3077",
+            "OfficeName": "رواق الخليج للأستشارات الهندسيه المعماريه"
+        },
+        "Attachments": [
+            {
+                "KrookiFile": "https://apiservicesstg.balady.gov.sa/v1/attachment/license-file/D908A7D3-433C-470E-882E-0AC7574BA61D",
+                "KrookiCoordFile": null
+            }
+        ],
+        "LocationBordersListData": [
+            {
+                "Side": 4,
+                "Boundary": "0",
+                "DeedBoundary": null,
+                "BorderLength": 100.1,
+                "DeedBorderLength": null,
+                "Truncate": 0,
+                "LessReflections": 0,
+                "MaxOutcropping": 0,
+                "BorderType": null,
+                "BorderTypeName": null,
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": [
+                    {
+                        "length": 100.1,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    }
+                ]
+            },
+            {
+                "Side": 2,
+                "Boundary": "0",
+                "DeedBoundary": null,
+                "BorderLength": 123.71,
+                "DeedBorderLength": null,
+                "Truncate": 0,
+                "LessReflections": 0,
+                "MaxOutcropping": 0,
+                "BorderType": null,
+                "BorderTypeName": null,
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": [
+                    {
+                        "length": 123.71000000000001,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    }
+                ]
+            },
+            {
+                "Side": 1,
+                "Boundary": "0",
+                "DeedBoundary": null,
+                "BorderLength": 76.4,
+                "DeedBorderLength": null,
+                "Truncate": 0,
+                "LessReflections": 0,
+                "MaxOutcropping": 0,
+                "BorderType": null,
+                "BorderTypeName": null,
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": [
+                    {
+                        "length": 76.4,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    }
+                ]
+            },
+            {
+                "Side": 3,
+                "Boundary": "00",
+                "DeedBoundary": null,
+                "BorderLength": 104.82,
+                "DeedBorderLength": null,
+                "Truncate": 0,
+                "LessReflections": 0,
+                "MaxOutcropping": 0,
+                "BorderType": null,
+                "BorderTypeName": null,
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": [
+                    {
+                        "length": 104.82,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    }
+                ]
+            }
+        ],
+        "CoordinatesListData": [
+            {
+                "CoordinateNumber": 12645749,
+                "Longitude": "40.314767319000055",
+                "Latitude": "21.062848079000048"
+            },
+            {
+                "CoordinateNumber": 12645758,
+                "Longitude": "40.31375440100004",
+                "Latitude": "21.06218650200003"
+            },
+            {
+                "CoordinateNumber": 12645747,
+                "Longitude": "40.314565662000064",
+                "Latitude": "21.06216435700003"
+            },
+            {
+                "CoordinateNumber": 12645754,
+                "Longitude": "40.314809625000066",
+                "Latitude": "21.06250816200003"
+            },
+            {
+                "CoordinateNumber": 12645753,
+                "Longitude": "40.31478531400006",
+                "Latitude": "21.062751855000045"
+            },
+            {
+                "CoordinateNumber": 12645757,
+                "Longitude": "40.31482709000005",
+                "Latitude": "21.062509698000042"
+            },
+            {
+                "CoordinateNumber": 12645751,
+                "Longitude": "40.31445956500005",
+                "Latitude": "21.061944072000074"
+            },
+            {
+                "CoordinateNumber": 12645759,
+                "Longitude": "40.31448634600008",
+                "Latitude": "21.06288555900005"
+            },
+            {
+                "CoordinateNumber": 12645755,
+                "Longitude": "40.31463811900005",
+                "Latitude": "21.06213238400005"
+            },
+            {
+                "CoordinateNumber": 12645756,
+                "Longitude": "40.31382178700005",
+                "Latitude": "21.062911046000067"
+            },
+            {
+                "CoordinateNumber": 12645752,
+                "Longitude": "40.313559987000076",
+                "Latitude": "21.062789516000066"
+            },
+            {
+                "CoordinateNumber": 12645750,
+                "Longitude": "40.31478531400006",
+                "Latitude": "21.062751855000045"
+            },
+            {
+                "CoordinateNumber": 12645748,
+                "Longitude": "40.31386665900004",
+                "Latitude": "21.06299892100003"
+            }
+        ],
+        "LandsListData": [
+            {
+                "LandNumber": "بدون",
+                "LandArea": 10506.75,
+                "RealestateID": null,
+                "LandAreaAccordingToScheme": 10506.75,
+                "partNumber": null
+            }
+        ],
+        "OwnersListData": [
+            {
+                "OwnerIdentifierType": 1,
+                "OwnerIdentifierTypeName": "هوية وطنية",
+                "OwnerIdentifier": "1000100873",
+                "OwnerName": "شاكر محمد مبارك القحطاني"
+            }
+        ],
+        "BuildCondListData": {
+            "BuildingPercentage": null,
+            "MaxBuildingHeight": null,
+            "FloorsNumber": null,
+            "ConstructionFactor": null
+        },
+        "DeedListData": null,
+        "UrbanBoundary": null,
+        "RequestId": 4617355915
+    },
+    {
+        "OldLicense": "558652585145",
+        "KrookiNumber": 46079867586,
+        "KrookiHijriIssueDate": "1446/07/01",
+        "KrookiIssueDate": "2025/01/01",
+        "PurposeID": 111,
+        "Area": 514.77,
+        "PurposeName": "اصدار رخصة بناء",
+        "Note": null,
+        "MainUsedCode": 13,
+        "MainUsedName": "سكني",
+        "SubUsedCode": 699,
+        "SubUsedName": "فيلا منفصلة",
+        "LandType": 113,
+        "LandTypeName": "مخططة",
+        "LandUsed": 653,
+        "LandUsedName": "سكني",
+        "HasNeighborhood": false,
+        "IsLandMobtra": false,
+        "IsFawry": false,
+        "SiteType": null,
+        "SiteTypeName": null,
+        "LocationData": {
+            "AmanahCode": "f5bbf80f-1b10-497c-a69c-5c6337ecdd57",
+            "AmanahName": "أمانة منطقة حائل",
+            "BaladiyaCode": "ca2d988f-a342-4c5f-a1ac-f21d3aaf529b",
+            "BaladiyaName": "بلدية الوسط",
+            "IssuerCode": "ca2d988f-a342-4c5f-a1ac-f21d3aaf529b",
+            "IssuerName": "بلدية الوسط",
+            "DistrictCode": 1927,
+            "DistrictName": "النعام",
+            "PlanNumber": "1610",
+            "BlockNumber": "بدون",
+            "RegionNumber": null,
+            "RegionName": null,
+            "CityNumber": 11,
+            "CityName": "حائل                          "
+        },
+        "OwnershipData": {
+            "OwnershipDocCode": 146,
+            "OwnershipDocName": "عقد اسكان",
+            "OwnershipDocNumber": "4617355961",
+            "OwnershipDocDate": "1446/07/02"
+        },
+        "EngOfficeData": {
+            "OfficeLicense": "3077",
+            "OfficeName": "رواق الخليج للأستشارات الهندسيه المعماريه"
+        },
+        "Attachments": [
+            {
+                "KrookiFile": "https://apiservicesstg.balady.gov.sa/v1/attachment/license-file/2F3146B2-D2A7-4782-9F5E-475C8D7560D2",
+                "KrookiCoordFile": null
+            }
+        ],
+        "LocationBordersListData": [
+            {
+                "Side": 4,
+                "Boundary": "9",
+                "DeedBoundary": null,
+                "BorderLength": 20.91,
+                "DeedBorderLength": null,
+                "Truncate": 9,
+                "LessReflections": 9,
+                "MaxOutcropping": 9,
+                "BorderType": null,
+                "BorderTypeName": null,
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": [
+                    {
+                        "length": 20.91,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    }
+                ]
+            },
+            {
+                "Side": 3,
+                "Boundary": "9",
+                "DeedBoundary": null,
+                "BorderLength": 24.99,
+                "DeedBorderLength": null,
+                "Truncate": 9,
+                "LessReflections": 9,
+                "MaxOutcropping": 9,
+                "BorderType": null,
+                "BorderTypeName": null,
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": [
+                    {
+                        "length": 24.99,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    }
+                ]
+            },
+            {
+                "Side": 2,
+                "Boundary": "69",
+                "DeedBoundary": null,
+                "BorderLength": 20.25,
+                "DeedBorderLength": null,
+                "Truncate": 9,
+                "LessReflections": 9,
+                "MaxOutcropping": 9,
+                "BorderType": null,
+                "BorderTypeName": null,
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": [
+                    {
+                        "length": 20.25,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    }
+                ]
+            },
+            {
+                "Side": 1,
+                "Boundary": "69",
+                "DeedBoundary": null,
+                "BorderLength": 24.99,
+                "DeedBorderLength": null,
+                "Truncate": 9,
+                "LessReflections": 9,
+                "MaxOutcropping": 9,
+                "BorderType": null,
+                "BorderTypeName": null,
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": [
+                    {
+                        "length": 24.99,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    }
+                ]
+            }
+        ],
+        "CoordinatesListData": [
+            {
+                "CoordinateNumber": 12645743,
+                "Longitude": "41.71289574000008",
+                "Latitude": "27.52181875800005"
+            },
+            {
+                "CoordinateNumber": 12645746,
+                "Longitude": "41.71258932000006",
+                "Latitude": "27.521715091000033"
+            },
+            {
+                "CoordinateNumber": 12645744,
+                "Longitude": "41.71289574000008",
+                "Latitude": "27.52181875800005"
+            },
+            {
+                "CoordinateNumber": 12645742,
+                "Longitude": "41.71283000100004",
+                "Latitude": "27.52164569300004"
+            },
+            {
+                "CoordinateNumber": 12645745,
+                "Longitude": "41.71265722000004",
+                "Latitude": "27.52189385500003"
+            }
+        ],
+        "LandsListData": [
+            {
+                "LandNumber": "47",
+                "LandArea": 514.77,
+                "RealestateID": null,
+                "LandAreaAccordingToScheme": 514.77,
+                "partNumber": null
+            }
+        ],
+        "OwnersListData": [
+            {
+                "OwnerIdentifierType": 1,
+                "OwnerIdentifierTypeName": "هوية وطنية",
+                "OwnerIdentifier": "1000100873",
+                "OwnerName": "شاكر محمد مبارك القحطاني"
+            }
+        ],
+        "BuildCondListData": {
+            "BuildingPercentage": null,
+            "MaxBuildingHeight": null,
+            "FloorsNumber": null,
+            "ConstructionFactor": null
+        },
+        "DeedListData": null,
+        "UrbanBoundary": null,
+        "RequestId": 4617355961
+    },
+    {
+        "OldLicense": "435544",
+        "KrookiNumber": 46079866017,
+        "KrookiHijriIssueDate": "1446/07/01",
+        "KrookiIssueDate": "2025/01/01",
+        "PurposeID": 111,
+        "Area": 2091.41,
+        "PurposeName": "اصدار رخصة بناء",
+        "Note": null,
+        "MainUsedCode": 13,
+        "MainUsedName": "سكني",
+        "SubUsedCode": 699,
+        "SubUsedName": "فيلا منفصلة",
+        "LandType": 113,
+        "LandTypeName": "مخططة",
+        "LandUsed": 653,
+        "LandUsedName": "سكني",
+        "HasNeighborhood": false,
+        "IsLandMobtra": false,
+        "IsFawry": false,
+        "SiteType": null,
+        "SiteTypeName": null,
+        "LocationData": {
+            "AmanahCode": "9753822b-f759-4f7a-8d79-b388224dc1eb",
+            "AmanahName": "أمانة المنطقة الشرقية",
+            "BaladiyaCode": "5cf7aaf7-3b7e-4193-9e0c-bf10d7ad38bd",
+            "BaladiyaName": "بلدية محافظة الخبر",
+            "IssuerCode": "ca2d988f-93a2-4c5f-a1ac-f21d3aaf529b",
+            "IssuerName": "بلدية الجنوب",
+            "DistrictCode": 5968,
+            "DistrictName": "الخزامى",
+            "PlanNumber": "191",
+            "BlockNumber": "بدون",
+            "RegionNumber": null,
+            "RegionName": null,
+            "CityNumber": 8,
+            "CityName": "الخبر                         "
+        },
+        "OwnershipData": {
+            "OwnershipDocCode": 146,
+            "OwnershipDocName": "عقد اسكان",
+            "OwnershipDocNumber": "2342425",
+            "OwnershipDocDate": "1446/07/01"
+        },
+        "EngOfficeData": {
+            "OfficeLicense": "5100001892",
+            "OfficeName": "صروح البناء للاستشارات الهندسية"
+        },
+        "Attachments": [
+            {
+                "KrookiFile": "https://apiservicesstg.balady.gov.sa/v1/attachment/license-file/AC551EE7-67AA-4FC7-9111-8B14D718F22A",
+                "KrookiCoordFile": null
+            }
+        ],
+        "LocationBordersListData": [
+            {
+                "Side": 3,
+                "Boundary": "الحد حسب الطبيعةالجنوب",
+                "DeedBoundary": null,
+                "BorderLength": 53.52,
+                "DeedBorderLength": null,
+                "Truncate": null,
+                "LessReflections": 9,
+                "MaxOutcropping": 9,
+                "BorderType": null,
+                "BorderTypeName": null,
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": [
+                    {
+                        "length": 53.52,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    }
+                ]
+            },
+            {
+                "Side": 2,
+                "Boundary": "الحد حسب الطبيعةالشرق",
+                "DeedBoundary": null,
+                "BorderLength": 53.57,
+                "DeedBorderLength": null,
+                "Truncate": null,
+                "LessReflections": 9,
+                "MaxOutcropping": 9,
+                "BorderType": null,
+                "BorderTypeName": null,
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": [
+                    {
+                        "length": 53.56999999999999,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    }
+                ]
+            },
+            {
+                "Side": 4,
+                "Boundary": "الحد حسب الطبيعةالغرب",
+                "DeedBoundary": null,
+                "BorderLength": 47.14,
+                "DeedBorderLength": null,
+                "Truncate": null,
+                "LessReflections": 9,
+                "MaxOutcropping": 9,
+                "BorderType": null,
+                "BorderTypeName": null,
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": [
+                    {
+                        "length": 47.14,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    }
+                ]
+            },
+            {
+                "Side": 1,
+                "Boundary": "الحد حسب الطبيعةالشمال",
+                "DeedBoundary": null,
+                "BorderLength": 52.01,
+                "DeedBorderLength": null,
+                "Truncate": null,
+                "LessReflections": 9,
+                "MaxOutcropping": 9,
+                "BorderType": null,
+                "BorderTypeName": null,
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": [
+                    {
+                        "length": 52.010000000000005,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    }
+                ]
+            }
+        ],
+        "CoordinatesListData": [
+            {
+                "CoordinateNumber": 12645387,
+                "Longitude": "50.182802991000074",
+                "Latitude": "26.213968752000028"
+            },
+            {
+                "CoordinateNumber": 12645386,
+                "Longitude": "50.18281053700008",
+                "Latitude": "26.214207959000078"
+            },
+            {
+                "CoordinateNumber": 12645383,
+                "Longitude": "50.18303057500003",
+                "Latitude": "26.21372351100007"
+            },
+            {
+                "CoordinateNumber": 12645388,
+                "Longitude": "50.18250593700003",
+                "Latitude": "26.214075150000042"
+            },
+            {
+                "CoordinateNumber": 12645384,
+                "Longitude": "50.18256535900008",
+                "Latitude": "26.214144289000046"
+            },
+            {
+                "CoordinateNumber": 12645389,
+                "Longitude": "50.18303906700004",
+                "Latitude": "26.21399266800006"
+            },
+            {
+                "CoordinateNumber": 12645391,
+                "Longitude": "50.18249527800003",
+                "Latitude": "26.213737250000065"
+            },
+            {
+                "CoordinateNumber": 12645385,
+                "Longitude": "50.18303057500003",
+                "Latitude": "26.21372351100007"
+            },
+            {
+                "CoordinateNumber": 12645390,
+                "Longitude": "50.18279544400008",
+                "Latitude": "26.213729546000025"
+            }
+        ],
+        "LandsListData": [
+            {
+                "LandNumber": "59",
+                "LandArea": 1429.57,
+                "RealestateID": null,
+                "LandAreaAccordingToScheme": 1429.57,
+                "partNumber": null
+            },
+            {
+                "LandNumber": "58",
+                "LandArea": 661.84,
+                "RealestateID": null,
+                "LandAreaAccordingToScheme": 661.84,
+                "partNumber": null
+            }
+        ],
+        "OwnersListData": [
+            {
+                "OwnerIdentifierType": 1,
+                "OwnerIdentifierTypeName": "هوية وطنية",
+                "OwnerIdentifier": "1003239900",
+                "OwnerName": "مشعل بن سعود بن عبدالهادي القحطاني"
+            }
+        ],
+        "BuildCondListData": {
+            "BuildingPercentage": null,
+            "MaxBuildingHeight": null,
+            "FloorsNumber": null,
+            "ConstructionFactor": null
+        },
+        "DeedListData": null,
+        "UrbanBoundary": null,
+        "RequestId": 4617354513
+    },
+    {
+        "OldLicense": "86541320456132065",
+        "KrookiNumber": 46079866277,
+        "KrookiHijriIssueDate": "1446/07/02",
+        "KrookiIssueDate": "2025/01/02",
+        "PurposeID": 111,
+        "Area": 853.14,
+        "PurposeName": "اصدار رخصة بناء",
+        "Note": null,
+        "MainUsedCode": 13,
+        "MainUsedName": "سكني",
+        "SubUsedCode": 699,
+        "SubUsedName": "فيلا منفصلة",
+        "LandType": 113,
+        "LandTypeName": "مخططة",
+        "LandUsed": 653,
+        "LandUsedName": "سكني",
+        "HasNeighborhood": false,
+        "IsLandMobtra": false,
+        "IsFawry": false,
+        "SiteType": null,
+        "SiteTypeName": null,
+        "LocationData": {
+            "AmanahCode": "9753822b-f759-4f7a-8d79-b388224dc1eb",
+            "AmanahName": "أمانة المنطقة الشرقية",
+            "BaladiyaCode": "65c747d0-1db8-48bc-9687-9e63e603b9f2",
+            "BaladiyaName": "القطيف",
+            "IssuerCode": "65c747d0-1db8-48bc-9687-9e63e603b9f2",
+            "IssuerName": "القطيف",
+            "DistrictCode": 6206,
+            "DistrictName": "الريف",
+            "PlanNumber": "826",
+            "BlockNumber": "بدون",
+            "RegionNumber": 5,
+            "RegionName": "الشرقية",
+            "CityNumber": 27,
+            "CityName": "القطيف                        "
+        },
+        "OwnershipData": {
+            "OwnershipDocCode": 146,
+            "OwnershipDocName": "عقد اسكان",
+            "OwnershipDocNumber": "4617354818",
+            "OwnershipDocDate": "1446/07/04"
+        },
+        "EngOfficeData": {
+            "OfficeLicense": "3077",
+            "OfficeName": "رواق الخليج للأستشارات الهندسيه المعماريه"
+        },
+        "Attachments": [
+            {
+                "KrookiFile": "https://apiservicesstg.balady.gov.sa/v1/attachment/license-file/2994A581-4667-479C-960D-B49A773843D9",
+                "KrookiCoordFile": null
+            }
+        ],
+        "LocationBordersListData": [
+            {
+                "Side": 4,
+                "Boundary": "0",
+                "DeedBoundary": null,
+                "BorderLength": 39.83,
+                "DeedBorderLength": null,
+                "Truncate": 0,
+                "LessReflections": 0,
+                "MaxOutcropping": 0,
+                "BorderType": null,
+                "BorderTypeName": null,
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": [
+                    {
+                        "length": 39.83,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    }
+                ]
+            },
+            {
+                "Side": 2,
+                "Boundary": "0",
+                "DeedBoundary": null,
+                "BorderLength": 25.15,
+                "DeedBorderLength": null,
+                "Truncate": 0,
+                "LessReflections": 0,
+                "MaxOutcropping": 0,
+                "BorderType": null,
+                "BorderTypeName": null,
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": [
+                    {
+                        "length": 25.15,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    }
+                ]
+            },
+            {
+                "Side": 1,
+                "Boundary": "0",
+                "DeedBoundary": null,
+                "BorderLength": 20.99,
+                "DeedBorderLength": null,
+                "Truncate": 0,
+                "LessReflections": 0,
+                "MaxOutcropping": 0,
+                "BorderType": null,
+                "BorderTypeName": null,
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": [
+                    {
+                        "length": 20.99,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    }
+                ]
+            },
+            {
+                "Side": 3,
+                "Boundary": "0",
+                "DeedBoundary": null,
+                "BorderLength": 25,
+                "DeedBorderLength": null,
+                "Truncate": 0,
+                "LessReflections": 0,
+                "MaxOutcropping": 0,
+                "BorderType": null,
+                "BorderTypeName": null,
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": [
+                    {
+                        "length": 25,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    }
+                ]
+            }
+        ],
+        "CoordinatesListData": [
+            {
+                "CoordinateNumber": 12645633,
+                "Longitude": "49.97853470600006",
+                "Latitude": "26.59972226700006"
+            },
+            {
+                "CoordinateNumber": 12645640,
+                "Longitude": "49.97852422300008",
+                "Latitude": "26.599701871000036"
+            },
+            {
+                "CoordinateNumber": 12645639,
+                "Longitude": "49.97852855600007",
+                "Latitude": "26.599708676000034"
+            },
+            {
+                "CoordinateNumber": 12645645,
+                "Longitude": "49.97829599100004",
+                "Latitude": "26.59995519100005"
+            },
+            {
+                "CoordinateNumber": 12645635,
+                "Longitude": "49.97827967300003",
+                "Latitude": "26.59995732400006"
+            },
+            {
+                "CoordinateNumber": 12645614,
+                "Longitude": "49.97853777600005",
+                "Latitude": "26.59972906200005"
+            },
+            {
+                "CoordinateNumber": 12645648,
+                "Longitude": "49.97837797500006",
+                "Latitude": "26.599935495000068"
+            },
+            {
+                "CoordinateNumber": 12645613,
+                "Longitude": "49.97854629700004",
+                "Latitude": "26.599794587000076"
+            },
+            {
+                "CoordinateNumber": 12645623,
+                "Longitude": "49.97852987300007",
+                "Latitude": "26.599844112000028"
+            },
+            {
+                "CoordinateNumber": 12645631,
+                "Longitude": "49.97854203600008",
+                "Latitude": "26.599814869000056"
+            },
+            {
+                "CoordinateNumber": 12645646,
+                "Longitude": "49.97854267200006",
+                "Latitude": "26.599742642000024"
+            },
+            {
+                "CoordinateNumber": 12645650,
+                "Longitude": "49.97853369400008",
+                "Latitude": "26.599837378000075"
+            },
+            {
+                "CoordinateNumber": 12645657,
+                "Longitude": "49.97850384800006",
+                "Latitude": "26.59988002800003"
+            },
+            {
+                "CoordinateNumber": 12645619,
+                "Longitude": "49.97852285300007",
+                "Latitude": "26.599857610000072"
+            },
+            {
+                "CoordinateNumber": 12645620,
+                "Longitude": "49.97839400200007",
+                "Latitude": "26.599931103000074"
+            },
+            {
+                "CoordinateNumber": 12645627,
+                "Longitude": "49.97854598300006",
+                "Latitude": "26.59975846900005"
+            },
+            {
+                "CoordinateNumber": 12645629,
+                "Longitude": "49.978328960000056",
+                "Latitude": "26.59994867200004"
+            },
+            {
+                "CoordinateNumber": 12645624,
+                "Longitude": "49.97854736900007",
+                "Latitude": "26.59977879400003"
+            },
+            {
+                "CoordinateNumber": 12645637,
+                "Longitude": "49.978546978000054",
+                "Latitude": "26.599787812000045"
+            },
+            {
+                "CoordinateNumber": 12645647,
+                "Longitude": "49.97854560500008",
+                "Latitude": "26.599801353000032"
+            },
+            {
+                "CoordinateNumber": 12645651,
+                "Longitude": "49.97854655500004",
+                "Latitude": "26.59976524500007"
+            },
+            {
+                "CoordinateNumber": 12645628,
+                "Longitude": "49.97844178500003",
+                "Latitude": "26.59991566800005"
+            },
+            {
+                "CoordinateNumber": 12645659,
+                "Longitude": "49.97851494000008",
+                "Latitude": "26.599866579000036"
+            },
+            {
+                "CoordinateNumber": 12645656,
+                "Longitude": "49.97849786100005",
+                "Latitude": "26.599884506000024"
+            },
+            {
+                "CoordinateNumber": 12645617,
+                "Longitude": "49.978214438000066",
+                "Latitude": "26.59981913100006"
+            },
+            {
+                "CoordinateNumber": 12645654,
+                "Longitude": "49.978540545000044",
+                "Latitude": "26.599735846000044"
+            },
+            {
+                "CoordinateNumber": 12645626,
+                "Longitude": "49.97851145000004",
+                "Latitude": "26.599871058000076"
+            },
+            {
+                "CoordinateNumber": 12645630,
+                "Longitude": "49.978361637000035",
+                "Latitude": "26.599939894000045"
+            },
+            {
+                "CoordinateNumber": 12645643,
+                "Longitude": "49.97834561900004",
+                "Latitude": "26.59994428500005"
+            },
+            {
+                "CoordinateNumber": 12645653,
+                "Longitude": "49.978214438000066",
+                "Latitude": "26.59981913100006"
+            },
+            {
+                "CoordinateNumber": 12645622,
+                "Longitude": "49.97841003100007",
+                "Latitude": "26.59992671200007"
+            },
+            {
+                "CoordinateNumber": 12645634,
+                "Longitude": "49.978532259000076",
+                "Latitude": "26.599715467000067"
+            },
+            {
+                "CoordinateNumber": 12645615,
+                "Longitude": "49.97846568600005",
+                "Latitude": "26.599906822000037"
+            },
+            {
+                "CoordinateNumber": 12645621,
+                "Longitude": "49.97842605800008",
+                "Latitude": "26.599922328000048"
+            },
+            {
+                "CoordinateNumber": 12645658,
+                "Longitude": "49.97848018900004",
+                "Latitude": "26.599897914000053"
+            },
+            {
+                "CoordinateNumber": 12645625,
+                "Longitude": "49.97847324900005",
+                "Latitude": "26.599902375000056"
+            },
+            {
+                "CoordinateNumber": 12645638,
+                "Longitude": "49.97848711900008",
+                "Latitude": "26.59989345200006"
+            },
+            {
+                "CoordinateNumber": 12645616,
+                "Longitude": "49.978539770000054",
+                "Latitude": "26.59982387200006"
+            },
+            {
+                "CoordinateNumber": 12645652,
+                "Longitude": "49.97828984900008",
+                "Latitude": "26.59962106100005"
+            },
+            {
+                "CoordinateNumber": 12645642,
+                "Longitude": "49.97827338400003",
+                "Latitude": "26.59995953300006"
+            },
+            {
+                "CoordinateNumber": 12645644,
+                "Longitude": "49.97854711700006",
+                "Latitude": "26.599772012000074"
+            },
+            {
+                "CoordinateNumber": 12645649,
+                "Longitude": "49.97854447800006",
+                "Latitude": "26.59975167600004"
+            },
+            {
+                "CoordinateNumber": 12645618,
+                "Longitude": "49.97831264100006",
+                "Latitude": "26.59995079600003"
+            },
+            {
+                "CoordinateNumber": 12645636,
+                "Longitude": "49.97853688200007",
+                "Latitude": "26.59983063100003"
+            },
+            {
+                "CoordinateNumber": 12645641,
+                "Longitude": "49.978493738000054",
+                "Latitude": "26.599888988000032"
+            },
+            {
+                "CoordinateNumber": 12645655,
+                "Longitude": "49.97850764900005",
+                "Latitude": "26.599875542000063"
+            },
+            {
+                "CoordinateNumber": 12645632,
+                "Longitude": "49.978543982000076",
+                "Latitude": "26.599808104000033"
+            }
+        ],
+        "LandsListData": [
+            {
+                "LandNumber": "0038",
+                "LandArea": 853.14,
+                "RealestateID": null,
+                "LandAreaAccordingToScheme": 853.14,
+                "partNumber": null
+            }
+        ],
+        "OwnersListData": [
+            {
+                "OwnerIdentifierType": 1,
+                "OwnerIdentifierTypeName": "هوية وطنية",
+                "OwnerIdentifier": "1000100873",
+                "OwnerName": "شاكر محمد مبارك القحطاني"
+            }
+        ],
+        "BuildCondListData": {
+            "BuildingPercentage": null,
+            "MaxBuildingHeight": null,
+            "FloorsNumber": null,
+            "ConstructionFactor": null
+        },
+        "DeedListData": null,
+        "UrbanBoundary": null,
+        "RequestId": 4617354818
+    },
+    {
+        "OldLicense": "65132564132",
+        "KrookiNumber": 46079866192,
+        "KrookiHijriIssueDate": "1446/07/01",
+        "KrookiIssueDate": "2025/01/01",
+        "PurposeID": 111,
+        "Area": 944.02,
+        "PurposeName": "اصدار رخصة بناء",
+        "Note": null,
+        "MainUsedCode": 13,
+        "MainUsedName": "سكني",
+        "SubUsedCode": 699,
+        "SubUsedName": "فيلا منفصلة",
+        "LandType": 113,
+        "LandTypeName": "مخططة",
+        "LandUsed": 653,
+        "LandUsedName": "سكني",
+        "HasNeighborhood": false,
+        "IsLandMobtra": false,
+        "IsFawry": false,
+        "SiteType": null,
+        "SiteTypeName": null,
+        "LocationData": {
+            "AmanahCode": "ed748dc1-4713-4b41-b27a-adab264c88c1",
+            "AmanahName": "أمانة منطقة القصيم",
+            "BaladiyaCode": "df5b1d19-935b-4c1f-bcbe-d8781daae12b",
+            "BaladiyaName": "بلدية عنيزة",
+            "IssuerCode": "df5b1d19-935b-4c1f-bcbe-d8781daae12b",
+            "IssuerName": "بلدية عنيزة",
+            "DistrictCode": 10078378,
+            "DistrictName": "الفاخرية",
+            "PlanNumber": "387",
+            "BlockNumber": "بدون",
+            "RegionNumber": null,
+            "RegionName": null,
+            "CityNumber": 43,
+            "CityName": "عنيزة                         "
+        },
+        "OwnershipData": {
+            "OwnershipDocCode": 146,
+            "OwnershipDocName": "عقد اسكان",
+            "OwnershipDocNumber": "4617354751",
+            "OwnershipDocDate": "1446/07/02"
+        },
+        "EngOfficeData": {
+            "OfficeLicense": "3077",
+            "OfficeName": "رواق الخليج للأستشارات الهندسيه المعماريه"
+        },
+        "Attachments": [
+            {
+                "KrookiFile": "https://apiservicesstg.balady.gov.sa/v1/attachment/license-file/4EFB0D25-2E87-4FD8-B915-A81492566A93",
+                "KrookiCoordFile": null
+            }
+        ],
+        "LocationBordersListData": [
+            {
+                "Side": 1,
+                "Boundary": "0",
+                "DeedBoundary": null,
+                "BorderLength": 20.92,
+                "DeedBorderLength": null,
+                "Truncate": 0,
+                "LessReflections": 0,
+                "MaxOutcropping": 0,
+                "BorderType": null,
+                "BorderTypeName": null,
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": [
+                    {
+                        "length": 20.92,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    }
+                ]
+            },
+            {
+                "Side": 4,
+                "Boundary": "0",
+                "DeedBoundary": null,
+                "BorderLength": 40.86,
+                "DeedBorderLength": null,
+                "Truncate": 0,
+                "LessReflections": 0,
+                "MaxOutcropping": 0,
+                "BorderType": null,
+                "BorderTypeName": null,
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": [
+                    {
+                        "length": 40.86,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    }
+                ]
+            },
+            {
+                "Side": 2,
+                "Boundary": "0",
+                "DeedBoundary": null,
+                "BorderLength": 28.99,
+                "DeedBorderLength": null,
+                "Truncate": 0,
+                "LessReflections": 0,
+                "MaxOutcropping": 0,
+                "BorderType": null,
+                "BorderTypeName": null,
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": [
+                    {
+                        "length": 28.99,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    }
+                ]
+            },
+            {
+                "Side": 3,
+                "Boundary": "0",
+                "DeedBoundary": null,
+                "BorderLength": 32.41,
+                "DeedBorderLength": null,
+                "Truncate": 0,
+                "LessReflections": 0,
+                "MaxOutcropping": 0,
+                "BorderType": null,
+                "BorderTypeName": null,
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": [
+                    {
+                        "length": 32.41,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    }
+                ]
+            }
+        ],
+        "CoordinatesListData": [
+            {
+                "CoordinateNumber": 12645598,
+                "Longitude": "43.99217991299997",
+                "Latitude": "26.066311602999974"
+            },
+            {
+                "CoordinateNumber": 12645599,
+                "Longitude": "43.99189384099998",
+                "Latitude": "26.066217782000024"
+            },
+            {
+                "CoordinateNumber": 12645596,
+                "Longitude": "43.99217991299997",
+                "Latitude": "26.066311602999974"
+            },
+            {
+                "CoordinateNumber": 12645597,
+                "Longitude": "43.991899108999974",
+                "Latitude": "26.066458839999996"
+            },
+            {
+                "CoordinateNumber": 12645600,
+                "Longitude": "43.99172679700001",
+                "Latitude": "26.06640365300001"
+            },
+            {
+                "CoordinateNumber": 12645595,
+                "Longitude": "43.992096118999996",
+                "Latitude": "26.066521938999983"
+            },
+            {
+                "CoordinateNumber": 12645601,
+                "Longitude": "43.99216307099999",
+                "Latitude": "26.06627668599998"
+            },
+            {
+                "CoordinateNumber": 12645602,
+                "Longitude": "43.99185016000001",
+                "Latitude": "26.066233098999987"
+            }
+        ],
+        "LandsListData": [
+            {
+                "LandNumber": "83",
+                "LandArea": 944.02,
+                "RealestateID": null,
+                "LandAreaAccordingToScheme": 944.02,
+                "partNumber": null
+            }
+        ],
+        "OwnersListData": [
+            {
+                "OwnerIdentifierType": 1,
+                "OwnerIdentifierTypeName": "هوية وطنية",
+                "OwnerIdentifier": "1000100873",
+                "OwnerName": "شاكر محمد مبارك القحطاني"
+            }
+        ],
+        "BuildCondListData": {
+            "BuildingPercentage": null,
+            "MaxBuildingHeight": null,
+            "FloorsNumber": null,
+            "ConstructionFactor": null
+        },
+        "DeedListData": null,
+        "UrbanBoundary": null,
+        "RequestId": 4617354751
+    },
+    {
+        "OldLicense": "321213213216546541",
+        "KrookiNumber": 46079866190,
+        "KrookiHijriIssueDate": "1446/07/01",
+        "KrookiIssueDate": "2025/01/01",
+        "PurposeID": 111,
+        "Area": 7256.64,
+        "PurposeName": "اصدار رخصة بناء",
+        "Note": null,
+        "MainUsedCode": 13,
+        "MainUsedName": "سكني",
+        "SubUsedCode": 699,
+        "SubUsedName": "فيلا منفصلة",
+        "LandType": 113,
+        "LandTypeName": "مخططة",
+        "LandUsed": 653,
+        "LandUsedName": "سكني",
+        "HasNeighborhood": false,
+        "IsLandMobtra": false,
+        "IsFawry": false,
+        "SiteType": null,
+        "SiteTypeName": null,
+        "LocationData": {
+            "AmanahCode": "957a3362-fdf1-4103-aae2-2fb6366d2db5",
+            "AmanahName": "أمانة محافظة جدة",
+            "BaladiyaCode": "626c457d-0540-4837-b6fd-b511c73ecced",
+            "BaladiyaName": "بلدية أبحر",
+            "IssuerCode": "626c457d-0540-4837-b6fd-b511c73ecced",
+            "IssuerName": "بلدية أبحر",
+            "DistrictCode": 10078631,
+            "DistrictName": "الأصيل",
+            "PlanNumber": "9 / 2944 / 1 / س المعدل 2 ",
+            "BlockNumber": "بدون",
+            "RegionNumber": null,
+            "RegionName": null,
+            "CityNumber": 2,
+            "CityName": "جده                           "
+        },
+        "OwnershipData": {
+            "OwnershipDocCode": 146,
+            "OwnershipDocName": "عقد اسكان",
+            "OwnershipDocNumber": "4617354746",
+            "OwnershipDocDate": "1446/07/04"
+        },
+        "EngOfficeData": {
+            "OfficeLicense": "3077",
+            "OfficeName": "رواق الخليج للأستشارات الهندسيه المعماريه"
+        },
+        "Attachments": [
+            {
+                "KrookiFile": "https://apiservicesstg.balady.gov.sa/v1/attachment/license-file/F1416AF8-D27E-4F24-8913-954F07B27738",
+                "KrookiCoordFile": null
+            }
+        ],
+        "LocationBordersListData": [
+            {
+                "Side": 3,
+                "Boundary": "0",
+                "DeedBoundary": null,
+                "BorderLength": 61.26,
+                "DeedBorderLength": null,
+                "Truncate": 0,
+                "LessReflections": 0,
+                "MaxOutcropping": 0,
+                "BorderType": null,
+                "BorderTypeName": null,
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": [
+                    {
+                        "length": 61.260000000000005,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    }
+                ]
+            },
+            {
+                "Side": 2,
+                "Boundary": "0",
+                "DeedBoundary": null,
+                "BorderLength": 109.27,
+                "DeedBorderLength": null,
+                "Truncate": 0,
+                "LessReflections": 0,
+                "MaxOutcropping": 0,
+                "BorderType": null,
+                "BorderTypeName": null,
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": [
+                    {
+                        "length": 109.27000000000001,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    }
+                ]
+            },
+            {
+                "Side": 4,
+                "Boundary": "0",
+                "DeedBoundary": null,
+                "BorderLength": 110.44,
+                "DeedBorderLength": null,
+                "Truncate": 0,
+                "LessReflections": 0,
+                "MaxOutcropping": 0,
+                "BorderType": null,
+                "BorderTypeName": null,
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": [
+                    {
+                        "length": 110.44,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    }
+                ]
+            },
+            {
+                "Side": 1,
+                "Boundary": "0",
+                "DeedBoundary": null,
+                "BorderLength": 64.1,
+                "DeedBorderLength": null,
+                "Truncate": 0,
+                "LessReflections": 0,
+                "MaxOutcropping": 0,
+                "BorderType": null,
+                "BorderTypeName": null,
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": [
+                    {
+                        "length": 64.1,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    }
+                ]
+            }
+        ],
+        "CoordinatesListData": [
+            {
+                "CoordinateNumber": 12645567,
+                "Longitude": "39.16815580999997",
+                "Latitude": "21.749149208000006"
+            },
+            {
+                "CoordinateNumber": 12645570,
+                "Longitude": "39.168531040999994",
+                "Latitude": "21.748198417000026"
+            },
+            {
+                "CoordinateNumber": 12645565,
+                "Longitude": "39.16762138600001",
+                "Latitude": "21.748936243000003"
+            },
+            {
+                "CoordinateNumber": 12645566,
+                "Longitude": "39.167638571",
+                "Latitude": "21.748971052"
+            },
+            {
+                "CoordinateNumber": 12645568,
+                "Longitude": "39.167976571",
+                "Latitude": "21.748036324999987"
+            },
+            {
+                "CoordinateNumber": 12645571,
+                "Longitude": "39.168217907999974",
+                "Latitude": "21.749122451000005"
+            },
+            {
+                "CoordinateNumber": 12645564,
+                "Longitude": "39.16801383000001",
+                "Latitude": "21.748020269999984"
+            },
+            {
+                "CoordinateNumber": 12645569,
+                "Longitude": "39.168531040999994",
+                "Latitude": "21.748198417000026"
+            },
+            {
+                "CoordinateNumber": 12645572,
+                "Longitude": "39.16855968200002",
+                "Latitude": "21.74825642899998"
+            }
+        ],
+        "LandsListData": [
+            {
+                "LandNumber": "47",
+                "LandArea": 7256.64,
+                "RealestateID": null,
+                "LandAreaAccordingToScheme": 7256.64,
+                "partNumber": null
+            }
+        ],
+        "OwnersListData": [
+            {
+                "OwnerIdentifierType": 1,
+                "OwnerIdentifierTypeName": "هوية وطنية",
+                "OwnerIdentifier": "1000100873",
+                "OwnerName": "شاكر محمد مبارك القحطاني"
+            }
+        ],
+        "BuildCondListData": {
+            "BuildingPercentage": null,
+            "MaxBuildingHeight": null,
+            "FloorsNumber": null,
+            "ConstructionFactor": null
+        },
+        "DeedListData": null,
+        "UrbanBoundary": null,
+        "RequestId": 4617354746
+    },
+    {
+        "OldLicense": "6546546546854",
+        "KrookiNumber": 46079866137,
+        "KrookiHijriIssueDate": "1446/07/01",
+        "KrookiIssueDate": "2025/01/01",
+        "PurposeID": 111,
+        "Area": 1190.4,
+        "PurposeName": "اصدار رخصة بناء",
+        "Note": null,
+        "MainUsedCode": 13,
+        "MainUsedName": "سكني",
+        "SubUsedCode": 699,
+        "SubUsedName": "فيلا منفصلة",
+        "LandType": 113,
+        "LandTypeName": "مخططة",
+        "LandUsed": 653,
+        "LandUsedName": "سكني",
+        "HasNeighborhood": false,
+        "IsLandMobtra": false,
+        "IsFawry": false,
+        "SiteType": null,
+        "SiteTypeName": null,
+        "LocationData": {
+            "AmanahCode": "957a3362-fdf1-4103-aae2-2fb6366d2db5",
+            "AmanahName": "أمانة محافظة جدة",
+            "BaladiyaCode": "626c457d-0540-4827-b6fd-b511c73ecced",
+            "BaladiyaName": "بلدية أم السلم",
+            "IssuerCode": "626c457d-0540-4827-b6fd-b511c73ecced",
+            "IssuerName": "بلدية أم السلم",
+            "DistrictCode": 10007895,
+            "DistrictName": "أم السلم",
+            "PlanNumber": "ِ363/ج/س",
+            "BlockNumber": "بدون",
+            "RegionNumber": null,
+            "RegionName": null,
+            "CityNumber": 2,
+            "CityName": "جده                           "
+        },
+        "OwnershipData": {
+            "OwnershipDocCode": 146,
+            "OwnershipDocName": "عقد اسكان",
+            "OwnershipDocNumber": "4617354647",
+            "OwnershipDocDate": "1446/07/01"
+        },
+        "EngOfficeData": {
+            "OfficeLicense": "3077",
+            "OfficeName": "رواق الخليج للأستشارات الهندسيه المعماريه"
+        },
+        "Attachments": [
+            {
+                "KrookiFile": "https://apiservicesstg.balady.gov.sa/v1/attachment/license-file/C08B85F3-1622-46AB-B4D8-CB7F5317DD32",
+                "KrookiCoordFile": null
+            }
+        ],
+        "LocationBordersListData": [
+            {
+                "Side": 1,
+                "Boundary": "0",
+                "DeedBoundary": null,
+                "BorderLength": 43.3,
+                "DeedBorderLength": null,
+                "Truncate": 0,
+                "LessReflections": 0,
+                "MaxOutcropping": 0,
+                "BorderType": null,
+                "BorderTypeName": null,
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": [
+                    {
+                        "length": 43.3,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    }
+                ]
+            },
+            {
+                "Side": 2,
+                "Boundary": "0",
+                "DeedBoundary": null,
+                "BorderLength": 26.42,
+                "DeedBorderLength": null,
+                "Truncate": 0,
+                "LessReflections": 0,
+                "MaxOutcropping": 0,
+                "BorderType": null,
+                "BorderTypeName": null,
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": [
+                    {
+                        "length": 26.42,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    }
+                ]
+            },
+            {
+                "Side": 4,
+                "Boundary": "0",
+                "DeedBoundary": null,
+                "BorderLength": 39.61,
+                "DeedBorderLength": null,
+                "Truncate": 0,
+                "LessReflections": 0,
+                "MaxOutcropping": 0,
+                "BorderType": null,
+                "BorderTypeName": null,
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": [
+                    {
+                        "length": 39.61,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    }
+                ]
+            },
+            {
+                "Side": 3,
+                "Boundary": "0",
+                "DeedBoundary": null,
+                "BorderLength": 30.05,
+                "DeedBorderLength": null,
+                "Truncate": 0,
+                "LessReflections": 0,
+                "MaxOutcropping": 0,
+                "BorderType": null,
+                "BorderTypeName": null,
+                "DimensionsType": 2,
+                "DimensionsTypeName": "غير منكسر",
+                "BorderLengthDetail": null,
+                "BorderLengthDetailWithType": [
+                    {
+                        "length": 30.05,
+                        "typeId": 1,
+                        "typeName": "ضلع"
+                    }
+                ]
+            }
+        ],
+        "CoordinatesListData": [
+            {
+                "CoordinateNumber": 12645548,
+                "Longitude": "39.324737718999984",
+                "Latitude": "21.464340956"
+            },
+            {
+                "CoordinateNumber": 12645553,
+                "Longitude": "39.32476715600001",
+                "Latitude": "21.46416740799998"
+            },
+            {
+                "CoordinateNumber": 12645551,
+                "Longitude": "39.32446089899997",
+                "Latitude": "21.464240609"
+            },
+            {
+                "CoordinateNumber": 12645546,
+                "Longitude": "39.324737718999984",
+                "Latitude": "21.464340956"
+            },
+            {
+                "CoordinateNumber": 12645547,
+                "Longitude": "39.32443098599998",
+                "Latitude": "21.464415270000018"
+            },
+            {
+                "CoordinateNumber": 12645550,
+                "Longitude": "39.32449147699998",
+                "Latitude": "21.464062049999995"
+            },
+            {
+                "CoordinateNumber": 12645552,
+                "Longitude": "39.32477768899997",
+                "Latitude": "21.464105297999993"
+            },
+            {
+                "CoordinateNumber": 12645549,
+                "Longitude": "39.32471776900002",
+                "Latitude": "21.464458576000027"
+            }
+        ],
+        "LandsListData": [
+            {
+                "LandNumber": "414",
+                "LandArea": 1190.4,
+                "RealestateID": null,
+                "LandAreaAccordingToScheme": 1190.4,
+                "partNumber": null
+            }
+        ],
+        "OwnersListData": [
+            {
+                "OwnerIdentifierType": 1,
+                "OwnerIdentifierTypeName": "هوية وطنية",
+                "OwnerIdentifier": "1000100873",
+                "OwnerName": "شاكر محمد مبارك القحطاني"
+            }
+        ],
+        "BuildCondListData": {
+            "BuildingPercentage": null,
+            "MaxBuildingHeight": null,
+            "FloorsNumber": null,
+            "ConstructionFactor": null
+        },
+        "DeedListData": null,
+        "UrbanBoundary": null,
+        "RequestId": 4617354647
+    },
+        {
+                "OldLicense": "",
+                "KrookiNumber": 46069864463,
+                "KrookiHijriIssueDate": "1446/06/22",
+                "KrookiIssueDate": "2024/12/23",
+                "PurposeID": 111,
+                "Area": 902.12,
+                "PurposeName": "اصدار رخصة بناء",
+                "Note": null,
+                "MainUsedCode": 13,
+                "MainUsedName": "سكني",
+                "SubUsedCode": 698,
+                "SubUsedName": "فيلا متصلة",
+                "LandType": 113,
+                "LandTypeName": "مخططة",
+                "LandUsed": null,
+                "LandUsedName": null,
+                "HasNeighborhood": false,
+                "IsLandMobtra": false,
+                "IsFawry": false,
+                "SiteType": 164,
+                "SiteTypeName": "أرض فضاء",
+                "LocationData": {
+                    "AmanahCode": "7e324d33-c281-4830-867e-2c652ec7e029",
+                    "AmanahName": "أمانة منطقة الجوف",
+                    "BaladiyaCode": "00bdf1a5-8cd5-4274-9848-c7e3a225f752",
+                    "BaladiyaName": "بلدية دومة الجندل",
+                    "IssuerCode": "00bdf1a5-8cd5-4274-9848-c7e3a225f752",
+                    "IssuerName": "بلدية دومة الجندل",
+                    "DistrictCode": 58446,
+                    "DistrictName": "النزهة",
+                    "PlanNumber": "1421/2/4/15",
+                    "BlockNumber": "بدون",
+                    "RegionNumber": null,
+                    "RegionName": null,
+                    "CityNumber": 39,
+                    "CityName": "دومة الجندل                   "
+                },
+                "OwnershipData": {
+                    "OwnershipDocCode": 697,
+                    "OwnershipDocName": "عقد الإيجار التجاري",
+                    "OwnershipDocNumber": "555555",
+                    "OwnershipDocDate": "1446/06/07"
+                },
+                "EngOfficeData": {
+                    "OfficeLicense": "5100000049",
+                    "OfficeName": "شركة مهنية لغرض الاختبار"
+                },
+                "Attachments": [
+                    {
+                        "KrookiFile": "https://apiservicesstg.balady.gov.sa/v1/attachment/license-file/272ef382574f46159697b70cd51d19c0",
+                        "KrookiCoordFile": null
+                    }
+                ],
+                "LocationBordersListData": [
+                    {
+                        "Side": 2,
+                        "Boundary": "1",
+                        "DeedBoundary": null,
+                        "BorderLength": 33.77,
+                        "DeedBorderLength": null,
+                        "Truncate": null,
+                        "LessReflections": null,
+                        "MaxOutcropping": null,
+                        "BorderType": 1297,
+                        "BorderTypeName": "جبل",
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 33.77,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    },
+                    {
+                        "Side": 4,
+                        "Boundary": "1",
+                        "DeedBoundary": null,
+                        "BorderLength": 42.74,
+                        "DeedBorderLength": null,
+                        "Truncate": null,
+                        "LessReflections": null,
+                        "MaxOutcropping": null,
+                        "BorderType": 1297,
+                        "BorderTypeName": "جبل",
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 9.13,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            },
+                            {
+                                "length": 33.61,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    },
+                    {
+                        "Side": 1,
+                        "Boundary": "1",
+                        "DeedBoundary": null,
+                        "BorderLength": 17.76,
+                        "DeedBorderLength": null,
+                        "Truncate": null,
+                        "LessReflections": null,
+                        "MaxOutcropping": null,
+                        "BorderType": 1296,
+                        "BorderTypeName": "وادي",
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 17.76,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    },
+                    {
+                        "Side": 3,
+                        "Boundary": "1",
+                        "DeedBoundary": null,
+                        "BorderLength": 26.7,
+                        "DeedBorderLength": null,
+                        "Truncate": null,
+                        "LessReflections": null,
+                        "MaxOutcropping": null,
+                        "BorderType": 1297,
+                        "BorderTypeName": "جبل",
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 26.7,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    }
+                ],
+                "CoordinatesListData": [
+                    {
+                        "CoordinateNumber": 12644506,
+                        "Longitude": "39.860402871000076",
+                        "Latitude": "29.795809818000066"
+                    },
+                    {
+                        "CoordinateNumber": 12644503,
+                        "Longitude": "39.86031908500007",
+                        "Latitude": "29.796104107000076"
+                    },
+                    {
+                        "CoordinateNumber": 12644508,
+                        "Longitude": "39.86058957300003",
+                        "Latitude": "29.796160705000034"
+                    },
+                    {
+                        "CoordinateNumber": 12644504,
+                        "Longitude": "39.86067175800008",
+                        "Latitude": "29.795864649000066"
+                    },
+                    {
+                        "CoordinateNumber": 12644505,
+                        "Longitude": "39.86067175800008",
+                        "Latitude": "29.795864649000066"
+                    },
+                    {
+                        "CoordinateNumber": 12644507,
+                        "Longitude": "39.86041096200006",
+                        "Latitude": "29.796123330000057"
+                    }
+                ],
+                "LandsListData": [
+                    {
+                        "LandNumber": "309",
+                        "LandArea": 0,
+                        "RealestateID": null,
+                        "LandAreaAccordingToScheme": 902.12,
+                        "partNumber": "10"
+                    }
+                ],
+                "OwnersListData": [
+                    {
+                        "OwnerIdentifierType": 1,
+                        "OwnerIdentifierTypeName": "هوية وطنية",
+                        "OwnerIdentifier": "1138587728",
+                        "OwnerName": "رهف محمد بن خضر خطيري"
+                    }
+                ],
+                "BuildCondListData": {
+                    "BuildingPercentage": null,
+                    "MaxBuildingHeight": null,
+                    "FloorsNumber": null,
+                    "ConstructionFactor": null
+                },
+                "DeedListData": null,
+                "UrbanBoundary": "1450",
+                "RequestId": 4617352801
+            },
+            {
+                "OldLicense": "212313165412654132",
+                "KrookiNumber": 46079866080,
+                "KrookiHijriIssueDate": "1446/07/01",
+                "KrookiIssueDate": "2025/01/01",
+                "PurposeID": 111,
+                "Area": 881.48,
+                "PurposeName": "اصدار رخصة بناء",
+                "Note": null,
+                "MainUsedCode": 13,
+                "MainUsedName": "سكني",
+                "SubUsedCode": 699,
+                "SubUsedName": "فيلا منفصلة",
+                "LandType": 113,
+                "LandTypeName": "مخططة",
+                "LandUsed": 653,
+                "LandUsedName": "سكني",
+                "HasNeighborhood": false,
+                "IsLandMobtra": false,
+                "IsFawry": false,
+                "SiteType": null,
+                "SiteTypeName": null,
+                "LocationData": {
+                    "AmanahCode": "48f81bf1-5c74-4ffc-aec2-b18b341de73f",
+                    "AmanahName": "أمانة منطقة المدينة المنورة",
+                    "BaladiyaCode": "85978f1b-7966-4e87-b352-12e342c2c92f",
+                    "BaladiyaName": "بلدية قباء",
+                    "IssuerCode": "85978f1b-7966-4e87-b352-12e342c2c92f",
+                    "IssuerName": "بلدية قباء",
+                    "DistrictCode": 10023626,
+                    "DistrictName": "الدويفعة",
+                    "PlanNumber": "بدون",
+                    "BlockNumber": "بدون",
+                    "RegionNumber": null,
+                    "RegionName": null,
+                    "CityNumber": 5,
+                    "CityName": "المدينه المنوره               "
+                },
+                "OwnershipData": {
+                    "OwnershipDocCode": 146,
+                    "OwnershipDocName": "عقد اسكان",
+                    "OwnershipDocNumber": "4617354606",
+                    "OwnershipDocDate": "1446/07/01"
+                },
+                "EngOfficeData": {
+                    "OfficeLicense": "3077",
+                    "OfficeName": "رواق الخليج للأستشارات الهندسيه المعماريه"
+                },
+                "Attachments": [
+                    {
+                        "KrookiFile": "https://apiservicesstg.balady.gov.sa/v1/attachment/license-file/68DB7BDE-B877-4D48-B129-BD797B803692",
+                        "KrookiCoordFile": null
+                    }
+                ],
+                "LocationBordersListData": [
+                    {
+                        "Side": 1,
+                        "Boundary": "0",
+                        "DeedBoundary": null,
+                        "BorderLength": 35.16,
+                        "DeedBorderLength": null,
+                        "Truncate": 0,
+                        "LessReflections": 0,
+                        "MaxOutcropping": 0,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 35.16,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    },
+                    {
+                        "Side": 2,
+                        "Boundary": "0",
+                        "DeedBoundary": null,
+                        "BorderLength": 26.51,
+                        "DeedBorderLength": null,
+                        "Truncate": 0,
+                        "LessReflections": 0,
+                        "MaxOutcropping": 0,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 26.51,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    },
+                    {
+                        "Side": 3,
+                        "Boundary": "0",
+                        "DeedBoundary": null,
+                        "BorderLength": 35.13,
+                        "DeedBorderLength": null,
+                        "Truncate": 0,
+                        "LessReflections": 0,
+                        "MaxOutcropping": 0,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 35.13,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    },
+                    {
+                        "Side": 4,
+                        "Boundary": "0",
+                        "DeedBoundary": null,
+                        "BorderLength": 22.14,
+                        "DeedBorderLength": null,
+                        "Truncate": 0,
+                        "LessReflections": 0,
+                        "MaxOutcropping": 0,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 22.14,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    }
+                ],
+                "CoordinatesListData": [
+                    {
+                        "CoordinateNumber": 12645496,
+                        "Longitude": "39.56911845399998",
+                        "Latitude": "24.174415211999985"
+                    },
+                    {
+                        "CoordinateNumber": 12645492,
+                        "Longitude": "39.568805037000004",
+                        "Latitude": "24.174344684000005"
+                    },
+                    {
+                        "CoordinateNumber": 12645489,
+                        "Longitude": "39.56902877900001",
+                        "Latitude": "24.174604363000014"
+                    },
+                    {
+                        "CoordinateNumber": 12645488,
+                        "Longitude": "39.56910103400003",
+                        "Latitude": "24.17438629100002"
+                    },
+                    {
+                        "CoordinateNumber": 12645493,
+                        "Longitude": "39.56902877900001",
+                        "Latitude": "24.174604363000014"
+                    },
+                    {
+                        "CoordinateNumber": 12645494,
+                        "Longitude": "39.568827942999974",
+                        "Latitude": "24.174347938999972"
+                    },
+                    {
+                        "CoordinateNumber": 12645495,
+                        "Longitude": "39.568723879000004",
+                        "Latitude": "24.17445948599999"
+                    },
+                    {
+                        "CoordinateNumber": 12645490,
+                        "Longitude": "39.568687436000005",
+                        "Latitude": "24.17455253999998"
+                    },
+                    {
+                        "CoordinateNumber": 12645491,
+                        "Longitude": "39.56876486499999",
+                        "Latitude": "24.17436569199998"
+                    }
+                ],
+                "LandsListData": [
+                    {
+                        "LandNumber": "بدون",
+                        "LandArea": 881.48,
+                        "RealestateID": null,
+                        "LandAreaAccordingToScheme": 881.48,
+                        "partNumber": null
+                    }
+                ],
+                "OwnersListData": [
+                    {
+                        "OwnerIdentifierType": 1,
+                        "OwnerIdentifierTypeName": "هوية وطنية",
+                        "OwnerIdentifier": "1000100873",
+                        "OwnerName": "شاكر محمد مبارك القحطاني"
+                    }
+                ],
+                "BuildCondListData": {
+                    "BuildingPercentage": null,
+                    "MaxBuildingHeight": null,
+                    "FloorsNumber": null,
+                    "ConstructionFactor": null
+                },
+                "DeedListData": null,
+                "UrbanBoundary": null,
+                "RequestId": 4617354606
+            },
+            {
+                "OldLicense": "54747854785",
+                "KrookiNumber": 46069865813,
+                "KrookiHijriIssueDate": "1446/06/01",
+                "KrookiIssueDate": "2024/12/02",
+                "PurposeID": 111,
+                "Area": 624,
+                "PurposeName": "اصدار رخصة بناء",
+                "Note": null,
+                "MainUsedCode": 13,
+                "MainUsedName": "سكني",
+                "SubUsedCode": 699,
+                "SubUsedName": "فيلا منفصلة",
+                "LandType": 113,
+                "LandTypeName": "مخططة",
+                "LandUsed": 653,
+                "LandUsedName": "سكني",
+                "HasNeighborhood": false,
+                "IsLandMobtra": false,
+                "IsFawry": false,
+                "SiteType": null,
+                "SiteTypeName": null,
+                "LocationData": {
+                    "AmanahCode": "7861fcdd-4c80-410a-8f18-6d28e029dc21",
+                    "AmanahName": "أمانة العاصمة المقدسة",
+                    "BaladiyaCode": "c99e8df6-0fbf-48b4-9ebf-f7f10c587b2d",
+                    "BaladiyaName": "بلدية جنوب مكة",
+                    "IssuerCode": "c99e8df6-0fbf-48b4-9ebf-f7f10c587b2d",
+                    "IssuerName": "بلدية جنوب مكة",
+                    "DistrictCode": 10038775,
+                    "DistrictName": "حي الشامية الجديد",
+                    "PlanNumber": "1/7/106/أ",
+                    "BlockNumber": "بدون",
+                    "RegionNumber": null,
+                    "RegionName": null,
+                    "CityNumber": 3,
+                    "CityName": "مكه المكرمه                   "
+                },
+                "OwnershipData": {
+                    "OwnershipDocCode": 146,
+                    "OwnershipDocName": "عقد اسكان",
+                    "OwnershipDocNumber": "4617354281",
+                    "OwnershipDocDate": "1446/06/02"
+                },
+                "EngOfficeData": {
+                    "OfficeLicense": "3077",
+                    "OfficeName": "رواق الخليج للأستشارات الهندسيه المعماريه"
+                },
+                "Attachments": [
+                    {
+                        "KrookiFile": "https://apiservicesstg.balady.gov.sa/v1/attachment/license-file/81E23A1F-E128-4BF8-B04E-56D3211508F0",
+                        "KrookiCoordFile": null
+                    }
+                ],
+                "LocationBordersListData": [
+                    {
+                        "Side": 3,
+                        "Boundary": "6",
+                        "DeedBoundary": null,
+                        "BorderLength": 28.5,
+                        "DeedBorderLength": null,
+                        "Truncate": 6,
+                        "LessReflections": 6,
+                        "MaxOutcropping": 6,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 28.5,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    },
+                    {
+                        "Side": 2,
+                        "Boundary": "6",
+                        "DeedBoundary": null,
+                        "BorderLength": 21,
+                        "DeedBorderLength": null,
+                        "Truncate": 6,
+                        "LessReflections": 6,
+                        "MaxOutcropping": 6,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 21,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    },
+                    {
+                        "Side": 4,
+                        "Boundary": "6",
+                        "DeedBoundary": null,
+                        "BorderLength": 20,
+                        "DeedBorderLength": null,
+                        "Truncate": 6,
+                        "LessReflections": 6,
+                        "MaxOutcropping": 6,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 20,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    },
+                    {
+                        "Side": 1,
+                        "Boundary": "666",
+                        "DeedBoundary": null,
+                        "BorderLength": 31.5,
+                        "DeedBorderLength": null,
+                        "Truncate": 6,
+                        "LessReflections": 6,
+                        "MaxOutcropping": 6,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 31.5,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    }
+                ],
+                "CoordinatesListData": [
+                    {
+                        "CoordinateNumber": 12645262,
+                        "Longitude": "39.68116147919002",
+                        "Latitude": "21.308327317148287"
+                    },
+                    {
+                        "CoordinateNumber": 12645263,
+                        "Longitude": "39.68118238823777",
+                        "Latitude": "21.308508981081847"
+                    },
+                    {
+                        "CoordinateNumber": 12645264,
+                        "Longitude": "39.68088693726436",
+                        "Latitude": "21.308316648782593"
+                    },
+                    {
+                        "CoordinateNumber": 12645261,
+                        "Longitude": "39.68118238823777",
+                        "Latitude": "21.308508981081847"
+                    },
+                    {
+                        "CoordinateNumber": 12645260,
+                        "Longitude": "39.680878947391804",
+                        "Latitude": "21.308497188323177"
+                    },
+                    {
+                        "CoordinateNumber": 12645265,
+                        "Longitude": "39.681188779839985",
+                        "Latitude": "21.30836454944627"
+                    }
+                ],
+                "LandsListData": [
+                    {
+                        "LandNumber": "620",
+                        "LandArea": 624,
+                        "RealestateID": null,
+                        "LandAreaAccordingToScheme": 624,
+                        "partNumber": null
+                    }
+                ],
+                "OwnersListData": [
+                    {
+                        "OwnerIdentifierType": 1,
+                        "OwnerIdentifierTypeName": "هوية وطنية",
+                        "OwnerIdentifier": "1000100873",
+                        "OwnerName": "شاكر محمد مبارك القحطاني"
+                    }
+                ],
+                "BuildCondListData": {
+                    "BuildingPercentage": null,
+                    "MaxBuildingHeight": null,
+                    "FloorsNumber": null,
+                    "ConstructionFactor": null
+                },
+                "DeedListData": null,
+                "UrbanBoundary": null,
+                "RequestId": 4617354281
+            },
+            {
+                "OldLicense": "321213210000",
+                "KrookiNumber": 46079865821,
+                "KrookiHijriIssueDate": "1446/06/01",
+                "KrookiIssueDate": "2024/12/02",
+                "PurposeID": 111,
+                "Area": 1495.48,
+                "PurposeName": "اصدار رخصة بناء",
+                "Note": null,
+                "MainUsedCode": 13,
+                "MainUsedName": "سكني",
+                "SubUsedCode": 699,
+                "SubUsedName": "فيلا منفصلة",
+                "LandType": 113,
+                "LandTypeName": "مخططة",
+                "LandUsed": 653,
+                "LandUsedName": "سكني",
+                "HasNeighborhood": false,
+                "IsLandMobtra": false,
+                "IsFawry": false,
+                "SiteType": null,
+                "SiteTypeName": null,
+                "LocationData": {
+                    "AmanahCode": "ed748dc1-4713-4b41-b27a-adab264c88c1",
+                    "AmanahName": "أمانة منطقة القصيم",
+                    "BaladiyaCode": "df5b1d19-935b-4c1f-bcbe-d8781daae12b",
+                    "BaladiyaName": "بلدية عنيزة",
+                    "IssuerCode": "df5b1d19-935b-4c1f-bcbe-d8781daae12b",
+                    "IssuerName": "بلدية عنيزة",
+                    "DistrictCode": 7288,
+                    "DistrictName": "السليمانية",
+                    "PlanNumber": "456/ق",
+                    "BlockNumber": "بدون",
+                    "RegionNumber": null,
+                    "RegionName": null,
+                    "CityNumber": 43,
+                    "CityName": "عنيزة                         "
+                },
+                "OwnershipData": {
+                    "OwnershipDocCode": 146,
+                    "OwnershipDocName": "عقد اسكان",
+                    "OwnershipDocNumber": "4617354333",
+                    "OwnershipDocDate": "1446/06/10"
+                },
+                "EngOfficeData": {
+                    "OfficeLicense": "3077",
+                    "OfficeName": "رواق الخليج للأستشارات الهندسيه المعماريه"
+                },
+                "Attachments": [
+                    {
+                        "KrookiFile": "https://apiservicesstg.balady.gov.sa/v1/attachment/license-file/3080721C-88EE-4EB7-974E-59E9535EAC4E",
+                        "KrookiCoordFile": null
+                    }
+                ],
+                "LocationBordersListData": [
+                    {
+                        "Side": 2,
+                        "Boundary": "0",
+                        "DeedBoundary": null,
+                        "BorderLength": 42.69,
+                        "DeedBorderLength": null,
+                        "Truncate": 0,
+                        "LessReflections": 0,
+                        "MaxOutcropping": 0,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 42.69,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    },
+                    {
+                        "Side": 1,
+                        "Boundary": "0",
+                        "DeedBoundary": null,
+                        "BorderLength": 31.23,
+                        "DeedBorderLength": null,
+                        "Truncate": 0,
+                        "LessReflections": 0,
+                        "MaxOutcropping": 0,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 31.23,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    },
+                    {
+                        "Side": 3,
+                        "Boundary": "0",
+                        "DeedBoundary": null,
+                        "BorderLength": 32,
+                        "DeedBorderLength": null,
+                        "Truncate": 0,
+                        "LessReflections": 0,
+                        "MaxOutcropping": 0,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 32,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    },
+                    {
+                        "Side": 4,
+                        "Boundary": "0",
+                        "DeedBoundary": null,
+                        "BorderLength": 54.15,
+                        "DeedBorderLength": null,
+                        "Truncate": 0,
+                        "LessReflections": 0,
+                        "MaxOutcropping": 0,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 54.15,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    }
+                ],
+                "CoordinatesListData": [
+                    {
+                        "CoordinateNumber": 12645290,
+                        "Longitude": "44.01717578300003",
+                        "Latitude": "26.08379965300003"
+                    },
+                    {
+                        "CoordinateNumber": 12645294,
+                        "Longitude": "44.016905823",
+                        "Latitude": "26.083644709999987"
+                    },
+                    {
+                        "CoordinateNumber": 12645295,
+                        "Longitude": "44.01710856",
+                        "Latitude": "26.084178678"
+                    },
+                    {
+                        "CoordinateNumber": 12645292,
+                        "Longitude": "44.01717985900001",
+                        "Latitude": "26.083846626000025"
+                    },
+                    {
+                        "CoordinateNumber": 12645291,
+                        "Longitude": "44.01680227100002",
+                        "Latitude": "26.084124449"
+                    },
+                    {
+                        "CoordinateNumber": 12645293,
+                        "Longitude": "44.01710856",
+                        "Latitude": "26.084178678"
+                    }
+                ],
+                "LandsListData": [
+                    {
+                        "LandNumber": "1173",
+                        "LandArea": 1495.48,
+                        "RealestateID": null,
+                        "LandAreaAccordingToScheme": 1495.48,
+                        "partNumber": null
+                    }
+                ],
+                "OwnersListData": [
+                    {
+                        "OwnerIdentifierType": 1,
+                        "OwnerIdentifierTypeName": "هوية وطنية",
+                        "OwnerIdentifier": "1000100873",
+                        "OwnerName": "شاكر محمد مبارك القحطاني"
+                    }
+                ],
+                "BuildCondListData": {
+                    "BuildingPercentage": null,
+                    "MaxBuildingHeight": null,
+                    "FloorsNumber": null,
+                    "ConstructionFactor": null
+                },
+                "DeedListData": null,
+                "UrbanBoundary": null,
+                "RequestId": 4617354333
+            },
+            {
+                "OldLicense": "5858958989",
+                "KrookiNumber": 46069865815,
+                "KrookiHijriIssueDate": "1446/06/03",
+                "KrookiIssueDate": "2024/12/04",
+                "PurposeID": 111,
+                "Area": 1200.07,
+                "PurposeName": "اصدار رخصة بناء",
+                "Note": null,
+                "MainUsedCode": 13,
+                "MainUsedName": "سكني",
+                "SubUsedCode": 699,
+                "SubUsedName": "فيلا منفصلة",
+                "LandType": 113,
+                "LandTypeName": "مخططة",
+                "LandUsed": 653,
+                "LandUsedName": "سكني",
+                "HasNeighborhood": false,
+                "IsLandMobtra": false,
+                "IsFawry": false,
+                "SiteType": null,
+                "SiteTypeName": null,
+                "LocationData": {
+                    "AmanahCode": "48f81bf1-5c74-4ffc-aec2-b18b341de73f",
+                    "AmanahName": "أمانة منطقة المدينة المنورة",
+                    "BaladiyaCode": "85978f1b-7966-4e87-b352-12e342c2c92f",
+                    "BaladiyaName": "بلدية قباء",
+                    "IssuerCode": "85978f1b-7966-4e87-b352-12e342c2c92f",
+                    "IssuerName": "بلدية قباء",
+                    "DistrictCode": 11767,
+                    "DistrictName": "السد",
+                    "PlanNumber": "634\\ت\\1413\\ل",
+                    "BlockNumber": "4",
+                    "RegionNumber": null,
+                    "RegionName": null,
+                    "CityNumber": 5,
+                    "CityName": "المدينه المنوره               "
+                },
+                "OwnershipData": {
+                    "OwnershipDocCode": 112,
+                    "OwnershipDocName": "صك",
+                    "OwnershipDocNumber": "69",
+                    "OwnershipDocDate": "1446/06/02"
+                },
+                "EngOfficeData": {
+                    "OfficeLicense": "3077",
+                    "OfficeName": "رواق الخليج للأستشارات الهندسيه المعماريه"
+                },
+                "Attachments": [
+                    {
+                        "KrookiFile": "https://apiservicesstg.balady.gov.sa/v1/attachment/license-file/6AB1A578-3D61-430A-ABEB-FD263C31BE2B",
+                        "KrookiCoordFile": null
+                    }
+                ],
+                "LocationBordersListData": [
+                    {
+                        "Side": 2,
+                        "Boundary": "6",
+                        "DeedBoundary": null,
+                        "BorderLength": 40.03,
+                        "DeedBorderLength": null,
+                        "Truncate": 6,
+                        "LessReflections": 6,
+                        "MaxOutcropping": 6,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 40.03,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    },
+                    {
+                        "Side": 4,
+                        "Boundary": "6",
+                        "DeedBoundary": null,
+                        "BorderLength": 60.02,
+                        "DeedBorderLength": null,
+                        "Truncate": 6,
+                        "LessReflections": 6,
+                        "MaxOutcropping": 6,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 60.02,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    },
+                    {
+                        "Side": 1,
+                        "Boundary": "6",
+                        "DeedBoundary": null,
+                        "BorderLength": 40,
+                        "DeedBorderLength": null,
+                        "Truncate": 6,
+                        "LessReflections": 6,
+                        "MaxOutcropping": 6,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 40,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    },
+                    {
+                        "Side": 3,
+                        "Boundary": "6",
+                        "DeedBoundary": null,
+                        "BorderLength": 20.01,
+                        "DeedBorderLength": null,
+                        "Truncate": 6,
+                        "LessReflections": 6,
+                        "MaxOutcropping": 6,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 20.01,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    }
+                ],
+                "CoordinatesListData": [
+                    {
+                        "CoordinateNumber": 12645271,
+                        "Longitude": "39.634085055000014",
+                        "Latitude": "24.401221521000025"
+                    },
+                    {
+                        "CoordinateNumber": 12645277,
+                        "Longitude": "39.63398344400002",
+                        "Latitude": "24.401376443000004"
+                    },
+                    {
+                        "CoordinateNumber": 12645274,
+                        "Longitude": "39.63388199399998",
+                        "Latitude": "24.40153127399998"
+                    },
+                    {
+                        "CoordinateNumber": 12645276,
+                        "Longitude": "39.634017296000025",
+                        "Latitude": "24.400973670999974"
+                    },
+                    {
+                        "CoordinateNumber": 12645272,
+                        "Longitude": "39.63371295000002",
+                        "Latitude": "24.401438344999974"
+                    },
+                    {
+                        "CoordinateNumber": 12645273,
+                        "Longitude": "39.634017296000025",
+                        "Latitude": "24.400973670999974"
+                    },
+                    {
+                        "CoordinateNumber": 12645275,
+                        "Longitude": "39.63418650300002",
+                        "Latitude": "24.40106659999998"
+                    }
+                ],
+                "LandsListData": [
+                    {
+                        "LandNumber": "47",
+                        "LandArea": 1200.07,
+                        "RealestateID": null,
+                        "LandAreaAccordingToScheme": 1200.07,
+                        "partNumber": null
+                    }
+                ],
+                "OwnersListData": [
+                    {
+                        "OwnerIdentifierType": 1,
+                        "OwnerIdentifierTypeName": "هوية وطنية",
+                        "OwnerIdentifier": "1000100873",
+                        "OwnerName": "شاكر محمد مبارك القحطاني"
+                    }
+                ],
+                "BuildCondListData": {
+                    "BuildingPercentage": null,
+                    "MaxBuildingHeight": null,
+                    "FloorsNumber": null,
+                    "ConstructionFactor": null
+                },
+                "DeedListData": [],
+                "UrbanBoundary": null,
+                "RequestId": 4617354283
+            },
+            {
+                "OldLicense": "",
+                "KrookiNumber": 46059859328,
+                "KrookiHijriIssueDate": "1446/05/15",
+                "KrookiIssueDate": "2024/11/17",
+                "PurposeID": 111,
+                "Area": 7315.84,
+                "PurposeName": "اصدار رخصة بناء",
+                "Note": "4617342434 ",
+                "MainUsedCode": 13,
+                "MainUsedName": "سكني",
+                "SubUsedCode": 698,
+                "SubUsedName": "فيلا متصلة",
+                "LandType": 150,
+                "LandTypeName": "غير مخططة",
+                "LandUsed": null,
+                "LandUsedName": null,
+                "HasNeighborhood": true,
+                "IsLandMobtra": true,
+                "IsFawry": false,
+                "SiteType": 165,
+                "SiteTypeName": "مبني قائم",
+                "LocationData": {
+                    "AmanahCode": "9753822b-f759-4f7a-8d79-b388224dc1eb",
+                    "AmanahName": "أمانة المنطقة الشرقية",
+                    "BaladiyaCode": "79bb36b5-d2a4-4ad2-ba9c-f5910467ba76",
+                    "BaladiyaName": "أمانة المنطقة الشرقية",
+                    "IssuerCode": "778d00f0-96db-494c-a3e9-4281de9e8a5e",
+                    "IssuerName": "أمانة محافظة الطائف",
+                    "DistrictCode": 10078451,
+                    "DistrictName": "الناصرية",
+                    "PlanNumber": "بدون",
+                    "BlockNumber": "بدون",
+                    "RegionNumber": 5,
+                    "RegionName": "الشرقية",
+                    "CityNumber": 7,
+                    "CityName": "الدمام                        "
+                },
+                "OwnershipData": {
+                    "OwnershipDocCode": 697,
+                    "OwnershipDocName": "عقد الإيجار التجاري",
+                    "OwnershipDocNumber": "344444",
+                    "OwnershipDocDate": "1446/05/01"
+                },
+                "EngOfficeData": {
+                    "OfficeLicense": "159",
+                    "OfficeName": "شركة عبدالرحمن احمد الجعفري وشركاه للاستشارات الهندسية"
+                },
+                "Attachments": [
+                    {
+                        "KrookiFile": "https://apiservicesstg.balady.gov.sa/v1/attachment/license-file/6ed7d72379834accad133945b3d6573b",
+                        "KrookiCoordFile": null
+                    }
+                ],
+                "LocationBordersListData": [
+                    {
+                        "Side": 3,
+                        "Boundary": "الحد حسب الطبيعةالجنوب",
+                        "DeedBoundary": null,
+                        "BorderLength": 60.94,
+                        "DeedBorderLength": null,
+                        "Truncate": null,
+                        "LessReflections": null,
+                        "MaxOutcropping": null,
+                        "BorderType": 1291,
+                        "BorderTypeName": "قطعة",
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 22.68,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            },
+                            {
+                                "length": 38.26,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    },
+                    {
+                        "Side": 2,
+                        "Boundary": "الحد حسب الطبيعةالشرق",
+                        "DeedBoundary": null,
+                        "BorderLength": 64.4,
+                        "DeedBorderLength": null,
+                        "Truncate": null,
+                        "LessReflections": null,
+                        "MaxOutcropping": null,
+                        "BorderType": 1297,
+                        "BorderTypeName": "جبل",
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 23.67,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            },
+                            {
+                                "length": 40.73,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    },
+                    {
+                        "Side": 4,
+                        "Boundary": "الحد حسب الطبيعةالغرب",
+                        "DeedBoundary": null,
+                        "BorderLength": 140.33,
+                        "DeedBorderLength": null,
+                        "Truncate": null,
+                        "LessReflections": null,
+                        "MaxOutcropping": null,
+                        "BorderType": 1294,
+                        "BorderTypeName": "ممر",
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 69.18,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            },
+                            {
+                                "length": 71.15,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    },
+                    {
+                        "Side": 1,
+                        "Boundary": "الحد حسب الطبيعةالشمال",
+                        "DeedBoundary": null,
+                        "BorderLength": 96.02,
+                        "DeedBorderLength": null,
+                        "Truncate": null,
+                        "LessReflections": null,
+                        "MaxOutcropping": null,
+                        "BorderType": 1296,
+                        "BorderTypeName": "وادي",
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 96.02,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    }
+                ],
+                "CoordinatesListData": [
+                    {
+                        "CoordinateNumber": 12642888,
+                        "Longitude": "41.565224090000015",
+                        "Latitude": "19.924247707999996"
+                    },
+                    {
+                        "CoordinateNumber": 12642893,
+                        "Longitude": "41.56576703500002",
+                        "Latitude": "19.923861133000003"
+                    },
+                    {
+                        "CoordinateNumber": 12642887,
+                        "Longitude": "41.565600749",
+                        "Latitude": "19.924761105000016"
+                    },
+                    {
+                        "CoordinateNumber": 12642894,
+                        "Longitude": "41.56621978700002",
+                        "Latitude": "19.92386159099999"
+                    },
+                    {
+                        "CoordinateNumber": 12642892,
+                        "Longitude": "41.56642894800001",
+                        "Latitude": "19.92394273299999"
+                    },
+                    {
+                        "CoordinateNumber": 12642889,
+                        "Longitude": "41.56638283900003",
+                        "Latitude": "19.92430809199999"
+                    },
+                    {
+                        "CoordinateNumber": 12642890,
+                        "Longitude": "41.56608884399998",
+                        "Latitude": "19.92402481099998"
+                    },
+                    {
+                        "CoordinateNumber": 12642891,
+                        "Longitude": "41.565224090000015",
+                        "Latitude": "19.924247707999996"
+                    }
+                ],
+                "LandsListData": [
+                    {
+                        "LandNumber": "بدون",
+                        "LandArea": 0,
+                        "RealestateID": null,
+                        "LandAreaAccordingToScheme": 7315.84,
+                        "partNumber": "gh"
+                    }
+                ],
+                "OwnersListData": [
+                    {
+                        "OwnerIdentifierType": 1,
+                        "OwnerIdentifierTypeName": "هوية وطنية",
+                        "OwnerIdentifier": "1000100873",
+                        "OwnerName": "شاكر محمد مبارك القحطاني"
+                    }
+                ],
+                "BuildCondListData": {
+                    "BuildingPercentage": null,
+                    "MaxBuildingHeight": null,
+                    "FloorsNumber": null,
+                    "ConstructionFactor": null
+                },
+                "DeedListData": null,
+                "UrbanBoundary": "1440",
+                "RequestId": 4617342434
+            },
+            {
+                "OldLicense": "35644132654132",
+                "KrookiNumber": 46069865216,
+                "KrookiHijriIssueDate": "1446/06/10",
+                "KrookiIssueDate": "2024/12/11",
+                "PurposeID": 111,
+                "Area": 980,
+                "PurposeName": "اصدار رخصة بناء",
+                "Note": null,
+                "MainUsedCode": 13,
+                "MainUsedName": "سكني",
+                "SubUsedCode": 24,
+                "SubUsedName": "دبلكس",
+                "LandType": 113,
+                "LandTypeName": "مخططة",
+                "LandUsed": 653,
+                "LandUsedName": "سكني",
+                "HasNeighborhood": false,
+                "IsLandMobtra": false,
+                "IsFawry": false,
+                "SiteType": null,
+                "SiteTypeName": null,
+                "LocationData": {
+                    "AmanahCode": "9753822b-f759-4f7a-8d79-b388224dc1eb",
+                    "AmanahName": "أمانة المنطقة الشرقية",
+                    "BaladiyaCode": "bce978e0-c140-4ff6-b3cf-ff120867a6aa",
+                    "BaladiyaName": "بلدية وسط الدمام",
+                    "IssuerCode": "bce978e0-c140-4ff6-b3cf-ff120867a6aa",
+                    "IssuerName": "بلدية وسط الدمام",
+                    "DistrictCode": 1656,
+                    "DistrictName": "النخيل",
+                    "PlanNumber": "570",
+                    "BlockNumber": "بدون",
+                    "RegionNumber": null,
+                    "RegionName": null,
+                    "CityNumber": 7,
+                    "CityName": "الدمام                        "
+                },
+                "OwnershipData": {
+                    "OwnershipDocCode": 146,
+                    "OwnershipDocName": "عقد اسكان",
+                    "OwnershipDocNumber": "4617353674",
+                    "OwnershipDocDate": "1446/06/09"
+                },
+                "EngOfficeData": {
+                    "OfficeLicense": "3077",
+                    "OfficeName": "رواق الخليج للأستشارات الهندسيه المعماريه"
+                },
+                "Attachments": [
+                    {
+                        "KrookiFile": "https://apiservicesstg.balady.gov.sa/v1/attachment/license-file/EAE526B1-7FF6-4945-898D-1D4CAA0BC282",
+                        "KrookiCoordFile": null
+                    }
+                ],
+                "LocationBordersListData": [
+                    {
+                        "Side": 4,
+                        "Boundary": "0",
+                        "DeedBoundary": null,
+                        "BorderLength": 35.01,
+                        "DeedBorderLength": null,
+                        "Truncate": 0,
+                        "LessReflections": 0,
+                        "MaxOutcropping": 0,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 35.01,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    },
+                    {
+                        "Side": 1,
+                        "Boundary": "0",
+                        "DeedBoundary": null,
+                        "BorderLength": 28.01,
+                        "DeedBorderLength": null,
+                        "Truncate": 0,
+                        "LessReflections": 0,
+                        "MaxOutcropping": 0,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 28.01,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    },
+                    {
+                        "Side": 3,
+                        "Boundary": "0",
+                        "DeedBoundary": null,
+                        "BorderLength": 28.01,
+                        "DeedBorderLength": null,
+                        "Truncate": 0,
+                        "LessReflections": 0,
+                        "MaxOutcropping": 0,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 28.01,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    },
+                    {
+                        "Side": 2,
+                        "Boundary": "0",
+                        "DeedBoundary": null,
+                        "BorderLength": 35.01,
+                        "DeedBorderLength": null,
+                        "Truncate": 0,
+                        "LessReflections": 0,
+                        "MaxOutcropping": 0,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 35.01,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    }
+                ],
+                "CoordinatesListData": [
+                    {
+                        "CoordinateNumber": 12644696,
+                        "Longitude": "50.09019639500008",
+                        "Latitude": "26.442014458000074"
+                    },
+                    {
+                        "CoordinateNumber": 12644695,
+                        "Longitude": "50.09023069400007",
+                        "Latitude": "26.441699976000052"
+                    },
+                    {
+                        "CoordinateNumber": 12644697,
+                        "Longitude": "50.09051016300003",
+                        "Latitude": "26.441724677000025"
+                    },
+                    {
+                        "CoordinateNumber": 12644699,
+                        "Longitude": "50.09051016300003",
+                        "Latitude": "26.441724677000025"
+                    },
+                    {
+                        "CoordinateNumber": 12644698,
+                        "Longitude": "50.09047586600008",
+                        "Latitude": "26.442039158000057"
+                    }
+                ],
+                "LandsListData": [
+                    {
+                        "LandNumber": "6",
+                        "LandArea": 980,
+                        "RealestateID": null,
+                        "LandAreaAccordingToScheme": 980,
+                        "partNumber": null
+                    }
+                ],
+                "OwnersListData": [
+                    {
+                        "OwnerIdentifierType": 1,
+                        "OwnerIdentifierTypeName": "هوية وطنية",
+                        "OwnerIdentifier": "1000100873",
+                        "OwnerName": "شاكر محمد مبارك القحطاني"
+                    }
+                ],
+                "BuildCondListData": {
+                    "BuildingPercentage": null,
+                    "MaxBuildingHeight": null,
+                    "FloorsNumber": null,
+                    "ConstructionFactor": null
+                },
+                "DeedListData": null,
+                "UrbanBoundary": null,
+                "RequestId": 4617353674
+            },
+            {
+                "OldLicense": "3123131654654",
+                "KrookiNumber": 46069865215,
+                "KrookiHijriIssueDate": "1446/06/02",
+                "KrookiIssueDate": "2024/12/03",
+                "PurposeID": 111,
+                "Area": 1004.19,
+                "PurposeName": "اصدار رخصة بناء",
+                "Note": null,
+                "MainUsedCode": 13,
+                "MainUsedName": "سكني",
+                "SubUsedCode": 699,
+                "SubUsedName": "فيلا منفصلة",
+                "LandType": 113,
+                "LandTypeName": "مخططة",
+                "LandUsed": 653,
+                "LandUsedName": "سكني",
+                "HasNeighborhood": false,
+                "IsLandMobtra": false,
+                "IsFawry": false,
+                "SiteType": null,
+                "SiteTypeName": null,
+                "LocationData": {
+                    "AmanahCode": "9753822b-f759-4f7a-8d79-b388224dc1eb",
+                    "AmanahName": "أمانة المنطقة الشرقية",
+                    "BaladiyaCode": "bce978e0-c140-4ff6-b3cf-ff120867a6aa",
+                    "BaladiyaName": "بلدية وسط الدمام",
+                    "IssuerCode": "bce978e0-c140-4ff6-b3cf-ff120867a6aa",
+                    "IssuerName": "بلدية وسط الدمام",
+                    "DistrictCode": 1661,
+                    "DistrictName": "السلام",
+                    "PlanNumber": "313",
+                    "BlockNumber": "بدون",
+                    "RegionNumber": null,
+                    "RegionName": null,
+                    "CityNumber": 7,
+                    "CityName": "الدمام                        "
+                },
+                "OwnershipData": {
+                    "OwnershipDocCode": 146,
+                    "OwnershipDocName": "عقد اسكان",
+                    "OwnershipDocNumber": "4617353673",
+                    "OwnershipDocDate": "1446/06/17"
+                },
+                "EngOfficeData": {
+                    "OfficeLicense": "3077",
+                    "OfficeName": "رواق الخليج للأستشارات الهندسيه المعماريه"
+                },
+                "Attachments": [
+                    {
+                        "KrookiFile": "https://apiservicesstg.balady.gov.sa/v1/attachment/license-file/4E0B3D02-9265-4E1F-B973-879F96B593D9",
+                        "KrookiCoordFile": null
+                    }
+                ],
+                "LocationBordersListData": [
+                    {
+                        "Side": 1,
+                        "Boundary": "0",
+                        "DeedBoundary": null,
+                        "BorderLength": 34.1,
+                        "DeedBorderLength": null,
+                        "Truncate": 0,
+                        "LessReflections": 0,
+                        "MaxOutcropping": 0,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 34.1,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    },
+                    {
+                        "Side": 2,
+                        "Boundary": "0",
+                        "DeedBoundary": null,
+                        "BorderLength": 30.01,
+                        "DeedBorderLength": null,
+                        "Truncate": 0,
+                        "LessReflections": 0,
+                        "MaxOutcropping": 0,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 30.01,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    },
+                    {
+                        "Side": 3,
+                        "Boundary": "0",
+                        "DeedBoundary": null,
+                        "BorderLength": 28.07,
+                        "DeedBorderLength": null,
+                        "Truncate": 0,
+                        "LessReflections": 0,
+                        "MaxOutcropping": 0,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 28.07,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    },
+                    {
+                        "Side": 4,
+                        "Boundary": "0",
+                        "DeedBoundary": null,
+                        "BorderLength": 32.55,
+                        "DeedBorderLength": null,
+                        "Truncate": 0,
+                        "LessReflections": 0,
+                        "MaxOutcropping": 0,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 32.55,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    }
+                ],
+                "CoordinatesListData": [
+                    {
+                        "CoordinateNumber": 12644690,
+                        "Longitude": "50.102555288000076",
+                        "Latitude": "26.451812274000076"
+                    },
+                    {
+                        "CoordinateNumber": 12644689,
+                        "Longitude": "50.10259758600006",
+                        "Latitude": "26.451745306000078"
+                    },
+                    {
+                        "CoordinateNumber": 12644691,
+                        "Longitude": "50.10294699700006",
+                        "Latitude": "26.451938236000046"
+                    },
+                    {
+                        "CoordinateNumber": 12644693,
+                        "Longitude": "50.10261783100003",
+                        "Latitude": "26.452021514000023"
+                    },
+                    {
+                        "CoordinateNumber": 12644694,
+                        "Longitude": "50.10294699700006",
+                        "Latitude": "26.451938236000046"
+                    },
+                    {
+                        "CoordinateNumber": 12644692,
+                        "Longitude": "50.102868528000045",
+                        "Latitude": "26.45167675700003"
+                    }
+                ],
+                "LandsListData": [
+                    {
+                        "LandNumber": "70",
+                        "LandArea": 1004.19,
+                        "RealestateID": null,
+                        "LandAreaAccordingToScheme": 1004.19,
+                        "partNumber": null
+                    }
+                ],
+                "OwnersListData": [
+                    {
+                        "OwnerIdentifierType": 1,
+                        "OwnerIdentifierTypeName": "هوية وطنية",
+                        "OwnerIdentifier": "1000100873",
+                        "OwnerName": "شاكر محمد مبارك القحطاني"
+                    }
+                ],
+                "BuildCondListData": {
+                    "BuildingPercentage": null,
+                    "MaxBuildingHeight": null,
+                    "FloorsNumber": null,
+                    "ConstructionFactor": null
+                },
+                "DeedListData": null,
+                "UrbanBoundary": null,
+                "RequestId": 4617353673
+            },
+            {
+                "OldLicense": "321321321321321",
+                "KrookiNumber": 46069865211,
+                "KrookiHijriIssueDate": "1446/06/01",
+                "KrookiIssueDate": "2024/12/02",
+                "PurposeID": 111,
+                "Area": 997,
+                "PurposeName": "اصدار رخصة بناء",
+                "Note": null,
+                "MainUsedCode": 13,
+                "MainUsedName": "سكني",
+                "SubUsedCode": 699,
+                "SubUsedName": "فيلا منفصلة",
+                "LandType": 113,
+                "LandTypeName": "مخططة",
+                "LandUsed": 653,
+                "LandUsedName": "سكني",
+                "HasNeighborhood": false,
+                "IsLandMobtra": false,
+                "IsFawry": false,
+                "SiteType": null,
+                "SiteTypeName": null,
+                "LocationData": {
+                    "AmanahCode": "9753822b-f759-4f7a-8d79-b388224dc1eb",
+                    "AmanahName": "أمانة المنطقة الشرقية",
+                    "BaladiyaCode": "bce978e0-c140-4ff6-b3cf-ff120867a6aa",
+                    "BaladiyaName": "بلدية وسط الدمام",
+                    "IssuerCode": "bce978e0-c140-4ff6-b3cf-ff120867a6aa",
+                    "IssuerName": "بلدية وسط الدمام",
+                    "DistrictCode": 1657,
+                    "DistrictName": "المحمدية",
+                    "PlanNumber": "213",
+                    "BlockNumber": "بدون",
+                    "RegionNumber": null,
+                    "RegionName": null,
+                    "CityNumber": 7,
+                    "CityName": "الدمام                        "
+                },
+                "OwnershipData": {
+                    "OwnershipDocCode": 146,
+                    "OwnershipDocName": "عقد اسكان",
+                    "OwnershipDocNumber": "4617353668",
+                    "OwnershipDocDate": "1446/06/18"
+                },
+                "EngOfficeData": {
+                    "OfficeLicense": "3077",
+                    "OfficeName": "رواق الخليج للأستشارات الهندسيه المعماريه"
+                },
+                "Attachments": [
+                    {
+                        "KrookiFile": "https://apiservicesstg.balady.gov.sa/v1/attachment/license-file/688400D6-81C0-4F01-B6FD-292984AEE94F",
+                        "KrookiCoordFile": null
+                    }
+                ],
+                "LocationBordersListData": [
+                    {
+                        "Side": 2,
+                        "Boundary": "0",
+                        "DeedBoundary": null,
+                        "BorderLength": 35.01,
+                        "DeedBorderLength": null,
+                        "Truncate": 0,
+                        "LessReflections": 0,
+                        "MaxOutcropping": 0,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 35.01,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    },
+                    {
+                        "Side": 3,
+                        "Boundary": "0",
+                        "DeedBoundary": null,
+                        "BorderLength": 31.5,
+                        "DeedBorderLength": null,
+                        "Truncate": 0,
+                        "LessReflections": 0,
+                        "MaxOutcropping": 0,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 31.5,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    },
+                    {
+                        "Side": 4,
+                        "Boundary": "0",
+                        "DeedBoundary": null,
+                        "BorderLength": 29.01,
+                        "DeedBorderLength": null,
+                        "Truncate": 0,
+                        "LessReflections": 0,
+                        "MaxOutcropping": 0,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 29.01,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    },
+                    {
+                        "Side": 1,
+                        "Boundary": "0",
+                        "DeedBoundary": null,
+                        "BorderLength": 29.01,
+                        "DeedBorderLength": null,
+                        "Truncate": 0,
+                        "LessReflections": 0,
+                        "MaxOutcropping": 0,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 29.01,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    }
+                ],
+                "CoordinatesListData": [
+                    {
+                        "CoordinateNumber": 12644686,
+                        "Longitude": "50.05620366000005",
+                        "Latitude": "26.46471460300006"
+                    },
+                    {
+                        "CoordinateNumber": 12644688,
+                        "Longitude": "50.05628091300008",
+                        "Latitude": "26.464682443000072"
+                    },
+                    {
+                        "CoordinateNumber": 12644683,
+                        "Longitude": "50.05637635800008",
+                        "Latitude": "26.46505066700007"
+                    },
+                    {
+                        "CoordinateNumber": 12644684,
+                        "Longitude": "50.05649746300003",
+                        "Latitude": "26.464754072000062"
+                    },
+                    {
+                        "CoordinateNumber": 12644687,
+                        "Longitude": "50.05610331500003",
+                        "Latitude": "26.464960353000038"
+                    },
+                    {
+                        "CoordinateNumber": 12644685,
+                        "Longitude": "50.05649746300003",
+                        "Latitude": "26.464754072000062"
+                    }
+                ],
+                "LandsListData": [
+                    {
+                        "LandNumber": "162",
+                        "LandArea": 997,
+                        "RealestateID": null,
+                        "LandAreaAccordingToScheme": 997,
+                        "partNumber": null
+                    },
+                    {
+                        "LandNumber": "بدون",
+                        "LandArea": 0,
+                        "RealestateID": null,
+                        "LandAreaAccordingToScheme": 0,
+                        "partNumber": null
+                    }
+                ],
+                "OwnersListData": [
+                    {
+                        "OwnerIdentifierType": 1,
+                        "OwnerIdentifierTypeName": "هوية وطنية",
+                        "OwnerIdentifier": "1000100873",
+                        "OwnerName": "شاكر محمد مبارك القحطاني"
+                    }
+                ],
+                "BuildCondListData": {
+                    "BuildingPercentage": null,
+                    "MaxBuildingHeight": null,
+                    "FloorsNumber": null,
+                    "ConstructionFactor": null
+                },
+                "DeedListData": null,
+                "UrbanBoundary": null,
+                "RequestId": 4617353668
+            },
+            {
+                "OldLicense": "6543215132056123",
+                "KrookiNumber": 46069865097,
+                "KrookiHijriIssueDate": "1446/06/09",
+                "KrookiIssueDate": "2024/12/10",
+                "PurposeID": 111,
+                "Area": 875,
+                "PurposeName": "اصدار رخصة بناء",
+                "Note": null,
+                "MainUsedCode": 13,
+                "MainUsedName": "سكني",
+                "SubUsedCode": 699,
+                "SubUsedName": "فيلا منفصلة",
+                "LandType": 113,
+                "LandTypeName": "مخططة",
+                "LandUsed": 653,
+                "LandUsedName": "سكني",
+                "HasNeighborhood": false,
+                "IsLandMobtra": false,
+                "IsFawry": false,
+                "SiteType": null,
+                "SiteTypeName": null,
+                "LocationData": {
+                    "AmanahCode": "9753822b-f759-4f7a-8d79-b388224dc1eb",
+                    "AmanahName": "أمانة المنطقة الشرقية",
+                    "BaladiyaCode": "bce978e0-c140-4ff6-b3cf-ff120867a6aa",
+                    "BaladiyaName": "بلدية وسط الدمام",
+                    "IssuerCode": "bce978e0-c140-4ff6-b3cf-ff120867a6aa",
+                    "IssuerName": "بلدية وسط الدمام",
+                    "DistrictCode": 1657,
+                    "DistrictName": "المحمدية",
+                    "PlanNumber": "368",
+                    "BlockNumber": "بدون",
+                    "RegionNumber": null,
+                    "RegionName": null,
+                    "CityNumber": 7,
+                    "CityName": "الدمام                        "
+                },
+                "OwnershipData": {
+                    "OwnershipDocCode": 146,
+                    "OwnershipDocName": "عقد اسكان",
+                    "OwnershipDocNumber": "4617353559",
+                    "OwnershipDocDate": "1446/06/09"
+                },
+                "EngOfficeData": {
+                    "OfficeLicense": "3077",
+                    "OfficeName": "رواق الخليج للأستشارات الهندسيه المعماريه"
+                },
+                "Attachments": [
+                    {
+                        "KrookiFile": "https://apiservicesstg.balady.gov.sa/v1/attachment/license-file/32C5A63B-071E-4541-A13B-002346380F3E",
+                        "KrookiCoordFile": null
+                    }
+                ],
+                "LocationBordersListData": [
+                    {
+                        "Side": 4,
+                        "Boundary": "0",
+                        "DeedBoundary": null,
+                        "BorderLength": 35.01,
+                        "DeedBorderLength": null,
+                        "Truncate": 0,
+                        "LessReflections": 0,
+                        "MaxOutcropping": 0,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 35.01,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    },
+                    {
+                        "Side": 2,
+                        "Boundary": "0",
+                        "DeedBoundary": null,
+                        "BorderLength": 35.01,
+                        "DeedBorderLength": null,
+                        "Truncate": 0,
+                        "LessReflections": 0,
+                        "MaxOutcropping": 0,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 35.01,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    },
+                    {
+                        "Side": 1,
+                        "Boundary": "0",
+                        "DeedBoundary": null,
+                        "BorderLength": 25.01,
+                        "DeedBorderLength": null,
+                        "Truncate": 0,
+                        "LessReflections": 0,
+                        "MaxOutcropping": 0,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 25.01,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    },
+                    {
+                        "Side": 3,
+                        "Boundary": "0",
+                        "DeedBoundary": null,
+                        "BorderLength": 25.01,
+                        "DeedBorderLength": null,
+                        "Truncate": 0,
+                        "LessReflections": 0,
+                        "MaxOutcropping": 0,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 25.01,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    }
+                ],
+                "CoordinatesListData": [
+                    {
+                        "CoordinateNumber": 12644662,
+                        "Longitude": "50.057072342000026",
+                        "Latitude": "26.470336303000067"
+                    },
+                    {
+                        "CoordinateNumber": 12644661,
+                        "Longitude": "50.05730733200005",
+                        "Latitude": "26.470415141000046"
+                    },
+                    {
+                        "CoordinateNumber": 12644663,
+                        "Longitude": "50.05694970600007",
+                        "Latitude": "26.47063239000005"
+                    },
+                    {
+                        "CoordinateNumber": 12644665,
+                        "Longitude": "50.05730733200005",
+                        "Latitude": "26.470415141000046"
+                    },
+                    {
+                        "CoordinateNumber": 12644664,
+                        "Longitude": "50.057184695000046",
+                        "Latitude": "26.470711228000027"
+                    }
+                ],
+                "LandsListData": [
+                    {
+                        "LandNumber": "96",
+                        "LandArea": 875,
+                        "RealestateID": null,
+                        "LandAreaAccordingToScheme": 875,
+                        "partNumber": null
+                    }
+                ],
+                "OwnersListData": [
+                    {
+                        "OwnerIdentifierType": 1,
+                        "OwnerIdentifierTypeName": "هوية وطنية",
+                        "OwnerIdentifier": "1000100873",
+                        "OwnerName": "شاكر محمد مبارك القحطاني"
+                    }
+                ],
+                "BuildCondListData": {
+                    "BuildingPercentage": null,
+                    "MaxBuildingHeight": null,
+                    "FloorsNumber": null,
+                    "ConstructionFactor": null
+                },
+                "DeedListData": null,
+                "UrbanBoundary": null,
+                "RequestId": 4617353559
+            },
+            {
+                "OldLicense": "84561320654132",
+                "KrookiNumber": 46069864891,
+                "KrookiHijriIssueDate": "1446/06/09",
+                "KrookiIssueDate": "2024/12/10",
+                "PurposeID": 111,
+                "Area": 723.81,
+                "PurposeName": "اصدار رخصة بناء",
+                "Note": null,
+                "MainUsedCode": 13,
+                "MainUsedName": "سكني",
+                "SubUsedCode": 699,
+                "SubUsedName": "فيلا منفصلة",
+                "LandType": 113,
+                "LandTypeName": "مخططة",
+                "LandUsed": 653,
+                "LandUsedName": "سكني",
+                "HasNeighborhood": false,
+                "IsLandMobtra": false,
+                "IsFawry": false,
+                "SiteType": null,
+                "SiteTypeName": null,
+                "LocationData": {
+                    "AmanahCode": "fbe6dd4a-8dd3-4b38-a652-1d16c4944b51",
+                    "AmanahName": "أمانة منطقة الاحساء",
+                    "BaladiyaCode": "da0d4b9a-6844-4b64-b518-d7cb72dbb470",
+                    "BaladiyaName": "بلدية المبرز",
+                    "IssuerCode": "da0d4b9a-6844-4b64-b518-d7cb72dbb470",
+                    "IssuerName": "بلدية المبرز",
+                    "DistrictCode": 8820,
+                    "DistrictName": "الشعبة",
+                    "PlanNumber": "4/344",
+                    "BlockNumber": "بدون",
+                    "RegionNumber": null,
+                    "RegionName": null,
+                    "CityNumber": 9,
+                    "CityName": "الهفوف                        "
+                },
+                "OwnershipData": {
+                    "OwnershipDocCode": 146,
+                    "OwnershipDocName": "عقد اسكان",
+                    "OwnershipDocNumber": "4617353362",
+                    "OwnershipDocDate": "1446/06/03"
+                },
+                "EngOfficeData": {
+                    "OfficeLicense": "3077",
+                    "OfficeName": "رواق الخليج للأستشارات الهندسيه المعماريه"
+                },
+                "Attachments": [
+                    {
+                        "KrookiFile": "https://apiservicesstg.balady.gov.sa/v1/attachment/license-file/4A2D4A5C-E837-46FA-AB07-5B9091C950D3",
+                        "KrookiCoordFile": null
+                    }
+                ],
+                "LocationBordersListData": [
+                    {
+                        "Side": 1,
+                        "Boundary": "0",
+                        "DeedBoundary": null,
+                        "BorderLength": 28.35,
+                        "DeedBorderLength": null,
+                        "Truncate": 0,
+                        "LessReflections": 0,
+                        "MaxOutcropping": 0,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 28.349999999999998,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    },
+                    {
+                        "Side": 2,
+                        "Boundary": "0",
+                        "DeedBoundary": null,
+                        "BorderLength": 27.22,
+                        "DeedBorderLength": null,
+                        "Truncate": 0,
+                        "LessReflections": 0,
+                        "MaxOutcropping": 0,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 27.22,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    },
+                    {
+                        "Side": 4,
+                        "Boundary": "0",
+                        "DeedBoundary": null,
+                        "BorderLength": 24.76,
+                        "DeedBorderLength": null,
+                        "Truncate": 0,
+                        "LessReflections": 0,
+                        "MaxOutcropping": 0,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 24.76,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    },
+                    {
+                        "Side": 3,
+                        "Boundary": "0",
+                        "DeedBoundary": null,
+                        "BorderLength": 26.71,
+                        "DeedBorderLength": null,
+                        "Truncate": 0,
+                        "LessReflections": 0,
+                        "MaxOutcropping": 0,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 26.71,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    }
+                ],
+                "CoordinatesListData": [
+                    {
+                        "CoordinateNumber": 12644618,
+                        "Longitude": "49.62106252299998",
+                        "Latitude": "25.470096335999983"
+                    },
+                    {
+                        "CoordinateNumber": 12644616,
+                        "Longitude": "49.62078444000002",
+                        "Latitude": "25.47005429799998"
+                    },
+                    {
+                        "CoordinateNumber": 12644615,
+                        "Longitude": "49.62108834200001",
+                        "Latitude": "25.470082390000016"
+                    },
+                    {
+                        "CoordinateNumber": 12644613,
+                        "Longitude": "49.62108834200001",
+                        "Latitude": "25.470082390000016"
+                    },
+                    {
+                        "CoordinateNumber": 12644619,
+                        "Longitude": "49.62111552699997",
+                        "Latitude": "25.46988287900001"
+                    },
+                    {
+                        "CoordinateNumber": 12644620,
+                        "Longitude": "49.62083555999999",
+                        "Latitude": "25.469835654999997"
+                    },
+                    {
+                        "CoordinateNumber": 12644614,
+                        "Longitude": "49.621096647",
+                        "Latitude": "25.469879694999975"
+                    },
+                    {
+                        "CoordinateNumber": 12644617,
+                        "Longitude": "49.62104296799998",
+                        "Latitude": "25.47009337999998"
+                    }
+                ],
+                "LandsListData": [
+                    {
+                        "LandNumber": "81",
+                        "LandArea": 723.81,
+                        "RealestateID": null,
+                        "LandAreaAccordingToScheme": 723.81,
+                        "partNumber": null
+                    }
+                ],
+                "OwnersListData": [
+                    {
+                        "OwnerIdentifierType": 1,
+                        "OwnerIdentifierTypeName": "هوية وطنية",
+                        "OwnerIdentifier": "1000100873",
+                        "OwnerName": "شاكر محمد مبارك القحطاني"
+                    }
+                ],
+                "BuildCondListData": {
+                    "BuildingPercentage": null,
+                    "MaxBuildingHeight": null,
+                    "FloorsNumber": null,
+                    "ConstructionFactor": null
+                },
+                "DeedListData": null,
+                "UrbanBoundary": null,
+                "RequestId": 4617353362
+            },
+            {
+                "OldLicense": "54548578585",
+                "KrookiNumber": 46069864653,
+                "KrookiHijriIssueDate": "1446/06/01",
+                "KrookiIssueDate": "2024/12/02",
+                "PurposeID": 111,
+                "Area": 547.77,
+                "PurposeName": "اصدار رخصة بناء",
+                "Note": null,
+                "MainUsedCode": 13,
+                "MainUsedName": "سكني",
+                "SubUsedCode": 699,
+                "SubUsedName": "فيلا منفصلة",
+                "LandType": 113,
+                "LandTypeName": "مخططة",
+                "LandUsed": 653,
+                "LandUsedName": "سكني",
+                "HasNeighborhood": false,
+                "IsLandMobtra": false,
+                "IsFawry": false,
+                "SiteType": null,
+                "SiteTypeName": null,
+                "LocationData": {
+                    "AmanahCode": "fbe6dd4a-8dd3-4b38-a652-1d16c4944b51",
+                    "AmanahName": "أمانة منطقة الاحساء",
+                    "BaladiyaCode": "da0d4b9a-6844-4b64-b518-d7cb72dbb470",
+                    "BaladiyaName": "بلدية المبرز",
+                    "IssuerCode": "da0d4b9a-6844-4b64-b518-d7cb72dbb470",
+                    "IssuerName": "بلدية المبرز",
+                    "DistrictCode": 8820,
+                    "DistrictName": "الشعبة",
+                    "PlanNumber": "ب/31",
+                    "BlockNumber": "بدون",
+                    "RegionNumber": null,
+                    "RegionName": null,
+                    "CityNumber": 9,
+                    "CityName": "الهفوف                        "
+                },
+                "OwnershipData": {
+                    "OwnershipDocCode": 146,
+                    "OwnershipDocName": "عقد اسكان",
+                    "OwnershipDocNumber": "4617353104",
+                    "OwnershipDocDate": "1446/06/09"
+                },
+                "EngOfficeData": {
+                    "OfficeLicense": "3077",
+                    "OfficeName": "رواق الخليج للأستشارات الهندسيه المعماريه"
+                },
+                "Attachments": [
+                    {
+                        "KrookiFile": "https://apiservicesstg.balady.gov.sa/v1/attachment/license-file/3BDEDCC7-14FA-41E5-AB74-D5E4C754D708",
+                        "KrookiCoordFile": null
+                    }
+                ],
+                "LocationBordersListData": [
+                    {
+                        "Side": 1,
+                        "Boundary": "8",
+                        "DeedBoundary": null,
+                        "BorderLength": 11.52,
+                        "DeedBorderLength": null,
+                        "Truncate": 8,
+                        "LessReflections": 8,
+                        "MaxOutcropping": 8,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 11.520000000000001,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    },
+                    {
+                        "Side": 3,
+                        "Boundary": "8",
+                        "DeedBoundary": null,
+                        "BorderLength": 24.38,
+                        "DeedBorderLength": null,
+                        "Truncate": 8,
+                        "LessReflections": 8,
+                        "MaxOutcropping": 8,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 24.38,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    },
+                    {
+                        "Side": 2,
+                        "Boundary": "8",
+                        "DeedBoundary": null,
+                        "BorderLength": 31.23,
+                        "DeedBorderLength": null,
+                        "Truncate": 8,
+                        "LessReflections": 8,
+                        "MaxOutcropping": 8,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 31.23,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    },
+                    {
+                        "Side": 4,
+                        "Boundary": "8",
+                        "DeedBoundary": null,
+                        "BorderLength": 35.21,
+                        "DeedBorderLength": null,
+                        "Truncate": 8,
+                        "LessReflections": 88,
+                        "MaxOutcropping": 8,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 35.21,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    }
+                ],
+                "CoordinatesListData": [
+                    {
+                        "CoordinateNumber": 12644562,
+                        "Longitude": "49.62222894000007",
+                        "Latitude": "25.47358029800006"
+                    },
+                    {
+                        "CoordinateNumber": 12644561,
+                        "Longitude": "49.621921298000075",
+                        "Latitude": "25.473509015000047"
+                    },
+                    {
+                        "CoordinateNumber": 12644553,
+                        "Longitude": "49.62222881100007",
+                        "Latitude": "25.473474515000078"
+                    },
+                    {
+                        "CoordinateNumber": 12644566,
+                        "Longitude": "49.62222894000007",
+                        "Latitude": "25.47358029800006"
+                    },
+                    {
+                        "CoordinateNumber": 12644560,
+                        "Longitude": "49.621887736000076",
+                        "Latitude": "25.473538200000064"
+                    },
+                    {
+                        "CoordinateNumber": 12644565,
+                        "Longitude": "49.62190306700006",
+                        "Latitude": "25.473524867000037"
+                    },
+                    {
+                        "CoordinateNumber": 12644555,
+                        "Longitude": "49.62222875400005",
+                        "Latitude": "25.473427507000054"
+                    },
+                    {
+                        "CoordinateNumber": 12644563,
+                        "Longitude": "49.622086711000065",
+                        "Latitude": "25.473580276000064"
+                    },
+                    {
+                        "CoordinateNumber": 12644557,
+                        "Longitude": "49.62207040200008",
+                        "Latitude": "25.47358027300004"
+                    },
+                    {
+                        "CoordinateNumber": 12644564,
+                        "Longitude": "49.62185879300006",
+                        "Latitude": "25.473580239000057"
+                    },
+                    {
+                        "CoordinateNumber": 12644552,
+                        "Longitude": "49.62185239300004",
+                        "Latitude": "25.47356347300007"
+                    },
+                    {
+                        "CoordinateNumber": 12644558,
+                        "Longitude": "49.62219808400005",
+                        "Latitude": "25.473580293000055"
+                    },
+                    {
+                        "CoordinateNumber": 12644554,
+                        "Longitude": "49.621986881000055",
+                        "Latitude": "25.473412325000027"
+                    },
+                    {
+                        "CoordinateNumber": 12644556,
+                        "Longitude": "49.62195792300008",
+                        "Latitude": "25.473465499000042"
+                    },
+                    {
+                        "CoordinateNumber": 12644559,
+                        "Longitude": "49.62197213300004",
+                        "Latitude": "25.473580257000037"
+                    }
+                ],
+                "LandsListData": [
+                    {
+                        "LandNumber": "8",
+                        "LandArea": 547.77,
+                        "RealestateID": null,
+                        "LandAreaAccordingToScheme": 547.77,
+                        "partNumber": null
+                    }
+                ],
+                "OwnersListData": [
+                    {
+                        "OwnerIdentifierType": 1,
+                        "OwnerIdentifierTypeName": "هوية وطنية",
+                        "OwnerIdentifier": "1000100873",
+                        "OwnerName": "شاكر محمد مبارك القحطاني"
+                    }
+                ],
+                "BuildCondListData": {
+                    "BuildingPercentage": null,
+                    "MaxBuildingHeight": null,
+                    "FloorsNumber": null,
+                    "ConstructionFactor": null
+                },
+                "DeedListData": null,
+                "UrbanBoundary": null,
+                "RequestId": 4617353104
+            },
+            {
+                "OldLicense": "65123654132654",
+                "KrookiNumber": 46069864683,
+                "KrookiHijriIssueDate": "1446/06/11",
+                "KrookiIssueDate": "2024/12/12",
+                "PurposeID": 111,
+                "Area": 1043.07,
+                "PurposeName": "اصدار رخصة بناء",
+                "Note": null,
+                "MainUsedCode": 13,
+                "MainUsedName": "سكني",
+                "SubUsedCode": 699,
+                "SubUsedName": "فيلا منفصلة",
+                "LandType": 113,
+                "LandTypeName": "مخططة",
+                "LandUsed": 653,
+                "LandUsedName": "سكني",
+                "HasNeighborhood": false,
+                "IsLandMobtra": false,
+                "IsFawry": false,
+                "SiteType": null,
+                "SiteTypeName": null,
+                "LocationData": {
+                    "AmanahCode": "3f6b6c49-af7e-4b46-9e6c-ddcb15d062e2",
+                    "AmanahName": "أمانة منطقة الباحة",
+                    "BaladiyaCode": "0229e5b6-42ad-4fd6-97e4-00055812e31e",
+                    "BaladiyaName": "بلدية بني حسن",
+                    "IssuerCode": "0229e5b6-42ad-4fd6-97e4-00055812e31e",
+                    "IssuerName": "بلدية بني حسن",
+                    "DistrictCode": 10078533,
+                    "DistrictName": "غرناطة",
+                    "PlanNumber": "بدون",
+                    "BlockNumber": "بدون",
+                    "RegionNumber": null,
+                    "RegionName": null,
+                    "CityNumber": 286,
+                    "CityName": "بني حسن                       "
+                },
+                "OwnershipData": {
+                    "OwnershipDocCode": 146,
+                    "OwnershipDocName": "عقد اسكان",
+                    "OwnershipDocNumber": "4617353046",
+                    "OwnershipDocDate": "1446/06/18"
+                },
+                "EngOfficeData": {
+                    "OfficeLicense": "3077",
+                    "OfficeName": "رواق الخليج للأستشارات الهندسيه المعماريه"
+                },
+                "Attachments": [
+                    {
+                        "KrookiFile": "https://apiservicesstg.balady.gov.sa/v1/attachment/license-file/AD9BEF3A-BA82-42D0-8D18-94E6C2B5E5E7",
+                        "KrookiCoordFile": null
+                    }
+                ],
+                "LocationBordersListData": [
+                    {
+                        "Side": 4,
+                        "Boundary": "0",
+                        "DeedBoundary": null,
+                        "BorderLength": 49.77,
+                        "DeedBorderLength": null,
+                        "Truncate": 0,
+                        "LessReflections": 0,
+                        "MaxOutcropping": 0,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 49.77,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    },
+                    {
+                        "Side": 3,
+                        "Boundary": "0",
+                        "DeedBoundary": null,
+                        "BorderLength": 45.03,
+                        "DeedBorderLength": null,
+                        "Truncate": 0,
+                        "LessReflections": 0,
+                        "MaxOutcropping": 0,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 45.03,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    },
+                    {
+                        "Side": 2,
+                        "Boundary": "0",
+                        "DeedBoundary": null,
+                        "BorderLength": 30.42,
+                        "DeedBorderLength": null,
+                        "Truncate": 0,
+                        "LessReflections": 0,
+                        "MaxOutcropping": null,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 30.42,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    },
+                    {
+                        "Side": 1,
+                        "Boundary": "0",
+                        "DeedBoundary": null,
+                        "BorderLength": 12.36,
+                        "DeedBorderLength": null,
+                        "Truncate": 0,
+                        "LessReflections": 0,
+                        "MaxOutcropping": 0,
+                        "BorderType": null,
+                        "BorderTypeName": null,
+                        "DimensionsType": 2,
+                        "DimensionsTypeName": "غير منكسر",
+                        "BorderLengthDetail": null,
+                        "BorderLengthDetailWithType": [
+                            {
+                                "length": 12.36,
+                                "typeId": 1,
+                                "typeName": "ضلع"
+                            }
+                        ]
+                    }
+                ],
+                "CoordinatesListData": [
+                    {
+                        "CoordinateNumber": 12644533,
+                        "Longitude": "41.378262882",
+                        "Latitude": "20.100330332"
+                    },
+                    {
+                        "CoordinateNumber": 12644537,
+                        "Longitude": "41.37813082100001",
+                        "Latitude": "20.09989846000002"
+                    },
+                    {
+                        "CoordinateNumber": 12644536,
+                        "Longitude": "41.37841992599999",
+                        "Latitude": "20.100019812000028"
+                    },
+                    {
+                        "CoordinateNumber": 12644535,
+                        "Longitude": "41.37836638800002",
+                        "Latitude": "20.09984849099999"
+                    },
+                    {
+                        "CoordinateNumber": 12644534,
+                        "Longitude": "41.37836638800002",
+                        "Latitude": "20.09984849099999"
+                    },
+                    {
+                        "CoordinateNumber": 12644538,
+                        "Longitude": "41.37837352600002",
+                        "Latitude": "20.100291071000015"
+                    }
+                ],
+                "LandsListData": [
+                    {
+                        "LandNumber": "بدون",
+                        "LandArea": 1043.07,
+                        "RealestateID": null,
+                        "LandAreaAccordingToScheme": 1043.07,
+                        "partNumber": null
+                    }
+                ],
+                "OwnersListData": [
+                    {
+                        "OwnerIdentifierType": 1,
+                        "OwnerIdentifierTypeName": "هوية وطنية",
+                        "OwnerIdentifier": "1000100873",
+                        "OwnerName": "شاكر محمد مبارك القحطاني"
+                    }
+                ],
+                "BuildCondListData": {
+                    "BuildingPercentage": null,
+                    "MaxBuildingHeight": null,
+                    "FloorsNumber": null,
+                    "ConstructionFactor": null
+                },
+                "DeedListData": null,
+                "UrbanBoundary": null,
+                "RequestId": 4617353046
+            }
    
 
 ]

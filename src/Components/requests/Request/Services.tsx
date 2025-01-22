@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import jsonData from "../../../mocks/OfficeRequestServices.json"; // Import the JSON data
 import Conditions from "../Conditions";
 
+
 interface LocationData {
   AmanahCode: string;
   AmanahName: string;
@@ -138,13 +139,18 @@ const Services: React.FC<ServicesProps> = ({ KrookiNumber }) => {
 
   useEffect(() => {
     // Filter JSON data based on criteria
- 
+  
     const filtered = jsonData.filter((item: FormDataobj) => {
       return item.KrookiNumber === KrookiNumber; // Example filter condition (MainUsedName === "سكني")
     });
-  
-    // Set the filtered data to state
-    setFilteredData(filtered[0]);
+    if (filtered.length === 0) {
+      // Assuming 'mockData' is an array of mock items
+      const randomItem = jsonData[Math.floor(Math.random() * jsonData.length)];
+      setFilteredData(randomItem);
+    } else {
+      // Set the filtered data to state
+      setFilteredData(filtered[0]);
+    }
   }, []);
 
   return (
@@ -281,25 +287,15 @@ const Services: React.FC<ServicesProps> = ({ KrookiNumber }) => {
         </div>
       </form>
 
-
-
-
-     
-
-<Conditions 
-
-  isModalOpen={isModalOpen}
-  setIsModalOpen={setIsModalOpen}
-  Amana={filteredData?.LocationData.AmanahName || ""}
-  Baladia={filteredData?.LocationData.BaladiyaName || ""}
-  Hai={filteredData?.LocationData.DistrictName || ""}
-  Land={filteredData?.LocationData.PlanNumber || ""}
-/>
+      <Conditions
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        Amana={filteredData?.LocationData.AmanahName || ""}
+        Baladia={filteredData?.LocationData.BaladiyaName || ""}
+        Hai={filteredData?.LocationData.DistrictName || ""}
+        Land={filteredData?.LocationData.PlanNumber || ""}
+      />
     </div>
-
-
-
-
   );
 };
 
