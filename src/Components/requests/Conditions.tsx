@@ -32,7 +32,7 @@ const Conditions: React.FC = () => {
     console.log("Location state:", location.state);
   }, [location]);
 
-  const { Amana = "", Baladia = "", Hai = "", Land = "" } = location.state || {};
+  const { Amana = "", Baladia = "", Hai = "", Land = "",buildingType="",instructure="" } = location.state || {};
   
   const [conditionsData, setConditionsData] = useState<ConditionsResponse | null>(null);
   const [token, setToken] = useState<string | null>(null);

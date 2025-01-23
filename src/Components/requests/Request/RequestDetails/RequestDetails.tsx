@@ -37,7 +37,7 @@ export default function RequestDetails() {
     }
   );
 
-  const [isFormTabVisible, setIsFormTabVisible] = useState(false);
+  const [isFormTabVisible, setIsFormTabVisible] = useState(!request.waitingApproval);
 
   const handleAccept = () => {
     const updatedRequest = {

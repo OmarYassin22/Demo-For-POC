@@ -12,7 +12,7 @@
         "creationTime": "2025-01-19T09:56:37Z",
         "cityId": "3",
         "municipalityId": "4b5d23e9-3bf8-4a88-b081-4724516fa0f1",
-        "waitingApproval": true,
+        "waitingApproval": false,
         "containerId": "service",
         "officeId": "3077", 
         "result": {
@@ -37,7 +37,7 @@
         "creationTime": "2025-01-19T06:53:14Z",
         "cityId": "5",
         "municipalityId": null,
-        "waitingApproval": true,
+        "waitingApproval": false,
         "containerId": "delegate",
         "officeId": null
       },
@@ -51,7 +51,7 @@
         "creationTime": "2025-01-16T14:22:25Z",
         "cityId": "11",
         "municipalityId": null,
-        "waitingApproval": true,
+        "waitingApproval": false,
         "containerId": "delegate",
         "officeId": null
       },
