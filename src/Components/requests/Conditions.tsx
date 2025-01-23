@@ -8,6 +8,8 @@ interface ServicesProps {
   Baladia: string;
   Hai: string;
   Land: string;
+  buildingType:number,
+  instructure:string
 }
 
 interface Condition {
@@ -28,6 +30,8 @@ const Conditions: React.FC<ServicesProps> = ({
   Baladia,
   Hai,
   Land,
+  buildingType,
+  instructure
 }) => {
   const [conditionsData, setConditionsData] = useState<ConditionsResponse | null>(null);
   const [token, setToken] = useState<string | null>(null);
@@ -76,6 +80,8 @@ console.log(Amana +" "+Baladia +" "+Hai+" "+Land);
           areaParentOfParentName: Baladia,
           areaParentName: Hai,
           areaName: Land,
+          building_type:buildingType,
+        
         },
         headers: {
           Authorization: `Bearer ${token}`,
@@ -84,11 +90,34 @@ console.log(Amana +" "+Baladia +" "+Hai+" "+Land);
       });
       setConditionsData(response.data.data.result);
       setError(null);
+      
     } catch (err: any) {
       setError("Unable to fetch conditions. Please try again.");
     } finally {
       setLoading(false);
     }
+
+
+
+    let filteredConditions;
+    if (conditionsData?.conditions) {
+      if (instructure === "1") {
+        // If instructure is 1, filter where code < 500
+        filteredConditions = conditionsData?.conditions.filter(
+          (condition) => parseInt(condition.code, 10) < 500
+        );
+      } else {
+        // Otherwise, filter where code >= 500
+        filteredConditions = conditionsData?.conditions.filter(
+          (condition) => parseInt(condition.code, 10)  >= 500
+        );
+      }
+    
+      setConditionsData({ conditions: filteredConditions });
+    } else {
+        // This block will run if either conditionsData or conditionsData?.conditions is null or undefined
+        // alert("Conditions Data or conditions is null or undefined");
+      }
   };
 
   useEffect(() => {
@@ -104,6 +133,15 @@ console.log(Amana +" "+Baladia +" "+Hai+" "+Land);
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+
+
+
+
+   
+ 
+ 
+
+
   const currentItems = conditionsData?.conditions?.slice(
     indexOfFirstItem,
     indexOfLastItem

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import jsonData from "../../../mocks/OfficeRequestServices.json"; // Import the JSON data
 import Conditions from "../Conditions";
-
 
 interface LocationData {
   AmanahCode: string;
@@ -132,14 +132,53 @@ interface ServicesProps {
 const Services: React.FC<ServicesProps> = ({ KrookiNumber }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [filteredData, setFilteredData] = useState<FormDataobj>();
-  const handleStartService = (e) => {
-    e.preventDefault();
-    setIsModalOpen(true);
+
+
+
+ 
+
+  interface FormValues {
+    description: string;
+    ComplianceType: string;
+  }
+  
+  const validationSchema = Yup.object({
+    description: Yup.string().required("وصف المبني مطلوب"),
+    ComplianceType: Yup.string().required("نوع التحقق مطلوب"),
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      description: "",
+      ComplianceType: "",
+    },
+    validationSchema,
+    
+    onSubmit: (values) => {
+      setIsModalOpen(true);
+    },
+  });
+  // const handleStartService = (e) => {
+  //   e.preventDefault();
+  //   setIsModalOpen(true);
+  // };
+
+
+  const [selectedOption, setSelectedOption] = useState<string>("");
+
+  // Handle change event for radio buttons
+  const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedOption( event.target.value); // Set the selected radio button value
+  
+  
   };
 
+  // useEffect(() => {
+  //   alert(selectedOption); // Alert will show the updated selectedOption value
+  // }, [selectedOption]);
   useEffect(() => {
     // Filter JSON data based on criteria
-  
+
     const filtered = jsonData.filter((item: FormDataobj) => {
       return item.KrookiNumber === KrookiNumber; // Example filter condition (MainUsedName === "سكني")
     });
@@ -159,12 +198,12 @@ const Services: React.FC<ServicesProps> = ({ KrookiNumber }) => {
         رقم القرار : {filteredData?.KrookiNumber} , تاريخ القرار:{" "}
         {filteredData?.KrookiIssueDate}
       </h2>
-      <form>
+      <form onSubmit={formik.handleSubmit} >
         <div className="bg-gray-100 p-4 rounded-lg mb-6">
           <div className="grid grid-cols-2 gap-6">
             <div className="mb-4">
               <label className="text-sm font-medium text-gray-700">
-                رقم القطع:
+                رقم القطعه:
               </label>
               <input
                 type="text"
@@ -233,20 +272,6 @@ const Services: React.FC<ServicesProps> = ({ KrookiNumber }) => {
               />
             </div>
           </div>
-          <div>
-            <div className="mb-4">
-              <label className="text-sm font-medium text-gray-700">
-                نوع المبنى:{" "}
-              </label>
-              <input
-                id="SubUsedCode"
-                name="SubUsedCode"
-                value={filteredData?.SubUsedCode}
-                // onChange={handleInputChange}
-                className="mt-1  bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-              />
-            </div>
-          </div>
 
           <div>
             <div className="mb-4">
@@ -254,31 +279,70 @@ const Services: React.FC<ServicesProps> = ({ KrookiNumber }) => {
                 وصف المبنى:{" "}
               </label>
               <textarea
-                id="first_name"
-                className="mt-1  bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-              />
+            id="description"
+            name="description"
+            value={formik.values.description}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            className={`block w-full pr-10 py-3 text-gray-900 border rounded-lg focus:ring-2 focus:ring-blue-500 ${
+              formik.touched.description && formik.errors.description
+                ? "border-red-500"
+                : "border-gray-300"
+            }`}
+            placeholder="أدخل وصف المبني"
+          />
+          {formik.touched.description && formik.errors.description && (
+            <p className="mt-1 text-sm text-red-600">
+              {formik.errors.description}
+            </p>
+          )}
             </div>
+           
           </div>
         </div>
         <div className="bg-gray-100 p-4 rounded-lg mb-6">
-          <div className="grid grid-cols-2 gap-6">
-            <div className="flex items-center gap-2">
-              <label htmlFor="test1">التحقق من المخططات المعمارىة</label>
-              <input type="checkbox" id="test1" name="test1" />
-            </div>
-            <div className="flex items-center gap-2">
-              <label htmlFor="test2">التحقق من المخططات الانشائية</label>
-              <input type="checkbox" id="test2" name="test2" />
-            </div>
+        <div className="grid grid-cols-2 gap-6">
+          <div className="flex items-center gap-2">
+            <label htmlFor="test1">التحقق من المخططات المعمارية</label>
+            <input
+              type="radio"
+              id="test1"
+              name="ComplianceType"
+              value="1"
+              checked={selectedOption === "1"}
+              onChange={(e) => {
+                handleRadioChange(e);
+                formik.setFieldValue("ComplianceType", e.target.value);
+              }}
+            />
+          </div>
+          <div className="flex items-center gap-2">
+            <label htmlFor="test2">التحقق من المخططات الإنشائية</label>
+            <input
+              type="radio"
+              id="test2"
+              name="ComplianceType"
+              value="2"
+              checked={selectedOption === "2"}
+              onChange={(e) => {
+                handleRadioChange(e);
+                formik.setFieldValue("ComplianceType", e.target.value);
+              }}
+            />
           </div>
         </div>
-
+        {formik.touched.ComplianceType && formik.errors.ComplianceType && (
+          <p className="mt-1 text-sm text-red-600">
+            {formik.errors.ComplianceType}
+          </p>
+        )}
+      </div>
         <div className="bg-gray-100 p-4  rounded-lg mb-6 pr-20">
           <div className="grid grid-cols-2 gap-6">
             <p>بدء الخدمة</p>
             <button
               type="submit"
-              onClick={handleStartService}
+              //onClick={handleStartService}
               className="px-4 py-2 max-w-52 bg-blue-600 text-white rounded-lg"
             >
               بدء الخدمة
@@ -294,6 +358,14 @@ const Services: React.FC<ServicesProps> = ({ KrookiNumber }) => {
         Baladia={filteredData?.LocationData.BaladiyaName || ""}
         Hai={filteredData?.LocationData.DistrictName || ""}
         Land={filteredData?.LocationData.PlanNumber || ""}
+        buildingType={ filteredData?.SubUsedCode === 26 || filteredData?.SubUsedCode === 699
+          ? 1
+          : filteredData?.SubUsedCode === 24
+          ? 2
+          : filteredData?.SubUsedCode === 698
+          ? 8
+          : 1}
+        instructure={selectedOption||"1"}
       />
     </div>
   );
