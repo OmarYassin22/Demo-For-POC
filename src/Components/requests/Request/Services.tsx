@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import { useNavigate } from "react-router-dom";
 import jsonData from "../../../mocks/OfficeRequestServices.json"; // Import the JSON data
 import Conditions from "../Conditions";
 
@@ -130,11 +130,26 @@ interface ServicesProps {
 }
 
 const Services: React.FC<ServicesProps> = ({ KrookiNumber }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
   const [filteredData, setFilteredData] = useState<FormDataobj>();
-  const handleStartService = (e) => {
+
+  const handleStartService = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    setIsModalOpen(true);
+    console.log("Navigating to conditions with data:", {
+      Amana: filteredData?.LocationData.AmanahName,
+      Baladia: filteredData?.LocationData.BaladiyaName,
+      Hai: filteredData?.LocationData.DistrictName,
+      Land: filteredData?.LocationData.PlanNumber,
+    });
+    
+    navigate("/conditions", {
+      state: {
+        Amana: filteredData?.LocationData.AmanahName || "",
+        Baladia: filteredData?.LocationData.BaladiyaName || "",
+        Hai: filteredData?.LocationData.DistrictName || "",
+        Land: filteredData?.LocationData.PlanNumber || ""
+      }
+    });
   };
 
   useEffect(() => {
@@ -286,15 +301,6 @@ const Services: React.FC<ServicesProps> = ({ KrookiNumber }) => {
           </div>
         </div>
       </form>
-
-      <Conditions
-        isModalOpen={isModalOpen}
-        setIsModalOpen={setIsModalOpen}
-        Amana={filteredData?.LocationData.AmanahName || ""}
-        Baladia={filteredData?.LocationData.BaladiyaName || ""}
-        Hai={filteredData?.LocationData.DistrictName || ""}
-        Land={filteredData?.LocationData.PlanNumber || ""}
-      />
     </div>
   );
 };

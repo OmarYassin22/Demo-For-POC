@@ -15,21 +15,18 @@ import {
 import data from "../../../../mocks/OfficeMock.json";
 import Conditions from "../../Conditions";
 export default function RequestDetails() {
-
-  
+  const { id, requestid } = useParams();
+  const navigate = useNavigate();
+  const office = data[id];
+  const [request, setRequest] = useState(
+    office.requests.find((request) => request.number === requestid)
+  );
 
   useEffect(() => {
     if (localStorage.getItem("isLoggedIn") !== "true") {
       navigate("/login");
     }
-  });
-  const { id, requestid } = useParams();
-  const navigate = useNavigate();
-  const office = data[id];
-  const request = office.requests.find(
-    (request) => request.number === requestid
-  );
-  console.log(request);
+  }, [navigate]);
 
   const formattedDate = new Date(request.creationTime).toLocaleDateString(
     "ar-SA",
@@ -40,14 +37,20 @@ export default function RequestDetails() {
     }
   );
 
-  const handleAccept = () => {
-    request.waitingApproval = true;
-    request.result = {
-      status: "تم قبول الطلب",
-      date: new Date().toISOString(),
-    };
-    console.log(request);
+  const [isFormTabVisible, setIsFormTabVisible] = useState(false);
 
+  const handleAccept = () => {
+    const updatedRequest = {
+      ...request,
+      waitingApproval: false,
+      result: {
+        status: "تم قبول الطلب",
+        date: new Date().toISOString(),
+      },
+    };
+    setRequest(updatedRequest);
+    setIsFormTabVisible(true);
+    console.log(updatedRequest);
     alert("تم قبول الطلب بنجاح");
   };
 
@@ -67,10 +70,12 @@ export default function RequestDetails() {
 
   const [activeTab, setActiveTab] = useState("details");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
- 
-  // Number of conditions per page
 
   const handleTabChange = (tab) => {
+    if (tab === "form" && request.waitingApproval) {
+      alert("يجب قبول الطلب أولاً");
+      return;
+    }
     setActiveTab(tab);
     setIsSidebarOpen(false); // Collapse the sidebar after choosing a tab
   };
@@ -78,8 +83,6 @@ export default function RequestDetails() {
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
-
- 
 
   return (
     <div className="min-h-screen bg-gray-50 p-6" style={{ direction: "rtl" }}>
@@ -95,22 +98,24 @@ export default function RequestDetails() {
               onClick={() => handleTabChange("details")}
               className={`px-4 py-2 rounded-lg ${
                 activeTab === "details"
-                  ? "bg-blue-600 text-white"
+                  ? "bg-teal-600 text-white"
                   : "bg-gray-200 text-gray-800"
               }`}
             >
               تفاصيل الطلب
             </button>
-            <button
-              onClick={() => handleTabChange("form")}
-              className={`px-4 py-2 rounded-lg ${
-                activeTab === "form"
-                  ? "bg-blue-600 text-white"
-                  : "bg-gray-200 text-gray-800"
-              }`}
-            >
-              خدمات{" "}
-            </button>
+            {isFormTabVisible && (
+              <button
+                onClick={() => handleTabChange("form")}
+                className={`px-4 py-2 rounded-lg ${
+                  activeTab === "form"
+                    ? "bg-teal-600 text-white"
+                    : "bg-gray-200 text-gray-800"
+                }`}
+              >
+                خدمات{" "}
+              </button>
+            )}
           </div>
         </div>
 
@@ -201,14 +206,14 @@ export default function RequestDetails() {
                   <div className="flex gap-4">
                     <button
                       onClick={handleAccept}
-                      className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+                      className="flex items-center gap-2 px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors"
                     >
                       <Check className="w-5 h-5" />
                       قبول الطلب
                     </button>
                     <button
                       onClick={handleReject}
-                      className="flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+                      className="flex items-center gap-2 px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
                     >
                       <X className="w-5 h-5" />
                       رفض الطلب
@@ -218,7 +223,7 @@ export default function RequestDetails() {
               )}
 
               {/* Result Section */}
-              {request.result && (
+              {!request.waitingApproval && request.result && (
                 <div className="bg-white rounded-lg shadow-lg p-6">
                   <h2 className="text-xl font-semibold mb-4">نتيجة الطلب</h2>
                   <div className="space-y-4">
@@ -249,14 +254,11 @@ export default function RequestDetails() {
           )}
 
           {activeTab === "form" && (
-           <Services   KrookiNumber={request.result?.krokiNo}  ></Services>
+            <Services KrookiNumber={request.result?.krokiNo}></Services>
           )}
         </div>
       </div>
       {/* <ConditionsModal /> */}
-
-
-     
     </div>
   );
 }

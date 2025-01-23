@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useLocation, useNavigate } from 'react-router-dom';
 
 interface ServicesProps {
   isModalOpen: boolean;
@@ -21,14 +22,16 @@ interface ConditionsResponse {
   conditions: Condition[];
 }
 
-const Conditions: React.FC<ServicesProps> = ({
-  isModalOpen,
-  setIsModalOpen,
-  Amana,
-  Baladia,
-  Hai,
-  Land,
-}) => {
+const Conditions: React.FC = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    console.log("Location state:", location.state);
+  }, [location]);
+
+  const { Amana = "", Baladia = "", Hai = "", Land = "" } = location.state || {};
+  
   const [conditionsData, setConditionsData] = useState<ConditionsResponse | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -92,15 +95,21 @@ console.log(Amana +" "+Baladia +" "+Hai+" "+Land);
   };
 
   useEffect(() => {
+    if (!location.state) {
+      console.error("No state data received");
+      return;
+    }
     setLoading(true);
     fetchToken();
-  }, []);
+  }, [location.state]);
 
   useEffect(() => {
     if (token) fetchConditions();
   }, [token]);
 
-  if (!isModalOpen) return null;
+  const handleClose = () => {
+    navigate(-1);
+  };
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -118,13 +127,12 @@ console.log(Amana +" "+Baladia +" "+Hai+" "+Land);
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg p-6 max-w-4xl w-full max-h-[80vh] overflow-y-auto">
-        {/* Modal Header */}
+    <div className="min-h-screen bg-gray-100 p-4" style={{direction:"rtl"}}>
+      <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-bold">الشروط والأحكام</h2>
+          <h2 className="text-xl font-bold">الشروط </h2>
           <button
-            onClick={() => setIsModalOpen(false)}
+            onClick={handleClose}
             className="text-gray-500 hover:text-gray-700"
           >
             ×
@@ -200,10 +208,10 @@ console.log(Amana +" "+Baladia +" "+Hai+" "+Land);
           </button>
         </div>
 
-        {/* Modal Footer */}
+        {/* Footer */}
         <div className="mt-6 flex justify-end gap-4 border-t pt-4">
           <button
-            onClick={() => setIsModalOpen(false)}
+            onClick={handleClose}
             className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
           >
             إغلاق
@@ -211,7 +219,7 @@ console.log(Amana +" "+Baladia +" "+Hai+" "+Land);
           <button
             onClick={() => {
               alert("تم بدء الخدمة بنجاح");
-              setIsModalOpen(false);
+              handleClose();
             }}
             className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
           >
