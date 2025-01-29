@@ -7,6 +7,11 @@ import Home from "./Components/Home/Home";
 import Offices from "./Components/Offices/Offices";
 import Conditions from "./Components/requests/Conditions";
 
+import InspectionReport from './Components/requests/Request/InspectionReport'
+
+import AutodeskResultViewer from './Components/Autodesk/AutodeskResultViewer'
+import ViewCompliance from './Components/Autodesk/ViewCompliance'
+
 function App() {
   const router = createBrowserRouter([
     {
@@ -30,6 +35,18 @@ function App() {
         {
           path: "conditions",
           element: <Conditions />,
+        },
+        {
+          path: "InspectionReport",
+          element: <InspectionReport />,
+        },
+        {
+          path: "AutodeskResultViewer",
+          element: <AutodeskResultViewer />,
+        },
+        {
+          path: "ViewCompliance",
+          element: <ViewCompliance />,
         },
         {
           path: "*",
