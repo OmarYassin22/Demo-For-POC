@@ -15,7 +15,7 @@ const DataTable = <T,>({ data, columns, onAction }: TableProps<T>) => {
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
-    initialState: { pagination: { pageSize: 5 } },
+    initialState: { pagination: { pageSize: data.length} },
   });
 
   const getRowColor = (status: boolean,result:string) => {
@@ -91,17 +91,17 @@ const DataTable = <T,>({ data, columns, onAction }: TableProps<T>) => {
 
         {/* Rows per page */}
         <div>
-          <select
+          {/* <select
             value={table.getState().pagination.pageSize}
             onChange={(e) => table.setPageSize(Number(e.target.value))}
             className="px-4 py-2 border rounded-md"
           >
-            {[5, 10, 15].map(pageSize => (
-              <option key={pageSize} value={pageSize}>
-                {pageSize} لكل صفحة
-              </option>
-            ))}
-          </select>
+          {Array.from({ length: data.length }, (_, i) => i + 1).map(pageSize => (
+  <option key={pageSize} value={pageSize}>
+    {pageSize} لكل صفحة
+  </option>
+))}
+          </select> */}
         </div>
       </div>
     </div>
