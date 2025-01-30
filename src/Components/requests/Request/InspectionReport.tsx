@@ -4,6 +4,8 @@ import DataTable from "../../DataTable";
  import jsonData from "../../../mocks/complianceResult.json"; // Import the JSON data
 
 
+
+
 // "Code": 500.3,
 //                 "Description": "يجب ألا تقل المسافة بين الأعمدة الرئيسية عن 4 م و يجب ألا تزيد عن 6.5 م",
 //                 "Place": "كامل المبنى",
@@ -13,7 +15,7 @@ import DataTable from "../../DataTable";
 //                 "Result": "غير مطابق",
 
 const InspectionReport = () => {
-
+localStorage.setItem("ComplianceResultData", JSON.stringify(jsonData));
     const data = jsonData.ABDALRAHMA_AL_GHAMDI_rev02.Results;
 
   const columns = [
