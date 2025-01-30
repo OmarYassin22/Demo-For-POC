@@ -49,16 +49,31 @@ class DataGridPanel extends Autodesk.Viewing.UI.DockingPanel {
         });
 
     }
-
+    counter = 0
+    rowsOffsets = [];
     update(model, dbids) {
         this.table.replaceData(failedConditions.map((cond) => DATAGRID_CONFIG.createRow(cond)));
         let menu = document.getElementById('dashboard-datagrid-panel');
         let totalRowHeight = 0;
-        
-        this.table.getRows().forEach(row => {
-            totalRowHeight += row.getElement().offsetHeight;
+        let rows = this.table.getRows();
+        if (this.counter == 0) {
+            for (let i = 0; i < rows.length; i++) {
+                this.rowsOffsets.push(rows[i].getElement().offsetHeight);
+            }
+        }
+        else {
+            for (let i = 0; i < rows.length; i++) {
+                rows[i].getElement().style.height = this.rowsOffsets[i];
+            }
+        }
+        rows.forEach(row => {
+            const offset = row.getElement().offsetHeight;
+            totalRowHeight += offset;
         });
-        menu.style.height=11 + 49.8 + 19.2 + totalRowHeight + 'px';
+        console.log(menu.style.height);
+        menu.style.height = 11 + 49.8 + 19.2 + totalRowHeight + 'px';
+        console.log(menu.style.height);
+        this.counter++;
     }
 }
 
