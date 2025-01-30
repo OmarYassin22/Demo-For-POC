@@ -70,9 +70,7 @@ class DataGridPanel extends Autodesk.Viewing.UI.DockingPanel {
             const offset = row.getElement().offsetHeight;
             totalRowHeight += offset;
         });
-        console.log(menu.style.height);
         menu.style.height = 11 + 49.8 + 19.2 + totalRowHeight + 'px';
-        console.log(menu.style.height);
         this.counter++;
     }
 }
