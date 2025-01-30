@@ -44,3 +44,32 @@ main {
     height: 100%; 
     width: 100%; 
 }
+
+.adsk-viewing-viewer.dark-theme .docking-panel-title {
+    background-color: rgb(53 67 114 / 94%);
+    border-bottom: 1px solid rgba(34,34,34,.8);
+    color: #fff;
+    text-align: center;
+}
+
+.tabulator-row {
+    position: relative;
+    box-sizing: border-box;
+    min-height: 22px;
+    background-color: #fff;
+    white-space: nowrap;
+}
+.tabulator-col-title {
+    text-align: center;
+}
+
+.wrap-text {
+    white-space: normal !important;  /* Ensures text wraps */
+    word-break: break-word;  /* Breaks long words if needed */
+}
+
+.tabulator-cell {
+    white-space: normal !important;
+    word-break: break-word;
+    text-align: right;
+}

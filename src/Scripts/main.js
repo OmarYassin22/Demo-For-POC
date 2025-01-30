@@ -20,7 +20,6 @@ $(document).ready(() => {
         const container = document.getElementById('viewer-container');
         const config = {
             extensions: [
-                'SampleExtension',
                 'DataGridExtension'
             ]
         };
@@ -36,40 +35,40 @@ $(document).ready(() => {
  */
 async function getToken(callback) {
     const clientId = '8A24Sv5A1dnxsewS2cyuVEKnzaBkO4J4FdfdSUx17aJq1DUI';  // Replace with your actual client ID
-  const clientSecret = '9VPSYajPf2AEkexvOo5swTwJgiELSNoAURJoaDq7235nPlLVjqD84RcgK0aTb3gm';  // Replace with your actual client secret
-  
-  // Create the Authorization header by encoding client_id:client_secret
-  const encodedAuth = btoa(`${clientId}:${clientSecret}`);
-  
-  const url = 'https://developer.api.autodesk.com/authentication/v2/token';
-  
-  const headers = {
-    'Content-Type': 'application/x-www-form-urlencoded',
-    'Authorization': `Basic ${encodedAuth}`, // Use the encoded value here
-  };
-  
-  const data = new URLSearchParams();
-  data.append('grant_type', 'client_credentials');
-  data.append('scope', 'bucket:create bucket:read code:all data:create data:read data:write');
-  
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: headers,
-      body: data,
-    });
-    
-    const result = await response.json();  // Parse JSON response
-    
-    if (response.ok) {
-      console.log(result); 
-      callback(result.access_token, result.expires_in); // Log the response
-    } else {
-      console.error('Error getting auth token:', result);
+    const clientSecret = '9VPSYajPf2AEkexvOo5swTwJgiELSNoAURJoaDq7235nPlLVjqD84RcgK0aTb3gm';  // Replace with your actual client secret
+
+    // Create the Authorization header by encoding client_id:client_secret
+    const encodedAuth = btoa(`${clientId}:${clientSecret}`);
+
+    const url = 'https://developer.api.autodesk.com/authentication/v2/token';
+
+    const headers = {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': `Basic ${encodedAuth}`, // Use the encoded value here
+    };
+
+    const data = new URLSearchParams();
+    data.append('grant_type', 'client_credentials');
+    data.append('scope', 'bucket:create bucket:read code:all data:create data:read data:write');
+
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: headers,
+            body: data,
+        });
+
+        const result = await response.json();  // Parse JSON response
+
+        if (response.ok) {
+            console.log(result);
+            callback(result.access_token, result.expires_in); // Log the response
+        } else {
+            console.error('Error getting auth token:', result);
+        }
+    } catch (error) {
+        console.error('Error:', error);
     }
-  } catch (error) {
-    console.error('Error:', error);
-  }
 }
 
 /**
@@ -91,30 +90,7 @@ function onDocumentLoadSuccess(doc, errorsAndWarnings) {
         onItemLoadSuccess(model);
     }).then(async () => {
 
-        // viewerApp.addEventListener(Autodesk.Viewing.OBJECT_TREE_CREATED_EVENT, async () => {
 
-        //     let instanceTree = viewerApp.model.getData().instanceTree;
-        //     let allDbIdsStr = Object.keys(instanceTree.nodeAccess.dbIdToIndex);
-        //     let dbids = allDbIdsStr
-        //         .map(function (id) {
-        //             return parseInt(id);
-        //         })
-        //     console.log(dbids);
-        //     for (const dbid of dbids) {
-        //         await viewerApp.getProperties(dbid, async (props) => {
-        //             // console.log(props.properties);
-        //             for (const prop of props.properties) {
-        //                 if (prop.displayName === "ElementId") {
-        //                     if (prop.displayValue=='650644') {
-        //                         viewerApp.select(dbid);
-        //                         viewerApp.utilities.fitToView([dbid]);
-        //                         break;
-        //                     }
-        //                 }
-        //             }
-        //         });
-        //     }
-        // });
     }
     ).catch((err) => {
         onItemLoadError(err);
@@ -145,4 +121,3 @@ function onItemLoadSuccess(item) {
 function onItemLoadError(error) {
     console.error(`onItemLoadError: ${error}`);
 }
-

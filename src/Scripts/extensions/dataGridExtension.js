@@ -31,8 +31,11 @@ class DataGridExtension extends BaseExtension {
     }
 
     onToolbarCreated() {
-        this._panel = new DataGridPanel(this, 'dashboard-datagrid-panel', 'Data Grid', { x: 10, y: 10 });
-        this._button = this.createToolbarButton('dashboard-datagrid-button', 'https://img.icons8.com/small/32/activity-grid.png', 'Show Data Grid');
+        const iconPath = 
+        "https://cdn-icons-png.flaticon.com/512/2891/2891706.png";
+        // "https://cdn-icons-png.flaticon.com/512/2891/2891678.png";
+        this._panel = new DataGridPanel(this, 'dashboard-datagrid-panel', 'قائمة الأخطاء', { x: 10, y: 10 });
+        this._button = this.createToolbarButton('dashboard-datagrid-button', iconPath, 'عرض الأخطاء');
         this._button.onClick = () => {
             this._panel.setVisible(!this._panel.isVisible());
             this._button.setState(this._panel.isVisible() ? Autodesk.Viewing.UI.Button.State.ACTIVE : Autodesk.Viewing.UI.Button.State.INACTIVE);
