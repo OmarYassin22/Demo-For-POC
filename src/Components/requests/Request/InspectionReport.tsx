@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom"; 
 import DataTable from "../../DataTable";
 
  import jsonData from "../../../mocks/complianceResult.json"; // Import the JSON data
@@ -6,15 +7,16 @@ import DataTable from "../../DataTable";
 
 
 
-// "Code": 500.3,
-//                 "Description": "يجب ألا تقل المسافة بين الأعمدة الرئيسية عن 4 م و يجب ألا تزيد عن 6.5 م",
-//                 "Place": "كامل المبنى",
-//                 "Plans": "",
-//                 "Status": false,
-//                 "Message": "يتم فحصه يدويا حسب حاجة التصميم",
-//                 "Result": "غير مطابق",
-
 const InspectionReport = () => {
+
+
+  const navigate = useNavigate();
+
+  const handleViewerClick = () => {
+    navigate('/AutodeskResultViewer'); // Replace with the desired route
+  };
+
+
 localStorage.setItem("ComplianceResultData", JSON.stringify(jsonData));
     const data = jsonData.ABDALRAHMA_AL_GHAMDI_rev02.Results;
 
@@ -114,7 +116,14 @@ localStorage.setItem("ComplianceResultData", JSON.stringify(jsonData));
           <p className="font-semibold text-gray-700 text-lg">أخري: {data.filter(item => item.Status === false && item.Result=="أخري").length}</p>
         </div>
       </div>
-    </div>
+
+
+      <div className="flex items-center justify-center ">
+      
+      <button  onClick={handleViewerClick} className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700  bg-center">
+              عرض الفحص
+       </button>
+       </div>   </div>
   );
 };
 
