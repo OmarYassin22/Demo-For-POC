@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom"; 
 import DataTable from "../../DataTable";
 
- import jsonData from "../../../mocks/complianceResult.json"; // Import the JSON data
+//  import jsonData from "../../../mocks/complianceResult.json"; // Import the JSON data
 
 
 
@@ -17,8 +17,25 @@ const InspectionReport = () => {
   };
 
 
-localStorage.setItem("ComplianceResultData", JSON.stringify(jsonData));
-    const data = jsonData.ABDALRAHMA_AL_GHAMDI_rev02.Results;
+// localStorage.setItem("ComplianceResultData", JSON.stringify(jsonData));
+
+const storedData = localStorage.getItem('ComplianceResultData');
+console.log(storedData);
+// If there's data in localStorage, parse it and update the state
+// if (storedData) {
+  const parsedData = JSON.parse(storedData);
+  console.log('Parsed Data:', parsedData);
+ // Get the first key dynamically (the changing key)
+ const dynamicKey = Object.keys(parsedData)[0];
+  
+ // Access the Results array within the dynamically identified key
+ const data = parsedData[dynamicKey]?.Results;
+ console.log(data);
+
+// } else {
+//   console.log('No data found in localStorage under the key "ComplianceResultData"');
+// }
+ 
 
   const columns = [
     { accessorKey: "Description", header: "الاشتراط" },

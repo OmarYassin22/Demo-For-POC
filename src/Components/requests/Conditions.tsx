@@ -1,7 +1,45 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,ChangeEvent } from "react";
 import axios from "axios";
 import { useLocation, useNavigate } from 'react-router-dom';
+import '../../styles/conditionModal.css'
+import MockStrConditions from "../../mocks/MockStrConditions.json";
 
+
+
+
+
+interface ApiResponse {
+  Value: {
+    WorkItemId: string;
+    apiRes: {
+      StatusCode: number;
+      Headers: {
+        [key: string]: string;
+      };
+      Data: {
+        Data: {
+          status: string;
+          url: string;
+          params: {
+            [key: string]: string;
+          };
+          size: number;
+          sha1: string;
+        };
+        TranslatedUrn: string;
+      };
+    };
+  };
+  StatusCode: number;
+}
+
+
+
+interface FormDataFields {
+  RvtFileUpload: File | null;
+  InputJsonFile: File | null;
+  Data: string;
+}
 interface ServicesProps {
   isModalOpen: boolean;
   setIsModalOpen: (state: boolean) => void;
@@ -27,6 +65,157 @@ interface ConditionsResponse {
 const Conditions: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
+
+
+
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [file, setFile] = useState<File | null>(null);
+  const [isUploading, setIsUploading] = useState<boolean>(false);
+  const [bundleResponse, setBundleResponse] = useState<ApiResponse | null>(null);
+
+  
+  const [complianceResult, setComplianceResult] = useState<ApiResponse | null>(null);
+  // Handles file selection
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    if (event.target.files) {
+      setFile(event.target.files[0]);
+    }
+  };
+
+  // Submit the form and upload the files
+  const handleSubmit = async (): Promise<void> => {
+    if (!file) return; // Ensure a file is selected
+
+    setIsUploading(true);
+
+    // Prepare the FormData
+    const formData = new FormData();
+    
+    // Append the selected file for 'RvtFileUpload' (user's file)
+    formData.append('RvtFileUpload', file);
+    
+    // Create and append the Input JSON file
+    const jsonString = JSON.stringify(MockStrConditions);
+    const blob = new Blob([jsonString], { type: 'application/json' });
+
+    //formData.append('InputJsonFile', inputJsonFile);
+    formData.append('InputJsonFile', blob, 'MockStrConditions.json'); // 'file' is the field name expected by the API
+
+    
+    // Prepare and append the 'Data' field (as JSON string)
+    const data = JSON.stringify({
+      activityName: "BenaaDA4R.BenaRevitPlugin_bundle_zipActivity+$LATEST",
+      browserConnectionId: "dKXiIePC_lcgHxe97GPBHw",
+    });
+    formData.append('Data', data);
+
+    try {
+      // Send the POST request to your API
+      const response = await fetch('http://localhost:8080/api/Handle/Bundle', {
+        method: 'POST',  // No CORS check for the request
+        body: formData,
+      });
+    
+      if (response.ok) {
+        console.log('File uploaded successfully!');
+        console.log(response);
+        alert('File uploaded successfully!');
+
+
+        const jsonResponse: ApiResponse = await response.json();
+
+        console.log(jsonResponse);
+        setBundleResponse(jsonResponse);
+
+        await handleApiCall(jsonResponse);
+        //localStorage.setItem("ConditionsData", "true");
+
+      } else {
+        console.log(response);
+        console.error('File upload failed:', response.statusText);
+        alert('File upload failed.');
+      }
+    } catch (error) {
+      console.error('Error during file upload:', error);
+      alert('Error during file upload');
+    } finally {
+      setIsUploading(false);
+      setIsModalOpen(false); // Close modal after upload attempt
+    }
+  };
+  const handleApiCall = async (jsonResponse: any) => {
+
+    if (!jsonResponse?.Value.apiRes.Data.Data.url) {
+      console.log('No URL found!');
+      return;
+    }
+    const requestBody = {
+      url: jsonResponse?.Value.apiRes.Data.Data.url,
+    };
+    localStorage.setItem("urn", jsonResponse?.Value.apiRes.Data.TranslatedUrn);
+   
+    try {
+      const response = await fetch('http://localhost:8080/api/Handle/getResponse', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`);
+      }
+
+      const jsonData = await response.json();
+      setComplianceResult(jsonData);
+      localStorage.setItem("ComplianceResultData",  JSON.stringify(jsonData));
+      console.log(complianceResult);
+
+      navigate("/InspectionReport");
+    } catch (error) {
+      console.error('Error making API call:', error);
+    }
+  };
+
+  // const downloadAndReadJson = async () => {
+  //   if (!bundleResponse?.Value.apiRes.Data.Data.url) {
+  //     console.log('No URL found!');
+  //     return;
+  //   }
+
+  //   setLoading(true);
+
+  //   try {
+  //     // Fetch the JSON from the URL
+  //     const jsonResponse = await fetch(bundleResponse.Value.apiRes.Data.Data.url);
+
+  //     if (jsonResponse.ok) {
+  //       // Parse the response as JSON
+  //       const jsonData = await jsonResponse.json();
+  //       setComplianceResult(jsonData);
+
+  //       console.log(complianceResult);
+  //     } else {
+  //       console.error('Failed to fetch JSON from the URL.');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error downloading the JSON file:', error);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+  // Open modal
+  const openModal = (): void => {
+    setIsModalOpen(true);
+  };
+
+  // Close modal
+  const closeModal = (): void => {
+    setIsModalOpen(false);
+  };
+
+
   
   useEffect(() => {
     console.log("Location state:", location.state);
@@ -153,9 +342,9 @@ console.log(Amana +" "+Baladia +" "+Hai+" "+Land);
     indexOfFirstItem,
     indexOfLastItem
   );
-  console.log("currentItems");
-  console.log(conditionsData);
-  console.log(currentItems);
+  // console.log("currentItems");
+  // console.log(conditionsData);
+  // console.log(currentItems);
   const totalPages = Math.ceil(
     (conditionsData?.conditions?.length || 0) / itemsPerPage
   );
@@ -262,20 +451,48 @@ console.log(Amana +" "+Baladia +" "+Hai+" "+Land);
                 إغلاق
               </button>
               <button
-                onClick={() => {
-                  alert("تم بدء الخدمة بنجاح");
-                  handleClose();
-                }}
+               
+               onClick={openModal}
                 className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
               >
                 بدء الخدمة
               </button>
+
+
+              
             </div>
           </>
         ) : (
           <div className="text-center text-gray-500">لا توجد بيانات متاحة</div>
         )}
       </div>
+
+
+
+
+
+
+      {isModalOpen && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <button onClick={closeModal} className="close-btn">X</button>
+            <h2>Upload a File</h2>
+            <input
+              type="file"
+              onChange={handleFileChange}
+              className="file-input"
+              disabled={isUploading}
+            />
+            <button
+              onClick={handleSubmit}
+              className="submit-btn"
+              disabled={!file || isUploading}
+            >
+              {isUploading ? 'Uploading...' : 'Submit'}
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,8 +1,8 @@
 //Replace placeholder below by your encoded model urn
-const urn =
-    // "dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6MmE5Y2JjZjMtNzg2ZC00ZjcwLTg2ZTItMjMzNDFlYTljOWRkL0FyY2gtVmlsbGEucnZ0";
-    'dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6YTYwOGM1OWYtN2ZjNC00MzFhLWEzNjktOWY5YWNlOGRkZjBlL0FCREFMUkFITUFfQUxfR0hBTURJX3JldjAyLnJ2dA';
-// "dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6Mzg1NzU2NGMxMTQ0NDFlZGEwNzc2ZjliZjVlOThjN2QvTWluZXN3ZWVwZXJHYW1lLnJ2dA";
+const urn =localStorage.getItem('urn');
+    
+    //'dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6YTYwOGM1OWYtN2ZjNC00MzFhLWEzNjktOWY5YWNlOGRkZjBlL0FCREFMUkFITUFfQUxfR0hBTURJX3JldjAyLnJ2dA';
+
 
 let viewerApp;
 const documentId = `urn:${urn}`;
