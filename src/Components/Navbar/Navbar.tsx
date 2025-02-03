@@ -41,7 +41,7 @@ export default function Navbar() {
           {/* Show navigation links only when not logged in */}
           {!isLoggedIn && (
             <div className="hidden md:flex space-x-8 space-x-reverse">
-              <a
+              {/* <a
                 href="#services"
                 className="text-white text-xl mx-4 hover:text-gray-200"
               >
@@ -58,7 +58,7 @@ export default function Navbar() {
                 className="text-white text-xl ml-4 hover:text-gray-200"
               >
                 اتصل بنا
-              </a>
+              </a> */}
             </div>
           )}
           {isLoggedIn && (

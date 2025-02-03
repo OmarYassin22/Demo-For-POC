@@ -2,6 +2,7 @@ import React, { useState, useEffect,ChangeEvent } from "react";
 import axios from "axios";
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../../styles/conditionModal.css'
+import { log } from "console";
 //import MockStrConditions from "../../mocks/MockStrConditions.json";
 
 
@@ -301,6 +302,7 @@ console.log(Amana +" "+Baladia +" "+Hai+" "+Land);
         // withCredentials: true,
       });
       setConditionsData(response.data.data.result);
+    
       setError(null);
 
 
@@ -321,6 +323,7 @@ console.log(Amana +" "+Baladia +" "+Hai+" "+Land);
         console.log("filteredConditions");
          console.log(filteredConditions);
         setConditionsData( filteredConditions );
+        console.log(conditionsData);
       } else {
           // This block will run if either conditionsData or conditionsData?.conditions is null or undefined
           // alert("Conditions Data or conditions is null or undefined");
@@ -487,7 +490,7 @@ console.log(Amana +" "+Baladia +" "+Hai+" "+Land);
               </div>
             )}
 
-            {conditionsData?.conditions ? (
+            {conditionsData ? (
               <>
                 {/* Updated Conditions container */}
                 <div 
@@ -499,7 +502,7 @@ console.log(Amana +" "+Baladia +" "+Hai+" "+Land);
                   }}
                 >
                   <div className="grid grid-cols-2 gap-6"> {/* increased gap */}
-                    {conditionsData.conditions.map((condition, index) => (
+                    {conditionsData.map((condition, index) => (
                       <div 
                         key={index}
                         className="group bg-white rounded-xl p-6 transition-all duration-300
@@ -518,10 +521,10 @@ console.log(Amana +" "+Baladia +" "+Hai+" "+Land);
                             </span>
                           </div>
                           
-                          <div className="flex-1">
-                            <h3 className="text-xl font-bold text-gray-800 mb-1">
+                          <div className="">
+                            {/* <h3 className="text-xl font-bold text-gray-800 mb-1">
                               شرط {index + 1}
-                            </h3>
+                            </h3> */}
                             <div className="flex items-center text-gray-500 text-sm">
                               <svg className="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
                                 <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" />

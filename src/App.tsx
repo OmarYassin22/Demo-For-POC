@@ -18,20 +18,19 @@ function App() {
       path: "/",
       element: <Layout />,
       children: [
+        // {
+        //   index: true,
+        //   element: <Home />,
+        // },
         {
-          index: true,
-          element: <Home />,
-        },
-        {
-          path: "/login",
-          element: <Login />,
+          index: true, element: <Login />,
         },
         {
           path: "/offices",
           element: <Offices />,
         },
         { path: "/offices/:id/requests", element: <Requests /> },
-        {path: "/offices/:id/request/:requestid", element:<RequestDetails/>},
+        { path: "/offices/:id/request/:requestid", element: <RequestDetails /> },
         {
           path: "conditions",
           element: <Conditions />,
