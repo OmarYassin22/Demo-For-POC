@@ -1,6 +1,6 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
 import axios from "axios";
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate ,useParams} from 'react-router-dom';
 import '../../styles/conditionModal.css'
 import { log } from "console";
 import { ArrowLeft } from "lucide-react";
@@ -65,6 +65,8 @@ interface ConditionsResponse {
 }
 
 const Conditions: React.FC = () => {
+  const { krookiNumber } = useParams();  // Get krookiNumber from URL parameter
+  
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -149,40 +151,42 @@ const Conditions: React.FC = () => {
     }
   };
   const handleApiCall = async (jsonResponse: any, shouldNavigate: boolean = false) => {
-
-    if (!jsonResponse?.Value.apiRes.Data.Data.url) {
-      console.log('No URL found!');
-      return;
-    }
-    const requestBody = {
-      url: jsonResponse?.Value.apiRes.Data.Data.url,
-    };
-    localStorage.setItem("urn", jsonResponse?.Value.apiRes.Data.TranslatedUrn);
-
-    try {
-      const response = await fetch('http://localhost:8080/api/Handle/getResponse', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestBody),
-      });
-
-      if (!response.ok) {
-        throw new Error(`Error: ${response.statusText}`);
+    if (shouldNavigate) {
+      navigate(`/InspectionReport/${krookiNumber}`);
+    }else{
+      if (!jsonResponse?.Value.apiRes.Data.Data.url) {
+        console.log('No URL found!');
+        return;
       }
-
-      const jsonData = await response.json();
-      setComplianceResult(jsonData);
-      localStorage.setItem("ComplianceResultData", JSON.stringify(jsonData));
-      console.log(complianceResult);
-
-      if (shouldNavigate) {
-        navigate("/InspectionReport");
+      const requestBody = {
+        url: jsonResponse?.Value.apiRes.Data.Data.url,
+      };
+      localStorage.setItem("urn", jsonResponse?.Value.apiRes.Data.TranslatedUrn);
+  
+      try {
+        const response = await fetch('http://localhost:8080/api/Handle/getResponse', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(requestBody),
+        });
+  
+        if (!response.ok) {
+          throw new Error(`Error: ${response.statusText}`);
+        }
+  
+        const jsonData = await response.json();
+        setComplianceResult(jsonData);
+        localStorage.setItem("ComplianceResultData", JSON.stringify(jsonData));
+        console.log(complianceResult);
+  
+       
+      } catch (error) {
+        console.error('Error making API call:', error);
       }
-    } catch (error) {
-      console.error('Error making API call:', error);
     }
+  
   };
 
   const handleStartService = async () => {

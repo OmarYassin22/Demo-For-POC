@@ -32,11 +32,11 @@ function App() {
         { path: "/offices/:id/requests", element: <Requests /> },
         { path: "/offices/:id/request/:requestid", element: <RequestDetails /> },
         {
-          path: "conditions",
+          path: "conditions/:krookiNumber",
           element: <Conditions />,
         },
         {
-          path: "InspectionReport",
+          path: "InspectionReport/:krookiNumber",
           element: <InspectionReport />,
         },
         {

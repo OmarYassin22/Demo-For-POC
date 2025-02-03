@@ -154,7 +154,7 @@ const Services: React.FC<ServicesProps> = ({ KrookiNumber }) => {
     onSubmit: (values) => {
       // setIsModalOpen(true);
 
-      navigate("/conditions", {
+      navigate(`/conditions/${filteredData?.KrookiNumber}`, {
         state: {
           Amana: filteredData?.LocationData.AmanahName || "",
           Baladia: filteredData?.LocationData.BaladiyaName || "",
@@ -169,7 +169,7 @@ const Services: React.FC<ServicesProps> = ({ KrookiNumber }) => {
               : filteredData?.SubUsedCode === 698
               ? 8
               : 1,
-          instructure: selectedOption || "1",
+          instructure: selectedOption || "1"
         },
       });
     },

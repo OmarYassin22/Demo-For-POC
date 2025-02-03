@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate,useParams } from "react-router-dom"; 
 import DataTable from "../../DataTable";
 
-//  import jsonData from "../../../mocks/complianceResult.json"; // Import the JSON data
+  import jsonData from "../../../mocks/OfficeRequestServices.json"; // Import the JSON data
 
 const InspectionReport = () => {
   const navigate = useNavigate();
+  const { krookiNumber } = useParams();  // Get krookiNumber from URL parameter
+  const foundData = jsonData.find(item => item.KrookiNumber.toString() === krookiNumber);
 
   const storedData = localStorage.getItem('ComplianceResultData');
   console.log(storedData);
@@ -102,7 +104,7 @@ const InspectionReport = () => {
               </div>
               <div>
                 <p className="text-sm text-gray-500">رقم القرار المساحي</p>
-                <p className="font-semibold text-gray-900">450815034595</p>
+                <p className="font-semibold text-gray-900">{foundData?.KrookiNumber}</p>
               </div>
             </div>
             <div className="flex items-center gap-3">
@@ -113,7 +115,7 @@ const InspectionReport = () => {
               </div>
               <div>
                 <p className="text-sm text-gray-500">تاريخ الطلب</p>
-                <p className="font-semibold text-gray-900">15/08/2024</p>
+                <p className="font-semibold text-gray-900">{foundData?.KrookiIssueDate}</p>
               </div>
             </div>
           </div>
@@ -129,15 +131,15 @@ const InspectionReport = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="flex flex-col">
                 <span className="text-sm text-gray-500">اسم المالك</span>
-                <span className="mt-1 font-semibold text-gray-900">زياد محمد صالح المصعبي</span>
+                <span className="mt-1 font-semibold text-gray-900">{foundData?.OwnersListData[0].OwnerName}</span>
               </div>
               <div className="flex flex-col">
                 <span className="text-sm text-gray-500">اسم مقدم الطلب</span>
-                <span className="mt-1 font-semibold text-gray-900">زياد محمد صالح المصعبي</span>
+                <span className="mt-1 font-semibold text-gray-900">{foundData?.OwnersListData[0].OwnerName}</span>
               </div>
               <div className="flex flex-col">
                 <span className="text-sm text-gray-500">رقم الهوية</span>
-                <span className="mt-1 font-semibold text-gray-900">4535652448</span>
+                <span className="mt-1 font-semibold text-gray-900">{foundData?.OwnersListData[0].OwnerIdentifier}</span>
               </div>
             </div>
           </div>
@@ -152,10 +154,10 @@ const InspectionReport = () => {
           <div className="p-6">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {[
-                { label: "رقم القطعة", value: "11" },
-                { label: "رقم النموذج", value: "1" },
-                { label: "نوع المبنى", value: "سكني" },
-                { label: "المساحة", value: "150 متر" },
+                { label: "رقم القطعة", value: foundData?.LocationData.PlanNumber },
+                { label: "رقم النموذج", value: foundData?.MainUsedName },
+                { label: "نوع المبنى", value: foundData?.MainUsedCode },
+                { label: "المساحة", value: foundData?.LandsListData[0].LandArea },
               ].map((item, index) => (
                 <div key={index} className="flex flex-col">
                   <span className="text-sm text-gray-500">{item.label}</span>
