@@ -73,7 +73,7 @@ const Conditions: React.FC = () => {
   const [file, setFile] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState<boolean>(false);
   const [bundleResponse, setBundleResponse] = useState<ApiResponse | null>(null);
-
+  const [uploadSuccess, setUploadSuccess] = useState(false);
   
   const [complianceResult, setComplianceResult] = useState<ApiResponse | null>(null);
   const [canStartService, setCanStartService] = useState(false);
@@ -90,6 +90,7 @@ const Conditions: React.FC = () => {
     if (!file) return; // Ensure a file is selected
 
     setIsUploading(true);
+    setUploadSuccess(false);
 
     // Prepare the FormData
     const formData = new FormData();
@@ -132,32 +133,21 @@ formData.append('InputJsonFile', blob, 'MockStrConditions.json');
     
       if (response.ok) {
         console.log('File uploaded successfully!');
-        console.log(response);
-        alert('File uploaded successfully!');
-
-
+        setUploadSuccess(true);
         const jsonResponse: ApiResponse = await response.json();
-
-        console.log(jsonResponse);
         setBundleResponse(jsonResponse);
-
-        await handleApiCall(jsonResponse);
-        //localStorage.setItem("ConditionsData", "true");
-
+        await handleApiCall(jsonResponse, false);
       } else {
         console.log(response);
         console.error('File upload failed:', response.statusText);
-        alert('File upload failed.');
       }
     } catch (error) {
       console.error('Error during file upload:', error);
-      alert('Error during file upload');
     } finally {
       setIsUploading(false);
-      setIsModalOpen(false); // Close modal after upload attempt
     }
   };
-  const handleApiCall = async (jsonResponse: any) => {
+  const handleApiCall = async (jsonResponse: any, shouldNavigate: boolean = false) => {
 
     if (!jsonResponse?.Value.apiRes.Data.Data.url) {
       console.log('No URL found!');
@@ -186,39 +176,20 @@ formData.append('InputJsonFile', blob, 'MockStrConditions.json');
       localStorage.setItem("ComplianceResultData",  JSON.stringify(jsonData));
       console.log(complianceResult);
 
-      navigate("/InspectionReport");
+      if (shouldNavigate) {
+        navigate("/InspectionReport");
+      }
     } catch (error) {
       console.error('Error making API call:', error);
     }
   };
 
-  // const downloadAndReadJson = async () => {
-  //   if (!bundleResponse?.Value.apiRes.Data.Data.url) {
-  //     console.log('No URL found!');
-  //     return;
-  //   }
+  const handleStartService = async () => {
+    if (bundleResponse) {
+      await handleApiCall(bundleResponse, true);
+    }
+  };
 
-  //   setLoading(true);
-
-  //   try {
-  //     // Fetch the JSON from the URL
-  //     const jsonResponse = await fetch(bundleResponse.Value.apiRes.Data.Data.url);
-
-  //     if (jsonResponse.ok) {
-  //       // Parse the response as JSON
-  //       const jsonData = await jsonResponse.json();
-  //       setComplianceResult(jsonData);
-
-  //       console.log(complianceResult);
-  //     } else {
-  //       console.error('Failed to fetch JSON from the URL.');
-  //     }
-  //   } catch (error) {
-  //     console.error('Error downloading the JSON file:', error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
   // Open modal
   const openModal = (): void => {
     setIsModalOpen(true);
@@ -382,14 +353,18 @@ console.log(Amana +" "+Baladia +" "+Hai+" "+Land);
     <div className="min-h-screen bg-gray-100 p-4" style={{direction:"rtl"}}>
       <div className="max-w-6xl mx-auto space-y-6">
         {/* Upload Section */}
-        <div className="bg-white rounded-xl shadow-lg p-6">
+        <div className={`bg-white rounded-xl shadow-lg p-6 transition-all duration-300 ${
+        uploadSuccess ? 'ring-2 ring-green-500 ring-offset-2' : ''
+      }`}>
           <div className="text-center mb-6">
             <h2 className="text-2xl font-bold text-gray-800 mb-2">رفع ملف التصميم</h2>
             <p className="text-gray-600">يرجى رفع ملف Revit (.rvt) للمتابعة مع الشروط</p>
           </div>
 
-          <div className="border-2 border-dashed border-gray-200 rounded-lg p-8
-            hover:border-blue-400 transition-colors text-center">
+          <div className={`border-2 border-dashed rounded-lg p-8 transition-colors
+          ${uploadSuccess 
+            ? 'border-green-500 bg-green-50' 
+            : 'border-gray-200 hover:border-blue-400'}`}>
             <input
               type="file"
               onChange={handleFileChange}
@@ -402,23 +377,19 @@ console.log(Amana +" "+Baladia +" "+Hai+" "+Land);
               htmlFor="file-upload"
               className="cursor-pointer flex flex-col items-center"
             >
-              <svg className="w-16 h-16 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
-                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-              </svg>
-              {file ? (
-                <div>
-                  <p className="text-blue-600 font-medium">{file.name}</p>
-                  <p className="text-gray-500 text-sm mt-1">
-                    {(file.size / (1024 * 1024)).toFixed(2)} MB
-                  </p>
-                </div>
-              ) : (
-                <div>
+              {uploadSuccess ? (
+              <>
+                <svg className="w-16 h-16 text-green-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <p className="text-green-600 font-medium">تم رفع الملف بنجاح!</p>
+              </>
+            ) : (
+              <div>
                   <p className="text-gray-600 text-lg">اضغط هنا لرفع الملف</p>
                   <p className="text-gray-500 text-sm mt-1">أو اسحب وأفلت الملف هنا</p>
                 </div>
-              )}
+            )}
             </label>
           </div>
 
@@ -432,7 +403,7 @@ console.log(Amana +" "+Baladia +" "+Hai+" "+Land);
                 يجب أن يكون الملف بصيغة Revit (.rvt)
               </p>
             </div>
-            {file && (
+            {file && !uploadSuccess && (
               <button
                 onClick={handleSubmit}
                 disabled={isUploading}
@@ -457,6 +428,14 @@ console.log(Amana +" "+Baladia +" "+Hai+" "+Land);
                 )}
               </button>
             )}
+            {uploadSuccess && (
+            <span className="text-green-600 flex items-center gap-2">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+              تم الرفع بنجاح
+            </span>
+          )}
           </div>
         </div>
 
@@ -597,10 +576,10 @@ console.log(Amana +" "+Baladia +" "+Hai+" "+Land);
                     إغلاق
                   </button>
                   <button
-                    onClick={openModal}
-                    disabled={!canStartService}
+                    onClick={handleStartService}
+                    disabled={!canStartService || !uploadSuccess}
                     className={`px-6 py-2.5 rounded-lg transition-all duration-300 
-                      ${canStartService 
+                      ${(canStartService && uploadSuccess)
                         ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-lg hover:shadow-blue-100' 
                         : 'bg-gray-200 text-gray-400 cursor-not-allowed'}`}
                   >
