@@ -2,7 +2,7 @@ import React, { useState, useEffect,ChangeEvent } from "react";
 import axios from "axios";
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../../styles/conditionModal.css'
-import MockStrConditions from "../../mocks/MockStrConditions.json";
+//import MockStrConditions from "../../mocks/MockStrConditions.json";
 
 
 
@@ -95,12 +95,31 @@ const Conditions: React.FC = () => {
     formData.append('RvtFileUpload', file);
     
     // Create and append the Input JSON file
-    const jsonString = JSON.stringify(MockStrConditions);
-    const blob = new Blob([jsonString], { type: 'application/json' });
 
-    //formData.append('InputJsonFile', inputJsonFile);
-    formData.append('InputJsonFile', blob, 'MockStrConditions.json'); // 'file' is the field name expected by the API
+    const responseObject = {
+      success: true,
+      errors: [],
+      codeNumber: "1",
+      payload:  conditionsData ,
+      message: "Successfully",
+      code: "ok",
+      requestId: null
+  };
 
+    // const jsonString = JSON.stringify(MockStrConditions);
+    // const blob = new Blob([jsonString], { type: 'application/json' });
+
+    // //formData.append('InputJsonFile', inputJsonFile);
+    // formData.append('InputJsonFile', blob, 'MockStrConditions.json'); // 'file' is the field name expected by the API
+// Convert the object to a JSON string
+const jsonString = JSON.stringify(responseObject);
+
+// Create a Blob from the JSON string
+const blob = new Blob([jsonString], { type: 'application/json' });
+
+
+// Append the Blob to FormData with a filename
+formData.append('InputJsonFile', blob, 'MockStrConditions.json');
     
     // Prepare and append the 'Data' field (as JSON string)
     const data = JSON.stringify({
@@ -228,7 +247,8 @@ const Conditions: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 20;
+  const [itemsPerPage, setItemsPerPage] = useState(200);
+  
 
   // Fetch Token
   const fetchToken = async () => {
@@ -279,6 +299,36 @@ console.log(Amana +" "+Baladia +" "+Hai+" "+Land);
         // withCredentials: true,
       });
       setConditionsData(response.data.data.result);
+      console.log("b");
+      console.log(response.data.data.result);
+
+      let filteredConditions=response.data.data.result;
+      if (filteredConditions?.conditions) {
+        console.log(instructure);
+        if (instructure === "1") {
+          // If instructure is 1, filter where code < 500
+          filteredConditions = filteredConditions?.conditions.filter(
+            (condition) => parseInt(condition.code, 10) < 500
+          );
+        } else {
+          // Otherwise, filter where code >= 500
+          filteredConditions = filteredConditions?.conditions.filter(
+            (condition) => parseInt(condition.code, 10)  >= 500
+          );
+        }
+      
+        setConditionsData({ conditions: filteredConditions });
+        console.log("filteredConditions");
+        console.log(filteredConditions);
+
+
+        setItemsPerPage(filteredConditions?.conditions?.length||200 );
+      } else {
+          // This block will run if either conditionsData or conditionsData?.conditions is null or undefined
+          // alert("Conditions Data or conditions is null or undefined");
+        }
+
+
       setError(null);
       
     } catch (err: any) {
@@ -289,25 +339,7 @@ console.log(Amana +" "+Baladia +" "+Hai+" "+Land);
 
 
 
-    let filteredConditions;
-    if (conditionsData?.conditions) {
-      if (instructure === "1") {
-        // If instructure is 1, filter where code < 500
-        filteredConditions = conditionsData?.conditions.filter(
-          (condition) => parseInt(condition.code, 10) < 500
-        );
-      } else {
-        // Otherwise, filter where code >= 500
-        filteredConditions = conditionsData?.conditions.filter(
-          (condition) => parseInt(condition.code, 10)  >= 500
-        );
-      }
-    
-      setConditionsData({ conditions: filteredConditions });
-    } else {
-        // This block will run if either conditionsData or conditionsData?.conditions is null or undefined
-        // alert("Conditions Data or conditions is null or undefined");
-      }
+   
   };
 
   useEffect(() => {
