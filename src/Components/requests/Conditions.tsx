@@ -2,7 +2,7 @@ import React, { useState, useEffect,ChangeEvent } from "react";
 import axios from "axios";
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../../styles/conditionModal.css'
-import MockStrConditions from "../../mocks/MockStrConditions.json";
+//import MockStrConditions from "../../mocks/MockStrConditions.json";
 
 
 
@@ -96,13 +96,24 @@ const Conditions: React.FC = () => {
     // Append the selected file for 'RvtFileUpload' (user's file)
     formData.append('RvtFileUpload', file);
     
-    // Create and append the Input JSON file
-    const jsonString = JSON.stringify(MockStrConditions);
-    const blob = new Blob([jsonString], { type: 'application/json' });
+    const responseObject = {
+      success: true,
+      errors: [],
+      codeNumber: "1",
+      payload:  conditionsData ,
+      message: "Successfully",
+      code: "ok",
+      requestId: null
+  };
 
-    //formData.append('InputJsonFile', inputJsonFile);
-    formData.append('InputJsonFile', blob, 'MockStrConditions.json'); // 'file' is the field name expected by the API
+const jsonString = JSON.stringify(responseObject);
 
+// Create a Blob from the JSON string
+const blob = new Blob([jsonString], { type: 'application/json' });
+
+
+// Append the Blob to FormData with a filename
+formData.append('InputJsonFile', blob, 'MockStrConditions.json');
     
     // Prepare and append the 'Data' field (as JSON string)
     const data = JSON.stringify({
@@ -291,6 +302,31 @@ console.log(Amana +" "+Baladia +" "+Hai+" "+Land);
       });
       setConditionsData(response.data.data.result);
       setError(null);
+
+
+
+      let filteredConditions=response.data.data.result;
+      if (filteredConditions?.conditions) {
+        if (instructure === "1") {
+          // If instructure is 1, filter where code < 500
+          filteredConditions = filteredConditions?.conditions.filter(
+            (condition) => parseInt(condition.code, 10) < 500
+          );
+        } else {
+          // Otherwise, filter where code >= 500
+          filteredConditions = filteredConditions?.conditions.filter(
+            (condition) => parseInt(condition.code, 10)  >= 500
+          );
+        }
+        console.log("filteredConditions");
+         console.log(filteredConditions);
+        setConditionsData( filteredConditions );
+      } else {
+          // This block will run if either conditionsData or conditionsData?.conditions is null or undefined
+          // alert("Conditions Data or conditions is null or undefined");
+        }
+
+
       
     } catch (err: any) {
       setError("Unable to fetch conditions. Please try again.");
@@ -300,25 +336,7 @@ console.log(Amana +" "+Baladia +" "+Hai+" "+Land);
 
 
 
-    let filteredConditions;
-    if (conditionsData?.conditions) {
-      if (instructure === "1") {
-        // If instructure is 1, filter where code < 500
-        filteredConditions = conditionsData?.conditions.filter(
-          (condition) => parseInt(condition.code, 10) < 500
-        );
-      } else {
-        // Otherwise, filter where code >= 500
-        filteredConditions = conditionsData?.conditions.filter(
-          (condition) => parseInt(condition.code, 10)  >= 500
-        );
-      }
-    
-      setConditionsData({ conditions: filteredConditions });
-    } else {
-        // This block will run if either conditionsData or conditionsData?.conditions is null or undefined
-        // alert("Conditions Data or conditions is null or undefined");
-      }
+   
   };
 
   useEffect(() => {
