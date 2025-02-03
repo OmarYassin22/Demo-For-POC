@@ -75,6 +75,8 @@ const Conditions: React.FC = () => {
 
   
   const [complianceResult, setComplianceResult] = useState<ApiResponse | null>(null);
+  const [canStartService, setCanStartService] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   // Handles file selection
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>): void => {
     if (event.target.files) {
@@ -227,8 +229,17 @@ const Conditions: React.FC = () => {
   const [token, setToken] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 20;
+  // Remove pagination states and calculations
+  // Add scroll handler
+  const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
+    const { scrollTop, scrollHeight, clientHeight } = event.currentTarget;
+    const progress = (scrollTop / (scrollHeight - clientHeight)) * 100;
+    setScrollProgress(progress);
+    
+    if (progress > 95) {
+      setCanStartService(true);
+    }
+  };
 
   // Fetch Token
   const fetchToken = async () => {
@@ -327,9 +338,6 @@ console.log(Amana +" "+Baladia +" "+Hai+" "+Land);
     navigate(-1);
   };
 
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-
 
 
 
@@ -337,19 +345,6 @@ console.log(Amana +" "+Baladia +" "+Hai+" "+Land);
  
  
 
-
-  const currentItems = conditionsData?.conditions?.slice(
-    indexOfFirstItem,
-    indexOfLastItem
-  );
-  // console.log("currentItems");
-  // console.log(conditionsData);
-  // console.log(currentItems);
-  const totalPages = Math.ceil(
-    (conditionsData?.conditions?.length || 0) / itemsPerPage
-  );
-
-  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   if (loading) {
     return (
@@ -364,135 +359,242 @@ console.log(Amana +" "+Baladia +" "+Hai+" "+Land);
 
   return (
     <div className="min-h-screen bg-gray-100 p-4" style={{direction:"rtl"}}>
-      <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6">
-        {/* Error Message */}
-        {error && <div className="text-red-500 mb-4">{error}</div>}
+      <div className="max-w-6xl mx-auto space-y-6">
+        {/* Upload Section */}
+        <div className="bg-white rounded-xl shadow-lg p-6">
+          <div className="text-center mb-6">
+            <h2 className="text-2xl font-bold text-gray-800 mb-2">رفع ملف Revit</h2>
+            <p className="text-gray-600">يرجى رفع ملف Revit (.rvt) للمتابعة مع الشروط</p>
+          </div>
 
-        {conditionsData?.conditions ? (
-          <>
-            {/* Existing content */}
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-bold">الشروط </h2>
-              <button
-                onClick={handleClose}
-                className="text-gray-500 hover:text-gray-700"
-              >
-                ×
-              </button>
-            </div>
-
-            {/* Conditions List */}
-            <div className="space-y-4">
-              {currentItems?.map((condition, index) => (
-                <div key={index} className="border rounded-lg p-4">
-                  <div className="flex justify-between items-center mb-2">
-                    <h3 className="font-semibold text-lg">شرط {index+1}</h3>
-                    <span className="text-sm text-gray-500">{condition.place}</span>
-                  </div>
-                  <p className="text-gray-700 mb-2">{condition.description}</p>
-                  {condition.visualCategory && (
-                    <span className="inline-block bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm">
-                      {condition.visualCategory}
-                    </span>
-                  )}
-                </div>
-              ))}
-            </div>
-
-            {/* Pagination */}
-            {conditionsData?.conditions && conditionsData.conditions.length > 0 && (
-              <div className="mt-6 flex justify-center items-center gap-2 border-t pt-4">
-                <button
-                  onClick={() => paginate(currentPage - 1)}
-                  disabled={currentPage === 1}
-                  className={`px-3 py-1 rounded ${
-                    currentPage === 1
-                      ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                      : "bg-blue-50 text-blue-600 hover:bg-blue-100"
-                  }`}
-                >
-                  السابق
-                </button>
-
-                {[...Array(totalPages)].map((_, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => paginate(idx + 1)}
-                    className={`w-8 h-8 rounded-full ${
-                      currentPage === idx + 1
-                        ? "bg-blue-600 text-white"
-                        : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                    }`}
-                  >
-                    {idx + 1}
-                  </button>
-                ))}
-
-                <button
-                  onClick={() => paginate(currentPage + 1)}
-                  disabled={currentPage === totalPages}
-                  className={`px-3 py-1 rounded ${
-                    currentPage === totalPages
-                      ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                      : "bg-blue-50 text-blue-600 hover:bg-blue-100"
-                  }`}
-                >
-                  التالي
-                </button>
-              </div>
-            )}
-
-            {/* Footer */}
-            <div className="mt-6 flex justify-end gap-4 border-t pt-4">
-              <button
-                onClick={handleClose}
-                className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
-              >
-                إغلاق
-              </button>
-              <button
-               
-               onClick={openModal}
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-              >
-                بدء الخدمة
-              </button>
-
-
-              
-            </div>
-          </>
-        ) : (
-          <div className="text-center text-gray-500">لا توجد بيانات متاحة</div>
-        )}
-      </div>
-
-
-
-
-
-
-      {isModalOpen && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <button onClick={closeModal} className="close-btn">X</button>
-            <h2>Upload a File</h2>
+          <div className="border-2 border-dashed border-gray-200 rounded-lg p-8
+            hover:border-blue-400 transition-colors text-center">
             <input
               type="file"
               onChange={handleFileChange}
-              className="file-input"
+              className="hidden"
+              id="file-upload"
+              accept=".rvt"
               disabled={isUploading}
             />
-            <button
-              onClick={handleSubmit}
-              className="submit-btn"
-              disabled={!file || isUploading}
+            <label 
+              htmlFor="file-upload"
+              className="cursor-pointer flex flex-col items-center"
             >
-              {isUploading ? 'Uploading...' : 'Submit'}
-            </button>
+              <svg className="w-16 h-16 text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
+                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+              </svg>
+              {file ? (
+                <div>
+                  <p className="text-blue-600 font-medium">{file.name}</p>
+                  <p className="text-gray-500 text-sm mt-1">
+                    {(file.size / (1024 * 1024)).toFixed(2)} MB
+                  </p>
+                </div>
+              ) : (
+                <div>
+                  <p className="text-gray-600 text-lg">اضغط هنا لرفع الملف</p>
+                  <p className="text-gray-500 text-sm mt-1">أو اسحب وأفلت الملف هنا</p>
+                </div>
+              )}
+            </label>
+          </div>
+
+          {/* File Requirements */}
+          <div className="mt-4 flex justify-between items-center">
+            <div className="text-sm text-gray-500">
+              <p className="flex items-center gap-2">
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" />
+                </svg>
+                يجب أن يكون الملف بصيغة Revit (.rvt)
+              </p>
+            </div>
+            {file && (
+              <button
+                onClick={handleSubmit}
+                disabled={isUploading}
+                className="flex items-center gap-2 px-6 py-2 bg-blue-600 text-white rounded-lg
+                  hover:bg-blue-700 transition-colors disabled:bg-gray-300"
+              >
+                {isUploading ? (
+                  <>
+                    <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                    </svg>
+                    جاري الرفع...
+                  </>
+                ) : (
+                  <>
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                    </svg>
+                    رفع الملف
+                  </>
+                )}
+              </button>
+            )}
           </div>
         </div>
-      )}
+
+        {/* Conditions Section */}
+        <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+          {/* Header with progress bar */}
+          <div className="relative px-6 py-4 bg-white border-b">
+            <div className="flex justify-between items-center">
+              <h2 className="text-2xl font-bold text-gray-800">الشروط والأحكام</h2>
+              {/* <button
+                onClick={handleClose}
+                className="text-gray-500 hover:text-gray-700 transition-colors"
+              >
+                <span className="text-xl">×</span>
+              </button> */}
+            </div>
+            {/* Progress bar */}
+            <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray-100">
+              <div 
+                className="h-full bg-blue-500 transition-all duration-300"
+                style={{ width: `${scrollProgress}%` }}
+              />
+            </div>
+          </div>
+
+          {/* Main content */}
+          <div className="p-4"> {/* reduced padding */}
+            {error && (
+              <div className="mb-4 p-4 bg-red-50 text-red-600 rounded-lg">
+                {error}
+              </div>
+            )}
+
+            {conditionsData?.conditions ? (
+              <>
+                {/* Updated Conditions container */}
+                <div 
+                  className="overflow-y-auto max-h-[75vh] px-2"
+                  onScroll={handleScroll}
+                  style={{
+                    scrollbarWidth: 'thin',
+                    scrollBehavior: 'smooth',
+                  }}
+                >
+                  <div className="grid grid-cols-2 gap-6"> {/* increased gap */}
+                    {conditionsData.conditions.map((condition, index) => (
+                      <div 
+                        key={index}
+                        className="group bg-white rounded-xl p-6 transition-all duration-300
+                          border-2 border-gray-100 hover:border-blue-200
+                          shadow-md hover:shadow-xl
+                          transform hover:-translate-y-1"
+                      >
+                        {/* Header Section */}
+                        <div className="flex items-center gap-4 mb-4 pb-3 border-b border-gray-100">
+                          <div className="flex-shrink-0 w-12 h-12
+                            bg-gradient-to-br from-blue-500 to-blue-600 
+                            rounded-xl flex items-center justify-center shadow-md"
+                          >
+                            <span className="text-white text-xl font-bold">
+                              {index + 1}
+                            </span>
+                          </div>
+                          
+                          <div className="flex-1">
+                            <h3 className="text-xl font-bold text-gray-800 mb-1">
+                              شرط {index + 1}
+                            </h3>
+                            <div className="flex items-center text-gray-500 text-sm">
+                              <svg className="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" />
+                              </svg>
+                              {condition.place}
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Description Section */}
+                        <div className="mb-4 pb-4 border-b border-gray-100">
+                          <div className="relative">
+                            <p className="text-gray-700 text-base leading-relaxed
+                              max-h-32 overflow-y-auto pr-1
+                              [&::-webkit-scrollbar]:w-1
+                              [&::-webkit-scrollbar-thumb]:bg-gray-200
+                              [&::-webkit-scrollbar-thumb]:rounded-full"
+                            >
+                              {condition.description}
+                            </p>
+                          </div>
+                        </div>
+
+                        {/* Footer Section */}
+                        <div className="flex items-center justify-between">
+                          {condition.visualCategory && (
+                            <div className="flex items-center">
+                              <span className="inline-flex items-center gap-1.5 px-4 py-1.5
+                                bg-blue-50 text-blue-700 rounded-lg text-sm font-medium
+                                group-hover:bg-blue-100 transition-colors"
+                              >
+                                <svg className="w-4 h-4 opacity-75" fill="currentColor" viewBox="0 0 20 20">
+                                  <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                                  <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" />
+                                </svg>
+                                <span>{condition.visualCategory}</span>
+                              </span>
+                            </div>
+                          )}
+                          <span className="px-3 py-1.5 bg-gray-50 text-gray-600 rounded-lg text-sm font-medium">
+                            كود: {condition.code}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Scroll indicator */}
+                  {!canStartService && (
+                    <div className="sticky bottom-0 text-center py-3 bg-gradient-to-t from-white via-white">
+                      <div className="text-gray-500 text-xs mb-1">
+                        اسحب لأسفل لقراءة جميع الشروط
+                      </div>
+                      <div className="animate-bounce inline-block">
+                        <svg className="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                        </svg>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Footer */}
+                <div className="mt-6 flex justify-end gap-4 pt-4 border-t">
+                  <button
+                    onClick={handleClose}
+                    className="px-6 py-2.5 border border-gray-300 rounded-lg
+                      hover:bg-gray-50 transition-colors text-gray-700"
+                  >
+                    إغلاق
+                  </button>
+                  <button
+                    onClick={openModal}
+                    disabled={!canStartService}
+                    className={`px-6 py-2.5 rounded-lg transition-all duration-300 
+                      ${canStartService 
+                        ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-lg hover:shadow-blue-100' 
+                        : 'bg-gray-200 text-gray-400 cursor-not-allowed'}`}
+                  >
+                    بدء الخدمة
+                  </button>
+                </div>
+              </>
+            ) : (
+              <div className="text-center py-12 text-gray-500">
+                لا توجد بيانات متاحة
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
