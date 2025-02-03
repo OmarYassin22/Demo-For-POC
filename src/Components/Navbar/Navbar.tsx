@@ -47,7 +47,7 @@ export default function Navbar() {
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");
     setIsLoggedIn(false);
-    navigate("/login");
+    navigate("/");
   };
 
   return (
@@ -100,7 +100,7 @@ export default function Navbar() {
           </button>
         ) : (
           <Link
-            to="/login"
+            to="/"
             className="flex items-center gap-2 text-white hover:text-gray-200"
           >
             <UserCircle className="h-6 w-6" />
