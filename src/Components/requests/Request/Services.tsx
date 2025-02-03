@@ -349,13 +349,11 @@ const Services: React.FC<ServicesProps> = ({ KrookiNumber }) => {
             </p>
           )}
         </div>
-        <div className="bg-gray-100 p-4  rounded-lg mb-6 pr-20">
-          <div className="grid grid-cols-2 gap-6">
-            <p>بدء الخدمة</p>
+        <div className="bg-gray-100 p-4 justify-center flex rounded-lg mb-6">
+          <div className="">
             <button
               type="submit"
-              //onClick={handleStartService}
-              className="px-4 py-2 max-w-52 bg-blue-600 text-white rounded-lg"
+              className="px-8 py-3 bg-emerald-600 text-white rounded-lg font-semibold hover:bg-emerald-700 transition-colors duration-200 shadow-md hover:shadow-lg flex items-center justify-center min-w-[100px]"
             >
               بدء الخدمة
             </button>

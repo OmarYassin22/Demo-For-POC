@@ -10,11 +10,10 @@ export default function Footer() {
           <div className="flex items-center justify-center space-x-2 space-x-reverse mb-4">
             <Building2 className="h-6 w-6" />
             <span className="text-xl font-bold">
-              تيم الباك
-            </span>
+Modern IT SA            </span>
           </div>
           <p className="text-gray-400">
-            © 2024 تيم الباك
+            © 2024 Modern IT SA
             جميع الحقوق محفوظة
           </p>
         </div>

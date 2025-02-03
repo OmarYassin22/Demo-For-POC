@@ -6,6 +6,7 @@ import {
   Search,
   ChevronRight,
   ChevronLeft,
+  ArrowLeft,
 } from "lucide-react";
 import data from "../../mocks/OfficeMock.json";
 
@@ -41,6 +42,15 @@ export default function Offices() {
       className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8"
       dir= "rtl"
     >
+       <div className="flex absolute left-10 top-24 justify-end mb-4">
+        <button
+          onClick={() => { navigate(-1) }}
+          className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-blue-600 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-200 border border-gray-200"
+        >
+          <ArrowLeft className="w-5 h-5" />
+          <span className="font-medium">العودة</span>
+        </button>
+      </div>
       <div className="max-w-7xl mx-auto">
         <div className="mb-12 space-y-6">
           <h1 className="text-4xl font-bold text-primary text-center">

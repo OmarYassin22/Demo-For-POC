@@ -120,13 +120,13 @@ export default function RequestDetails() {
         </div>
 
         <div className="w-full md:w-3/4 md:ml-6 right-0">
-          <div className="w-full ">
+          <div className="flex absolute left-10 top-24  justify-end mb-4">
             <button
               onClick={handleBack}
-              className="flex items-center gap-2 mb-4 relative left-0  text-blue-600 hover:text-blue-800 transition-colors"
+              className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-blue-600 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-200 border border-gray-200"
             >
               <ArrowLeft className="w-5 h-5" />
-              العودة
+              <span className="font-medium">العودة</span>
             </button>
           </div>
           <button

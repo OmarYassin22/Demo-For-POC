@@ -1,8 +1,9 @@
-import React, { useState, useEffect,ChangeEvent } from "react";
+import React, { useState, useEffect, ChangeEvent } from "react";
 import axios from "axios";
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../../styles/conditionModal.css'
 import { log } from "console";
+import { ArrowLeft } from "lucide-react";
 //import MockStrConditions from "../../mocks/MockStrConditions.json";
 
 
@@ -48,8 +49,8 @@ interface ServicesProps {
   Baladia: string;
   Hai: string;
   Land: string;
-  buildingType:number,
-  instructure:string
+  buildingType: number,
+  instructure: string
 }
 
 interface Condition {
@@ -74,7 +75,7 @@ const Conditions: React.FC = () => {
   const [isUploading, setIsUploading] = useState<boolean>(false);
   const [bundleResponse, setBundleResponse] = useState<ApiResponse | null>(null);
   const [uploadSuccess, setUploadSuccess] = useState(false);
-  
+
   const [complianceResult, setComplianceResult] = useState<ApiResponse | null>(null);
   const [canStartService, setCanStartService] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -94,29 +95,29 @@ const Conditions: React.FC = () => {
 
     // Prepare the FormData
     const formData = new FormData();
-    
+
     // Append the selected file for 'RvtFileUpload' (user's file)
     formData.append('RvtFileUpload', file);
-    
+
     const responseObject = {
       success: true,
       errors: [],
       codeNumber: "1",
-      payload:  conditionsData ,
+      payload: conditionsData,
       message: "Successfully",
       code: "ok",
       requestId: null
-  };
+    };
 
-const jsonString = JSON.stringify(responseObject);
+    const jsonString = JSON.stringify(responseObject);
 
-// Create a Blob from the JSON string
-const blob = new Blob([jsonString], { type: 'application/json' });
+    // Create a Blob from the JSON string
+    const blob = new Blob([jsonString], { type: 'application/json' });
 
 
-// Append the Blob to FormData with a filename
-formData.append('InputJsonFile', blob, 'MockStrConditions.json');
-    
+    // Append the Blob to FormData with a filename
+    formData.append('InputJsonFile', blob, 'MockStrConditions.json');
+
     // Prepare and append the 'Data' field (as JSON string)
     const data = JSON.stringify({
       activityName: "BenaaDA4R.BenaRevitPlugin_bundle_zipActivity+$LATEST",
@@ -130,7 +131,7 @@ formData.append('InputJsonFile', blob, 'MockStrConditions.json');
         method: 'POST',  // No CORS check for the request
         body: formData,
       });
-    
+
       if (response.ok) {
         console.log('File uploaded successfully!');
         setUploadSuccess(true);
@@ -157,7 +158,7 @@ formData.append('InputJsonFile', blob, 'MockStrConditions.json');
       url: jsonResponse?.Value.apiRes.Data.Data.url,
     };
     localStorage.setItem("urn", jsonResponse?.Value.apiRes.Data.TranslatedUrn);
-   
+
     try {
       const response = await fetch('http://localhost:8080/api/Handle/getResponse', {
         method: 'POST',
@@ -173,7 +174,7 @@ formData.append('InputJsonFile', blob, 'MockStrConditions.json');
 
       const jsonData = await response.json();
       setComplianceResult(jsonData);
-      localStorage.setItem("ComplianceResultData",  JSON.stringify(jsonData));
+      localStorage.setItem("ComplianceResultData", JSON.stringify(jsonData));
       console.log(complianceResult);
 
       if (shouldNavigate) {
@@ -201,13 +202,13 @@ formData.append('InputJsonFile', blob, 'MockStrConditions.json');
   };
 
 
-  
+
   useEffect(() => {
     console.log("Location state:", location.state);
   }, [location]);
 
-  const { Amana = "", Baladia = "", Hai = "", Land = "",buildingType="",instructure="" } = location.state || {};
-  
+  const { Amana = "", Baladia = "", Hai = "", Land = "", buildingType = "", instructure = "" } = location.state || {};
+
   const [conditionsData, setConditionsData] = useState<ConditionsResponse | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -218,7 +219,7 @@ formData.append('InputJsonFile', blob, 'MockStrConditions.json');
     const { scrollTop, scrollHeight, clientHeight } = event.currentTarget;
     const progress = (scrollTop / (scrollHeight - clientHeight)) * 100;
     setScrollProgress(progress);
-    
+
     if (progress > 95) {
       setCanStartService(true);
     }
@@ -230,7 +231,7 @@ formData.append('InputJsonFile', blob, 'MockStrConditions.json');
     const username = "7WVXK2rO9fGn16uIGM7ixGhswAu2uGHd";
     const password = "TCz3GQGRssBq7maT";
     const basicAuth = btoa(`${username}:${password}`);
-console.log(Amana +" "+Baladia +" "+Hai+" "+Land);
+    console.log(Amana + " " + Baladia + " " + Hai + " " + Land);
     try {
       const response = await axios.post(
         url,
@@ -264,8 +265,8 @@ console.log(Amana +" "+Baladia +" "+Hai+" "+Land);
           areaParentOfParentName: Baladia,
           areaParentName: Hai,
           areaName: Land,
-          building_type:buildingType,
-        
+          building_type: buildingType,
+
         },
         headers: {
           Authorization: `Bearer ${token}`,
@@ -273,12 +274,12 @@ console.log(Amana +" "+Baladia +" "+Hai+" "+Land);
         // withCredentials: true,
       });
       setConditionsData(response.data.data.result);
-    
+
       setError(null);
 
 
 
-      let filteredConditions=response.data.data.result;
+      let filteredConditions = response.data.data.result;
       if (filteredConditions?.conditions) {
         if (instructure === "1") {
           // If instructure is 1, filter where code < 500
@@ -288,20 +289,20 @@ console.log(Amana +" "+Baladia +" "+Hai+" "+Land);
         } else {
           // Otherwise, filter where code >= 500
           filteredConditions = filteredConditions?.conditions.filter(
-            (condition) => parseInt(condition.code, 10)  >= 500
+            (condition) => parseInt(condition.code, 10) >= 500
           );
         }
         console.log("filteredConditions");
-         console.log(filteredConditions);
-        setConditionsData( filteredConditions );
+        console.log(filteredConditions);
+        setConditionsData(filteredConditions);
         console.log(conditionsData);
       } else {
-          // This block will run if either conditionsData or conditionsData?.conditions is null or undefined
-          // alert("Conditions Data or conditions is null or undefined");
-        }
+        // This block will run if either conditionsData or conditionsData?.conditions is null or undefined
+        // alert("Conditions Data or conditions is null or undefined");
+      }
 
 
-      
+
     } catch (err: any) {
       setError("Unable to fetch conditions. Please try again.");
     } finally {
@@ -310,7 +311,7 @@ console.log(Amana +" "+Baladia +" "+Hai+" "+Land);
 
 
 
-   
+
   };
 
   useEffect(() => {
@@ -333,38 +334,46 @@ console.log(Amana +" "+Baladia +" "+Hai+" "+Land);
 
 
 
-   
- 
- 
+
+
+
 
 
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-100 p-4 flex items-center justify-center">
         <div className="text-center">
-          <div className="spinner-border animate-spin inline-block w-12 h-12 border-4 rounded-full text-blue-500 border-t-transparent"></div>
+          <div className="spinner-border animate-spin inline-block w-12 h-12 border-4 rounded-full text-green-500 border-t-transparent"></div>
           <p className="mt-4 text-gray-600">جاري تحميل البيانات...</p>
         </div>
       </div>
-    );
+    );  
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 p-4" style={{direction:"rtl"}}>
+    <div className="min-h-screen  bg-gray-100 p-4" style={{ direction: "rtl" }}>
+      <div className="flex absolute left-10 top-24 justify-end mb-4">
+        <button
+          onClick={() => { navigate(-1) }}
+          className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-blue-600 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-200 border border-gray-200"
+        >
+          <ArrowLeft className="w-5 h-5" />
+          <span className="font-medium">العودة</span>
+        </button>
+      </div>
       <div className="max-w-6xl mx-auto space-y-6">
         {/* Upload Section */}
-        <div className={`bg-white rounded-xl shadow-lg p-6 transition-all duration-300 ${
-        uploadSuccess ? 'ring-2 ring-green-500 ring-offset-2' : ''
-      }`}>
+        <div className={`bg-white rounded-xl shadow-lg p-6 transition-all duration-300 ${uploadSuccess ? 'ring-2 ring-green-500 ring-offset-2' : ''
+          }`}>
           <div className="text-center mb-6">
             <h2 className="text-2xl font-bold text-gray-800 mb-2">رفع ملف التصميم</h2>
             <p className="text-gray-600">يرجى رفع ملف Revit (.rvt) للمتابعة مع الشروط</p>
           </div>
 
           <div className={`border-2 border-dashed rounded-lg p-8 transition-colors
-          ${uploadSuccess 
-            ? 'border-green-500 bg-green-50' 
-            : 'border-gray-200 hover:border-blue-400'}`}>
+          ${uploadSuccess
+              ? 'border-green-500 bg-green-50'
+              : 'border-gray-200 hover:border-green-400'}`}>
             <input
               type="file"
               onChange={handleFileChange}
@@ -373,23 +382,23 @@ console.log(Amana +" "+Baladia +" "+Hai+" "+Land);
               accept=".rvt"
               disabled={isUploading}
             />
-            <label 
+            <label
               htmlFor="file-upload"
               className="cursor-pointer flex flex-col items-center"
             >
               {uploadSuccess ? (
-              <>
-                <svg className="w-16 h-16 text-green-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <p className="text-green-600 font-medium">تم رفع الملف بنجاح!</p>
-              </>
-            ) : (
-              <div>
+                <>
+                  <svg className="w-16 h-16 text-green-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <p className="text-green-600 font-medium">تم رفع الملف بنجاح!</p>
+                </>
+              ) : (
+                <div>
                   <p className="text-gray-600 text-lg">اضغط هنا لرفع الملف</p>
                   <p className="text-gray-500 text-sm mt-1">أو اسحب وأفلت الملف هنا</p>
                 </div>
-            )}
+              )}
             </label>
           </div>
 
@@ -407,8 +416,8 @@ console.log(Amana +" "+Baladia +" "+Hai+" "+Land);
               <button
                 onClick={handleSubmit}
                 disabled={isUploading}
-                className="flex items-center gap-2 px-6 py-2 bg-blue-600 text-white rounded-lg
-                  hover:bg-blue-700 transition-colors disabled:bg-gray-300"
+                className="flex items-center gap-2 px-6 py-2 bg-green-600 text-white rounded-lg
+                  hover:bg-green-700 transition-colors disabled:bg-gray-300"
               >
                 {isUploading ? (
                   <>
@@ -429,13 +438,13 @@ console.log(Amana +" "+Baladia +" "+Hai+" "+Land);
               </button>
             )}
             {uploadSuccess && (
-            <span className="text-green-600 flex items-center gap-2">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-              </svg>
-              تم الرفع بنجاح
-            </span>
-          )}
+              <span className="text-green-600 flex items-center gap-2">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+                تم الرفع بنجاح
+              </span>
+            )}
           </div>
         </div>
 
@@ -454,8 +463,8 @@ console.log(Amana +" "+Baladia +" "+Hai+" "+Land);
             </div>
             {/* Progress bar */}
             <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray-100">
-              <div 
-                className="h-full bg-blue-500 transition-all duration-300"
+              <div
+                className="h-full bg-green-600 transition-all duration-300"
                 style={{ width: `${scrollProgress}%` }}
               />
             </div>
@@ -472,7 +481,7 @@ console.log(Amana +" "+Baladia +" "+Hai+" "+Land);
             {conditionsData ? (
               <>
                 {/* Updated Conditions container */}
-                <div 
+                <div
                   className="overflow-y-auto max-h-[75vh] px-2"
                   onScroll={handleScroll}
                   style={{
@@ -482,24 +491,24 @@ console.log(Amana +" "+Baladia +" "+Hai+" "+Land);
                 >
                   <div className="grid grid-cols-2 gap-6"> {/* increased gap */}
                     {conditionsData.map((condition, index) => (
-                      <div 
+                      <div
                         key={index}
                         className="group bg-white rounded-xl p-6 transition-all duration-300
-                          border-2 border-gray-100 hover:border-blue-200
+                          border-2 border-gray-100 hover:border-green-200
                           shadow-md hover:shadow-xl
                           transform hover:-translate-y-1"
                       >
                         {/* Header Section */}
                         <div className="flex items-center gap-4 mb-4 pb-3 border-b border-gray-100">
                           <div className="flex-shrink-0 w-12 h-12
-                            bg-gradient-to-br from-blue-500 to-blue-600 
+                            bg-gradient-to-br from-green-500 to-green-600 
                             rounded-xl flex items-center justify-center shadow-md"
                           >
                             <span className="text-white text-xl font-bold">
                               {index + 1}
                             </span>
                           </div>
-                          
+
                           <div className="">
                             {/* <h3 className="text-xl font-bold text-gray-800 mb-1">
                               شرط {index + 1}
@@ -532,8 +541,8 @@ console.log(Amana +" "+Baladia +" "+Hai+" "+Land);
                           {condition.visualCategory && (
                             <div className="flex items-center">
                               <span className="inline-flex items-center gap-1.5 px-4 py-1.5
-                                bg-blue-50 text-blue-700 rounded-lg text-sm font-medium
-                                group-hover:bg-blue-100 transition-colors"
+                                bg-green-50 text-green-700 rounded-lg text-sm font-medium
+                                group-hover:bg-green-100 transition-colors"
                               >
                                 <svg className="w-4 h-4 opacity-75" fill="currentColor" viewBox="0 0 20 20">
                                   <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
@@ -558,7 +567,7 @@ console.log(Amana +" "+Baladia +" "+Hai+" "+Land);
                         اسحب لأسفل لقراءة جميع الشروط
                       </div>
                       <div className="animate-bounce inline-block">
-                        <svg className="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                         </svg>
                       </div>
@@ -566,21 +575,14 @@ console.log(Amana +" "+Baladia +" "+Hai+" "+Land);
                   )}
                 </div>
 
-                {/* Footer */}
-                <div className="mt-6 flex justify-end gap-4 pt-4 border-t">
-                  <button
-                    onClick={handleClose}
-                    className="px-6 py-2.5 border border-gray-300 rounded-lg
-                      hover:bg-gray-50 transition-colors text-gray-700"
-                  >
-                    إغلاق
-                  </button>
+                {/* Footer - Updated */}
+                <div className="mt-6 flex justify-center pt-4 border-t">
                   <button
                     onClick={handleStartService}
                     disabled={!canStartService || !uploadSuccess}
-                    className={`px-6 py-2.5 rounded-lg transition-all duration-300 
+                    className={`px-8 py-3 rounded-lg transition-all duration-300 
                       ${(canStartService && uploadSuccess)
-                        ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-lg hover:shadow-blue-100' 
+                        ? 'bg-green-600 text-white hover:bg-green-700 shadow-lg hover:shadow-green-100'
                         : 'bg-gray-200 text-gray-400 cursor-not-allowed'}`}
                   >
                     بدء الخدمة
