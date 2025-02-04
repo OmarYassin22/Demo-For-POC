@@ -1,5 +1,5 @@
 import bg from "../../Assets/image/Screenshot_18-1-2025_133036_ssoapp.balady.gov.sa.jpeg"; // Import background image
-import React from "react";
+import React, { useEffect } from 'react';
 import { useNavigate } from "react-router-dom"; // Import useNavigate for redirecting
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -27,6 +27,17 @@ export default function Login() {
   // State to manage custom error message
   const [errorMessage, setErrorMessage] = React.useState<string>("");
   const navigate = useNavigate();
+
+
+  useEffect(() => {
+    // Check if 'isLoggedIn' is true in localStorage
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+
+    if (isLoggedIn === 'true') {
+      // Navigate to the office page if logged in
+      navigate('/offices');
+    }
+  }, [navigate]);
 
   const formik = useFormik<FormValues>({
     initialValues: {
