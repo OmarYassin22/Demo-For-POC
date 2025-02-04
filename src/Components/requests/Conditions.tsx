@@ -453,7 +453,7 @@ const Conditions: React.FC = () => {
           {/* Header with progress bar */}
           <div className="relative px-6 py-4 bg-white border-b">
             <div className="flex justify-between items-center">
-              <h2 className="text-2xl font-bold text-gray-800">الشروط</h2>
+              <h2 className="text-2xl font-bold text-gray-800">الأشطراتات</h2>
               {/* <button
                 onClick={handleClose}
                 className="text-gray-500 hover:text-gray-700 transition-colors"
@@ -585,7 +585,7 @@ const Conditions: React.FC = () => {
                         ? 'bg-green-600 text-white hover:bg-green-700 shadow-lg hover:shadow-green-100'
                         : 'bg-gray-200 text-gray-400 cursor-not-allowed'}`}
                   >
-                    بدء الخدمة
+                    بدء الفحص
                   </button>
                 </div>
               </>

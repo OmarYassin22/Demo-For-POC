@@ -95,10 +95,12 @@ export default function Login() {
                     value={formik.values.username}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    className={`block w-full pr-10 py-3 text-gray-900 border rounded-lg focus:ring-2 focus:ring-blue-500 ${formik.touched.username && formik.errors.username
-                      ? 'border-red-500'
-                      : 'border-gray-300'
-                      }`}
+                    className={`block w-full pr-10 py-3 text-gray-900 border rounded-lg 
+                      focus:ring-2 focus:ring-green-500 ${
+                      formik.touched.username && formik.errors.username
+                        ? 'border-red-500'
+                        : 'border-gray-300'
+                    }`}
                     placeholder="أدخل رقم الهوية"
                   />
                 </div>
@@ -123,10 +125,12 @@ export default function Login() {
                     value={formik.values.password}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
-                    className={`block w-full pr-10 py-3 text-gray-900 border rounded-lg focus:ring-2 focus:ring-blue-500 ${formik.touched.password && formik.errors.password
-                      ? 'border-red-500'
-                      : 'border-gray-300'
-                      }`}
+                    className={`block w-full pr-10 py-3 text-gray-900 border rounded-lg 
+                      focus:ring-2 focus:ring-green-500 ${
+                      formik.touched.password && formik.errors.password
+                        ? 'border-red-500'
+                        : 'border-gray-300'
+                    }`}
                     placeholder="أدخل كلمة المرور"
                   />
                 </div>
@@ -146,7 +150,10 @@ export default function Login() {
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150"
+              className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg 
+                shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 
+                focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 
+                transition duration-150"
             >
               تسجيل الدخول
             </button>

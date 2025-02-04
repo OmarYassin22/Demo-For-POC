@@ -68,7 +68,7 @@ const DataTable = <T,>({ data, columns, onAction }: TableProps<T>) => {
       </table>
 
       {/* Pagination Controls */}
-      <div className="flex justify-between items-center py-4 px-6 bg-gray-50">
+      {/* <div className="flex justify-between items-center py-4 px-6 bg-gray-50">
         <div className="flex items-center space-x-2">
           <button
             onClick={() => table.previousPage()}
@@ -89,21 +89,10 @@ const DataTable = <T,>({ data, columns, onAction }: TableProps<T>) => {
           </button>
         </div>
 
-        {/* Rows per page */}
         <div>
-          {/* <select
-            value={table.getState().pagination.pageSize}
-            onChange={(e) => table.setPageSize(Number(e.target.value))}
-            className="px-4 py-2 border rounded-md"
-          >
-          {Array.from({ length: data.length }, (_, i) => i + 1).map(pageSize => (
-  <option key={pageSize} value={pageSize}>
-    {pageSize} لكل صفحة
-  </option>
-))}
-          </select> */}
+   
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

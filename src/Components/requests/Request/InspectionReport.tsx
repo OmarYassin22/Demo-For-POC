@@ -6,6 +6,7 @@ import DataTable from "../../DataTable";
 
 const InspectionReport = () => {
   const navigate = useNavigate();
+  const [filteredData, setFilteredData] = useState(null);
 
   const storedData = localStorage.getItem('ComplianceResultData');
   console.log(storedData);
@@ -17,6 +18,25 @@ const InspectionReport = () => {
 
   const handleAction = (id: string) => {
     console.log("Action triggered for ID:", id);
+  };
+
+  // Add filter handling functions
+  const handleFilter = (filterType) => {
+    let filtered;
+    switch (filterType) {
+      case 'matched':
+        filtered = data.filter(item => item.Status === true);
+        break;
+      case 'unmatched':
+        filtered = data.filter(item => item.Status === false && item.Result !== "أخري");
+        break;
+      case 'other':
+        filtered = data.filter(item => item.Status === false && item.Result === "أخري");
+        break;
+      default:
+        filtered = null;
+    }
+    setFilteredData(filtered);
   };
 
   // Add new columns configuration with status indicators
@@ -179,7 +199,11 @@ const InspectionReport = () => {
                 { label: "الاشتراطات غير المطابقة", value: data.filter(item => item.Status === false && item.Result != "أخري").length },
                 { label: "أخرى", value: data.filter(item => item.Status === false && item.Result == "أخري").length }
               ].map((stat, index) => (
-                <div key={index} className="bg-green-50 rounded-lg p-4">
+                <div key={index} className={`rounded-lg p-4 ${
+                  stat.label === 'الاشتراطات المطابقة' ? 'bg-green-50' :
+                  stat.label === 'الاشتراطات غير المطابقة' ? 'bg-red-50' :
+                  stat.label === 'أخرى' ? 'bg-yellow-50' : 'bg-gray-100'
+                }`}>
                   <p className="text-sm text-gray-500">{stat.label}</p>
                   <p className="text-2xl font-bold text-gray-900 mt-1">{stat.value}</p>
                 </div>
@@ -194,79 +218,124 @@ const InspectionReport = () => {
               <h2 className="text-xl font-semibold text-gray-800">نتائج فحص الاشتراطات</h2>
               <div className="flex items-center gap-4">
                 <div className="flex items-center gap-2">
-                  <span className="w-3 h-3 rounded-full bg-green-400"></span>
-                  <span className="text-sm text-gray-600">مطابق</span>
+                  {/* <span className="w-3 h-3 rounded-full bg-green-400"></span> */}
+                  <span 
+                    className={`text-sm px-3 py-1 rounded-full transition-colors cursor-pointer flex items-center gap-2
+                    ${filteredData && filteredData === data.filter(item => item.Status === true) 
+                      ? 'bg-green-100 text-green-700' 
+                      : 'hover:bg-green-50 text-gray-600 hover:text-green-600'}`}
+                    onClick={() => handleFilter('matched')}
+                  >
+                    <span>مطابق</span>
+                    <span className="inline-flex items-center justify-center px-2 py-0.5 text-xs font-medium rounded-full bg-green-200 text-green-800">
+                      {data.filter(item => item.Status === true).length}
+                    </span>
+                  </span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="w-3 h-3 rounded-full bg-red-400"></span>
-                  <span className="text-sm text-gray-600">غير مطابق</span>
+                  {/* <span className="w-3 h-3 rounded-full bg-red-400"></span> */}
+                  <span 
+                    className={`text-sm px-3 py-1 rounded-full transition-colors cursor-pointer flex items-center gap-2
+                    ${filteredData && filteredData === data.filter(item => item.Status === false && item.Result !== "أخري")
+                      ? 'bg-red-100 text-red-700' 
+                      : 'hover:bg-red-50 text-gray-600 hover:text-red-600'}`}
+                    onClick={() => handleFilter('unmatched')}
+                  >
+                    <span>غير مطابق</span>
+                    <span className="inline-flex items-center justify-center px-2 py-0.5 text-xs font-medium rounded-full bg-red-200 text-red-800">
+                      {data.filter(item => item.Status === false && item.Result !== "أخري").length}
+                    </span>
+                  </span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="w-3 h-3 rounded-full bg-yellow-400"></span>
-                  <span className="text-sm text-gray-600">أخرى</span>
+                  {/* <span className="w-3 h-3 rounded-full bg-yellow-400"></span> */}
+                  <span 
+                    className={`text-sm px-3 py-1 rounded-full transition-colors cursor-pointer flex items-center gap-2
+                    ${filteredData && filteredData === data.filter(item => item.Status === false && item.Result === "أخري")
+                      ? 'bg-yellow-100 text-yellow-700' 
+                      : 'hover:bg-yellow-50 text-gray-600 hover:text-yellow-600'}`}
+                    onClick={() => handleFilter('other')}
+                  >
+                    <span>أخرى</span>
+                    <span className="inline-flex items-center justify-center px-2 py-0.5 text-xs font-medium rounded-full bg-yellow-200 text-yellow-800">
+                      {data.filter(item => item.Status === false && item.Result === "أخري").length}
+                    </span>
+                  </span>
                 </div>
+               
+                  <button 
+                    onClick={() => setFilteredData(null)}
+                    className="text-sm px-3 py-1 rounded-full text-gray-500 hover:text-gray-700 
+                             hover:bg-gray-50 transition-colors flex items-center gap-2"
+                  >
+                    <span>إظهار الكل</span>
+                    <span className="inline-flex items-center justify-center px-2 py-0.5 text-xs font-medium rounded-full bg-gray-200 text-gray-800">
+                      {data.length}
+                    </span>
+                  </button>
+                
               </div>
             </div>
             <div className="absolute bottom-0 left-0 right-0 h-1 bg-green-600"></div>
           </div>
 
-          <div className="grid grid-cols-2 divide-x divide-gray-200">
-            {/* Autodesk Viewer - Enhanced Design */}
-            <div className="relative bg-gray-50 h-[70vh] p-3">
-              {/* Viewer Header */}
-              <div className="absolute top-0 left-0 right-0 bg-gradient-to-b from-white to-transparent p-3 z-10">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-lg font-semibold text-gray-800">نموذج المبنى</h3>
-                  <span className="px-3 py-1 bg-green-50 text-green-700 rounded-full text-sm font-medium">
-                    3D عرض
-                  </span>
+          {/* Requirements Table - Full Width */}
+          <div className="relative">
+            <div className="max-h-[50vh] overflow-y-auto">
+              <div className="p-6">
+                <div className="overflow-hidden rounded-lg border border-gray-200">
+                  <DataTable
+                    data={filteredData || data}
+                    columns={columns}
+                    onAction={handleAction}
+                    className="[&_thead_th]:bg-gray-50 [&_thead_th]:text-gray-600 
+                      [&_thead_th]:font-semibold [&_thead_th]:px-4 [&_thead_th]:py-3
+                      [&_tbody_td]:px-4 [&_tbody_td]:py-3
+                      [&_tbody_tr:hover]:bg-green-50
+                      [&_tbody_tr]:border-t [&_tbody_tr]:border-gray-100 "
+                  />
                 </div>
               </div>
-
-              {/* Viewer Container */}
-              <div className="relative h-full rounded-lg overflow-hidden shadow-inner bg-white">
-                <div className="absolute inset-0 bg-gradient-to-t from-gray-900/5 to-white/5 pointer-events-none"></div>
-                <iframe
-                  id="viewer-iframe"
-                  src=".././src/index.html"
-                  title="Autodesk Viewer"
-                  className="w-full h-full rounded-lg"
-                  style={{
-                    border: 'none',
-                    filter: 'drop-shadow(0 4px 6px rgb(0 0 0 / 0.1))',
-                  }}
-                />
-              </div>
-
-              {/* Removed bottom controls since fullscreen is now in header */}
             </div>
 
-            {/* Requirements Table */}
-            <div className="relative">
-              <div className="max-h-[70vh] overflow-y-auto">
-                <div className="p-6">
-                  <div className="overflow-hidden rounded-lg border border-gray-200">
-                    <DataTable
-                      data={data}
-                      columns={columns}
-                      onAction={handleAction}
-                      className="[&_thead_th]:bg-gray-50 [&_thead_th]:text-gray-600 
-                        [&_thead_th]:font-semibold [&_thead_th]:px-4 [&_thead_th]:py-3
-                        [&_tbody_td]:px-4 [&_tbody_td]:py-3
-                        [&_tbody_tr:hover]:bg-green-50
-                        [&_tbody_tr]:border-t [&_tbody_tr]:border-gray-100"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Scroll Indicators */}
-              <div className="absolute top-0 left-0 right-0 h-4 bg-gradient-to-b from-white to-transparent pointer-events-none"></div>
-              <div className="absolute bottom-0 left-0 right-0 h-4 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
-            </div>
+            {/* Scroll Indicators */}
+            <div className="absolute top-0 left-0 right-0 h-4 bg-gradient-to-b from-white to-transparent pointer-events-none"></div>
+            <div className="absolute bottom-0 left-0 right-0 h-4 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
           </div>
         </div>
 
+        {/* 3D Viewer - New Row */}
+        <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+          <div className="relative px-6 py-4 bg-white border-b">
+            <div className="flex items-center justify-between">
+              <h2 className="text-xl font-semibold text-gray-800">نموذج المبنى</h2>
+              <span className="px-3 py-1 bg-green-50 text-green-700 rounded-full text-sm font-medium">
+                3D عرض
+              </span>
+            </div>
+            <div className="absolute bottom-0 left-0 right-0 h-1 bg-green-600"></div>
+          </div>
+
+          <div className="p-6">
+            <div className="relative h-[50vh] rounded-lg overflow-hidden shadow-inner bg-white">
+              <div className="absolute inset-0 bg-gradient-to-t from-gray-900/5 to-white/5 pointer-events-none"></div>
+              <iframe
+                id="viewer-iframe"
+                src=".././src/index.html"
+                title="Autodesk Viewer"
+                className="w-full h-full rounded-lg"
+                style={{
+                  border: 'none',
+                  filter: 'drop-shadow(0 4px 6px rgb(0 0 0 / 0.1))',
+                  marginTop: '-69px', // Add this to hide the header
+                  height: 'calc(100% + 50px)', // Compensate for the negative margin
+                }}
+                frameBorder="0"
+                scrolling="no"
+              />
+            </div>
+          </div>
+        </div>
 
       </div>
     </div>
