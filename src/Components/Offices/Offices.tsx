@@ -75,7 +75,7 @@ export default function Offices() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {paginatedOffices.map((office) => (
             <Link to={`/offices/${office.id}/requests`} key={office.id}>
-              <div className="bg-white rounded-xl shadow-sm hover:shadow-lg transition-shadow p-6 border border-gray-100">
+              <div className="bg-white rounded-xl shadow-sm hover:shadow-lg transition-shadow p-6 border border-gray-100" style={{minHeight:"9rem"}}>
                 <div className="flex items-center gap-3 mb-4">
                   <Building2 className="w-6 h-6 text-primary" />
                   <h3 className="text-xl font-semibold text-gray-900">
