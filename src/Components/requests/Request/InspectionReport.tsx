@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import DataTable from "../../DataTable";
+// import model from "../../../Assets/index.html";
+// import { URL } from "url";
 
 //  import jsonData from "../../../mocks/complianceResult.json"; // Import the JSON data
 
 const InspectionReport = () => {
+  // const url = URL.createObjectURL(model);
+
   const navigate = useNavigate();
   const [filteredData, setFilteredData] = useState(null);
 
@@ -321,7 +325,8 @@ const InspectionReport = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/5 to-white/5 pointer-events-none"></div>
               <iframe
                 id="viewer-iframe"
-                src=".././src/index.html"
+                src="/index.html"
+                // src={url}
                 title="Autodesk Viewer"
                 className="w-full h-full rounded-lg"
                 style={{
