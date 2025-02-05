@@ -1,6 +1,6 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
 import axios from "axios";
-import { useLocation, useNavigate ,useParams} from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import '../../styles/conditionModal.css'
 import { log } from "console";
 import { ArrowLeft } from "lucide-react";
@@ -66,7 +66,7 @@ interface ConditionsResponse {
 
 const Conditions: React.FC = () => {
   const { krookiNumber } = useParams();  // Get krookiNumber from URL parameter
-  
+
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -129,7 +129,9 @@ const Conditions: React.FC = () => {
 
     try {
       // Send the POST request to your API
-      const response = await fetch('http://localhost:8080/api/Handle/Bundle', {
+      // const response = await fetch('http://localhost:8080/api/Handle/Bundle', {
+      const response = await fetch('http://poc-backend.runasp.net/api/Bundle', {
+
         method: 'POST',  // No CORS check for the request
         body: formData,
       });
@@ -153,7 +155,7 @@ const Conditions: React.FC = () => {
   const handleApiCall = async (jsonResponse: any, shouldNavigate: boolean = false) => {
     if (shouldNavigate) {
       navigate(`/InspectionReport/${krookiNumber}`);
-    }else{
+    } else {
       if (!jsonResponse?.Value.apiRes.Data.Data.url) {
         console.log('No URL found!');
         return;
@@ -162,31 +164,33 @@ const Conditions: React.FC = () => {
         url: jsonResponse?.Value.apiRes.Data.Data.url,
       };
       localStorage.setItem("urn", jsonResponse?.Value.apiRes.Data.TranslatedUrn);
-  
+
       try {
-        const response = await fetch('http://localhost:8080/api/Handle/getResponse', {
+        // const response = await fetch('http://localhost:8080/api/Handle/getResponse', {
+        const response = await fetch('http://poc-backend.runasp.net/api/Handle/getResponse', {
+
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(requestBody),
         });
-  
+
         if (!response.ok) {
           throw new Error(`Error: ${response.statusText}`);
         }
-  
+
         const jsonData = await response.json();
         setComplianceResult(jsonData);
         localStorage.setItem("ComplianceResultData", JSON.stringify(jsonData));
         console.log(complianceResult);
-  
-       
+
+
       } catch (error) {
         console.error('Error making API call:', error);
       }
     }
-  
+
   };
 
   const handleStartService = async () => {
@@ -351,7 +355,7 @@ const Conditions: React.FC = () => {
           <p className="mt-4 text-gray-600">جاري تحميل البيانات...</p>
         </div>
       </div>
-    );  
+    );
   }
 
   return (
