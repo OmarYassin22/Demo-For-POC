@@ -1,4 +1,4 @@
-const DATAGRID_CONFIG = {
+    const DATAGRID_CONFIG = {
     columns: [ // Definition of individual grid columns (see http://tabulator.info for more details)
         { title: 'السبب', field: 'Message', widthGrow: 3, cssClass: "wrap-text" },
         { title: 'الاشتراط', field: 'desc', widthGrow: 4, cssClass: "wrap-text" },
