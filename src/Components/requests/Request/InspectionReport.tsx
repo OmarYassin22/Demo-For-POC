@@ -325,7 +325,7 @@ const InspectionReport = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/5 to-white/5 pointer-events-none"></div>
               <iframe
                 id="viewer-iframe"
-                src="/index.html"
+                src="/model.html"
                 // src={url}
                 title="Autodesk Viewer"
                 className="w-full h-full rounded-lg"
