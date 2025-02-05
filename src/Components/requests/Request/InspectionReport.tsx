@@ -13,12 +13,9 @@ const InspectionReport = () => {
   const [filteredData, setFilteredData] = useState(null);
 
   const storedData = localStorage.getItem('ComplianceResultData');
-  console.log(storedData);
   const parsedData = JSON.parse(storedData);
-  console.log('Parsed Data:', parsedData);
   const dynamicKey = Object.keys(parsedData)[0];
   const data = parsedData[dynamicKey]?.Results;
-  console.log(data);
 
   const handleAction = (id: string) => {
     console.log("Action triggered for ID:", id);

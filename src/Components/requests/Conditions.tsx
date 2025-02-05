@@ -137,13 +137,11 @@ const Conditions: React.FC = () => {
       });
 
       if (response.ok) {
-        console.log('File uploaded successfully!');
         setUploadSuccess(true);
         const jsonResponse: ApiResponse = await response.json();
         setBundleResponse(jsonResponse);
         await handleApiCall(jsonResponse, false);
       } else {
-        console.log(response);
         console.error('File upload failed:', response.statusText);
       }
     } catch (error) {
@@ -157,7 +155,6 @@ const Conditions: React.FC = () => {
       navigate(`/InspectionReport/${krookiNumber}`);
     } else {
       if (!jsonResponse?.Value.apiRes.Data.Data.url) {
-        console.log('No URL found!');
         return;
       }
       const requestBody = {

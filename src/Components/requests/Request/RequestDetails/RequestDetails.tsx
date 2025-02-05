@@ -50,7 +50,6 @@ export default function RequestDetails() {
     };
     setRequest(updatedRequest);
     setIsFormTabVisible(true);
-    console.log(updatedRequest);
     alert("تم قبول الطلب بنجاح");
   };
 
@@ -60,7 +59,6 @@ export default function RequestDetails() {
       office.requests.splice(index, 1);
     }
     alert("تم رفض الطلب");
-    console.log(request);
     navigate(`/offices/${id}/requests`);
   };
 
