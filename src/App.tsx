@@ -12,6 +12,7 @@ import InspectionReport from './Components/requests/Request/InspectionReport'
 import AutodeskResultViewer from './Components/Autodesk/AutodeskResultViewer'
 import ViewCompliance from './Components/Autodesk/ViewCompliance'
 
+
 function App() {
   const router = createBrowserRouter([
     {
@@ -28,6 +29,11 @@ function App() {
         {
           path: "/offices",
           element: <Offices />,
+        },
+
+        {
+          path: "/login",
+          element: <Login />,
         },
         { path: "/offices/:id/requests", element: <Requests /> },
         { path: "/offices/:id/request/:requestid", element: <RequestDetails /> },

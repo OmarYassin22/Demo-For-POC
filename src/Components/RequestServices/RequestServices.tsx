@@ -180,7 +180,7 @@ interface FormDataobj {
   // Call API with Base64 image after upload
   const handleFileUpload = async () => {
     if (!base64Image) {
-      alert("No file selected.");
+      alert("لايوجد ملف.");
       return;
     }
 

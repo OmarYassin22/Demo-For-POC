@@ -288,6 +288,9 @@ const Conditions: React.FC = () => {
 
 
       let filteredConditions = response.data.data.result;
+      filteredConditions?.conditions.filter(
+        (condition) => condition.active ==true
+      );
       if (filteredConditions?.conditions) {
         if (instructure === "1") {
           // If instructure is 1, filter where code < 500
@@ -461,7 +464,7 @@ const Conditions: React.FC = () => {
           {/* Header with progress bar */}
           <div className="relative px-6 py-4 bg-white border-b">
             <div className="flex justify-between items-center">
-              <h2 className="text-2xl font-bold text-gray-800">الأشطراتات</h2>
+              <h2 className="text-2xl font-bold text-gray-800">الإشتراطات</h2>
               {/* <button
                 onClick={handleClose}
                 className="text-gray-500 hover:text-gray-700 transition-colors"
