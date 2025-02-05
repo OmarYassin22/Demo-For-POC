@@ -3,12 +3,9 @@ import Login from "./Components/Login/Login";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Requests from "./Components/requests/Requests";
 import RequestDetails from './Components/requests/Request/RequestDetails/RequestDetails';
-import Home from "./Components/Home/Home";
 import Offices from "./Components/Offices/Offices";
 import Conditions from "./Components/requests/Conditions";
-
 import InspectionReport from './Components/requests/Request/InspectionReport'
-
 import AutodeskResultViewer from './Components/Autodesk/AutodeskResultViewer'
 import ViewCompliance from './Components/Autodesk/ViewCompliance'
 
