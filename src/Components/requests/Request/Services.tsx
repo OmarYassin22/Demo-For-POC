@@ -329,7 +329,7 @@ console.log(response.data.data);
           <div className="grid grid-cols-2 gap-6">
             <div className="mb-4">
               <label className="text-sm font-medium text-gray-700">
-                رقم القطعه:
+                رقم القطعه: 
               </label>
               <input
                 type="text"
@@ -349,7 +349,6 @@ console.log(response.data.data);
                 id="MainUsedName"
                 name="MainUsedName"
                 value={filteredData?.MainUsedName}
-                //onChange={handleInputChange}
                 className="mt-1  bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 disabled
               />
