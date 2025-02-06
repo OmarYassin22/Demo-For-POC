@@ -21,8 +21,10 @@ export default function Requests() {
   // Filter and transform requests
   const filteredRequests = office?.requests
     .filter(request => 
+      !request.number.toLowerCase().includes("dlg")&&
+      (
       request.number.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      request.ownerName.toLowerCase().includes(searchTerm.toLowerCase())
+      request.ownerName.toLowerCase().includes(searchTerm.toLowerCase()))
     );
 
   // Pagination logic

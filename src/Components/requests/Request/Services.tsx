@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
+import axios from 'axios';
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import jsonData from "../../../mocks/OfficeRequestServices.json"; // Import the JSON data
-
+import { useParams } from 'react-router-dom';
 
 interface LocationData {
   AmanahCode: string;
@@ -128,12 +129,16 @@ interface FormDataobj {
 
 interface ServicesProps {
   KrookiNumber: number;
+
 }
 
-const Services: React.FC<ServicesProps> = ({ KrookiNumber }) => {
+const Services: React.FC<ServicesProps> = ({ KrookiNumber}) => {
+
+  
+const [accessToken, setAccessToken] = useState<string >(""); 
   const navigate = useNavigate();
   const [filteredData, setFilteredData] = useState<FormDataobj>();
-
+  const { id, requestid } = useParams();
   interface FormValues {
     description: string;
     ComplianceType: string;
@@ -190,20 +195,111 @@ const Services: React.FC<ServicesProps> = ({ KrookiNumber }) => {
   //   alert(selectedOption); // Alert will show the updated selectedOption value
   // }, [selectedOption]);
   useEffect(() => {
-    // Filter JSON data based on criteria
 
+    const fetchData = async () => {
+    // Filter JSON data based on criteria
+    console.log('Office ID:', id); // Should log '64ed91f79d5cf006de8e3471'
+    console.log('Request ID:', requestid); // Should log '4617356232'
     const filtered = jsonData.filter((item: FormDataobj) => {
       return item.KrookiNumber === KrookiNumber; // Example filter condition (MainUsedName === "سكني")
     });
+    console.log(filtered);
     if (filtered.length === 0) {
+  
       // Assuming 'mockData' is an array of mock items
-      const randomItem = jsonData[Math.floor(Math.random() * jsonData.length)];
-      setFilteredData(randomItem);
+     await getToken();
+
     } else {
       // Set the filtered data to state
       setFilteredData(filtered[0]);
     }
+    }
+    fetchData();
   }, []);
+
+
+
+  const getToken = async () => {
+    try {
+      // URL to get the token
+      const url = 'https://apiservicesstg.balady.gov.sa/oauth/v1/token';
+
+      // Headers
+      const headers = {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': 'Basic cWVNU0l1UkNhSk9ma0FFZEdoMWhVb1BoSHZGQTVBQ0c6aVNuTmVESnhEdmdKa0tPOQ==',
+        };
+
+      // Request body (URL-encoded form data)
+      const body = new URLSearchParams();
+      body.append('grant_type', 'client_credentials');
+
+      // Make the POST request using axios
+      const response = await axios.post(url, body.toString(), { headers });
+
+      console.log("token:"+response.data.access_token);
+     await fetchOfficeData(response.data.access_token);
+    
+    } catch (err) {
+      console.error('Error:', err);
+    }
+  };
+
+  const fetchOfficeData = async (access_token:string) => {
+    const url = 'https://apiservicesstg.balady.gov.sa/v1/cad-engine/benaa-office/'+requestid+'/'+id;
+    alert(url);
+    const headers = {
+      'loginIdentityType': '1',
+      'loginIdentityId': '1000115574',
+      'Authorization': 'Bearer '+access_token,
+      
+    };
+
+    // Call the API using fetch
+    fetch(url, {
+      method: 'GET',
+      headers: headers,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        
+         
+        getdatabykrooki(access_token,data.data.result.krokiNo);// Handle the response data here
+      })
+      .catch((error) => {
+        console.error('Error:', error); // Handle any errors
+      });
+  };
+
+
+
+  const getdatabykrooki =  (access_token:string,krokiData:string) => {
+    const url = 'https://apiservicesstg.balady.gov.sa/v1/BuildingLicenseInfo/construction-survey-report';
+
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer '+access_token,
+     
+    };
+
+    const body = {
+      krokiNumber: krokiData,
+      queryMode: 'BY_LICENSE_NUMBER',
+    };
+
+    // Make the POST request using axios
+    axios
+      .post(url, body, { headers })
+      .then((response) => {
+console.log(response.data.data);
+        setFilteredData(response.data.data.result[0]); // Store response data in state
+      
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  };
+
 
   return (
     <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6">

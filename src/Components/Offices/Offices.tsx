@@ -22,16 +22,42 @@ export default function Offices() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
+  // const offices = Object.entries(data)
+  //   .map(([id, office]) => ({
+  //     id,
+  //     name: office.name,
+  //     requestCount: office.requests.length,
+  //     activeRequests: office.requests.filter((r) => !r.waitingApproval).length,
+  //   }))
+  //   .filter((office) =>
+  //     office.name.toLowerCase().includes(searchTerm.toLowerCase())
+  //   );
+
   const offices = Object.entries(data)
-    .map(([id, office]) => ({
+  .map(([id, office]) => {
+    // First, filter the requests by excluding the ones that contain "dlg" in their number
+    const filteredRequests = office.requests.filter(
+      (r) => !r.number.toLowerCase().includes("dlg")
+    );
+
+    // Now calculate the counts based on the filtered requests
+    const requestCount = filteredRequests.length;
+    const activeRequests = filteredRequests.filter(
+      (r) => !r.waitingApproval // Filter out requests that are waiting for approval
+    ).length;
+
+    return {
       id,
       name: office.name,
-      requestCount: office.requests.length,
-      activeRequests: office.requests.filter((r) => !r.waitingApproval).length,
-    }))
-    .filter((office) =>
-      office.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+      requestCount,
+      activeRequests,
+      filteredRequests, // Include the filtered requests (after filtering out "dlg" requests)
+    };
+  })
+  .filter((office) =>
+    office.name.toLowerCase().includes(searchTerm.toLowerCase()) // Filter offices based on searchTerm
+  &&office.filteredRequests.length > 0
+  );
 
   const totalPages = Math.ceil(offices.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
