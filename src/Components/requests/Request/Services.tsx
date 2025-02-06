@@ -304,7 +304,7 @@ console.log(response.data.data);
   return (
     <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6">
       <h2 className="text-xl font-semibold mb-4">
-        رقم القرار : {filteredData?.KrookiNumber} , تاريخ القرار:{" "}
+        رقم القرار : {filteredData?.KrookiNumber} , تاريخ القرار:
         {filteredData?.KrookiIssueDate}
       </h2>
       <form onSubmit={formik.handleSubmit}>
