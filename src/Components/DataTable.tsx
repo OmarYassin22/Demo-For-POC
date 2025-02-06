@@ -26,7 +26,7 @@ const DataTable = <T,>({ data, columns, onAction }: TableProps<T>) => {
     } else if (status === false&&result==="أخري") {
      
       return 'bg-yellow-100'; 
-      alert(result);
+    //  alert(result);
     } else if (status === false) {
       return 'bg-red-100'; 
     }

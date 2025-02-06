@@ -237,7 +237,7 @@ const [accessToken, setAccessToken] = useState<string >("");
       // Make the POST request using axios
       const response = await axios.post(url, body.toString(), { headers });
 
-      console.log("token:"+response.data.access_token);
+      //console.log("token:"+response.data.access_token);
      await fetchOfficeData(response.data.access_token);
     
     } catch (err) {
