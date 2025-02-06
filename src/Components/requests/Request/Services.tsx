@@ -391,14 +391,14 @@ console.log(response.data.data);
                 id="description"
                 name="description"
                 value={formik.values.description}
+                placeholder="أدخل وصف المبني"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                className={`block w-full pr-10 py-3 text-gray-900 border rounded-lg focus:ring-2 focus:ring-blue-500 ${
+                className={`block w-full py-3 pr-2 text-gray-900 border rounded-lg focus:ring-2 focus:ring-blue-500 ${
                   formik.touched.description && formik.errors.description
                     ? "border-red-500"
                     : "border-gray-300"
                 }`}
-                placeholder="أدخل وصف المبني"
               />
               {formik.touched.description && formik.errors.description && (
                 <p className="mt-1 text-sm text-red-600">

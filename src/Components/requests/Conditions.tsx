@@ -375,7 +375,7 @@ const Conditions: React.FC = () => {
           }`}>
           <div className="text-center mb-6">
             <h2 className="text-2xl font-bold text-gray-800 mb-2">رفع ملف التصميم</h2>
-            <p className="text-gray-600">يرجى رفع ملف Revit (.rvt) للمتابعة مع الشروط</p>
+            <p className="text-gray-600">يرجى رفع ملف Revit (.rvt)</p>
           </div>
 
           <div className={`border-2 border-dashed rounded-lg p-8 transition-colors
