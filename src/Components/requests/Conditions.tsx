@@ -414,7 +414,7 @@ const Conditions: React.FC = () => {
                   <svg className="w-16 h-16 text-green-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <p className="text-green-600 font-medium">تم رفع الملف بنجاح!</p>
+                  <p className="text-green-600 font-medium">تم الفحص بنجاح!</p>
                 </>
               ) : (
                 <div>
@@ -467,14 +467,14 @@ const Conditions: React.FC = () => {
                 )}
               </button>
             )}
-            {uploadSuccess && (
+            {/* {uploadSuccess && (
               <span className="text-green-600 flex items-center gap-2">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
                 تم الفحص بنجاح
               </span>
-            )}
+            )} */}
 
 
              {/* File Name Display */}
