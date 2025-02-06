@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 import DataTable from "../../DataTable";
+
+import { ArrowLeft } from "lucide-react";
 // import model from "../../../Assets/index.html";
 // import { URL } from "url";
 
 //  import jsonData from "../../../mocks/complianceResult.json"; // Import the JSON data
 
 const InspectionReport = () => {
-  // const url = URL.createObjectURL(model);
+ // Access the location state using useLocation
+ const location = useLocation();
 
+ // Destructure officeId and requestId from the location state
+ const { officeId, requestId } = location.state || {};
+ //alert(officeId);
   const navigate = useNavigate();
   const [filteredData, setFilteredData] = useState(null);
 
@@ -20,6 +26,14 @@ const InspectionReport = () => {
   const handleAction = (id: string) => {
     console.log("Action triggered for ID:", id);
   };
+
+
+  const handleBackAction = () => {
+ 
+    
+    navigate(`/offices/${officeId}/request/${requestId}`);
+  };
+
 
   // Add filter handling functions
   const handleFilter = (filterType) => {
@@ -102,7 +116,19 @@ const InspectionReport = () => {
   ];
 
   return (
+
+
     <div className="min-h-screen bg-gray-100 p-8" style={{ direction: "rtl" }}>
+
+<div className="flex absolute left-10 top-24 justify-end mb-4">
+        <button
+          onClick={() => { handleBackAction() }}
+          className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-blue-600 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-200 border border-gray-200"
+        >
+          <ArrowLeft className="w-5 h-5" />
+          <span className="font-medium">العودة</span>
+        </button>
+      </div>
       <div className="max-w-7xl mx-auto space-y-6"> {/* Increased max-width for better split view */}
         {/* Main Title */}
         <div className="bg-white rounded-xl shadow-lg overflow-hidden">

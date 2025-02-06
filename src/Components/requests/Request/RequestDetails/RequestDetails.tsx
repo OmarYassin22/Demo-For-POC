@@ -252,7 +252,7 @@ export default function RequestDetails() {
           )}
 
           {activeTab === "form" && (
-            <Services KrookiNumber={request.result?.krokiNo}></Services>
+            <Services KrookiNumber={request.result?.krokiNo }  officeId={id?id:""} requestId={requestid?requestid:""}></Services>
           )}
         </div>
       </div>

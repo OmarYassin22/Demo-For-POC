@@ -129,10 +129,11 @@ interface FormDataobj {
 
 interface ServicesProps {
   KrookiNumber: number;
+  officeId:string;requestId:string;
 
 }
 
-const Services: React.FC<ServicesProps> = ({ KrookiNumber}) => {
+const Services: React.FC<ServicesProps> = ({ KrookiNumber,officeId,requestId}) => {
 
   
 const [accessToken, setAccessToken] = useState<string >(""); 
@@ -158,9 +159,11 @@ const [accessToken, setAccessToken] = useState<string >("");
 
     onSubmit: (values) => {
       // setIsModalOpen(true);
-
+//alert(officeId);
       navigate(`/conditions/${filteredData?.KrookiNumber}`, {
         state: {
+officeId:officeId,
+requestId:requestId,
           Amana: filteredData?.LocationData.AmanahName || "",
           Baladia: filteredData?.LocationData.BaladiyaName || "",
           Hai: filteredData?.LocationData.DistrictName || "",
@@ -186,6 +189,7 @@ const [accessToken, setAccessToken] = useState<string >("");
 
   const [selectedOption, setSelectedOption] = useState<string>("");
 
+  const [loading, setLoading] = useState<boolean>(false);
   // Handle change event for radio buttons
   const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedOption(event.target.value); // Set the selected radio button value
@@ -197,6 +201,8 @@ const [accessToken, setAccessToken] = useState<string >("");
   useEffect(() => {
 
     const fetchData = async () => {
+      
+   
     // Filter JSON data based on criteria
     console.log('Office ID:', id); // Should log '64ed91f79d5cf006de8e3471'
     console.log('Request ID:', requestid); // Should log '4617356232'
@@ -205,10 +211,11 @@ const [accessToken, setAccessToken] = useState<string >("");
     });
     console.log(filtered);
     if (filtered.length === 0) {
-  
+      setLoading(true);
       // Assuming 'mockData' is an array of mock items
      await getToken();
 
+   
     } else {
       // Set the filtered data to state
       setFilteredData(filtered[0]);
@@ -265,6 +272,7 @@ const [accessToken, setAccessToken] = useState<string >("");
         
          
         getdatabykrooki(access_token,data.data.result.krokiNo);// Handle the response data here
+       
       })
       .catch((error) => {
         console.error('Error:', error); // Handle any errors
@@ -293,14 +301,23 @@ const [accessToken, setAccessToken] = useState<string >("");
       .then((response) => {
 console.log(response.data.data);
         setFilteredData(response.data.data.result[0]); // Store response data in state
-      
+        setLoading(false);
       })
       .catch((error) => {
         console.error('Error:', error);
       });
   };
 
-
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-100 p-4 flex items-center justify-center">
+        <div className="text-center">
+          <div className="spinner-border animate-spin inline-block w-12 h-12 border-4 rounded-full text-green-500 border-t-transparent"></div>
+          <p className="mt-4 text-gray-600">جاري تحميل البيانات...</p>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-6">
       <h2 className="text-xl font-semibold mb-4">

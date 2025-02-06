@@ -62,6 +62,7 @@ interface Condition {
 
 interface ConditionsResponse {
   conditions: Condition[];
+
 }
 
 const Conditions: React.FC = () => {
@@ -90,6 +91,13 @@ const Conditions: React.FC = () => {
 
   // Submit the form and upload the files
   const handleSubmit = async (): Promise<void> => {
+//alert("o"+officeId+"r"+requestId);
+    // navigate(`/InspectionReport/${krookiNumber}`, {
+    //   state: {
+    //     officeId:officeId,
+    //     requestId:requestId
+    //   }
+    // });
     if (!file) return; // Ensure a file is selected
 
     setIsUploading(true);
@@ -152,7 +160,12 @@ const Conditions: React.FC = () => {
   };
   const handleApiCall = async (jsonResponse: any, shouldNavigate: boolean = false) => {
     if (shouldNavigate) {
-      navigate(`/InspectionReport/${krookiNumber}`);
+      navigate(`/InspectionReport/${krookiNumber}`, {
+        state: {
+          officeId:officeId,
+          requestId:requestId
+        }
+      });
     } else {
       if (!jsonResponse?.Value.apiRes.Data.Data.url) {
         return;
@@ -210,9 +223,11 @@ const Conditions: React.FC = () => {
 
   useEffect(() => {
     console.log("Location state:", location.state);
+
+   
   }, [location]);
 
-  const { Amana = "", Baladia = "", Hai = "", Land = "", buildingType = "", instructure = "" } = location.state || {};
+  const { Amana = "", Baladia = "", Hai = "", Land = "", buildingType = "", instructure = "",officeId="",requestId="" } = location.state || {};
 
   const [conditionsData, setConditionsData] = useState<ConditionsResponse | null>(null);
   const [token, setToken] = useState<string | null>(null);
@@ -403,8 +418,15 @@ const Conditions: React.FC = () => {
                 </>
               ) : (
                 <div>
+                  
                   <p className="text-gray-600 text-lg">اضغط هنا لرفع الملف</p>
                   <p className="text-gray-500 text-sm mt-1">أو اسحب وأفلت الملف هنا</p>
+
+                  {file  && (
+        <div className="mt-4 text-gray-600">
+          <p className="text-lg">الملف المختار: <strong>{file.name}</strong></p>
+        </div>
+      )}
                 </div>
               )}
             </label>
@@ -437,9 +459,9 @@ const Conditions: React.FC = () => {
                   </>
                 ) : (
                   <>
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    {/* <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-                    </svg>
+                    </svg> */}
                    بدء الفحص
                   </>
                 )}
@@ -453,6 +475,10 @@ const Conditions: React.FC = () => {
                 تم الفحص بنجاح
               </span>
             )}
+
+
+             {/* File Name Display */}
+   
           </div>
         </div>
 
