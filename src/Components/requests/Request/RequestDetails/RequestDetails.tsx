@@ -227,7 +227,7 @@ export default function RequestDetails() {
                   <div className="space-y-4">
                     <div className="p-4 bg-gray-50 rounded-lg">
                       <h3 className="font-medium mb-2">الحالة</h3>
-                      <p>{request.result.status}</p>
+                      <p>تم قبول الطلب</p>
                     </div>
                     {request.result.notes && (
                       <div className="p-4 bg-gray-50 rounded-lg">
@@ -235,7 +235,7 @@ export default function RequestDetails() {
                         <p>{request.result.notes}</p>
                       </div>
                     )}
-                    {request.result.date && (
+                    {/* {request.result.date && (
                       <div className="p-4 bg-gray-50 rounded-lg">
                         <h3 className="font-medium mb-2">تاريخ النتيجة</h3>
                         <p>
@@ -244,7 +244,7 @@ export default function RequestDetails() {
                           )}
                         </p>
                       </div>
-                    )}
+                    )} */}
                   </div>
                 </div>
               )}
