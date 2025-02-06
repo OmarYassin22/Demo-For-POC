@@ -247,7 +247,7 @@ const [accessToken, setAccessToken] = useState<string >("");
 
   const fetchOfficeData = async (access_token:string) => {
     const url = 'https://apiservicesstg.balady.gov.sa/v1/cad-engine/benaa-office/'+requestid+'/'+id;
-    alert(url);
+   
     const headers = {
       'loginIdentityType': '1',
       'loginIdentityId': '1000115574',
