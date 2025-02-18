@@ -163,7 +163,8 @@ const Conditions: React.FC = () => {
       navigate(`/InspectionReport/${krookiNumber}`, {
         state: {
           officeId:officeId,
-          requestId:requestId
+          requestId:requestId,
+          instructure:instructure
         }
       });
     } else {

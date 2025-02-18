@@ -13,11 +13,15 @@ const InspectionReport = () => {
  const location = useLocation();
 
  // Destructure officeId and requestId from the location state
- const { officeId, requestId } = location.state || {};
+ const { officeId, requestId ,instructure} = location.state || {};
  //alert(officeId);
   const navigate = useNavigate();
   const [filteredData, setFilteredData] = useState(null);
-
+if(instructure=="1"){
+  alert("فحص معماري")
+}else{
+  alert("فحص إنشائي")
+}
   const storedData = localStorage.getItem('ComplianceResultData');
   const parsedData = JSON.parse(storedData);
   const dynamicKey = Object.keys(parsedData)[0];
