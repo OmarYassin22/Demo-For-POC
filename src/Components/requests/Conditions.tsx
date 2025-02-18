@@ -50,7 +50,8 @@ interface ServicesProps {
   Hai: string;
   Land: string;
   buildingType: number,
-  instructure: string
+  instructure: string,
+  complianceType: string; // Add this line
 }
 
 interface Condition {
@@ -65,11 +66,12 @@ interface ConditionsResponse {
 
 }
 
-const Conditions: React.FC = () => {
-  const { krookiNumber } = useParams();  // Get krookiNumber from URL parameter
-
+const Conditions: React.FC<ServicesProps> = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { complianceType } = location.state || {}; // Get complianceType from location state
+  const { krookiNumber } = useParams();  // Get krookiNumber from URL parameter
+  console.log(complianceType);
 
 
 
@@ -385,11 +387,15 @@ const Conditions: React.FC = () => {
         </button>
       </div>
       <div className="max-w-6xl mx-auto space-y-6">
+        {/* Display the compliance type at the top */}
+        <div className="mb-4 text-lg font-semibold text-gray-700">
+          نوع التحقق: {complianceType === "1" ? "معمارى" : "انشائى"}
+        </div>
         {/* Upload Section */}
         <div className={`bg-white rounded-xl shadow-lg p-6 transition-all duration-300 ${uploadSuccess ? 'ring-2 ring-green-500 ring-offset-2' : ''
           }`}>
           <div className="text-center mb-6">
-            <h2 className="text-2xl font-bold text-gray-800 mb-2">رفع ملف التصميم</h2>
+            <h2 className="text-2xl font-bold text-gray-800 mb-2">رفع ملف التصميم ال{complianceType === "1" ? "معمارى" : "انشائى"}</h2>
             <p className="text-gray-600">يرجى رفع ملف Revit (.rvt)</p>
           </div>
 

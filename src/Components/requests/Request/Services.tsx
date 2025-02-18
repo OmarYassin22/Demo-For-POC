@@ -150,10 +150,12 @@ const [accessToken, setAccessToken] = useState<string >("");
     ComplianceType: Yup.string().required("نوع التحقق مطلوب"),
   });
 
+  const [selectedOption, setSelectedOption] = useState<string>("1"); // Default to "1"
+
   const formik = useFormik({
     initialValues: {
       description: "",
-      ComplianceType: "",
+      ComplianceType: "1", // Default to "1"
     },
     validationSchema,
 
@@ -177,7 +179,8 @@ requestId:requestId,
               : filteredData?.SubUsedCode === 698
               ? 8
               : 1,
-          instructure: selectedOption || "1"
+          instructure: selectedOption || "1",
+          complianceType: selectedOption || "1" // Ensure this line is included
         },
       });
     },
@@ -187,12 +190,11 @@ requestId:requestId,
   //   setIsModalOpen(true);
   // };
 
-  const [selectedOption, setSelectedOption] = useState<string>("");
-
   const [loading, setLoading] = useState<boolean>(false);
   // Handle change event for radio buttons
   const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedOption(event.target.value); // Set the selected radio button value
+    formik.setFieldValue("ComplianceType", event.target.value); // Update formik value
   };
 
   // useEffect(() => {
