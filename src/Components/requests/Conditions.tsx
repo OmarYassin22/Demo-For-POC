@@ -131,7 +131,7 @@ console.log(Amana +" "+Baladia +" "+Hai+" "+Land);
       <div className="min-h-screen bg-gray-100 p-4 flex items-center justify-center">
         <div className="text-center">
           <div className="spinner-border animate-spin inline-block w-12 h-12 border-4 rounded-full text-blue-500 border-t-transparent"></div>
-          <p className="mt-4 text-gray-600">جاري تحميل البيانات...</p>
+          <p className="mt-4 text-gray-600" style={{direction:"rtl"}}>جاري تحميل البيانات...</p>
         </div>
       </div>
     );
