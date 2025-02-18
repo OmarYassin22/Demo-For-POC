@@ -165,7 +165,8 @@ const Conditions: React.FC<ServicesProps> = () => {
       navigate(`/InspectionReport/${krookiNumber}`, {
         state: {
           officeId:officeId,
-          requestId:requestId
+          requestId:requestId,
+          instructure:instructure
         }
       });
     } else {
