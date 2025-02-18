@@ -6,6 +6,7 @@ import {
   Search,
   ChevronRight,
   ChevronLeft,
+  ArrowLeft,
 } from "lucide-react";
 import data from "../../mocks/OfficeMock.json";
 
@@ -21,16 +22,42 @@ export default function Offices() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
+  // const offices = Object.entries(data)
+  //   .map(([id, office]) => ({
+  //     id,
+  //     name: office.name,
+  //     requestCount: office.requests.length,
+  //     activeRequests: office.requests.filter((r) => !r.waitingApproval).length,
+  //   }))
+  //   .filter((office) =>
+  //     office.name.toLowerCase().includes(searchTerm.toLowerCase())
+  //   );
+
   const offices = Object.entries(data)
-    .map(([id, office]) => ({
+  .map(([id, office]) => {
+    // First, filter the requests by excluding the ones that contain "dlg" in their number
+    const filteredRequests = office.requests.filter(
+      (r) => !r.number.toLowerCase().includes("dlg")
+    );
+
+    // Now calculate the counts based on the filtered requests
+    const requestCount = filteredRequests.length;
+    const activeRequests = filteredRequests.filter(
+      (r) => !r.waitingApproval // Filter out requests that are waiting for approval
+    ).length;
+
+    return {
       id,
       name: office.name,
-      requestCount: office.requests.length,
-      activeRequests: office.requests.filter((r) => !r.waitingApproval).length,
-    }))
-    .filter((office) =>
-      office.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+      requestCount,
+      activeRequests,
+      filteredRequests, // Include the filtered requests (after filtering out "dlg" requests)
+    };
+  })
+  .filter((office) =>
+    office.name.toLowerCase().includes(searchTerm.toLowerCase()) // Filter offices based on searchTerm
+  &&office.filteredRequests.length > 0
+  );
 
   const totalPages = Math.ceil(offices.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -41,6 +68,15 @@ export default function Offices() {
       className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8"
       dir= "rtl"
     >
+       <div className="flex absolute left-10 top-24 justify-end mb-4">
+        <button
+          onClick={() => { navigate(-1) }}
+          className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-blue-600 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-200 border border-gray-200"
+        >
+          <ArrowLeft className="w-5 h-5" />
+          <span className="font-medium">العودة</span>
+        </button>
+      </div>
       <div className="max-w-7xl mx-auto">
         <div className="mb-12 space-y-6">
           <h1 className="text-4xl font-bold text-primary text-center">
@@ -65,7 +101,7 @@ export default function Offices() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {paginatedOffices.map((office) => (
             <Link to={`/offices/${office.id}/requests`} key={office.id}>
-              <div className="bg-white rounded-xl shadow-sm hover:shadow-lg transition-shadow p-6 border border-gray-100">
+              <div className="bg-white rounded-xl shadow-sm hover:shadow-lg transition-shadow p-6 border border-gray-100" style={{minHeight:"9rem"}}>
                 <div className="flex items-center gap-3 mb-4">
                   <Building2 className="w-6 h-6 text-primary" />
                   <h3 className="text-xl font-semibold text-gray-900">

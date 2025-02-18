@@ -29,8 +29,8 @@ interface OfficeData {
  * @returns An array of requests for the office.
  */
 function getAllRequestsByOffice(officeId: string): Request[] {
-  const office = Object.values(officeData).find(o => o.requests.some(r => r.officeId === officeId));
-  return office ? office.requests.filter(r => r.officeId === officeId) : [];
+  const office = Object.values(officeData).find(o => o.requests.some(r => r.officeId === officeId && !r.number.toLowerCase().includes("dlg")));
+  return office ? office.requests.filter(r => r.officeId === officeId ) : [];
 }
 
 /**

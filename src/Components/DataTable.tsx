@@ -1,5 +1,3 @@
-// src/Components/DataTable.tsx
-
 import React from 'react';
 import { useReactTable, flexRender, getCoreRowModel, getPaginationRowModel, getSortedRowModel } from '@tanstack/react-table';
 
@@ -10,27 +8,39 @@ interface TableProps<T> {
   onAction: (id: string) => void;
 }
 
-// Define a column helper instance
-// const columnHelper = createColumnHelper<any>();
-
-const DataTable = <T,>({ data, columns }: TableProps<T>) => {
+const DataTable = <T,>({ data, columns, onAction }: TableProps<T>) => {
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
-    initialState: { pagination: { pageSize: 5 } },
+    initialState: { pagination: { pageSize: data.length} },
   });
 
+  const getRowColor = (status: boolean,result:string) => {
+   
+   
+    if (status ===true) {
+      return ''; 
+    } else if (status === false&&result==="أخري") {
+     
+      return 'bg-yellow-100'; 
+    //  alert(result);
+    } else if (status === false) {
+      return 'bg-red-100'; 
+    }
+    return ''; 
+  };
+
   return (
-    <div>
-      <table className="table">
-        <thead>
+    <div className="overflow-x-auto bg-white shadow-md rounded-lg" dir="rtl">
+      <table className="min-w-full table-auto text-sm text-gray-700">
+        <thead className="bg-gray-200">
           {table.getHeaderGroups().map(headerGroup => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map(header => (
-                <th key={header.id}>
+                <th key={header.id} className="px-4 py-2 text-right font-medium">
                   {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                 </th>
               ))}
@@ -38,29 +48,51 @@ const DataTable = <T,>({ data, columns }: TableProps<T>) => {
           ))}
         </thead>
         <tbody>
-          {table.getRowModel().rows.map(row => (
-            <tr key={row.id}>
-              {row.getVisibleCells().map(cell => (
-                <td key={cell.id}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
-            </tr>
-          ))}
+          {table.getRowModel().rows.map(row => {
+           const rowindex =Number(row.id  );
+           const status= data[rowindex].Status;
+           const Result=data[rowindex].Result
+            // Assuming 'status' is the column you want to check
+          
+            return (
+              <tr key={row.id} className={`border-b hover:bg-gray-50 ${getRowColor(status ,Result)}`}>
+                {row.getVisibleCells().map(cell => (
+                  <td key={cell.id} className="px-4 py-2 text-right">
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
+                ))}
+              </tr>
+            );
+          })}
         </tbody>
       </table>
 
-      <div className="pagination-controls">
-        <button onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
-          السابق
-        </button>
-        <span>
-          صفحة {table.getState().pagination.pageIndex + 1} من {table.getPageCount()}
-        </span>
-        <button onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
-          التالي
-        </button>
-      </div>
+      {/* Pagination Controls */}
+      {/* <div className="flex justify-between items-center py-4 px-6 bg-gray-50">
+        <div className="flex items-center space-x-2">
+          <button
+            onClick={() => table.previousPage()}
+            disabled={!table.getCanPreviousPage()}
+            className="bg-blue-500 text-white px-4 py-2 rounded-md disabled:bg-gray-300"
+          >
+            السابق
+          </button>
+          <span>
+            صفحة {table.getState().pagination.pageIndex + 1} من {table.getPageCount()}
+          </span>
+          <button
+            onClick={() => table.nextPage()}
+            disabled={!table.getCanNextPage()}
+            className="bg-blue-500 text-white px-4 py-2 rounded-md disabled:bg-gray-300"
+          >
+            التالي
+          </button>
+        </div>
+
+        <div>
+   
+        </div>
+      </div> */}
     </div>
   );
 };

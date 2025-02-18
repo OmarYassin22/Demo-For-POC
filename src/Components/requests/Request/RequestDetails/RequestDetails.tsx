@@ -37,7 +37,7 @@ export default function RequestDetails() {
     }
   );
 
-  const [isFormTabVisible, setIsFormTabVisible] = useState(false);
+  const [isFormTabVisible, setIsFormTabVisible] = useState(!request.waitingApproval);
 
   const handleAccept = () => {
     const updatedRequest = {
@@ -50,7 +50,6 @@ export default function RequestDetails() {
     };
     setRequest(updatedRequest);
     setIsFormTabVisible(true);
-    console.log(updatedRequest);
     alert("تم قبول الطلب بنجاح");
   };
 
@@ -60,7 +59,6 @@ export default function RequestDetails() {
       office.requests.splice(index, 1);
     }
     alert("تم رفض الطلب");
-    console.log(request);
     navigate(`/offices/${id}/requests`);
   };
 
@@ -89,7 +87,7 @@ export default function RequestDetails() {
       <div className="flex">
         {/* Sidebar */}
         <div
-          className={`fixed inset-y-0 right-0  mt-16 z-10 transform ${
+          className={`fixed inset-y-0 right-0   z-10 transform ${
             isSidebarOpen ? "translate-x-0" : "translate-x-full"
           } transition-transform duration-300 ease-in-out md:relative md:translate-x-0 w-full md:w-1/4 bg-white rounded-lg shadow-lg p-6 mb-4 md:mb-0`}
         >
@@ -120,13 +118,13 @@ export default function RequestDetails() {
         </div>
 
         <div className="w-full md:w-3/4 md:ml-6 right-0">
-          <div className="w-full ">
+          <div className="flex absolute left-10 top-24  justify-end mb-4">
             <button
               onClick={handleBack}
-              className="flex items-center gap-2 mb-4 relative left-0  text-blue-600 hover:text-blue-800 transition-colors"
+              className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-blue-600 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-200 border border-gray-200"
             >
               <ArrowLeft className="w-5 h-5" />
-              العودة
+              <span className="font-medium">العودة</span>
             </button>
           </div>
           <button
@@ -229,7 +227,7 @@ export default function RequestDetails() {
                   <div className="space-y-4">
                     <div className="p-4 bg-gray-50 rounded-lg">
                       <h3 className="font-medium mb-2">الحالة</h3>
-                      <p>{request.result.status}</p>
+                      <p>تم قبول الطلب</p>
                     </div>
                     {request.result.notes && (
                       <div className="p-4 bg-gray-50 rounded-lg">
@@ -237,7 +235,7 @@ export default function RequestDetails() {
                         <p>{request.result.notes}</p>
                       </div>
                     )}
-                    {request.result.date && (
+                    {/* {request.result.date && (
                       <div className="p-4 bg-gray-50 rounded-lg">
                         <h3 className="font-medium mb-2">تاريخ النتيجة</h3>
                         <p>
@@ -246,7 +244,7 @@ export default function RequestDetails() {
                           )}
                         </p>
                       </div>
-                    )}
+                    )} */}
                   </div>
                 </div>
               )}
@@ -254,7 +252,7 @@ export default function RequestDetails() {
           )}
 
           {activeTab === "form" && (
-            <Services KrookiNumber={request.result?.krokiNo}></Services>
+            <Services KrookiNumber={request.result?.krokiNo }  officeId={id?id:""} requestId={requestid?requestid:""}></Services>
           )}
         </div>
       </div>

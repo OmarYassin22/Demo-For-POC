@@ -1,0 +1,16 @@
+import React from "react";
+import ForgeViewer from "./ForgeViewer";
+
+const ViewCompliance: React.FC = () => {
+  const ACCESS_TOKEN = "eyJhbGciOiJSUzI1NiIsImtpZCI6IlhrUFpfSmhoXzlTYzNZS01oRERBZFBWeFowOF9SUzI1NiIsInBpLmF0bSI6ImFzc2MifQ.eyJzY29wZSI6WyJidWNrZXQ6Y3JlYXRlIiwiYnVja2V0OnJlYWQiLCJjb2RlOmFsbCIsImRhdGE6Y3JlYXRlIiwiZGF0YTpyZWFkIiwiZGF0YTp3cml0ZSJdLCJjbGllbnRfaWQiOiI4QTI0U3Y1QTFkbnhzZXdTMmN5dVZFS256YUJrTzRKNEZkZmRTVXgxN2FKcTFEVUkiLCJpc3MiOiJodHRwczovL2RldmVsb3Blci5hcGkuYXV0b2Rlc2suY29tIiwiYXVkIjoiaHR0cHM6Ly9hdXRvZGVzay5jb20iLCJqdGkiOiJjVFBUOHVhSWJidHlKdWVrdEVVOWlMN2JNdkJwdEE2VmpzWWI4Vkt1TnpiRVppRFplMkY3TWJDRlVid0tYd1BwIiwiZXhwIjoxNzM4MTQ2NzI2fQ.X_fG2DVW2V7rEJBILS-qHJ8RyXViTzsnQFUPLz6sFRyNZ1r2-7qetg_QNskFlTnmXEfH4OSu40_B1svibRqRhfL-gDSqJOlwH3Hs4qf-Co11YwpwkBASsf8VUqBAjJzPJrhcApn4d3yJhdvG3NTinuZ97STu3DDcyX2oRMTzNcrvbG99P5Tm9ir90oPlINNSay5lK6zEib-uamSMUiOLVU6IBvLGEeucUe4oJxGvdh4f_PTx6_o4-CIBHD7-4NBMgowQEWSfC7xQslHqS0_iNZWwJXIedrSS0szv4XWo9n0vbb8TmxEpyQ4-FTqd1SqOBMTEkR_Jt_0f1mBi8Hrk8w";
+  const MODEL_URN = "dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6YTYwOGM1OWYtN2ZjNC00MzFhLWEzNjktOWY5YWNlOGRkZjBlL0FCREFMUkFITUFfQUxfR0hBTURJX3JldjAyLnJ2dA";
+
+  return (
+    <div>
+      <h1>Autodesk Forge Viewer</h1>
+      <ForgeViewer urn={MODEL_URN} accessToken={ACCESS_TOKEN} />
+    </div>
+  );
+};
+
+export default ViewCompliance;

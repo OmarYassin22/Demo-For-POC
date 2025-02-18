@@ -2,7 +2,7 @@ import  { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import data from "../../mocks/OfficeMock.json";
 import Component from "./Request/Request";
-import { Building2, ChevronRight, ChevronLeft, Search } from "lucide-react";
+import { Building2, ChevronRight, ChevronLeft, Search, ArrowLeft } from "lucide-react";
 
 export default function Requests() {
   const navigate = useNavigate();
@@ -21,8 +21,10 @@ export default function Requests() {
   // Filter and transform requests
   const filteredRequests = office?.requests
     .filter(request => 
+      !request.number.toLowerCase().includes("dlg")&&
+      (
       request.number.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      request.ownerName.toLowerCase().includes(searchTerm.toLowerCase())
+      request.ownerName.toLowerCase().includes(searchTerm.toLowerCase()))
     );
 
   // Pagination logic
@@ -32,6 +34,15 @@ export default function Requests() {
 
   return (
     <div className="min-h-screen bg-gray-50 p-6" style={{ direction: "rtl" }}>
+       <div className="flex absolute left-10 top-24 justify-end mb-4">
+        <button
+          onClick={() => { navigate(-1) }}
+          className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-blue-600 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-200 border border-gray-200"
+        >
+          <ArrowLeft className="w-5 h-5" />
+          <span className="font-medium">العودة</span>
+        </button>
+      </div>
       <div className="max-w-7xl mx-auto">
         <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
           <div className="flex items-center gap-3 mb-4">
