@@ -17,11 +17,7 @@ const InspectionReport = () => {
  //alert(officeId);
   const navigate = useNavigate();
   const [filteredData, setFilteredData] = useState(null);
-if(instructure=="1"){
-  alert("فحص معماري")
-}else{
-  alert("فحص إنشائي")
-}
+
   const storedData = localStorage.getItem('ComplianceResultData');
   const parsedData = JSON.parse(storedData);
   const dynamicKey = Object.keys(parsedData)[0];

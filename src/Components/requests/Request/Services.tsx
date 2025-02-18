@@ -206,12 +206,10 @@ requestId:requestId,
       
    
     // Filter JSON data based on criteria
-    console.log('Office ID:', id); // Should log '64ed91f79d5cf006de8e3471'
-    console.log('Request ID:', requestid); // Should log '4617356232'
+   
     const filtered = jsonData.filter((item: FormDataobj) => {
       return item.KrookiNumber === KrookiNumber; // Example filter condition (MainUsedName === "سكني")
     });
-    console.log(filtered);
     if (filtered.length === 0) {
       setLoading(true);
       // Assuming 'mockData' is an array of mock items
@@ -246,7 +244,8 @@ requestId:requestId,
       // Make the POST request using axios
       const response = await axios.post(url, body.toString(), { headers });
 
-      //console.log("token:"+response.data.access_token);
+      console.log("token:");
+      console.log( response.data.access_token);
      await fetchOfficeData(response.data.access_token);
     
     } catch (err) {
@@ -301,7 +300,6 @@ requestId:requestId,
     axios
       .post(url, body, { headers })
       .then((response) => {
-console.log(response.data.data);
         setFilteredData(response.data.data.result[0]); // Store response data in state
         setLoading(false);
       })
