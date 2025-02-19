@@ -92,7 +92,7 @@ const Conditions: React.FC<ServicesProps> = () => {
 
   // Submit the form and upload the files
   const handleSubmit = async (): Promise<void> => {
-//alert("o"+officeId+"r"+requestId);
+    //alert("o"+officeId+"r"+requestId);
     // navigate(`/InspectionReport/${krookiNumber}`, {
     //   state: {
     //     officeId:officeId,
@@ -163,9 +163,9 @@ const Conditions: React.FC<ServicesProps> = () => {
     if (shouldNavigate) {
       navigate(`/InspectionReport/${krookiNumber}`, {
         state: {
-          officeId:officeId,
-          requestId:requestId,
-          instructure:instructure
+          officeId: officeId,
+          requestId: requestId,
+          instructure: instructure
         }
       });
     } else {
@@ -194,34 +194,15 @@ const Conditions: React.FC<ServicesProps> = () => {
 
         const jsonData = await response.json();
         setComplianceResult(jsonData);
+        debugger;
         localStorage.setItem("ComplianceResultData", JSON.stringify(jsonData));
         console.log(complianceResult);
 
-        // Retrieve the dictionary from local storage
-        const visualCategoryDict = JSON.parse(localStorage.getItem("visualCategory") || "{}");
+        JSON.parse(localStorage.getItem("visualCategory") || "{}");
 
-        // Retrieve the compliance result data from local storage
-        const complianceResultData = JSON.parse(localStorage.getItem("ComplianceResultData") || "{}");
+        JSON.parse(localStorage.getItem("ComplianceResultData") || "{}");
 
-        // Check if conditions for a specific visual category are passed or not
-        const checkConditions = (category: string) => {
-          const conditionIds = visualCategoryDict[category] || [];
-          const passedConditions = complianceResultData.result.filter((condition: any) => conditionIds.includes(condition.id) && condition.passed);
-          return passedConditions.length === conditionIds.length;
-        };
 
-        // Example usage: Check if conditions for each visual category are passed
-        const visualCategories = Object.keys(visualCategoryDict);
-        const visualCategoryStatus: { [key: string]: boolean } = {};
-
-        visualCategories.forEach((category) => {
-          visualCategoryStatus[category] = checkConditions(category);
-        });
-
-        // Store the visual category status in local storage
-        localStorage.setItem("visualCategoryStatus", JSON.stringify(visualCategoryStatus));
-
-        console.log("Visual Category Status:", visualCategoryStatus);
 
       } catch (error) {
         console.error('Error making API call:', error);
@@ -250,10 +231,10 @@ const Conditions: React.FC<ServicesProps> = () => {
   useEffect(() => {
     console.log("Location state:", location.state);
 
-   
+
   }, [location]);
 
-  const { Amana = "", Baladia = "", Hai = "", Land = "", buildingType = "", instructure = "",officeId="",requestId="" } = location.state || {};
+  const { Amana = "", Baladia = "", Hai = "", Land = "", buildingType = "", instructure = "", officeId = "", requestId = "" } = location.state || {};
 
   const [conditionsData, setConditionsData] = useState<ConditionsResponse | null>(null);
   const [token, setToken] = useState<string | null>(null);
@@ -323,7 +304,7 @@ const Conditions: React.FC<ServicesProps> = () => {
       setConditionsData(conditions);
 
       setError(null);
-
+      debugger;;
       // Create a dictionary for visualCategory using id
       const visualCategory: { [key: string]: string[] } = {};
       conditions?.conditions.forEach((condition) => {
@@ -403,7 +384,7 @@ const Conditions: React.FC<ServicesProps> = () => {
       <div className="min-h-screen bg-gray-100 p-4 flex items-center justify-center">
         <div className="text-center">
           <div className="spinner-border animate-spin inline-block w-12 h-12 border-4 rounded-full text-blue-500 border-t-transparent"></div>
-          <p className="mt-4 text-gray-600" style={{direction:"rtl"}}>جاري تحميل البيانات...</p>
+          <p className="mt-4 text-gray-600" style={{ direction: "rtl" }}>جاري تحميل البيانات...</p>
         </div>
       </div>
     );
@@ -458,15 +439,15 @@ const Conditions: React.FC<ServicesProps> = () => {
                 </>
               ) : (
                 <div>
-                  
+
                   <p className="text-gray-600 text-lg">اضغط هنا لرفع الملف</p>
                   <p className="text-gray-500 text-sm mt-1">أو اسحب وأفلت الملف هنا</p>
 
-                  {file  && (
-        <div className="mt-4 text-gray-600">
-          <p className="text-lg">الملف المختار: <strong>{file.name}</strong></p>
-        </div>
-      )}
+                  {file && (
+                    <div className="mt-4 text-gray-600">
+                      <p className="text-lg">الملف المختار: <strong>{file.name}</strong></p>
+                    </div>
+                  )}
                 </div>
               )}
             </label>
@@ -502,7 +483,7 @@ const Conditions: React.FC<ServicesProps> = () => {
                     {/* <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
                     </svg> */}
-                   بدء الفحص
+                    بدء الفحص
                   </>
                 )}
               </button>
@@ -517,8 +498,8 @@ const Conditions: React.FC<ServicesProps> = () => {
             )} */}
 
 
-             {/* File Name Display */}
-   
+            {/* File Name Display */}
+
           </div>
         </div>
 
@@ -659,7 +640,7 @@ const Conditions: React.FC<ServicesProps> = () => {
                         ? 'bg-green-600 text-white hover:bg-green-700 shadow-lg hover:shadow-green-100'
                         : 'bg-gray-200 text-gray-400 cursor-not-allowed'}`}
                   >
-                   عرض التقرير
+                    عرض التقرير
                   </button>
                 </div>
               </>
