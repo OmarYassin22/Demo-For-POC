@@ -11,27 +11,29 @@ import { ArrowLeft } from "lucide-react";
 const InspectionReport = () => {
   // Access the location state using useLocation
   const location = useLocation();
+  const navigate = useNavigate();
+  const { officeId, requestId, instructure } = location.state || {};
+  const [filteredData, setFilteredData] = useState(null);
 
   useEffect(() => {
     debugger;
     // Retrieve the dictionary from local storage
     const ComplianceResultData = JSON.parse(localStorage.getItem("ComplianceResultData") || "{}");
     const visualCategoryDict = JSON.parse(localStorage.getItem("visualCategory") || "{}");
-    // console.log(firstValue);
+    const key = Object.keys(ComplianceResultData)[0];
     console.log(visualCategoryDict);
-
-    // Retrieve the compliance result data from local storage
+    console.log(ComplianceResultData[key].Results);
 
     // Check if conditions for a specific visual category are passed or not
     const checkConditions = (category: string) => {
+      debugger;
       const conditionIds = visualCategoryDict[category] || [];
-      const passedConditions = ComplianceResultData.result.filter((condition: any) => conditionIds.includes(condition.id) && condition.passed);
+      const passedConditions = ComplianceResultData[key].Results.filter((condition: any) => conditionIds.includes(condition.code) && condition.Status);
       return passedConditions.length === conditionIds.length;
     };
 
     // Example usage: Check if conditions for each visual category are passed
     const visualCategories = Object.keys(visualCategoryDict);
-    console.log(visualCategories);
     const visualCategoryStatus: { [key: string]: boolean } = {};
 
     visualCategories.forEach((category) => {
@@ -42,14 +44,7 @@ const InspectionReport = () => {
     localStorage.setItem("visualCategoryStatus", JSON.stringify(visualCategoryStatus));
 
     console.log("Visual Category Status:", visualCategoryStatus);
-
   }, []);
-
-  // Destructure officeId and requestId from the location state
-  const { officeId, requestId, instructure } = location.state || {};
-  //alert(officeId);
-  const navigate = useNavigate();
-  const [filteredData, setFilteredData] = useState(null);
 
   const storedData = localStorage.getItem('ComplianceResultData');
   const parsedData = JSON.parse(storedData);
@@ -260,8 +255,8 @@ const InspectionReport = () => {
                 { label: "أخرى", value: data.filter(item => item.Status === false && item.Result == "أخري").length }
               ].map((stat, index) => (
                 <div key={index} className={`rounded-lg p-4 ${stat.label === 'الاشتراطات المطابقة' ? 'bg-green-50' :
-                    stat.label === 'الاشتراطات غير المطابقة' ? 'bg-red-50' :
-                      stat.label === 'أخرى' ? 'bg-yellow-50' : 'bg-gray-100'
+                  stat.label === 'الاشتراطات غير المطابقة' ? 'bg-red-50' :
+                    stat.label === 'أخرى' ? 'bg-yellow-50' : 'bg-gray-100'
                   }`}>
                   <p className="text-sm text-gray-500">{stat.label}</p>
                   <p className="text-2xl font-bold text-gray-900 mt-1">{stat.value}</p>
