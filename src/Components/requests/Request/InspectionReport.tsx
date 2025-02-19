@@ -21,7 +21,6 @@ const InspectionReport = () => {
     console.log(visualCategoryDict);
 
     // Retrieve the compliance result data from local storage
-    console.log(parsedData.);
 
     // Check if conditions for a specific visual category are passed or not
     const checkConditions = (category: string) => {
