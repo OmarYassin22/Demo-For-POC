@@ -71,7 +71,6 @@ const Conditions: React.FC<ServicesProps> = () => {
   const navigate = useNavigate();
   const { complianceType } = location.state || {}; // Get complianceType from location state
   const { krookiNumber } = useParams();  // Get krookiNumber from URL parameter
-  console.log(complianceType);
 
 
 
@@ -198,12 +197,36 @@ const Conditions: React.FC<ServicesProps> = () => {
         localStorage.setItem("ComplianceResultData", JSON.stringify(jsonData));
         console.log(complianceResult);
 
+        // Retrieve the dictionary from local storage
+        const visualCategoryDict = JSON.parse(localStorage.getItem("visualCategory") || "{}");
+
+        // Retrieve the compliance result data from local storage
+        const complianceResultData = JSON.parse(localStorage.getItem("ComplianceResultData") || "{}");
+
+        // Check if conditions for a specific visual category are passed or not
+        const checkConditions = (category: string) => {
+          const conditionIds = visualCategoryDict[category] || [];
+          const passedConditions = complianceResultData.result.filter((condition: any) => conditionIds.includes(condition.id) && condition.passed);
+          return passedConditions.length === conditionIds.length;
+        };
+
+        // Example usage: Check if conditions for each visual category are passed
+        const visualCategories = Object.keys(visualCategoryDict);
+        const visualCategoryStatus: { [key: string]: boolean } = {};
+
+        visualCategories.forEach((category) => {
+          visualCategoryStatus[category] = checkConditions(category);
+        });
+
+        // Store the visual category status in local storage
+        localStorage.setItem("visualCategoryStatus", JSON.stringify(visualCategoryStatus));
+
+        console.log("Visual Category Status:", visualCategoryStatus);
 
       } catch (error) {
         console.error('Error making API call:', error);
       }
     }
-
   };
 
   const handleStartService = async () => {
@@ -296,15 +319,28 @@ const Conditions: React.FC<ServicesProps> = () => {
         },
         // withCredentials: true,
       });
-      setConditionsData(response.data.data.result);
+      const conditions = response.data.data.result;
+      setConditionsData(conditions);
 
       setError(null);
 
+      // Create a dictionary for visualCategory using id
+      const visualCategory: { [key: string]: string[] } = {};
+      conditions?.conditions.forEach((condition) => {
+        if (condition.visualCategory) {
+          if (!visualCategory[condition.visualCategory]) {
+            visualCategory[condition.visualCategory] = [];
+          }
+          visualCategory[condition.visualCategory].push(condition.id);
+        }
+      });
 
+      // Store the dictionary in local storage
+      localStorage.setItem("visualCategory", JSON.stringify(visualCategory));
 
-      let filteredConditions = response.data.data.result;
+      let filteredConditions = conditions;
       filteredConditions?.conditions.filter(
-        (condition) => condition.active ==true
+        (condition) => condition.active == true
       );
       if (filteredConditions?.conditions) {
         if (instructure === "1") {
@@ -318,10 +354,7 @@ const Conditions: React.FC<ServicesProps> = () => {
             (condition) => parseInt(condition.code, 10) >= 500
           );
         }
-        console.log("filteredConditions");
-        console.log(filteredConditions);
         setConditionsData(filteredConditions);
-        console.log(conditionsData);
       } else {
         // This block will run if either conditionsData or conditionsData?.conditions is null or undefined
         // alert("Conditions Data or conditions is null or undefined");

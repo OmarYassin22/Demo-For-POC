@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate,useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import DataTable from "../../DataTable";
 
 import { ArrowLeft } from "lucide-react";
@@ -9,12 +9,46 @@ import { ArrowLeft } from "lucide-react";
 //  import jsonData from "../../../mocks/complianceResult.json"; // Import the JSON data
 
 const InspectionReport = () => {
- // Access the location state using useLocation
- const location = useLocation();
+  // Access the location state using useLocation
+  const location = useLocation();
 
- // Destructure officeId and requestId from the location state
- const { officeId, requestId ,instructure} = location.state || {};
- //alert(officeId);
+  useEffect(() => {
+    debugger;
+    // Retrieve the dictionary from local storage
+    const ComplianceResultData = JSON.parse(localStorage.getItem("ComplianceResultData") || "{}");
+    const visualCategoryDict = JSON.parse(localStorage.getItem("visualCategory") || "{}");
+    // console.log(firstValue);
+    console.log(visualCategoryDict);
+
+    // Retrieve the compliance result data from local storage
+    console.log(parsedData.);
+
+    // Check if conditions for a specific visual category are passed or not
+    const checkConditions = (category: string) => {
+      const conditionIds = visualCategoryDict[category] || [];
+      const passedConditions = ComplianceResultData.result.filter((condition: any) => conditionIds.includes(condition.id) && condition.passed);
+      return passedConditions.length === conditionIds.length;
+    };
+
+    // Example usage: Check if conditions for each visual category are passed
+    const visualCategories = Object.keys(visualCategoryDict);
+    console.log(visualCategories);
+    const visualCategoryStatus: { [key: string]: boolean } = {};
+
+    visualCategories.forEach((category) => {
+      visualCategoryStatus[category] = checkConditions(category);
+    });
+
+    // Store the visual category status in local storage
+    localStorage.setItem("visualCategoryStatus", JSON.stringify(visualCategoryStatus));
+
+    console.log("Visual Category Status:", visualCategoryStatus);
+
+  }, []);
+
+  // Destructure officeId and requestId from the location state
+  const { officeId, requestId, instructure } = location.state || {};
+  //alert(officeId);
   const navigate = useNavigate();
   const [filteredData, setFilteredData] = useState(null);
 
@@ -29,8 +63,8 @@ const InspectionReport = () => {
 
 
   const handleBackAction = () => {
- 
-    
+
+
     navigate(`/offices/${officeId}/request/${requestId}`);
   };
 
@@ -120,7 +154,7 @@ const InspectionReport = () => {
 
     <div className="min-h-screen bg-gray-100 p-8" style={{ direction: "rtl" }}>
 
-<div className="flex absolute left-10 top-24 justify-end mb-4">
+      <div className="flex absolute left-10 top-24 justify-end mb-4">
         <button
           onClick={() => { handleBackAction() }}
           className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-blue-600 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-200 border border-gray-200"
@@ -226,11 +260,10 @@ const InspectionReport = () => {
                 { label: "الاشتراطات غير المطابقة", value: data.filter(item => item.Status === false && item.Result != "أخري").length },
                 { label: "أخرى", value: data.filter(item => item.Status === false && item.Result == "أخري").length }
               ].map((stat, index) => (
-                <div key={index} className={`rounded-lg p-4 ${
-                  stat.label === 'الاشتراطات المطابقة' ? 'bg-green-50' :
-                  stat.label === 'الاشتراطات غير المطابقة' ? 'bg-red-50' :
-                  stat.label === 'أخرى' ? 'bg-yellow-50' : 'bg-gray-100'
-                }`}>
+                <div key={index} className={`rounded-lg p-4 ${stat.label === 'الاشتراطات المطابقة' ? 'bg-green-50' :
+                    stat.label === 'الاشتراطات غير المطابقة' ? 'bg-red-50' :
+                      stat.label === 'أخرى' ? 'bg-yellow-50' : 'bg-gray-100'
+                  }`}>
                   <p className="text-sm text-gray-500">{stat.label}</p>
                   <p className="text-2xl font-bold text-gray-900 mt-1">{stat.value}</p>
                 </div>
@@ -246,11 +279,11 @@ const InspectionReport = () => {
               <div className="flex items-center gap-4">
                 <div className="flex items-center gap-2">
                   {/* <span className="w-3 h-3 rounded-full bg-green-400"></span> */}
-                  <span 
+                  <span
                     className={`text-sm px-3 py-1 rounded-full transition-colors cursor-pointer flex items-center gap-2
-                    ${filteredData && filteredData === data.filter(item => item.Status === true) 
-                      ? 'bg-green-100 text-green-700' 
-                      : 'hover:bg-green-50 text-gray-600 hover:text-green-600'}`}
+                    ${filteredData && filteredData === data.filter(item => item.Status === true)
+                        ? 'bg-green-100 text-green-700'
+                        : 'hover:bg-green-50 text-gray-600 hover:text-green-600'}`}
                     onClick={() => handleFilter('matched')}
                   >
                     <span>مطابق</span>
@@ -261,11 +294,11 @@ const InspectionReport = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   {/* <span className="w-3 h-3 rounded-full bg-red-400"></span> */}
-                  <span 
+                  <span
                     className={`text-sm px-3 py-1 rounded-full transition-colors cursor-pointer flex items-center gap-2
                     ${filteredData && filteredData === data.filter(item => item.Status === false && item.Result !== "أخري")
-                      ? 'bg-red-100 text-red-700' 
-                      : 'hover:bg-red-50 text-gray-600 hover:text-red-600'}`}
+                        ? 'bg-red-100 text-red-700'
+                        : 'hover:bg-red-50 text-gray-600 hover:text-red-600'}`}
                     onClick={() => handleFilter('unmatched')}
                   >
                     <span>غير مطابق</span>
@@ -276,11 +309,11 @@ const InspectionReport = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   {/* <span className="w-3 h-3 rounded-full bg-yellow-400"></span> */}
-                  <span 
+                  <span
                     className={`text-sm px-3 py-1 rounded-full transition-colors cursor-pointer flex items-center gap-2
                     ${filteredData && filteredData === data.filter(item => item.Status === false && item.Result === "أخري")
-                      ? 'bg-yellow-100 text-yellow-700' 
-                      : 'hover:bg-yellow-50 text-gray-600 hover:text-yellow-600'}`}
+                        ? 'bg-yellow-100 text-yellow-700'
+                        : 'hover:bg-yellow-50 text-gray-600 hover:text-yellow-600'}`}
                     onClick={() => handleFilter('other')}
                   >
                     <span>أخرى</span>
@@ -289,18 +322,18 @@ const InspectionReport = () => {
                     </span>
                   </span>
                 </div>
-               
-                  <button 
-                    onClick={() => setFilteredData(null)}
-                    className="text-sm px-3 py-1 rounded-full text-gray-500 hover:text-gray-700 
+
+                <button
+                  onClick={() => setFilteredData(null)}
+                  className="text-sm px-3 py-1 rounded-full text-gray-500 hover:text-gray-700 
                              hover:bg-gray-50 transition-colors flex items-center gap-2"
-                  >
-                    <span>إظهار الكل</span>
-                    <span className="inline-flex items-center justify-center px-2 py-0.5 text-xs font-medium rounded-full bg-gray-200 text-gray-800">
-                      {data.length}
-                    </span>
-                  </button>
-                
+                >
+                  <span>إظهار الكل</span>
+                  <span className="inline-flex items-center justify-center px-2 py-0.5 text-xs font-medium rounded-full bg-gray-200 text-gray-800">
+                    {data.length}
+                  </span>
+                </button>
+
               </div>
             </div>
             <div className="absolute bottom-0 left-0 right-0 h-1 bg-green-600"></div>
