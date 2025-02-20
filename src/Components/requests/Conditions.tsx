@@ -92,7 +92,7 @@ const Conditions: React.FC = () => {
 
   // Submit the form and upload the files
   const handleSubmit = async (): Promise<void> => {
-//alert("o"+officeId+"r"+requestId);
+    //alert("o"+officeId+"r"+requestId);
     // navigate(`/InspectionReport/${krookiNumber}`, {
     //   state: {
     //     officeId:officeId,
@@ -163,8 +163,8 @@ const Conditions: React.FC = () => {
     if (shouldNavigate) {
       navigate(`/InspectionReport/${krookiNumber}`, {
         state: {
-          officeId:officeId,
-          requestId:requestId
+          officeId: officeId,
+          requestId: requestId
         }
       });
     } else {
@@ -225,10 +225,10 @@ const Conditions: React.FC = () => {
   useEffect(() => {
     console.log("Location state:", location.state);
 
-   
+
   }, [location]);
 
-  const { Amana = "", Baladia = "", Hai = "", Land = "", buildingType = "", instructure = "",officeId="",requestId="" } = location.state || {};
+  const { Amana = "", Baladia = "", Hai = "", Land = "", buildingType = "", instructure = "", officeId = "", requestId = "" } = location.state || {};
 
   const [conditionsData, setConditionsData] = useState<ConditionsResponse | null>(null);
   const [token, setToken] = useState<string | null>(null);
@@ -302,7 +302,7 @@ const Conditions: React.FC = () => {
 
       let filteredConditions = response.data.data.result;
       filteredConditions?.conditions.filter(
-        (condition) => condition.active ==true
+        (condition) => condition.active == true
       );
       if (filteredConditions?.conditions) {
         if (instructure === "1") {
@@ -368,7 +368,7 @@ const Conditions: React.FC = () => {
       <div className="min-h-screen bg-gray-100 p-4 flex items-center justify-center">
         <div className="text-center">
           <div className="spinner-border animate-spin inline-block w-12 h-12 border-4 rounded-full text-blue-500 border-t-transparent"></div>
-          <p className="mt-4 text-gray-600" style={{direction:"rtl"}}>جاري تحميل البيانات...</p>
+          <p className="mt-4 text-gray-600" style={{ direction: "rtl" }}>جاري تحميل البيانات...</p>
         </div>
       </div>
     );
@@ -498,7 +498,7 @@ const Conditions: React.FC = () => {
                   )}
                 </div>
 
-              
+
               </>
             ) : (
               <div className="text-center py-12 text-gray-500">
@@ -565,10 +565,10 @@ const Conditions: React.FC = () => {
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                   </svg>
-                  <span>جاري الفحص...</span>
+                  <span>جاري الرفع...</span>
                 </>
               ) : (
-                <span>بدء الفحص</span>
+                <span>رفع الملف </span>
               )}
             </button>
 
@@ -580,8 +580,7 @@ const Conditions: React.FC = () => {
                   ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-md hover:shadow-lg'
                   : 'bg-gray-200 text-gray-400 cursor-not-allowed'}`}
             >
-              عرض التقرير
-            </button>
+              بدء الفحص            </button>
           </div>
         </div>
       </div>
