@@ -13,7 +13,7 @@ import {
   X as CloseIcon,
 } from "lucide-react";
 import data from "../../../../mocks/OfficeMock.json";
-import Conditions from "../../Conditions";
+;
 export default function RequestDetails() {
   const { id, requestid } = useParams();
   const navigate = useNavigate();
@@ -27,15 +27,15 @@ export default function RequestDetails() {
       navigate("/login");
     }
   }, [navigate]);
-
-  const formattedDate = new Date(request.creationTime).toLocaleDateString(
+debugger;
+  const formattedDate =!request&& request.creationTime?new Date(request.creationTime).toLocaleDateString(
     "ar-SA",
     {
       year: "numeric",
       month: "long",
       day: "numeric",
     }
-  );
+  ):" ";
 
   const [isFormTabVisible, setIsFormTabVisible] = useState(!request.waitingApproval);
 
