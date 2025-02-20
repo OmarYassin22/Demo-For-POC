@@ -24,12 +24,20 @@ const InspectionReport = () => {
     console.log(visualCategoryDict);
     console.log(ComplianceResultData[key].Results);
 
-    // Check if conditions for a specific visual category are passed or not
     const checkConditions = (category: string) => {
-      debugger;
+      let passedCount = 0;
+
       const conditionIds = visualCategoryDict[category] || [];
-      const passedConditions = ComplianceResultData[key].Results.filter((condition: any) => conditionIds.includes(condition.code) && condition.Status);
-      return passedConditions.length === conditionIds.length;
+  
+
+      ComplianceResultData[key].Results.forEach(condition => {
+        if (conditionIds.includes(condition.Code) && condition.Status) {
+          passedCount++;
+        }
+      });
+
+      return passedCount === conditionIds.length;
+
     };
 
     // Example usage: Check if conditions for each visual category are passed

@@ -195,33 +195,32 @@ const Conditions: React.FC<ServicesProps> = () => {
         const jsonData = await response.json();
         setComplianceResult(jsonData);
         localStorage.setItem("ComplianceResultData", JSON.stringify(jsonData));
-        console.log(complianceResult);
 
         // Retrieve the dictionary from local storage
-        const visualCategoryDict = JSON.parse(localStorage.getItem("visualCategory") || "{}");
+        // const visualCategoryDict = JSON.parse(localStorage.getItem("visualCategory") || "{}");
 
         // Retrieve the compliance result data from local storage
-        const complianceResultData = JSON.parse(localStorage.getItem("ComplianceResultData") || "{}");
+        // const complianceResultData = JSON.parse(localStorage.getItem("ComplianceResultData") || "{}");
 
-        // Check if conditions for a specific visual category are passed or not
-        const checkConditions = (category: string) => {
-          const conditionIds = visualCategoryDict[category] || [];
-          const passedConditions = complianceResultData.result.filter((condition: any) => conditionIds.includes(condition.id) && condition.passed);
-          return passedConditions.length === conditionIds.length;
-        };
+        // // Check if conditions for a specific visual category are passed or not
+        // const checkConditions = (category: string) => {
+        //   const conditionIds = visualCategoryDict[category] || [];
+        //   const passedConditions = complianceResultData.result.filter((condition: any) => conditionIds.includes(condition.id) && condition.passed);
+        //   return passedConditions.length === conditionIds.length;
+        // };
 
-        // Example usage: Check if conditions for each visual category are passed
-        const visualCategories = Object.keys(visualCategoryDict);
-        const visualCategoryStatus: { [key: string]: boolean } = {};
+        // // Example usage: Check if conditions for each visual category are passed
+        // const visualCategories = Object.keys(visualCategoryDict);
+        // const visualCategoryStatus: { [key: string]: boolean } = {};
 
-        visualCategories.forEach((category) => {
-          visualCategoryStatus[category] = checkConditions(category);
-        });
+        // visualCategories.forEach((category) => {
+        //   visualCategoryStatus[category] = checkConditions(category);
+        // });
 
-        // Store the visual category status in local storage
-        localStorage.setItem("visualCategoryStatus", JSON.stringify(visualCategoryStatus));
+        // // Store the visual category status in local storage
+        // localStorage.setItem("visualCategoryStatus", JSON.stringify(visualCategoryStatus));
 
-        console.log("Visual Category Status:", visualCategoryStatus);
+        // console.log("Visual Category Status:", visualCategoryStatus);
 
       } catch (error) {
         console.error('Error making API call:', error);
@@ -247,11 +246,11 @@ const Conditions: React.FC<ServicesProps> = () => {
 
 
 
-  useEffect(() => {
-    console.log("Location state:", location.state);
+  // useEffect(() => {
+  //   console.log("Location state:", location.state);
 
    
-  }, [location]);
+  // }, [location]);
 
   const { Amana = "", Baladia = "", Hai = "", Land = "", buildingType = "", instructure = "",officeId="",requestId="" } = location.state || {};
 
@@ -331,12 +330,13 @@ const Conditions: React.FC<ServicesProps> = () => {
           if (!visualCategory[condition.visualCategory]) {
             visualCategory[condition.visualCategory] = [];
           }
-          visualCategory[condition.visualCategory].push(condition.id);
+          visualCategory[condition.visualCategory].push(condition.code);
         }
       });
 
       // Store the dictionary in local storage
       localStorage.setItem("visualCategory", JSON.stringify(visualCategory));
+      console.log("Visual Category:", visualCategory);  
 
       let filteredConditions = conditions;
       filteredConditions?.conditions.filter(
