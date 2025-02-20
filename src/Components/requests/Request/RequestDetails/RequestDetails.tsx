@@ -13,7 +13,9 @@ import {
   X as CloseIcon,
 } from "lucide-react";
 import data from "../../../../mocks/OfficeMock.json";
-;
+import Conditions from "../../Conditions";
+import BackButton from "../../../common/BackButton";
+
 export default function RequestDetails() {
   const { id, requestid } = useParams();
   const navigate = useNavigate();
@@ -81,13 +83,17 @@ debugger;
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
+  const handleBackAction = () => {
+    navigate(-1);
+  };
+
 
   return (
     <div className="min-h-screen bg-gray-50 p-6" style={{ direction: "rtl" }}>
       <div className="flex">
         {/* Sidebar */}
         <div
-          className={`fixed inset-y-0 right-0   z-10 transform ${
+          className={`fixed inset-y-0 right-0 top-20   z-10 transform ${
             isSidebarOpen ? "translate-x-0" : "translate-x-full"
           } transition-transform duration-300 ease-in-out md:relative md:translate-x-0 w-full md:w-1/4 bg-white rounded-lg shadow-lg p-6 mb-4 md:mb-0`}
         >
@@ -118,15 +124,8 @@ debugger;
         </div>
 
         <div className="w-full md:w-3/4 md:ml-6 right-0">
-          <div className="flex absolute left-10 top-24  justify-end mb-4">
-            <button
-              onClick={handleBack}
-              className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-blue-600 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-200 border border-gray-200"
-            >
-              <ArrowLeft className="w-5 h-5" />
-              <span className="font-medium">العودة</span>
-            </button>
-          </div>
+          <BackButton onClick={handleBackAction} />
+
           <button
             onClick={toggleSidebar}
             className="md:hidden flex items-center gap-2 mb-4 text-blue-600 hover:text-blue-800 transition-colors"

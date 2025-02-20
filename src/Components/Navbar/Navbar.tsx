@@ -1,48 +1,47 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { LogOut, UserCircle } from "lucide-react";
+import logo from "../../Assets/image/favicon.ico"; // Import the logo
 
-// Add new logo component
-const BuildingVerificationLogo = () => (
+const BuildingVerificationLogo = ({ isScrolled }: { isScrolled: boolean }) => (
   <div className="flex items-center gap-3">
-    <div className="relative">
-      <svg 
-        className="h-10 w-10 text-white" 
-        viewBox="0 0 24 24" 
-        fill="none" 
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        {/* Building base */}
-        <path 
-          d="M3 21h18v-2H3v2zm3-16h3v3H6V5zm0 5h3v3H6v-3zm0 5h3v3H6v-3zm5-10h3v3h-3V5zm0 5h3v3h-3v-3zm0 5h3v3h-3v-3z" 
-          fill="currentColor"
-        />
-        {/* Checkmark overlay */}
-        <path 
-          d="M20 6L9 17l-5-5 1.41-1.42L9 14.17l9.59-9.58L20 6z" 
-          fill="#4ADE80"
-          className="animate-pulse"
-        />
-      </svg>
-      {/* Decorative elements */}
-      <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full animate-ping"></div>
-      <div className="absolute -bottom-1 -left-1 w-2 h-2 bg-green-300 rounded-full"></div>
-    </div>
+    <img 
+      src={logo} 
+      alt="Building Verification Logo" 
+      className={`h-10 w-10 transition-all duration-300
+        ${isScrolled ? 'filter brightness-0' : 'filter brightness-0 invert'}`}
+    />
     <div className="flex flex-col">
-      <span className="text-white text-xl font-bold leading-tight">محرك التحقق</span>
-      <span className="text-green-300 text-sm">من تصاميم البناء</span>
+      <span className={`text-xl font-bold leading-tight transition-colors
+        ${isScrolled ? 'text-gray-800' : 'text-white'}`}>
+        محرك التحقق
+      </span>
+      <span className={`text-sm transition-colors
+        ${isScrolled ? 'text-green-600' : 'text-green-300'}`}>
+        من تصاميم البناء
+      </span>
     </div>
   </div>
 );
 
 export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
     const loginStatus = localStorage.getItem("isLoggedIn");
     setIsLoggedIn(loginStatus === "true");
-  },);
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");
@@ -51,9 +50,15 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="relative z-10 flex items-center justify-between px-6 py-4 bg-primary" dir="rtl">
+    <nav 
+      className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 transition-all duration-300
+        ${isScrolled 
+          ? 'bg-white text-green-800 shadow-md' 
+          : 'bg-primary text-white'}`} 
+      dir="rtl"
+    >
       <Link to={isLoggedIn ? "/offices" : "/"} className="flex items-center">
-        <BuildingVerificationLogo />
+        <BuildingVerificationLogo isScrolled={isScrolled} />
       </Link>
       
       {/* Rest of navbar */}
@@ -84,7 +89,8 @@ export default function Navbar() {
         {isLoggedIn && (
           <Link
             to="/offices"
-            className="text-white text-xl mx-4 hover:text-gray-200"
+            className={`text-xl mx-4 transition-colors
+              ${isScrolled ? 'text-gray-800 hover:text-gray-600' : 'text-white hover:text-gray-200'}`}
           >
             المكاتب
           </Link>
@@ -93,7 +99,8 @@ export default function Navbar() {
         {isLoggedIn ? (
           <button
             onClick={handleLogout}
-            className="flex items-center gap-2 text-white hover:text-gray-200"
+            className={`flex items-center gap-2 transition-colors
+              ${isScrolled ? 'text-gray-800 hover:text-gray-600' : 'text-white hover:text-gray-200'}`}
           >
             <LogOut className="h-6 w-6" />
             <span className="text-sm">تسجيل خروج</span>
@@ -101,7 +108,8 @@ export default function Navbar() {
         ) : (
           <Link
             to="/"
-            className="flex items-center gap-2 text-white hover:text-gray-200"
+            className={`flex items-center gap-2 transition-colors
+              ${isScrolled ? 'text-gray-800 hover:text-gray-600' : 'text-white hover:text-gray-200'}`}
           >
             <UserCircle className="h-6 w-6" />
             <span className="text-sm">تسجيل دخول</span>

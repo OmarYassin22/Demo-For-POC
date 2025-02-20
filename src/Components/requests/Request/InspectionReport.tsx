@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import DataTable from "../../DataTable";
+import BackButton from '../../common/BackButton';
 
 import { ArrowLeft } from "lucide-react";
 // import model from "../../../Assets/index.html";
@@ -17,23 +18,27 @@ const InspectionReport = () => {
 
   useEffect(() => {
     debugger;
- 
     // Retrieve the dictionary from local storage
     const ComplianceResultData = JSON.parse(localStorage.getItem("ComplianceResultData") || "{}");
-
     const visualCategoryDict = JSON.parse(localStorage.getItem("visualCategory") || "{}");
     const key = Object.keys(ComplianceResultData)[0];
     console.log(visualCategoryDict);
     console.log(ComplianceResultData[key].Results);
 
-    console.log("not");
-    console.log(ComplianceResultData[key].Results.filter(item => item.Status !== true && item.Result === "اخري" ));
-    // Check if conditions for a specific visual category are passed or not
     const checkConditions = (category: string) => {
-      debugger;
+      let passedCount = 0;
+
       const conditionIds = visualCategoryDict[category] || [];
-      const passedConditions = ComplianceResultData[key].Results.filter((condition: any) => conditionIds.includes(condition.code) && condition.Status);
-      return passedConditions.length === conditionIds.length;
+  
+
+      ComplianceResultData[key].Results.forEach(condition => {
+        if (conditionIds.includes(condition.Code) && condition.Status) {
+          passedCount++;
+        }
+      });
+
+      return passedCount === conditionIds.length;
+
     };
 
     // Example usage: Check if conditions for each visual category are passed
@@ -61,8 +66,6 @@ const InspectionReport = () => {
 
 
   const handleBackAction = () => {
-
-
     navigate(`/offices/${officeId}/request/${requestId}`);
   };
 
@@ -75,15 +78,14 @@ const InspectionReport = () => {
         filtered = data.filter(item => item.Status === true);
         break;
       case 'unmatched':
-        filtered = data.filter(item => item.Status === false && item.Result !== "اخري");
+        filtered = data.filter(item => item.Status === false && item.Result !== "أخري");
         break;
       case 'other':
-        filtered = data.filter(item => item.Status !== true && item.Result === "اخري");
+        filtered = data.filter(item => item.Status == false && item.Result === "أخري");
         break;
       default:
         filtered = null;
     }
-    console.log(filtered);
     setFilteredData(filtered);
   };
 
@@ -121,14 +123,14 @@ const InspectionReport = () => {
           <div className={`inline-flex items-center px-3 py-1 rounded-full text-sm
             ${status
               ? 'bg-green-100 text-green-700'
-              : result === "اخري"
+              : result === "أخري"
                 ? 'bg-yellow-100 text-yellow-700'
                 : 'bg-red-100 text-red-700'
             }`}>
             <span className="w-2 h-2 mr-2 rounded-full 
               ${status 
                 ? 'bg-green-400' 
-                : result === 'اخري'
+                : result === 'أخري'
                   ? 'bg-yellow-400'
                   : 'bg-red-400'
               }"></span>
@@ -152,16 +154,7 @@ const InspectionReport = () => {
 
 
     <div className="min-h-screen bg-gray-100 p-8" style={{ direction: "rtl" }}>
-
-      <div className="flex absolute left-10 top-24 justify-end mb-4">
-        <button
-          onClick={() => { handleBackAction() }}
-          className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-blue-600 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-200 border border-gray-200"
-        >
-          <ArrowLeft className="w-5 h-5" />
-          <span className="font-medium">العودة</span>
-        </button>
-      </div>
+      <BackButton onClick={handleBackAction} />
       <div className="max-w-7xl mx-auto space-y-6"> {/* Increased max-width for better split view */}
         {/* Main Title */}
         <div className="bg-white rounded-xl shadow-lg overflow-hidden">
@@ -256,8 +249,8 @@ const InspectionReport = () => {
               {[
                 { label: "إجمالي الاشتراطات", value: data.length },
                 { label: "الاشتراطات المطابقة", value: data.filter(item => item.Status === true).length },
-                { label: "الاشتراطات غير المطابقة", value: data.filter(item => item.Status === false && item.Result != "اخري").length },
-                { label: "أخرى", value: data.filter(item =>  item.Status !== true && item.Result == "اخري").length }
+                { label: "الاشتراطات غير المطابقة", value: data.filter(item => item.Status === false && item.Result != "أخري").length },
+                { label: "أخرى", value: data.filter(item => item.Status === false && item.Result == "أخري").length }
               ].map((stat, index) => (
                 <div key={index} className={`rounded-lg p-4 ${stat.label === 'الاشتراطات المطابقة' ? 'bg-green-50' :
                   stat.label === 'الاشتراطات غير المطابقة' ? 'bg-red-50' :
@@ -295,14 +288,14 @@ const InspectionReport = () => {
                   {/* <span className="w-3 h-3 rounded-full bg-red-400"></span> */}
                   <span
                     className={`text-sm px-3 py-1 rounded-full transition-colors cursor-pointer flex items-center gap-2
-                    ${filteredData && filteredData === data.filter(item => item.Status === false && item.Result !== "اخري")
+                    ${filteredData && filteredData === data.filter(item => item.Status === false && item.Result !== "أخري")
                         ? 'bg-red-100 text-red-700'
                         : 'hover:bg-red-50 text-gray-600 hover:text-red-600'}`}
                     onClick={() => handleFilter('unmatched')}
                   >
                     <span>غير مطابق</span>
                     <span className="inline-flex items-center justify-center px-2 py-0.5 text-xs font-medium rounded-full bg-red-200 text-red-800">
-                      {data.filter(item => item.Status !== true && item.Result !== "اخري").length}
+                      {data.filter(item => item.Status === false && item.Result !== "أخري").length}
                     </span>
                   </span>
                 </div>
@@ -310,14 +303,14 @@ const InspectionReport = () => {
                   {/* <span className="w-3 h-3 rounded-full bg-yellow-400"></span> */}
                   <span
                     className={`text-sm px-3 py-1 rounded-full transition-colors cursor-pointer flex items-center gap-2
-                    ${filteredData && filteredData === data.filter(item => item.Status !== true && item.Result === "اخري")
+                    ${filteredData && filteredData === data.filter(item => item.Status === false && item.Result === "أخري")
                         ? 'bg-yellow-100 text-yellow-700'
                         : 'hover:bg-yellow-50 text-gray-600 hover:text-yellow-600'}`}
                     onClick={() => handleFilter('other')}
                   >
                     <span>أخرى</span>
                     <span className="inline-flex items-center justify-center px-2 py-0.5 text-xs font-medium rounded-full bg-yellow-200 text-yellow-800">
-                      {data.filter(item => item.Status !== true && item.Result === "اخري").length}
+                      {data.filter(item => item.Status === false && item.Result === "أخري").length}
                     </span>
                   </span>
                 </div>
