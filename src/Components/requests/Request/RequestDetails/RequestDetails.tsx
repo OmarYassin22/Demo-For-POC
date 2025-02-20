@@ -93,7 +93,7 @@ debugger;
       <div className="flex">
         {/* Sidebar */}
         <div
-          className={`fixed inset-y-0 right-0 top-20   z-10 transform ${
+          className={`fixed inset-y-0 right-0    z-10 transform ${
             isSidebarOpen ? "translate-x-0" : "translate-x-full"
           } transition-transform duration-300 ease-in-out md:relative md:translate-x-0 w-full md:w-1/4 bg-white rounded-lg shadow-lg p-6 mb-4 md:mb-0`}
         >
