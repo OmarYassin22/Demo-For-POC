@@ -4,6 +4,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import '../../styles/conditionModal.css'
 import { log } from "console";
 import { ArrowLeft } from "lucide-react";
+import BackButton from '../common/BackButton';
 //import MockStrConditions from "../../mocks/MockStrConditions.json";
 
 
@@ -50,8 +51,7 @@ interface ServicesProps {
   Hai: string;
   Land: string;
   buildingType: number,
-  instructure: string,
-  complianceType: string; // Add this line
+  instructure: string
 }
 
 interface Condition {
@@ -66,11 +66,11 @@ interface ConditionsResponse {
 
 }
 
-const Conditions: React.FC<ServicesProps> = () => {
+const Conditions: React.FC = () => {
+  const { krookiNumber } = useParams();  // Get krookiNumber from URL parameter
+
   const location = useLocation();
   const navigate = useNavigate();
-  const { complianceType } = location.state || {}; // Get complianceType from location state
-  const { krookiNumber } = useParams();  // Get krookiNumber from URL parameter
 
 
 
@@ -164,8 +164,7 @@ const Conditions: React.FC<ServicesProps> = () => {
       navigate(`/InspectionReport/${krookiNumber}`, {
         state: {
           officeId:officeId,
-          requestId:requestId,
-          instructure:instructure
+          requestId:requestId
         }
       });
     } else {
@@ -195,37 +194,14 @@ const Conditions: React.FC<ServicesProps> = () => {
         const jsonData = await response.json();
         setComplianceResult(jsonData);
         localStorage.setItem("ComplianceResultData", JSON.stringify(jsonData));
+        console.log(complianceResult);
 
-        // Retrieve the dictionary from local storage
-        // const visualCategoryDict = JSON.parse(localStorage.getItem("visualCategory") || "{}");
-
-        // Retrieve the compliance result data from local storage
-        // const complianceResultData = JSON.parse(localStorage.getItem("ComplianceResultData") || "{}");
-
-        // // Check if conditions for a specific visual category are passed or not
-        // const checkConditions = (category: string) => {
-        //   const conditionIds = visualCategoryDict[category] || [];
-        //   const passedConditions = complianceResultData.result.filter((condition: any) => conditionIds.includes(condition.id) && condition.passed);
-        //   return passedConditions.length === conditionIds.length;
-        // };
-
-        // // Example usage: Check if conditions for each visual category are passed
-        // const visualCategories = Object.keys(visualCategoryDict);
-        // const visualCategoryStatus: { [key: string]: boolean } = {};
-
-        // visualCategories.forEach((category) => {
-        //   visualCategoryStatus[category] = checkConditions(category);
-        // });
-
-        // // Store the visual category status in local storage
-        // localStorage.setItem("visualCategoryStatus", JSON.stringify(visualCategoryStatus));
-
-        // console.log("Visual Category Status:", visualCategoryStatus);
 
       } catch (error) {
         console.error('Error making API call:', error);
       }
     }
+
   };
 
   const handleStartService = async () => {
@@ -246,11 +222,11 @@ const Conditions: React.FC<ServicesProps> = () => {
 
 
 
-  // useEffect(() => {
-  //   console.log("Location state:", location.state);
+  useEffect(() => {
+    console.log("Location state:", location.state);
 
    
-  // }, [location]);
+  }, [location]);
 
   const { Amana = "", Baladia = "", Hai = "", Land = "", buildingType = "", instructure = "",officeId="",requestId="" } = location.state || {};
 
@@ -318,43 +294,32 @@ const Conditions: React.FC<ServicesProps> = () => {
         },
         // withCredentials: true,
       });
-      const conditions = response.data.data.result;
-      setConditionsData(conditions);
+      setConditionsData(response.data.data.result);
 
       setError(null);
 
-      // Create a dictionary for visualCategory using id
-      const visualCategory: { [key: string]: string[] } = {};
-      conditions?.conditions.forEach((condition) => {
-        if (condition.visualCategory) {
-          if (!visualCategory[condition.visualCategory]) {
-            visualCategory[condition.visualCategory] = [];
-          }
-          visualCategory[condition.visualCategory].push(condition.code);
-        }
-      });
 
-      // Store the dictionary in local storage
-      localStorage.setItem("visualCategory", JSON.stringify(visualCategory));
-      console.log("Visual Category:", visualCategory);  
 
-      let filteredConditions = conditions;
+      let filteredConditions = response.data.data.result;
       filteredConditions?.conditions.filter(
-        (condition) => condition.active == true
+        (condition) => condition.active ==true
       );
       if (filteredConditions?.conditions) {
         if (instructure === "1") {
           // If instructure is 1, filter where code < 500
           filteredConditions = filteredConditions?.conditions.filter(
-            (condition) => parseFloat(condition.code) < 500
+            (condition) => parseInt(condition.code, 10) < 500
           );
         } else {
           // Otherwise, filter where code >= 500
           filteredConditions = filteredConditions?.conditions.filter(
-            (condition) => parseFloat(condition.code) >= 500
+            (condition) => parseInt(condition.code, 10) >= 500
           );
         }
+        console.log("filteredConditions");
+        console.log(filteredConditions);
         setConditionsData(filteredConditions);
+        console.log(conditionsData);
       } else {
         // This block will run if either conditionsData or conditionsData?.conditions is null or undefined
         // alert("Conditions Data or conditions is null or undefined");
@@ -410,132 +375,16 @@ const Conditions: React.FC<ServicesProps> = () => {
   }
 
   return (
-    <div className="min-h-screen  bg-gray-100 p-4" style={{ direction: "rtl" }}>
-      <div className="flex absolute left-10 top-24 justify-end mb-4">
-        <button
-          onClick={() => { navigate(-1) }}
-          className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-blue-600 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-200 border border-gray-200"
-        >
-          <ArrowLeft className="w-5 h-5" />
-          <span className="font-medium">العودة</span>
-        </button>
-      </div>
+    <div className="min-h-screen bg-gray-100 p-4" style={{ direction: "rtl" }}>
+      <BackButton />
       <div className="max-w-6xl mx-auto space-y-6">
-        {/* Display the compliance type at the top */}
-        <div className="mb-4 text-lg font-semibold text-gray-700">
-          نوع التحقق: {complianceType === "1" ? "معمارى" : "انشائى"}
-        </div>
-        {/* Upload Section */}
-        <div className={`bg-white rounded-xl shadow-lg p-6 transition-all duration-300 ${uploadSuccess ? 'ring-2 ring-green-500 ring-offset-2' : ''
-          }`}>
-          <div className="text-center mb-6">
-            <h2 className="text-2xl font-bold text-gray-800 mb-2">رفع ملف التصميم ال{complianceType === "1" ? "معمارى" : "انشائى"}</h2>
-            <p className="text-gray-600">يرجى رفع ملف Revit (.rvt)</p>
-          </div>
-
-          <div className={`border-2 border-dashed rounded-lg p-8 transition-colors
-          ${uploadSuccess
-              ? 'border-green-500 bg-green-50'
-              : 'border-gray-200 hover:border-green-400'}`}>
-            <input
-              type="file"
-              onChange={handleFileChange}
-              className="hidden"
-              id="file-upload"
-              accept=".rvt"
-              disabled={isUploading}
-            />
-            <label
-              htmlFor="file-upload"
-              className="cursor-pointer flex flex-col items-center"
-            >
-              {uploadSuccess ? (
-                <>
-                  <svg className="w-16 h-16 text-green-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <p className="text-green-600 font-medium">تم الفحص بنجاح!</p>
-                </>
-              ) : (
-                <div>
-                  
-                  <p className="text-gray-600 text-lg">اضغط هنا لرفع الملف</p>
-                  <p className="text-gray-500 text-sm mt-1">أو اسحب وأفلت الملف هنا</p>
-
-                  {file  && (
-        <div className="mt-4 text-gray-600">
-          <p className="text-lg">الملف المختار: <strong>{file.name}</strong></p>
-        </div>
-      )}
-                </div>
-              )}
-            </label>
-          </div>
-
-          {/* File Requirements */}
-          <div className="mt-4 flex justify-between items-center">
-            <div className="text-sm text-gray-500">
-              <p className="flex items-center gap-2">
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" />
-                </svg>
-                يجب أن يكون الملف بصيغة Revit (.rvt)
-              </p>
-            </div>
-            {file && !uploadSuccess && (
-              <button
-                onClick={handleSubmit}
-                disabled={isUploading}
-                className="flex items-center gap-2 px-6 py-2 bg-green-600 text-white rounded-lg
-                  hover:bg-green-700 transition-colors disabled:bg-gray-300"
-              >
-                {isUploading ? (
-                  <>
-                    <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                    </svg>
-                    جاري الفحص...
-                  </>
-                ) : (
-                  <>
-                    {/* <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-                    </svg> */}
-                   بدء الفحص
-                  </>
-                )}
-              </button>
-            )}
-            {/* {uploadSuccess && (
-              <span className="text-green-600 flex items-center gap-2">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-                تم الفحص بنجاح
-              </span>
-            )} */}
-
-
-             {/* File Name Display */}
-   
-          </div>
-        </div>
-
-        {/* Conditions Section */}
+        {/* Conditions Section - Moved to top */}
         <div className="bg-white rounded-xl shadow-lg overflow-hidden">
           {/* Header with progress bar */}
           <div className="relative px-6 py-4 bg-white border-b">
             <div className="flex justify-between items-center">
               <h2 className="text-2xl font-bold text-gray-800">الإشتراطات</h2>
-              {/* <button
-                onClick={handleClose}
-                className="text-gray-500 hover:text-gray-700 transition-colors"
-              >
-                <span className="text-xl">×</span>
-              </button> */}
             </div>
-            {/* Progress bar */}
             <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray-100">
               <div
                 className="h-full bg-green-600 transition-all duration-300"
@@ -649,25 +498,90 @@ const Conditions: React.FC<ServicesProps> = () => {
                   )}
                 </div>
 
-                {/* Footer - Updated */}
-                <div className="mt-6 flex justify-center pt-4 border-t">
-                  <button
-                    onClick={handleStartService}
-                    disabled={!canStartService || !uploadSuccess}
-                    className={`px-8 py-3 rounded-lg transition-all duration-300 
-                      ${(canStartService && uploadSuccess)
-                        ? 'bg-green-600 text-white hover:bg-green-700 shadow-lg hover:shadow-green-100'
-                        : 'bg-gray-200 text-gray-400 cursor-not-allowed'}`}
-                  >
-                   عرض التقرير
-                  </button>
-                </div>
+              
               </>
             ) : (
               <div className="text-center py-12 text-gray-500">
                 لا توجد بيانات متاحة
               </div>
             )}
+          </div>
+        </div>
+
+        {/* Upload Section - Moved below conditions */}
+        <div className="bg-white rounded-xl shadow-lg p-6">
+          <div className="text-center mb-6">
+            <h2 className="text-2xl font-bold text-gray-800 mb-2">رفع ملف التصميم</h2>
+            <p className="text-gray-600">يرجى رفع ملف Revit (.rvt)</p>
+          </div>
+
+          <div className={`border-2 border-dashed rounded-lg p-8 transition-colors mb-6
+            ${uploadSuccess ? 'border-green-500 bg-green-50' : 'border-gray-200 hover:border-green-400'}`}>
+            <input
+              type="file"
+              onChange={handleFileChange}
+              className="hidden"
+              id="file-upload"
+              accept=".rvt"
+              disabled={isUploading}
+            />
+            <label
+              htmlFor="file-upload"
+              className="cursor-pointer flex flex-col items-center"
+            >
+              {uploadSuccess ? (
+                <>
+                  <svg className="w-16 h-16 text-green-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <p className="text-green-600 font-medium">تم الفحص بنجاح!</p>
+                </>
+              ) : (
+                <div>
+                  <p className="text-gray-600 text-lg">اضغط هنا لرفع الملف</p>
+                  <p className="text-gray-500 text-sm mt-1">أو اسحب وأفلت الملف هنا</p>
+                  {file && (
+                    <div className="mt-4 text-gray-600">
+                      <p className="text-lg">الملف المختار: <strong>{file.name}</strong></p>
+                    </div>
+                  )}
+                </div>
+              )}
+            </label>
+          </div>
+
+          {/* Action Buttons - Redesigned */}
+          <div className="flex justify-center gap-4">
+            <button
+              onClick={handleSubmit}
+              disabled={!file || isUploading || uploadSuccess}
+              className="flex items-center gap-2 px-8 py-3 bg-green-600 text-white rounded-lg
+                hover:bg-green-700 transition-all duration-300 disabled:bg-gray-300 disabled:cursor-not-allowed
+                shadow-md hover:shadow-lg"
+            >
+              {isUploading ? (
+                <>
+                  <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                  </svg>
+                  <span>جاري الفحص...</span>
+                </>
+              ) : (
+                <span>بدء الفحص</span>
+              )}
+            </button>
+
+            <button
+              onClick={handleStartService}
+              disabled={!canStartService || !uploadSuccess}
+              className={`flex items-center gap-2 px-8 py-3 rounded-lg transition-all duration-300 
+                ${(canStartService && uploadSuccess)
+                  ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-md hover:shadow-lg'
+                  : 'bg-gray-200 text-gray-400 cursor-not-allowed'}`}
+            >
+              عرض التقرير
+            </button>
           </div>
         </div>
       </div>
