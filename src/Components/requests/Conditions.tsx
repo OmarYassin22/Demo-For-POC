@@ -346,12 +346,12 @@ const Conditions: React.FC<ServicesProps> = () => {
         if (instructure === "1") {
           // If instructure is 1, filter where code < 500
           filteredConditions = filteredConditions?.conditions.filter(
-            (condition) => parseInt(condition.code, 10) < 500
+            (condition) => parseFloat(condition.code) < 500
           );
         } else {
           // Otherwise, filter where code >= 500
           filteredConditions = filteredConditions?.conditions.filter(
-            (condition) => parseInt(condition.code, 10) >= 500
+            (condition) => parseFloat(condition.code) >= 500
           );
         }
         setConditionsData(filteredConditions);
