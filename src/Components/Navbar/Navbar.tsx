@@ -5,20 +5,19 @@ import logo from "../../Assets/image/favicon.ico"; // Import the logo
 
 const BuildingVerificationLogo = ({ isScrolled }: { isScrolled: boolean }) => (
   <div className="flex items-center gap-3">
-    <img 
-      src={logo} 
-      alt="Building Verification Logo" 
+    <img
+      src={logo}
+      alt="Building Verification Logo"
       className={`h-10 w-10 transition-all duration-300
         ${isScrolled ? 'filter brightness-0' : 'filter brightness-0 invert'}`}
     />
     <div className="flex flex-col">
       <span className={`text-xl font-bold leading-tight transition-colors
         ${isScrolled ? 'text-gray-800' : 'text-white'}`}>
-        محرك التحقق
-      </span>
+        محرك مراجعة      </span>
       <span className={`text-sm transition-colors
         ${isScrolled ? 'text-green-600' : 'text-green-300'}`}>
-        من تصاميم البناء
+        تصاميم البناء
       </span>
     </div>
   </div>
@@ -50,17 +49,17 @@ export default function Navbar() {
   };
 
   return (
-    <nav 
+    <nav
       className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 transition-all duration-300
-        ${isScrolled 
-          ? 'bg-white text-green-800 shadow-md' 
-          : 'bg-primary text-white'}`} 
+        ${isScrolled
+          ? 'bg-white text-green-800 shadow-md'
+          : 'bg-primary text-white'}`}
       dir="rtl"
     >
       <Link to={isLoggedIn ? "/offices" : "/"} className="flex items-center">
         <BuildingVerificationLogo isScrolled={isScrolled} />
       </Link>
-      
+
       {/* Rest of navbar */}
       <div className="flex items-center space-x-8 space-x-reverse">
         {/* Show navigation links only when not logged in */}
