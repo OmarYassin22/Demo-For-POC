@@ -231,7 +231,7 @@ const Conditions: React.FC = () => {
 
   }, [location]);
 
-  const { Amana = "", Baladia = "", Hai = "", Land = "", buildingType = "", instructure = "", officeId = "", requestId = "" } = location.state || {};
+  const { Amana = "", Baladia = "", Hai = "", Land = "", buildingType = "", instructure = "", officeId = "", requestId = "",complianceType="" } = location.state || {};
 
   const [conditionsData, setConditionsData] = useState<ConditionsResponse | null>(null);
  
