@@ -267,7 +267,6 @@ const fetchSurveyReport = async (krokiNumber: number): Promise<SurveyReportRespo
     setRequest(response.data.data.result[0]);
 
     
-   setIsFormTabVisible(!waitingApproval);
   } catch (error: any) {
     console.error("Error fetching survey report:", error.response?.data || error.message);
     throw error;
@@ -276,6 +275,7 @@ const fetchSurveyReport = async (krokiNumber: number): Promise<SurveyReportRespo
 
 useEffect(() => {
   debugger;
+  
   const fetchData = async () => {
     if (localStorage.getItem("isLoggedIn") !== "true") {
       navigate("/login");
@@ -303,7 +303,8 @@ debugger;
  
 
 
-const [isFormTabVisible, setIsFormTabVisible] = useState(false);
+const [isFormTabVisible, setIsFormTabVisible] = useState(!waitingApproval);
+
 
   const handleAccept = () => {
     const updatedRequest = {
