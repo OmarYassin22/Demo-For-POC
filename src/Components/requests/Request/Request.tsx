@@ -9,7 +9,7 @@ interface RequestData {
   platformName: string;
   ownerId: string;
   waitingApproval: boolean;
-  creationTime: string;
+  creationTime: string|null;
 }
 
 export default function Component({data, officeId}: {data: RequestData, officeId: string}) {
@@ -21,11 +21,14 @@ export default function Component({data, officeId}: {data: RequestData, officeId
     }
   });
   const { ownerName, number, platformName, ownerId,waitingApproval, creationTime } = data;
-  const formattedDate = new Date(creationTime).toLocaleDateString('ar-SA', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  });
+  debugger;
+  const formattedDate = creationTime 
+  ? new Date(creationTime).toLocaleDateString('ar-SA', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    }) 
+  : " ";
 
   return (
     <Link to={`/offices/${officeId}/request/${number}`} className="w-full block hover:scale-[1.02] transition-transform">

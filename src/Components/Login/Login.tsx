@@ -1,5 +1,6 @@
 import bg from "../../Assets/image/Screenshot_18-1-2025_133036_ssoapp.balady.gov.sa.jpeg"; // Import background image
 import React, { useEffect } from 'react';
+import axios from "axios";
 import { useNavigate } from "react-router-dom"; // Import useNavigate for redirecting
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -45,9 +46,12 @@ export default function Login() {
       password: "",
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
+    onSubmit: async(values) => {
       // Handle form submission: check username and password
       if (values.username === correctUsername && values.password === correctPassword) {
+
+
+        await fetchToken();
         // Save login status in localStorage
         localStorage.setItem("isLoggedIn", "true");
 
@@ -62,6 +66,38 @@ export default function Login() {
       }
     },
   });
+
+
+  const fetchToken = async () => {
+    const url = "https://apiservicesstg.balady.gov.sa/oauth/v1/token";
+    const username = "7WVXK2rO9fGn16uIGM7ixGhswAu2uGHd";
+    const password = "TCz3GQGRssBq7maT";
+    const basicAuth = btoa(`${username}:${password}`);
+    try {
+      const response = await axios.post(
+        url,
+        new URLSearchParams({ grant_type: "client_credentials" }).toString(),
+        {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            Authorization: `Basic ${basicAuth}`,
+          },
+        }
+      );
+      localStorage.setItem("Token", response.data.access_token);
+
+      const expiresInSeconds = parseInt(response.data.expires_in, 10); // Convert "17999" to number
+      const expirationTime = Date.now() + expiresInSeconds * 1000;
+      localStorage.setItem("tokenExpiration", expirationTime.toString());
+      
+
+
+    
+    } catch (err: any) {
+      
+    }
+  };
+
 
   return (
     <div className="min-h-screen relative" style={{direction: 'rtl'}}>
