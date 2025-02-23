@@ -3,11 +3,20 @@ import { useNavigate, useLocation } from "react-router-dom";
 import DataTable from "../../DataTable";
 import BackButton from '../../common/BackButton';
 
-import { ArrowLeft } from "lucide-react";
-// import model from "../../../Assets/index.html";
-// import { URL } from "url";
+import { ArrowLeft, Download } from "lucide-react"; // Replace Printer with Download
+import { createPresentation } from "../../../services/presentationService";
 
-//  import jsonData from "../../../mocks/complianceResult.json"; // Import the JSON data
+// Add this interface for type safety
+interface CategoryStatus {
+  [key: string]: {
+    total: number;
+    passed: number;
+    conditions: {
+      code: string;
+      status: boolean;
+    }[];
+  };
+}
 
 const InspectionReport = () => {
   // Access the location state using useLocation
@@ -15,9 +24,10 @@ const InspectionReport = () => {
   const navigate = useNavigate();
   const { officeId, requestId, instructure } = location.state || {};
   const [filteredData, setFilteredData] = useState(null);
+  const [visualStatus, setVisualStatus] = useState({});
+  const [categoryStatuses, setCategoryStatuses] = useState<CategoryStatus>({});
 
   useEffect(() => {
-    debugger;
     // Retrieve the dictionary from local storage
     const ComplianceResultData = JSON.parse(localStorage.getItem("ComplianceResultData") || "{}");
     const visualCategoryDict = JSON.parse(localStorage.getItem("visualCategory") || "{}");
@@ -53,6 +63,32 @@ const InspectionReport = () => {
     localStorage.setItem("visualCategoryStatus", JSON.stringify(visualCategoryStatus));
 
     console.log("Visual Category Status:", visualCategoryStatus);
+
+    // Add this to existing useEffect:
+    const storedVisualStatus = localStorage.getItem("visualCategoryStatus");
+    if (storedVisualStatus) {
+      setVisualStatus(JSON.parse(storedVisualStatus));
+    }
+
+    const CondintionsCodeBenaa = JSON.parse(localStorage.getItem("CondintionsCodeBenaa") || "{}");
+
+    // Group conditions by category and check their status
+    const statuses: CategoryStatus = {};
+    
+    Object.entries(CondintionsCodeBenaa).forEach(([category, codes]) => {
+      const conditionStatuses = (codes as string[]).map(code => ({
+        code,
+        status: ComplianceResultData[key].Results.find(r => r.Code === code)?.Status || false
+      }));
+
+      statuses[category] = {
+        total: conditionStatuses.length,
+        passed: conditionStatuses.filter(c => c.status).length,
+        conditions: conditionStatuses
+      };
+    });
+
+    setCategoryStatuses(statuses);
   }, []);
 
   const storedData = localStorage.getItem('ComplianceResultData');
@@ -69,6 +105,23 @@ const InspectionReport = () => {
     navigate(`/offices/${officeId}/request/${requestId}`);
   };
 
+  const handleExportPresentation = async () => {
+    const reportData = {
+      total: data.length,
+      matched: data.filter(item => item.Status === true).length,
+      unmatched: data.filter(item => item.Status === false).length,
+      results: data,
+      visualStatus,
+      categoryStatuses,
+    };
+
+    try {
+      await createPresentation(reportData);
+    } catch (error) {
+      console.error('Error creating presentation:', error);
+      // Add error handling/notification here
+    }
+  };
 
   // Add filter handling functions
   const handleFilter = (filterType) => {
@@ -154,7 +207,16 @@ const InspectionReport = () => {
 
 
     <div className="min-h-screen bg-gray-100 p-8" style={{ direction: "rtl" }}>
-      <BackButton onClick={handleBackAction} />
+      <div className="flex justify-between items-center mb-6">
+        <BackButton onClick={handleBackAction} className="back-button" />
+        <button
+          onClick={handleExportPresentation}
+          className="print-button flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+        >
+          <Download size={20} />
+          <span>تحميل العرض التقديمي</span>
+        </button>
+      </div>
       <div className="max-w-7xl mx-auto space-y-6"> {/* Increased max-width for better split view */}
         {/* Main Title */}
         <div className="bg-white rounded-xl shadow-lg overflow-hidden">
@@ -390,9 +452,84 @@ const InspectionReport = () => {
           </div>
         </div>
 
+        {/* Category Statuses */}
+        <div className="bg-white rounded-xl shadow-lg p-6">
+          <h2 className="text-xl font-semibold mb-4">نتائج التحقق حسب الفئة</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {Object.entries(categoryStatuses).map(([category, status]) => (
+              <div key={category} className="border rounded-lg p-4">
+                <div className="flex justify-between items-center mb-2">
+                  <h3 className="font-medium">{category}</h3>
+                  <span className={`px-3 py-1 rounded-full text-sm ${
+                    status.passed === status.total 
+                      ? 'bg-green-100 text-green-700'
+                      : 'bg-red-100 text-red-700'
+                  }`}>
+                    {status.passed === status.total ? 'تحقق' : 'لم يتحقق'}
+                  </span>
+                </div>
+                <div className="text-sm text-gray-500">
+                  {status.passed} من {status.total} اشتراطات مطابقة
+                </div>
+                <div className="mt-2 space-y-1">
+                  {status.conditions.map((condition) => (
+                    <div key={condition.code} className="flex items-center gap-2 text-sm">
+                      <span className={`w-2 h-2 rounded-full ${
+                        condition.status ? 'bg-green-400' : 'bg-red-400'
+                      }`}></span>
+                      <span>{condition.code}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
       </div>
     </div>
   );
 };
+
+// Add this style to your global CSS or create a new style tag in your HTML
+const printStyles = `
+  @media print {
+    @page {
+      size: A4;
+      margin: 20mm;
+    }
+    
+    body {
+      background: white !important;
+    }
+
+    .back-button,
+    .print-button {
+      display: none !important;
+    }
+
+    .max-w-7xl {
+      max-width: none !important;
+      margin: 0 !important;
+    }
+
+    .bg-gray-100 {
+      background: white !important;
+    }
+
+    .shadow-lg {
+      box-shadow: none !important;
+    }
+
+    .rounded-xl {
+      border-radius: 0 !important;
+    }
+  }
+`;
+
+// Add the styles to the document
+const styleElement = document.createElement('style');
+styleElement.textContent = printStyles;
+document.head.appendChild(styleElement);
 
 export default InspectionReport;
