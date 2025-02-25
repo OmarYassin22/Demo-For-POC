@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import DataTable from "../../DataTable";
 import BackButton from '../../common/BackButton';
-
 import { ArrowLeft, Download } from "lucide-react"; // Replace Printer with Download
-import { createPresentation } from "../../../services/presentationService";
+import { ArcReportComponent } from "../../ArcReport/ArcReport";
+import { jsPDF } from "jspdf";
+import html2canvas from "html2canvas";
+import ReactDOMServer from "react-dom/server"; // Add this import
 
 // Add this interface for type safety
 interface CategoryStatus {
@@ -39,7 +41,7 @@ const InspectionReport = () => {
       let passedCount = 0;
 
       const conditionIds = visualCategoryDict[category] || [];
-  
+
 
       ComplianceResultData[key].Results.forEach(condition => {
         if (conditionIds.includes(condition.Code) && condition.Status) {
@@ -74,7 +76,7 @@ const InspectionReport = () => {
 
     // Group conditions by category and check their status
     const statuses: CategoryStatus = {};
-    
+
     Object.entries(CondintionsCodeBenaa).forEach(([category, codes]) => {
       const conditionStatuses = (codes as string[]).map(code => ({
         code,
@@ -105,22 +107,26 @@ const InspectionReport = () => {
     navigate(`/offices/${officeId}/request/${requestId}`);
   };
 
-  const handleExportPresentation = async () => {
-    const reportData = {
-      total: data.length,
-      matched: data.filter(item => item.Status === true).length,
-      unmatched: data.filter(item => item.Status === false).length,
-      results: data,
-      visualStatus,
-      categoryStatuses,
-    };
+  const handleDownloadReport = async () => {
+    const input = document.createElement("div");
+    document.body.appendChild(input);
+    input.style.position = "absolute";
+    input.style.top = "-9999px";
+    input.style.width = "210mm"; // A4 width in mm
+    input.style.height = "297mm"; // A4 height in mm
+    input.style.backgroundColor = "white";
+    input.style.padding = "20px";
+    input.style.boxSizing = "border-box";
+    input.innerHTML = ReactDOMServer.renderToString(
+      <ArcReportComponent visualCategoryStatus={visualStatus} />
+    );
+    const canvas = await html2canvas(input);
+    const imgData = canvas.toDataURL("image/png");
+    const pdf = new jsPDF("p", "mm", "a4");
+    pdf.addImage(imgData, "PNG", 0, 0, 210, 297);
+    pdf.save("ArcReport.pdf");
 
-    try {
-      await createPresentation(reportData);
-    } catch (error) {
-      console.error('Error creating presentation:', error);
-      // Add error handling/notification here
-    }
+    document.body.removeChild(input);
   };
 
   // Add filter handling functions
@@ -210,11 +216,11 @@ const InspectionReport = () => {
       <div className="flex justify-between items-center mb-6">
         <BackButton onClick={handleBackAction} className="back-button" />
         <button
-          onClick={handleExportPresentation}
+          onClick={handleDownloadReport}
           className="print-button flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
         >
           <Download size={20} />
-          <span>تحميل العرض التقديمي</span>
+          <span>تحميل التقرير</span>
         </button>
       </div>
       <div className="max-w-7xl mx-auto space-y-6"> {/* Increased max-width for better split view */}
@@ -372,7 +378,7 @@ const InspectionReport = () => {
                   >
                     <span>أخرى</span>
                     <span className="inline-flex items-center justify-center px-2 py-0.5 text-xs font-medium rounded-full bg-yellow-200 text-yellow-800">
-                      {data.filter(item => item.Status !== true&& item.Result === "اخري").length}
+                      {data.filter(item => item.Status !== true && item.Result === "اخري").length}
                     </span>
                   </span>
                 </div>
@@ -460,11 +466,10 @@ const InspectionReport = () => {
               <div key={category} className="border rounded-lg p-4">
                 <div className="flex justify-between items-center mb-2">
                   <h3 className="font-medium">{category}</h3>
-                  <span className={`px-3 py-1 rounded-full text-sm ${
-                    status.passed === status.total 
+                  <span className={`px-3 py-1 rounded-full text-sm ${status.passed === status.total
                       ? 'bg-green-100 text-green-700'
                       : 'bg-red-100 text-red-700'
-                  }`}>
+                    }`}>
                     {status.passed === status.total ? 'تحقق' : 'لم يتحقق'}
                   </span>
                 </div>
@@ -474,9 +479,8 @@ const InspectionReport = () => {
                 <div className="mt-2 space-y-1">
                   {status.conditions.map((condition) => (
                     <div key={condition.code} className="flex items-center gap-2 text-sm">
-                      <span className={`w-2 h-2 rounded-full ${
-                        condition.status ? 'bg-green-400' : 'bg-red-400'
-                      }`}></span>
+                      <span className={`w-2 h-2 rounded-full ${condition.status ? 'bg-green-400' : 'bg-red-400'
+                        }`}></span>
                       <span>{condition.code}</span>
                     </div>
                   ))}
@@ -490,46 +494,4 @@ const InspectionReport = () => {
     </div>
   );
 };
-
-// Add this style to your global CSS or create a new style tag in your HTML
-const printStyles = `
-  @media print {
-    @page {
-      size: A4;
-      margin: 20mm;
-    }
-    
-    body {
-      background: white !important;
-    }
-
-    .back-button,
-    .print-button {
-      display: none !important;
-    }
-
-    .max-w-7xl {
-      max-width: none !important;
-      margin: 0 !important;
-    }
-
-    .bg-gray-100 {
-      background: white !important;
-    }
-
-    .shadow-lg {
-      box-shadow: none !important;
-    }
-
-    .rounded-xl {
-      border-radius: 0 !important;
-    }
-  }
-`;
-
-// Add the styles to the document
-const styleElement = document.createElement('style');
-styleElement.textContent = printStyles;
-document.head.appendChild(styleElement);
-
 export default InspectionReport;

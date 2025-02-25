@@ -9,13 +9,13 @@ import Conditions from "./Components/requests/Conditions";
 import InspectionReport from './Components/requests/Request/InspectionReport'
 import AutodeskResultViewer from './Components/Autodesk/AutodeskResultViewer'
 import ViewCompliance from './Components/Autodesk/ViewCompliance'
-
+ 
 function App() {
   return (
     <BrowserRouter>
       <div className="min-h-screen bg-gray-50">
         <Navbar />
-        <div className="pt-20">
+        <div className="pt-20 ">
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/offices" element={<Offices />} />
@@ -26,7 +26,7 @@ function App() {
             <Route path="/InspectionReport/:krookiNumber" element={<InspectionReport />} />
             <Route path="/AutodeskResultViewer" element={<AutodeskResultViewer />} />
             <Route path="/ViewCompliance" element={<ViewCompliance />} />
-            <Route path="*" element={<h1>Page Not Found</h1>} />
+             <Route path="*" element={<h1>Page Not Found</h1>} />
           </Routes>
         </div>
       </div>
