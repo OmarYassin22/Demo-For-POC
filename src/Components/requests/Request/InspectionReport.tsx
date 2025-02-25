@@ -153,8 +153,10 @@ const InspectionReport = () => {
         }
         pdf.addImage(imgData, "JPEG", marginLeft, marginTop, imgWidth, imgHeight, "", "MEDIUM");
       }
-
-      pdf.save("ArcReport.pdf");
+      if (localStorage.getItem("reportType") == 'str')
+        pdf.save("نتائج الفحص الإنشائى.pdf");
+      else
+        pdf.save("نتائج الفحص المعمارى.pdf");
     } catch (error) {
       console.error("Error generating PDF:", error);
     }

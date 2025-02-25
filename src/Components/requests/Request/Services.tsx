@@ -431,29 +431,29 @@ requestId:requestId,
             <div className="flex items-center gap-2">
               <label htmlFor="test1">التحقق من المخططات المعمارية</label>
               <input
-                type="radio"
-                id="test1"
-                name="ComplianceType"
-                value="1"
-                checked={selectedOption === "1"}
-                onChange={(e) => {
-                  handleRadioChange(e);
-                  formik.setFieldValue("ComplianceType", e.target.value);
-                }}
+              type="radio"
+              id="test1"
+              name="ComplianceType"
+              value="1"
+              required
+              onChange={(e) => {
+                handleRadioChange(e);
+                formik.setFieldValue("ComplianceType", e.target.value);
+              }}
               />
             </div>
             <div className="flex items-center gap-2">
               <label htmlFor="test2">التحقق من المخططات الإنشائية</label>
               <input
-                type="radio"
-                id="test2"
-                name="ComplianceType"
-                value="2"
-                checked={selectedOption === "2"}
-                onChange={(e) => {
-                  handleRadioChange(e);
-                  formik.setFieldValue("ComplianceType", e.target.value);
-                }}
+              type="radio"
+              id="test2"
+              name="ComplianceType"
+              value="2"
+              required
+              onChange={(e) => {
+                handleRadioChange(e);
+                formik.setFieldValue("ComplianceType", e.target.value);
+              }}
               />
             </div>
           </div>

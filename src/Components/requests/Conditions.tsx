@@ -164,7 +164,7 @@ const Conditions: React.FC = () => {
       navigate(`/InspectionReport/${krookiNumber}`, {
         state: {
 
-      officeId: officeId,
+          officeId: officeId,
           requestId: requestId,
           instructure: instructure
 
@@ -231,10 +231,10 @@ const Conditions: React.FC = () => {
 
   }, [location]);
 
-  const { Amana = "", Baladia = "", Hai = "", Land = "", buildingType = "", instructure = "", officeId = "", requestId = "",complianceType="" } = location.state || {};
+  const { Amana = "", Baladia = "", Hai = "", Land = "", buildingType = "", instructure = "", officeId = "", requestId = "", complianceType = "" } = location.state || {};
 
   const [conditionsData, setConditionsData] = useState<ConditionsResponse | null>(null);
- 
+
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   // Remove pagination states and calculations
@@ -268,7 +268,7 @@ const Conditions: React.FC = () => {
         }
       );
       //console.log(response.data.access_token);
-   
+
 
       localStorage.setItem("Token", response.data.access_token);
       const expiresInSeconds = parseInt(response.data.expires_in, 10); // Convert "17999" to number
@@ -353,7 +353,7 @@ const Conditions: React.FC = () => {
     }
     setLoading(true);
 
-  
+
     const expiration = localStorage.getItem("tokenExpiration");
     if (localStorage.getItem('Token')) {
 
@@ -363,7 +363,7 @@ const Conditions: React.FC = () => {
       }
 
     }
-    if(!localStorage.getItem('Token')){
+    if (!localStorage.getItem('Token')) {
       fetchToken();
     }
   }, [location.state]);
@@ -375,7 +375,7 @@ const Conditions: React.FC = () => {
   const handleClose = () => {
     navigate(-1);
   };
-  
+
 
 
 
@@ -409,8 +409,8 @@ const Conditions: React.FC = () => {
           <div className="relative px-6 py-4 bg-white border-b">
             <div className="flex justify-between items-center">
               <h2 className="text-2xl font-bold text-gray-800">
-                
-                {localStorage.getItem("reportType") === "arc" ? ' الإشتراطات المعمارية ' : ' الإشتراطات الأنشائية '}
+الإشطراتات
+                {localStorage.getItem("reportType") === "arc" ? ' المعمارية ' : '  الأنشائية '} 
               </h2>
             </div>
             <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray-100">
@@ -528,7 +528,7 @@ const Conditions: React.FC = () => {
 
 
                 {/* Footer - Updated */}
-                <div className="mt-6 flex justify-center pt-4 border-t">
+                {/* <div className="mt-6 flex justify-center pt-4 border-t">
                   <button
                     onClick={handleStartService}
                     disabled={!canStartService || !uploadSuccess}
@@ -539,9 +539,9 @@ const Conditions: React.FC = () => {
                   >
                     عرض التقرير
                   </button>
-                </div>
+                </div> */}
 
-              
+
 
               </>
             ) : (
@@ -555,8 +555,8 @@ const Conditions: React.FC = () => {
         {/* Upload Section - Moved below conditions */}
         <div className="bg-white rounded-xl shadow-lg p-6">
           <div className="text-center mb-6">
-            <h2 className="text-2xl font-bold text-gray-800 mb-2">رفع ملف التصميم                 {localStorage.getItem("reportType") === "arc" ? ' المعمارية ' : '  الأنشائية '}
-</h2>
+            <h2 className="text-2xl font-bold text-gray-800 mb-2">رفع ملف التصميم {localStorage.getItem("reportType") === "arc" ? 'المعماري' : 'الأنشائي'}
+            </h2>
             <p className="text-gray-600">يرجى رفع ملف Revit (.rvt)</p>
           </div>
 
