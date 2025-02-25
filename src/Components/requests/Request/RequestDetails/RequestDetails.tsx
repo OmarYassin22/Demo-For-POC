@@ -161,7 +161,7 @@ export interface RequestData {
 export default function RequestDetails() {
   debugger;
   const location = useLocation();
-  const { waitingApproval, ownerId, platformName } = location.state || {}; // Fallback if state is missing
+  const { waitingApproval, ownerId, platformName,officeId } = location.state || {}; // Fallback if state is missing
 
   const { id, requestid } = useParams();
   const navigate = useNavigate();
@@ -302,29 +302,48 @@ debugger;
 
  
 
-
+const[waitingApprovalStatus,setWaitingApprovalStatus]=useState(waitingApproval);
 const [isFormTabVisible, setIsFormTabVisible] = useState(!waitingApproval);
 
-
-  const handleAccept = () => {
-    const updatedRequest = {
-      ...request,
-      waitingApproval: false,
-      result: {
-        status: "تم قبول الطلب",
-        date: new Date().toISOString(),
+const approveRequest = async ( type: "approve" | "reject") => {
+  //console.log(officeId +" re  "+requestid+"  فخنث :"+localStorage.getItem('Token'));
+  try {
+    const response = await axios.post(
+      "https://apiservicesstg.balady.gov.sa/v1/cad-engine/benaa/action",
+      {
+        type, // Dynamic type ("approve" or "reject")
+        channel: "balady-services",
+        reqNo: requestid, // Dynamic requestId
+        notes: "notes",
       },
-    };
-    setRequest(updatedRequest);
+      {
+        headers: {
+          officeId: officeId,
+          loginIdentityType: "2",
+          loginIdentityId: "1000100873",
+          "x-platform-id": "baladybusiness",
+          "x-provider-id": "64ed91f79d5cf006de8e3471",
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${localStorage.getItem('Token')}` // Replace with actual token
+        },
+      }
+    );
+
+    if( response.data.statusDetails.code==200) {
+setWaitingApprovalStatus(false);
+    }   
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
+  const handleAccept = async() => {
+    await approveRequest("approve");
     setIsFormTabVisible(true);
     alert("تم قبول الطلب بنجاح");
   };
 
-  const handleReject = () => {
-    const index = office.requests.findIndex((r) => r.number === requestid);
-    if (index > -1) {
-      office.requests.splice(index, 1);
-    }
+  const handleReject =async () => {
+    await approveRequest("reject");
     alert("تم رفض الطلب");
     navigate(`/offices/${id}/requests`);
   };
@@ -337,7 +356,7 @@ const [isFormTabVisible, setIsFormTabVisible] = useState(!waitingApproval);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const handleTabChange = (tab) => {
-    if (tab === "form" && waitingApproval) {
+    if (tab === "form" && waitingApprovalStatus) {
       alert("يجب قبول الطلب أولاً");
       return;
     }
@@ -419,12 +438,12 @@ const [isFormTabVisible, setIsFormTabVisible] = useState(!waitingApproval);
                   </div>
                   <span
                     className={`px-4 py-2 rounded-full text-sm ${
-                      waitingApproval
+                      waitingApprovalStatus
                         ? "bg-yellow-100 text-yellow-800"
                         : "bg-green-100 text-green-800"
                     }`}
                   >
-                    {waitingApproval ? "قيد الانتظار" : "مكتمل"}
+                    {waitingApprovalStatus ? "قيد الانتظار" : "مكتمل"}
                   </span>
                 </div>
 
@@ -477,7 +496,7 @@ const [isFormTabVisible, setIsFormTabVisible] = useState(!waitingApproval);
               </div>
 
               {/* Action Buttons */}
-              {waitingApproval && (
+              {waitingApprovalStatus && (
                 <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
                   <h2 className="text-xl font-semibold mb-4">إجراءات الطلب</h2>
                   <div className="flex gap-4">
@@ -500,7 +519,7 @@ const [isFormTabVisible, setIsFormTabVisible] = useState(!waitingApproval);
               )}
 
               {/* Result Section */}
-              {!waitingApproval  && (
+              {!waitingApprovalStatus  && (
                 <div className="bg-white rounded-lg shadow-lg p-6">
                   <h2 className="text-xl font-semibold mb-4">نتيجة الطلب</h2>
                   <div className="space-y-4">

@@ -40,7 +40,8 @@ export default function Offices() {
     const filteredRequests = office.requests.filter(
       (r) => !r.number.toLowerCase().includes("dlg")
     );
-
+// alert(office.requests.length);
+// alert(filteredRequests.length);
     // Now calculate the counts based on the filtered requests
     const requestCount = filteredRequests.length;
     const activeRequests = filteredRequests.filter(
