@@ -52,7 +52,6 @@ export default function Requests() {
   };
 
   useEffect(() => {
-    debugger;
     const expiration = localStorage.getItem("tokenExpiration");
     if (localStorage.getItem('Token')) {
 

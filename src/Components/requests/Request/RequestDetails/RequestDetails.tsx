@@ -159,7 +159,6 @@ export interface RequestData {
 //import data from "../../../../mocks/OfficeMock.json";
 //import Conditions from "../../Conditions";
 export default function RequestDetails() {
-  debugger;
   const location = useLocation();
   const { waitingApproval, ownerId, platformName,officeId } = location.state || {}; // Fallback if state is missing
 
@@ -213,12 +212,12 @@ const fetchOfficeData = async (officeId: string, providerId: string): Promise<Re
   };
 
   try {
-    debugger;
+     ;
     const response = await axios.get<{ result: RequestData }>(url, { headers });
-    debugger;
+     ;
     console.log(response.data) ; // Ensure it correctly extracts `result`
 setRequestBasic(response.data.data.result);
-debugger;
+ ;
 
      await fetchSurveyReport(response.data.data.result.krokiNo);
   
@@ -233,7 +232,7 @@ debugger;
 // Get Office Details
 const getOfficeDetails = async () => {
   try {
-    debugger;
+     ;
     if (!id || !requestid) throw new Error("Missing ID parameters");
      await fetchOfficeData(id, requestid);
    
@@ -260,7 +259,7 @@ const fetchSurveyReport = async (krokiNumber: number): Promise<SurveyReportRespo
 
   try {
     const response = await axios.post<SurveyReportResponse>(url, requestData, { headers });
-    debugger;
+     ;
    console.log("ob");
    console.log(response.data.data.result[0]);
 
@@ -274,14 +273,14 @@ const fetchSurveyReport = async (krokiNumber: number): Promise<SurveyReportRespo
 };
 
 useEffect(() => {
-  debugger;
+   ;
   
   const fetchData = async () => {
     if (localStorage.getItem("isLoggedIn") !== "true") {
       navigate("/login");
       return;
     }
-debugger;
+ ;
     const expiration = localStorage.getItem("tokenExpiration");
   if (localStorage.getItem('Token')) {
 

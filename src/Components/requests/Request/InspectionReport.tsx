@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import DataTable from "../../DataTable";
 import BackButton from '../../common/BackButton';
-
 import { ArrowLeft, Download } from "lucide-react"; // Replace Printer with Download
-import { createPresentation } from "../../../services/presentationService";
+import { jsPDF } from "jspdf";
+import { toPng } from "html-to-image"; // Alternative for high-quality PDF images
+import ArcReport from "../../ArcReport/ArcReport";
+import html2canvas from 'html2canvas';
+import StrReport from "../../ArcReport/StrReport";
+
 
 // Add this interface for type safety
 interface CategoryStatus {
@@ -32,14 +36,13 @@ const InspectionReport = () => {
     const ComplianceResultData = JSON.parse(localStorage.getItem("ComplianceResultData") || "{}");
     const visualCategoryDict = JSON.parse(localStorage.getItem("visualCategory") || "{}");
     const key = Object.keys(ComplianceResultData)[0];
-    console.log(visualCategoryDict);
-    console.log(ComplianceResultData[key].Results);
+
 
     const checkConditions = (category: string) => {
       let passedCount = 0;
 
       const conditionIds = visualCategoryDict[category] || [];
-  
+
 
       ComplianceResultData[key].Results.forEach(condition => {
         if (conditionIds.includes(condition.Code) && condition.Status) {
@@ -62,7 +65,6 @@ const InspectionReport = () => {
     // Store the visual category status in local storage
     localStorage.setItem("visualCategoryStatus", JSON.stringify(visualCategoryStatus));
 
-    console.log("Visual Category Status:", visualCategoryStatus);
 
     // Add this to existing useEffect:
     const storedVisualStatus = localStorage.getItem("visualCategoryStatus");
@@ -74,7 +76,7 @@ const InspectionReport = () => {
 
     // Group conditions by category and check their status
     const statuses: CategoryStatus = {};
-    
+
     Object.entries(CondintionsCodeBenaa).forEach(([category, codes]) => {
       const conditionStatuses = (codes as string[]).map(code => ({
         code,
@@ -97,52 +99,69 @@ const InspectionReport = () => {
   const data = parsedData[dynamicKey]?.Results;
 
   const handleAction = (id: string) => {
-    console.log("Action triggered for ID:", id);
   };
 
 
   const handleBackAction = () => {
     navigate(`/offices/${officeId}/request/${requestId}`);
   };
+  const reportRef = useRef(null);
+  const handleDownloadReport = async () => {
+    if (!reportRef.current) {
+      console.error("ArcReport is not ready yet!");
+      return;
+    }
 
-  const handleExportPresentation = async () => {
-    const reportData = {
-      total: data.length,
-      matched: data.filter(item => item.Status === true).length,
-      unmatched: data.filter(item => item.Status === false).length,
-      results: data,
-      visualStatus,
-      categoryStatuses,
-    };
 
     try {
-      await createPresentation(reportData);
+      const pdf = new jsPDF({
+        orientation: "p",
+        unit: "mm",
+        format: "a4",
+        compress: true,
+      });
+
+      const pdfWidth = 210;
+      const pdfHeight = 297;
+      const marginLeft = 10;
+      const marginTop = 15;
+      const contentWidth = pdfWidth - 2 * marginLeft;
+      const contentHeight = pdfHeight - 2 * marginTop;
+
+      const sections = reportRef.current.querySelectorAll(".page-section");
+
+      for (let i = 0; i < sections.length; i++) {
+        const section = sections[i];
+
+        const canvas = await html2canvas(section, {
+          scale: 1.5,
+          backgroundColor: "#ffffff",
+          useCORS: true,
+        });
+
+        const imgData = canvas.toDataURL("image/jpeg", 0.7); // ✅ Use JPEG for smaller file size
+
+        const imgWidth = contentWidth; // ✅ Fit exactly inside margins
+        let imgHeight = (canvas.height * imgWidth) / canvas.width; // ✅ Maintain aspect ratio
+
+        if (imgHeight > contentHeight) {
+          imgHeight = contentHeight;
+        }
+
+        if (i > 0) {
+          pdf.addPage();
+        }
+        pdf.addImage(imgData, "JPEG", marginLeft, marginTop, imgWidth, imgHeight, "", "MEDIUM");
+      }
+      if (localStorage.getItem("reportType") == 'str')
+        pdf.save("نتائج الفحص الإنشائى.pdf");
+      else
+        pdf.save("نتائج الفحص المعمارى.pdf");
     } catch (error) {
-      console.error('Error creating presentation:', error);
-      // Add error handling/notification here
+      console.error("Error generating PDF:", error);
     }
   };
 
-  // Add filter handling functions
-  const handleFilter = (filterType) => {
-    let filtered;
-    switch (filterType) {
-      case 'matched':
-        filtered = data.filter(item => item.Status === true);
-        break;
-      case 'unmatched':
-        filtered = data.filter(item => item.Status === false && item.Result !== "اخري");
-        break;
-      case 'other':
-        filtered = data.filter(item => item.Status !== true && item.Result === "اخري");
-        break;
-      default:
-        filtered = null;
-    }
-    setFilteredData(filtered);
-  };
-
-  // Add new columns configuration with status indicators
   const columns = [
     {
       accessorKey: "Description",
@@ -210,12 +229,27 @@ const InspectionReport = () => {
       <div className="flex justify-between items-center mb-6">
         <BackButton onClick={handleBackAction} className="back-button" />
         <button
-          onClick={handleExportPresentation}
+          onClick={handleDownloadReport}
           className="print-button flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
         >
           <Download size={20} />
-          <span>تحميل العرض التقديمي</span>
+          <span>تحميل التقرير</span>
         </button>
+      </div>
+      <div
+        ref={reportRef}
+        style={{
+          position: "absolute",
+          left: "-9999px",
+          top: "0",
+          width: "100%",
+          height: "auto",
+          padding: '20px',
+          opacity: 0,
+          pointerEvents: "none",
+        }}
+      >
+        {localStorage.getItem("reportType") === "arc" ? <ArcReport /> : <StrReport />}
       </div>
       <div className="max-w-7xl mx-auto space-y-6"> {/* Increased max-width for better split view */}
         {/* Main Title */}
@@ -372,7 +406,7 @@ const InspectionReport = () => {
                   >
                     <span>أخرى</span>
                     <span className="inline-flex items-center justify-center px-2 py-0.5 text-xs font-medium rounded-full bg-yellow-200 text-yellow-800">
-                      {data.filter(item => item.Status !== true&& item.Result === "اخري").length}
+                      {data.filter(item => item.Status !== true && item.Result === "اخري").length}
                     </span>
                   </span>
                 </div>
@@ -460,11 +494,10 @@ const InspectionReport = () => {
               <div key={category} className="border rounded-lg p-4">
                 <div className="flex justify-between items-center mb-2">
                   <h3 className="font-medium">{category}</h3>
-                  <span className={`px-3 py-1 rounded-full text-sm ${
-                    status.passed === status.total 
-                      ? 'bg-green-100 text-green-700'
-                      : 'bg-red-100 text-red-700'
-                  }`}>
+                  <span className={`px-3 py-1 rounded-full text-sm ${status.passed === status.total
+                    ? 'bg-green-100 text-green-700'
+                    : 'bg-red-100 text-red-700'
+                    }`}>
                     {status.passed === status.total ? 'تحقق' : 'لم يتحقق'}
                   </span>
                 </div>
@@ -474,9 +507,8 @@ const InspectionReport = () => {
                 <div className="mt-2 space-y-1">
                   {status.conditions.map((condition) => (
                     <div key={condition.code} className="flex items-center gap-2 text-sm">
-                      <span className={`w-2 h-2 rounded-full ${
-                        condition.status ? 'bg-green-400' : 'bg-red-400'
-                      }`}></span>
+                      <span className={`w-2 h-2 rounded-full ${condition.status ? 'bg-green-400' : 'bg-red-400'
+                        }`}></span>
                       <span>{condition.code}</span>
                     </div>
                   ))}
@@ -490,46 +522,4 @@ const InspectionReport = () => {
     </div>
   );
 };
-
-// Add this style to your global CSS or create a new style tag in your HTML
-const printStyles = `
-  @media print {
-    @page {
-      size: A4;
-      margin: 20mm;
-    }
-    
-    body {
-      background: white !important;
-    }
-
-    .back-button,
-    .print-button {
-      display: none !important;
-    }
-
-    .max-w-7xl {
-      max-width: none !important;
-      margin: 0 !important;
-    }
-
-    .bg-gray-100 {
-      background: white !important;
-    }
-
-    .shadow-lg {
-      box-shadow: none !important;
-    }
-
-    .rounded-xl {
-      border-radius: 0 !important;
-    }
-  }
-`;
-
-// Add the styles to the document
-const styleElement = document.createElement('style');
-styleElement.textContent = printStyles;
-document.head.appendChild(styleElement);
-
 export default InspectionReport;
