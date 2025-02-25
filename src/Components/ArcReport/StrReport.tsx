@@ -40,7 +40,8 @@ const StyleWrapper = styled.div`
     border-radius: 20px 0 0 0;
     padding: 1rem;
     position: relative;
-    height: 17rem;
+    max-height: 17rem;
+    height: fit-content;
   }
 
   .box::after {
@@ -111,10 +112,11 @@ const StyleWrapper = styled.div`
 
   .header {
     display: flex;
-    gap: 20px;
+    gap: 10px;
     height: 70px;
     justify-content: start;
     margin-bottom: 0.5rem;
+    align-items: end;
   }
 
   .header-title {
@@ -124,13 +126,15 @@ const StyleWrapper = styled.div`
   }
 
   .header-body {
-    font-size: 30px;
+  text-align: right;
+    font-size: 25px;
     font-weight: 800;
-    margin-top: -0.5rem;
     color: gray;
+    margin: 0;
   }
 
   .content {
+  height: 100%;
     display: flex;
     align-items: center;
   }
@@ -461,7 +465,7 @@ const StyleWrapper = styled.div`
 
     .header {
       height: auto !important;
-      gap: 0.2rem !important;
+      gap: 0.1rem !important;
       margin-bottom: 0.2rem !important;
     }
 
@@ -1106,7 +1110,7 @@ interface ConditionStates {
   [key: string]: boolean;
 }
 
-const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
+const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
 
   const [conditionStutes, setConditionState] = useState<ConditionStates>({});
   useEffect(() => {
@@ -1124,33 +1128,29 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
   return (
     <StyleWrapper ref={ref} style={{ direction: "rtl" }}> {/* ✅ Attach ref properly */}
       <div className="page-section">
-      <img src="/header.png" style={{width:'100%'}} alt="" />
+        <img src="/header.png" style={{ width: '100%' }} alt="" />
         <div className="section-header">
-          <img src="/3d-conditions_images/image.png" style={{marginTop:'1rem'}} alt="" />
-          <h1 className="section-title">المتطلبات المعمارية</h1>
+          <img src="/3d-conditions_images/image.png" style={{ marginTop: '1rem' }} alt="" />
+          <h1 className="section-title">   المتطلبات الإنشائية</h1>
         </div>
         <div className="conditions-grid">
           <div className="cond">
             <div className="header">
               <img src="/3d-conditions_images/house.png" />
-              <div classname="main-header">
-                <p className="header-title">الفراغات الداخلية</p>
-                <p className="header-body">مساحة الغرف السكنية</p>
+              <div className="main-header">
+                <p className="header-body"> العمود المستطيل</p>
               </div>
             </div>
             <div className="box">
               <div className="content">
                 <div style={{ minWidth: "50%" }}>
                   <p className="content-body">
-                    يجب الا تقل مساحة ارضية الغرف السكنية عن 6.5 م2.
-                    <br />
-                    <br />
-                    لا يقل اي بعد افقي للغرف السكنية عن 2.1 م يستثنى المطبخ
-                    والحمامات ودورات المياه.
-                    <span>2.1 م</span>.
+
+                    يجب ألا يقل أقل بعد للمقطع العرضي للعمود المستطيل عن 0.2 م، ويجب إلا تزيد نسبة بعد المقطع العرضي الطويل إلى البعد القصير عن3، إلا في أنظمة عمود-بلاطة، حيث يجب ألا تتجاوز 2.
+
                   </p>
                 </div>
-                <img src="/3d-conditions_images/slide1image1.png" alt />
+                <img src="/Str/slide1image1.png" alt />
               </div>
             </div>
             <div
@@ -1166,11 +1166,11 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["مساحة الغرف السكنية"] === true}
+                        conditionStutes["العمود المستطيل"] === true}
                       readOnly
-                      id="مساحة الغرف السكنية 1" />
+                      id="العمود المستطيل 1" />
                     <label
-                      htmlFor="مساحة الغرف السكنية 1"
+                      htmlFor="العمود المستطيل 1"
                       className="check-box"
                     />
                   </div>
@@ -1179,10 +1179,10 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <p>لم يتحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["مساحة الغرف السكنية"] === false}
-                      readOnly id="مساحة الغرف السكنية -1" />
+                      conditionStutes["العمود المستطيل"] === false}
+                      readOnly id="العمود المستطيل -1" />
                     <label
-                      htmlFor="مساحة الغرف السكنية -1"
+                      htmlFor="العمود المستطيل -1"
                       className="check-box"
                     />
                   </div>
@@ -1192,10 +1192,10 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
 
-                      !Object.prototype.hasOwnProperty.call(conditionStutes, "مساحة الغرف السكنية")}
-                      readOnly id="مساحة الغرف السكنية 0" />
+                      !Object.prototype.hasOwnProperty.call(conditionStutes, "العمود المستطيل")}
+                      readOnly id="العمود المستطيل 0" />
                     <label
-                      htmlFor="مساحة الغرف السكنية 0"
+                      htmlFor="العمود المستطيل 0"
                       className="check-box"
                     />
                   </div>
@@ -1207,18 +1207,17 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
             <div className="header">
               <img src="/3d-conditions_images/house.png" alt />
               <div classname="main-header">
-                <p className="header-title">الفراغات الداخلية</p>
-                <p className="header-body">الممرات الداخلية</p>
+                <p className="header-body">العمود الدائري</p>
               </div>
             </div>
             <div className="box">
               <div className="content">
                 <div style={{ minWidth: "50%" }}>
                   <p className="content-body">
-                    لا يقل عرض الممرات الداخلية عن 0.9 م
+                    يجب أن يكون قطر الأعمدة ذات المقطع العرضي الدائري 0.3 م على الأقل.
                   </p>
                 </div>
-                <img src="/3d-conditions_images/slide1image2.png" alt />
+                <img src="/Str/slide1image2.png" alt />
               </div>
             </div>
             <div
@@ -1233,9 +1232,9 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <p>تحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["الممرات الداخلية"] === true}
-                      readOnly id="الممرات الداخلية 1" />
-                    <label htmlFor="الممرات الداخلية 1" className="check-box" />
+                      conditionStutes["العمود الدائري"] === true}
+                      readOnly id="العمود الدائري 1" />
+                    <label htmlFor="العمود الدائري 1" className="check-box" />
                   </div>
                 </div>
                 <div className="check">
@@ -1243,11 +1242,11 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["الممرات الداخلية"] === false}
+                        conditionStutes["العمود الدائري"] === false}
                       readOnly
-                      id="الممرات الداخلية -1" />
+                      id="العمود الدائري -1" />
                     <label
-                      htmlFor="الممرات الداخلية -1"
+                      htmlFor="العمود الدائري -1"
                       className="check-box"
                     />
                   </div>
@@ -1256,9 +1255,9 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <p>لا ينطبق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      !Object.prototype.hasOwnProperty.call(conditionStutes, "الممرات الداخلية")}
-                      readOnly id="الممرات الداخلية 0" />
-                    <label htmlFor="الممرات الداخلية 0" className="check-box" />
+                      !Object.prototype.hasOwnProperty.call(conditionStutes, "العمود الدائري")}
+                      readOnly id="العمود الدائري 0" />
+                    <label htmlFor="العمود الدائري 0" className="check-box" />
                   </div>
                 </div>
               </div>
@@ -1268,25 +1267,18 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
             <div className="header">
               <img src="/3d-conditions_images/house.png" alt />
               <div classname="main-header">
-                <p className="header-title">الفراغات الداخلية</p>
-                <p className="header-body">الارتفاعات الداخلية</p>
+                <p className="header-body">سمك الجدار</p>
               </div>
             </div>
             <div className="box">
               <div className="content">
                 <div style={{ minWidth: "50%" }}>
                   <p className="content-body">
-                    يجب الالتزام بالحد الأدنى لصافي الارتفاع الداخلي للدور
-                    الواحد مقاساً من مستوى السطح النهائي للأرضية حتى بطنية سقفه
-                    الظاهر في جميع الأدوار
-                    <br />
-                    <br />
-                    <br />
-                    لا يقل ارتفاع سقف الغرف السكنية والممرات والطوابق السفلية عن
-                    <span>2.1 م</span>.
+                    يجب ألا يقل سمك الجدار عن 0.2 م.
+
                   </p>
                 </div>
-                <img src="/3d-conditions_images/slide1images3.png" alt />
+                <img src="/Str/slide1image3.png" alt />
               </div>
             </div>
             <div
@@ -1303,11 +1295,11 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                     <input type="checkbox"
 
                       checked={
-                        conditionStutes["الارتفاعات الداخلية"] === true}
+                        conditionStutes["سمك الجدار"] === true}
                       readOnly
-                      id="الارتفاعات الداخلية 1" />
+                      id="سمك الجدار 1" />
                     <label
-                      htmlFor="الارتفاعات الداخلية 1"
+                      htmlFor="سمك الجدار 1"
                       className="check-box"
                     />
                   </div>
@@ -1316,10 +1308,10 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <p>لم يتحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["الارتفاعات الداخلية"] === false}
-                      readOnly id="الارتفاعات الداخلية -1" />
+                      conditionStutes["سمك الجدار"] === false}
+                      readOnly id="سمك الجدار -1" />
                     <label
-                      htmlFor="الارتفاعات الداخلية -1"
+                      htmlFor="سمك الجدار -1"
                       className="check-box"
                     />
                   </div>
@@ -1328,10 +1320,10 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <p>لا ينطبق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      !Object.prototype.hasOwnProperty.call(conditionStutes, "الارتفاعات الداخلية")}
-                      readOnly id="الارتفاعات الداخلية 0" />
+                      !Object.prototype.hasOwnProperty.call(conditionStutes, "سمك الجدار")}
+                      readOnly id="سمك الجدار 0" />
                     <label
-                      htmlFor="الارتفاعات الداخلية 0"
+                      htmlFor="سمك الجدار 0"
                       className="check-box"
                     />
                   </div>
@@ -1343,27 +1335,18 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
             <div className="header">
               <img src="/3d-conditions_images/house.png" alt />
               <div classname="main-header">
-                <p className="header-title">الفراغات الداخلية</p>
-                <p className="header-body">الإضاءة الطبيعية</p>
+                <p className="header-body">بعد القاعدة الأصغر</p>
               </div>
             </div>
             <div className="box">
               <div className="content">
-                <div style={{ minWidth: "60%" }}>
+                <div >
                   <p className="content-body">
-                    <br />
-                    يجب ألا تقل مساحة الزجاج المستخدم للإضاءة الطبيعية عن
-                    <span>(8%)</span> من مساحة أرضية الغرفة، ولا يقل الجزء
-                    القابل للفتح عن<span> 4%</span> من مساحة الغرفة (للتهوية
-                    الطبيعية).
-                    <br />
-                    <br />
-                    <br />
-                    يجب لا تقل مساحة نوافذ دورات المياه والحمامات عن
-                    <span> 0.30م2،</span> ويكون نصفها قابل للفتح.
+                    يجب أن يكون بعد القاعدة الأصغر 1.0 م.
+
                   </p>
                 </div>
-                <img src="/3d-conditions_images/slide1image4.png" alt />
+                <img src="/Str/slide1image4.png" alt />
               </div>
             </div>
             <div
@@ -1378,19 +1361,19 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <p>تحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["الإضاءة الطبيعية"] === true}
-                      readOnly id="الإضاءة الطبيعية 1" />
-                    <label htmlFor="الإضاءة الطبيعية 1" className="check-box" />
+                      conditionStutes?.["بعد القاعدة الأصغر"] === true}
+                      readOnly id="بعد القاعدة الأصغر 1" />
+                    <label htmlFor="بعد القاعدة الأصغر 1" className="check-box" />
                   </div>
                 </div>
                 <div className="check">
                   <p>لم يتحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["الإضاءة الطبيعية"] === false}
-                      readOnly id="الإضاءة الطبيعية -1" />
+                      conditionStutes["بعد القاعدة الأصغر"] === false}
+                      readOnly id="بعد القاعدة الأصغر -1" />
                     <label
-                      htmlFor="الإضاءة الطبيعية -1"
+                      htmlFor="بعد القاعدة الأصغر -1"
                       className="check-box"
                     />
                   </div>
@@ -1399,9 +1382,9 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <p>لا ينطبق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      !Object.prototype.hasOwnProperty.call(conditionStutes, "الإضاءة الطبيعية")}
-                      readOnly id="الإضاءة الطبيعية 0" />
-                    <label htmlFor="الإضاءة الطبيعية 0" className="check-box" />
+                      !Object.prototype.hasOwnProperty.call(conditionStutes, "بعد القاعدة الأصغر")}
+                      readOnly id="بعد القاعدة الأصغر 0" />
+                    <label htmlFor="بعد القاعدة الأصغر 0" className="check-box" />
                   </div>
                 </div>
               </div>
@@ -1411,19 +1394,17 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
             <div className="header">
               <img src="/3d-conditions_images/house.png" alt />
               <div classname="main-header">
-                <p className="header-title">الفراغات الداخلية</p>
-                <p className="header-body">داربزين الحماية</p>
+                <p className="header-body">المسافة بين سطح التربة والقاعدة</p>
               </div>
             </div>
             <div className="box">
               <div className="content">
                 <div style={{ minWidth: "50%" }}>
                   <p className="content-body">
-                    يجب أن لا يقل ارتفاع درابزين الشرفات والسلالم المفتوحة في
-                    الفلل السكنية عن <span> ( من 0.85 م إلى 0.95 م)</span>.
+                    يجب أن تكون المسافة الدنيا من سطح التربة إلى  قاع القاعدة لا تقل 1.0 م.
                   </p>
                 </div>
-                <img src="/3d-conditions_images/slide1imaeg5.png" alt />
+                <img src="/Str/slide1image5.png" alt />
               </div>
             </div>
             <div
@@ -1438,27 +1419,27 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <p>تحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["داربزين الحماية"] === true}
-                      readOnly id="داربزين الحماية 1" />
-                    <label htmlFor="داربزين الحماية 1" className="check-box" />
+                      conditionStutes["المسافة بين سطح التربة والقاعدة"] === true}
+                      readOnly id="المسافة بين سطح التربة والقاعدة 1" />
+                    <label htmlFor="المسافة بين سطح التربة والقاعدة 1" className="check-box" />
                   </div>
                 </div>
                 <div className="check">
                   <p>لم يتحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["داربزين الحماية"] === false}
-                      readOnly id="داربزين الحماية -1" />
-                    <label htmlFor="داربزين الحماية -1" className="check-box" />
+                      conditionStutes["المسافة بين سطح التربة والقاعدة"] === false}
+                      readOnly id="المسافة بين سطح التربة والقاعدة -1" />
+                    <label htmlFor="المسافة بين سطح التربة والقاعدة -1" className="check-box" />
                   </div>
                 </div>
                 <div className="check">
                   <p>لا ينطبق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      !Object.prototype.hasOwnProperty.call(conditionStutes, "داربزين الحماية")}
-                      readOnly id="داربزين الحماية 0" />
-                    <label htmlFor="داربزين الحماية 0" className="check-box" />
+                      !Object.prototype.hasOwnProperty.call(conditionStutes, "المسافة بين سطح التربة والقاعدة")}
+                      readOnly id="المسافة بين سطح التربة والقاعدة 0" />
+                    <label htmlFor="المسافة بين سطح التربة والقاعدة 0" className="check-box" />
                   </div>
                 </div>
               </div>
@@ -1468,20 +1449,18 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
             <div className="header">
               <img src="/3d-conditions_images/house.png" alt />
               <div classname="main-header">
-                <p className="header-title">الفراغات الداخلية</p>
-                <p className="header-body">ارتفاع المبنى</p>
+                <p className="header-body">أبعاد الكمرة</p>
               </div>
             </div>
             <div className="box">
               <div className="content">
                 <div style={{ minWidth: "54%" }}>
                   <p className="content-body">
-                    مراجعة الارتفاع الكلي للفيلا السكنية وفقاً لاشتراطات
-                    الامانات والبلديات
+                    يجب ألا تقل نسبة العرض الى الارتفاع للكمرة عن 0.3 ويجب ألا يقل العرض عن 0.2 م ولا يتجاوز عرض العمود الداعم مضافاً اليه (0.75 h) على كل جانب من العمود الداعم.
                   </p>
                 </div>
                 <img
-                  src="/3d-conditions_images/slide1image6.png"
+                  src="/Str/slide1image6.png"
                   alt
                   style={{ marginLeft: "1rem" }}
                 />
@@ -1499,27 +1478,27 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <p>تحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["ارتفاع المبنى"] === true}
-                      readOnly id="ارتفاع المبنى 1" />
-                    <label htmlFor="ارتفاع المبنى 1" className="check-box" />
+                      conditionStutes["أبعاد الكمرة"] === true}
+                      readOnly id="أبعاد الكمرة 1" />
+                    <label htmlFor="أبعاد الكمرة 1" className="check-box" />
                   </div>
                 </div>
                 <div className="check">
                   <p>لم يتحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["ارتفاع المبنى"] === false}
-                      readOnly id="ارتفاع المبنى -1" />
-                    <label htmlFor="ارتفاع المبنى -1" className="check-box" />
+                      conditionStutes["أبعاد الكمرة"] === false}
+                      readOnly id="أبعاد الكمرة -1" />
+                    <label htmlFor="أبعاد الكمرة -1" className="check-box" />
                   </div>
                 </div>
                 <div className="check">
                   <p>لا ينطبق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      !Object.prototype.hasOwnProperty.call(conditionStutes, "ارتفاع المبنى")}
-                      readOnly id="ارتفاع المبنى 0" />
-                    <label htmlFor="ارتفاع المبنى 0" className="check-box" />
+                      !Object.prototype.hasOwnProperty.call(conditionStutes, "أبعاد الكمرة")}
+                      readOnly id="أبعاد الكمرة 0" />
+                    <label htmlFor="أبعاد الكمرة 0" className="check-box" />
                   </div>
                 </div>
               </div>
@@ -1529,26 +1508,18 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
             <div className="header">
               <img src="/3d-conditions_images/house.png" alt />
               <div classname="main-header">
-                <p className="header-title">الفراغات الداخلية</p>
-                <p className="header-body">سترة السطح</p>
+                <p className="header-body">عمق القاعدة فوق التسليح السفلي</p>
               </div>
             </div>
             <div className="box">
               <div className="content">
                 <div style={{ minWidth: "50%" }}>
                   <p className="content-body">
-                    <br />
-                    الحد الأدنى لارتفاع سترة السطح <span> (1.70م)</span>، والحد
-                    الأعلى <span>(2م)</span> مقاساً من منسوب أرضية السطح.
-                    <br />
-                    <br />
-                    <br />
-                    الحد الأدنى لارتفاع سترة ملحق السطح <span>(0.4 م)</span>
-                    {"{"}" "{"}"}
-                    والحد الأعلى <span>(0.8 م)</span>
+                    يجب ألا يقل عمق القاعدة فوق التسليح السفلي عن 0.3 م.
+
                   </p>
                 </div>
-                <img src="/3d-conditions_images/slide1imaeg7.png" alt />
+                <img src="/Str/slide1image7.png" alt />
               </div>
             </div>
             <div
@@ -1563,27 +1534,27 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <p>تحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["سترة السطح"] === true}
-                      readOnly id="سترة السطح 1" />
-                    <label htmlFor="سترة السطح 1" className="check-box" />
+                      conditionStutes["عمق القاعدة فوق التسليح السفلي"] === true}
+                      readOnly id="عمق القاعدة فوق التسليح السفلي 1" />
+                    <label htmlFor="عمق القاعدة فوق التسليح السفلي 1" className="check-box" />
                   </div>
                 </div>
                 <div className="check">
                   <p>لم يتحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["سترة السطح"] === false}
-                      readOnly id="سترة السطح -1" />
-                    <label htmlFor="سترة السطح -1" className="check-box" />
+                      conditionStutes["عمق القاعدة فوق التسليح السفلي"] === false}
+                      readOnly id="عمق القاعدة فوق التسليح السفلي -1" />
+                    <label htmlFor="عمق القاعدة فوق التسليح السفلي -1" className="check-box" />
                   </div>
                 </div>
                 <div className="check">
                   <p>لا ينطبق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      !Object.prototype.hasOwnProperty.call(conditionStutes, "سترة السطح")}
-                      readOnly id="سترة السطح 0" />
-                    <label htmlFor="سترة السطح 0" className="check-box" />
+                      !Object.prototype.hasOwnProperty.call(conditionStutes, "عمق القاعدة فوق التسليح السفلي")}
+                      readOnly id="عمق القاعدة فوق التسليح السفلي 0" />
+                    <label htmlFor="عمق القاعدة فوق التسليح السفلي 0" className="check-box" />
                   </div>
                 </div>
               </div>
@@ -1593,28 +1564,18 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
             <div className="header">
               <img src="/3d-conditions_images/house.png" alt />
               <div classname="main-header">
-                <p className="header-title">الفراغات الداخلية</p>
-                <p className="header-body">المدخل الخارجي</p>
+                <p className="header-body">الخزانات</p>
               </div>
             </div>
             <div className="box">
-              <div className="content">
+              <div className="content" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                 <div style={{ minWidth: "65%", fontSize: "10px" }}>
                   <p className="content-body">
-                    يجب توفير ما لا يقل عن باب خروج واحد لكل وحدة سكنية، كما يجب
-                    عمل باب الخروج بمفصالات جانبية، وبعرض صافي لا يقل عن
-                    <span>0.8 م</span> تقاس من واجهة الباب إلى أخر نقطة له وذلك
-                    في حال فتح الباب بزاوية <span>90</span> درجة وفيما يخص
-                    الارتفاع ا الباب فلابد الا يقل عن <span>1.950 م</span> تقاس
-                    من اعلى العتبة إلى اسفلها. ولا يلزم التزام الأبواب الأخرى
-                    بهذه الأبعاد الدقيقة.
-                    <br />
-                    <br />
-                    يجب الحرص على إمكانية فتح أبواب الخروج بسهولة من داخل المسكن
-                    دون الحاجة إلى مفتاح او بذل مجهود كبير.
+                    يحب أن يكون للخزانات شكل مستطيل وألا يزيد الطول عن 6 وألا يزيد الارتفاع 3.5 وأن تكون النسبة بين الطول إلى العرض بين 1 و1.5
+
                   </p>
                 </div>
-                <img src="/3d-conditions_images/slide1image8.png" alt />
+                <img src="/Str/slide1image8.png" alt />
               </div>
             </div>
             <div
@@ -1629,18 +1590,18 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <p>تحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["المدخل الخارجي"] === true}
-                      readOnly id="المدخل الخارجي 1" />
-                    <label htmlFor="المدخل الخارجي 1" className="check-box" />
+                      conditionStutes["الخزانات"] === true}
+                      readOnly id="الخزانات 1" />
+                    <label htmlFor="الخزانات 1" className="check-box" />
                   </div>
                 </div>
                 <div className="check">
                   <p>لم يتحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["المدخل الخارجي"] === false}
-                      readOnly id="المدخل الخارجي -1" />
-                    <label htmlFor="المدخل الخارجي -1" className="check-box" />
+                      conditionStutes["الخزانات"] === false}
+                      readOnly id="الخزانات -1" />
+                    <label htmlFor="الخزانات -1" className="check-box" />
                   </div>
                 </div>
                 <div className="check">
@@ -1648,10 +1609,10 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        !Object.prototype.hasOwnProperty.call(conditionStutes, "المدخل الخارجي")}
+                        !Object.prototype.hasOwnProperty.call(conditionStutes, "الخزانات")}
 
-                      id="المدخل الخارجي 0" />
-                    <label htmlFor="المدخل الخارجي 0" className="check-box" />
+                      id="الخزانات 0" />
+                    <label htmlFor="الخزانات 0" className="check-box" />
                   </div>
                 </div>
               </div>
@@ -1665,31 +1626,26 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
 
         <div className="section-header">
           <img src="/3d-conditions_images/image.png" alt />
-          <h1 className="section-title">المتطلبات المعمارية</h1>
+          <h1 className="section-title">المتطلبات الإنشائية</h1>
         </div>
         <div className="conditions-grid">
           <div className="cond">
             <div className="header">
               <img src="/3d-conditions_images/house.png" alt />
               <div className="main-header">
-                <p className="header-title">الفراغات الداخلية</p>
-                <p className="header-body">نسب البناء</p>
+                <p className="header-title">البلاطات الهوردي أحادية الاتجاه   </p>
+                <p className="header-body">عرض العصب</p>
               </div>
             </div>
             <div className="box">
               <div className="content">
                 <div style={{ minWidth: '40%' }}>
                   <p className="content-body">
-                    <br />
-                    <br />
-                    مراجعة نسبة البناء في الدور الأرضي والأول وفقاً لاشتراطات
-                    الامانات والبلديات.
-                    <br />
-                    <br />
-                    يسمح بعمل ملحق ارضي وذلك وفقاً لاشتراطات الامانات والبلديات.
+                    يجب ألا يقل عرض العصب في البلاطت الهوردي أحادية الاتجاه عن 0.10م.
+
                   </p>
                 </div>
-                <img src="/3d-conditions_images/slide2image1.png" alt />
+                <img src="/Str/slide2image1.png" alt />
               </div>
             </div>
             <div style={{ backgroundColor: '#ddefec !important', justifyItems: 'center', borderRadius: '0 0 25px 25px !important', maxHeight: '2.8rem' }}>
@@ -1698,7 +1654,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <p>تحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["نسب البناء"] === true}
+                      conditionStutes["عرض العصب"] === true}
                       readOnly id="cbtest-1" />
                     <label htmlFor="cbtest-1" className="check-box" />
                   </div>
@@ -1707,7 +1663,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <p>لم يتحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["نسب البناء"] === false}
+                      conditionStutes["عرض العصب"] === false}
                       readOnly id="cbtest-2" />
                     <label htmlFor="cbtest-2" className="check-box" />
                   </div>
@@ -1717,7 +1673,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        !Object.prototype.hasOwnProperty.call(conditionStutes, "نسب البناء")}
+                        !Object.prototype.hasOwnProperty.call(conditionStutes, "عرض العصب")}
                       readOnly
                       id="cbtest-3" />
                     <label htmlFor="cbtest-3" className="check-box" />
@@ -1730,23 +1686,19 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
             <div className="header">
               <img src="/3d-conditions_images/house.png" alt />
               <div className="main-header">
-                <p className="header-title">الفراغات الداخلية</p>
-                <p className="header-body">الارتداد في حالة شوارع جانبية</p>
+                <p className="header-title"> البلاطات الهوردي أحادية الاتجاه   </p>
+                <p className="header-body">ارتفاع الكلي للعصب</p>
               </div>
             </div>
             <div className="box">
               <div className="content">
                 <div style={{ minWidth: '45%' }}>
                   <p className="content-body">
-                    <br />
-                    <br />
-                    <br />
-                    مراجعة الارتدادت وفقاً لاشتراطات الامانات والبلديات.
-                    <br />
-                    يسمح بعمل بروز وذلك وفقا لاشتراطات الامانات والبلديات.
+                    يجب ألا يزيد ارتفاع الكلي للعصب في البلاطات الهوردي أحادية الاتجاه عن 3.5*عرض العصب.
+
                   </p>
                 </div>
-                <img src="/3d-conditions_images/slide2image2.png" alt />
+                <img src="/Str/slide2image2.png" alt />
               </div>
             </div>
             <div style={{ backgroundColor: '#ddefec !important', justifyItems: 'center', borderRadius: '0 0 25px 25px !important', maxHeight: '2.8rem' }}>
@@ -1756,7 +1708,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["الارتداد في حالة شوارع جانبية"] === true}
+                        conditionStutes["ارتفاع الكلي للعصب"] === true}
                       id="cbtest-4" defaultChecked />
                     <label htmlFor="cbtest-4" className="check-box" />
                   </div>
@@ -1766,7 +1718,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["الارتداد في حالة شوارع جانبية"] === false}
+                        conditionStutes["ارتفاع الكلي للعصب"] === false}
                       id="cbtest-5" />
                     <label htmlFor="cbtest-5" className="check-box" />
                   </div>
@@ -1776,7 +1728,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        !Object.prototype.hasOwnProperty.call(conditionStutes, "الارتداد في حالة شوارع جانبية")}
+                        !Object.prototype.hasOwnProperty.call(conditionStutes, "ارتفاع الكلي للعصب")}
                       id="cbtest-6" />
                     <label htmlFor="cbtest-6" className="check-box" />
                   </div>
@@ -1788,19 +1740,18 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
             <div className="header">
               <img src="/3d-conditions_images/house.png" alt />
               <div className="main-header">
-                <p className="header-title">الفراغات الداخلية</p>
-                <p className="header-body">ملحق علوي</p>
+                <p className="header-title"> البلاطات الهوردي أحادية الاتجاه   </p>
+                <p className="header-body"> المسافة الصافية بين الأعصاب   </p>
               </div>
             </div>
             <div className="box">
               <div className="content">
                 <div style={{ minWidth: '50%' }}>
                   <p className="content-body">
-                    يجب أن يكون الملحق العلوي مطابقاً لاشتراطات الأمانات
-                    والبلديات.
+                    يجب ألا تزيد المسافة الصافية بين الأعصاب في البلاطات الهوردي أحادية الاتجاه عن 0.75 م
+
                   </p>
                 </div>
-                <img src="/3d-conditions_images/slide2image3.png" alt />
               </div>
             </div>
             <div style={{ backgroundColor: '#ddefec !important', justifyItems: 'center', borderRadius: '0 0 25px 25px !important', maxHeight: '2.8rem' }}>
@@ -1842,18 +1793,17 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
             <div className="header">
               <img src="/3d-conditions_images/house.png" alt />
               <div className="main-header">
-                <p className="header-title">الفراغات الداخلية</p>
-                <p className="header-body">الارتداد في حالة الجار</p>
+                <p className="header-title"> البلاطات الهوردي أحادية الاتجاه   </p>
+                <p className="header-body">سمك البلاطة فوق الاعصاب</p>
               </div>
             </div>
             <div className="box">
               <div className="content">
                 <div style={{ minWidth: '50%' }}>
                   <p className="content-body">
-                    يجب مراجعة الارتدادات وفقاً لاشتراطات الأمانات والبلديات.
+                    يجب ألا يقل سمك البلاطة فوق الأعصاب في البلاطات الهوردي أحادية الاتجاه عن الاكبر من 0.05 م والمسافة الصافية بين الأعصاب مقسوم على 12.
                   </p>
                 </div>
-                <img src="/3d-conditions_images/slide2image4.png" alt />
               </div>
             </div>
             <div style={{ backgroundColor: '#ddefec !important', justifyItems: 'center', borderRadius: '0 0 25px 25px !important', maxHeight: '2.8rem' }}>
@@ -1863,7 +1813,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["الارتداد في حالة الجار"] === true}
+                        conditionStutes["سمك البلاطة فوق الاعصاب"] === true}
                       id="cbtest-19" />
                     <label htmlFor="cbtest-19" className="check-box" />
                   </div>
@@ -1873,7 +1823,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["الارتداد في حالة الجار"] === false}
+                        conditionStutes["سمك البلاطة فوق الاعصاب"] === false}
                       id="cbtest-20" />
                     <label htmlFor="cbtest-20" className="check-box" />
                   </div>
@@ -1883,7 +1833,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        !Object.prototype.hasOwnProperty.call(conditionStutes, "الارتداد في حالة الجار")}
+                        !Object.prototype.hasOwnProperty.call(conditionStutes, "سمك البلاطة فوق الاعصاب")}
                       id="cbtest-21" />
                     <label htmlFor="cbtest-21" className="check-box" />
                   </div>
@@ -1895,18 +1845,17 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
             <div className="header">
               <img src="/3d-conditions_images/house.png" alt />
               <div className="main-header">
-                <p className="header-title">الفراغات الداخلية</p>
-                <p className="header-body">دور القبو</p>
+                <p className="header-title"> البلاطات الهوردي ثنائية الاتجاه   </p>
+                <p className="header-body">عرض العصب</p>
               </div>
             </div>
             <div className="box">
               <div className="content">
                 <div style={{ minWidth: '50%' }}>
                   <p className="content-body">
-                    يجب أن يكون دور القبو مطابقاً لاشتراطات الأمانات والبلديات.
+                    يجب ألا يقل عرض العصب في البلاطت الهوردي ثنائية الاتجاه عن 0.12 م.
                   </p>
                 </div>
-                <img src="/3d-conditions_images/slide2image5.png" alt />
               </div>
             </div>
             <div style={{ backgroundColor: '#ddefec !important', justifyItems: 'center', borderRadius: '0 0 25px 25px !important', maxHeight: '2.8rem' }}>
@@ -1916,7 +1865,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["دور القبو"] === true}
+                        conditionStutes["عرض العصب"] === true}
                       id="cbtest-22" />
                     <label htmlFor="cbtest-22" className="check-box" />
                   </div>
@@ -1926,7 +1875,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["دور القبو"] === false}
+                        conditionStutes["عرض العصب"] === false}
                       id="cbtest-23" />
                     <label htmlFor="cbtest-23" className="check-box" />
                   </div>
@@ -1936,7 +1885,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        !Object.prototype.hasOwnProperty.call(conditionStutes, "دور القبو")}
+                        !Object.prototype.hasOwnProperty.call(conditionStutes, "عرض العصب")}
                       id="cbtest-24" />
                     <label htmlFor="cbtest-24" className="check-box" />
                   </div>
@@ -1948,19 +1897,18 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
             <div className="header">
               <img src="/3d-conditions_images/house.png" alt />
               <div className="main-header">
-                <p className="header-title">الفراغات الداخلية</p>
-                <p className="header-body">ارتداد الملحق العلوي</p>
+                <p className="header-title">البلاطات الهوردي ثنائية الاتجاه   </p>
+                <p className="header-body">ارتفاع الكلي للعصب</p>
               </div>
             </div>
             <div className="box">
               <div className="content">
                 <div style={{ minWidth: '50%' }}>
                   <p className="content-body">
-                    يجب مراجعة ارتداد الملحق العلوي وفقاً لاشتراطات الأمانات
-                    والبلديات.
+                    يجب ألا يزيد ارتفاع الكلي للعصب في البلاطات الهوردي ثنائية الاتجاه عن 3.5 عرض العصب.
+
                   </p>
                 </div>
-                <img src="/3d-conditions_images/slide2image6.png" alt />
               </div>
             </div>
             <div style={{ backgroundColor: '#ddefec !important', justifyItems: 'center', borderRadius: '0 0 25px 25px !important', maxHeight: '2.8rem' }}>
@@ -1970,7 +1918,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["ارتداد الملحق العلوي"] === true}
+                        conditionStutes["ارتفاع الكلي للعصب"] === true}
                       id="cbtest-25" />
                     <label htmlFor="cbtest-25" className="check-box" />
                   </div>
@@ -1980,7 +1928,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["ارتداد الملحق العلوي"] === false}
+                        conditionStutes["ارتفاع الكلي للعصب"] === false}
                       id="cbtest-26" />
                     <label htmlFor="cbtest-26" className="check-box" />
                   </div>
@@ -1990,7 +1938,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        !Object.prototype.hasOwnProperty.call(conditionStutes, "ارتداد الملحق العلوي")}
+                        !Object.prototype.hasOwnProperty.call(conditionStutes, "ارتفاع الكلي للعصب")}
                       id="cbtest-27" />
                     <label htmlFor="cbtest-27" className="check-box" />
                   </div>
@@ -2002,19 +1950,18 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
             <div className="header">
               <img src="/3d-conditions_images/house.png" alt />
               <div className="main-header">
-                <p className="header-title">الفراغات الداخلية</p>
-                <p className="header-body">الارتداد الأمامي</p>
+                <p className="header-title">البلاطات الهوردي ثنائية الاتجاه   </p>
+                <p className="header-body">المسافة الصافية بين الأعصاب </p>
               </div>
             </div>
             <div className="box">
               <div className="content">
                 <div style={{ minWidth: '50%' }}>
                   <p className="content-body">
-                    يجب مراجعة الارتداد الأمامي وفقاً لاشتراطات الأمانات
-                    والبلديات.
+                    يجب ألا تزيد المسافة الصافية بين الأعصاب في البلاطات الهوردي ثنائية الاتجاه عن 0.75 م.
+
                   </p>
                 </div>
-                <img src="/3d-conditions_images/slide2image7.png" alt />
               </div>
             </div>
             <div style={{ backgroundColor: '#ddefec !important', justifyItems: 'center', borderRadius: '0 0 25px 25px !important', maxHeight: '2.8rem' }}>
@@ -2024,7 +1971,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["الارتداد الأمامي"] === true}
+                        conditionStutes["المسافة الصافية بين الأعصاب "] === true}
                       id="cbtest-28" />
                     <label htmlFor="cbtest-28" className="check-box" />
                   </div>
@@ -2034,7 +1981,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["الارتداد الأمامي"] === false}
+                        conditionStutes["المسافة الصافية بين الأعصاب "] === false}
                       id="cbtest-29" />
                     <label htmlFor="cbtest-29" className="check-box" />
                   </div>
@@ -2045,7 +1992,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                     <input type="checkbox"
 
                       checked={
-                        !Object.prototype.hasOwnProperty.call(conditionStutes, "الارتداد الأمامي")}
+                        !Object.prototype.hasOwnProperty.call(conditionStutes, "المسافة الصافية بين الأعصاب ")}
                       id="cbtest-30" />
                     <label htmlFor="cbtest-30" className="check-box" />
                   </div>
@@ -2057,18 +2004,17 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
             <div className="header">
               <img src="/3d-conditions_images/house.png" alt />
               <div className="main-header">
-                <p className="header-title">الفراغات الداخلية</p>
-                <p className="header-body">الشطفة الخارجية</p>
+                <p className="header-title">البلاطات الهوردي ثنائية الاتجاه   </p>
+                <p className="header-body">سمك البلاطة فوق الأعصاب </p>
               </div>
             </div>
             <div className="box">
               <div className="content">
                 <div style={{ minWidth: '50%' }}>
                   <p className="content-body">
-                    يجب مراجعة الشطفة الخارجية وفقاً لاشتراطات الأمانات والبلديات.
+                    يجب ألا يقل سمك البلاطة فوق الأعصاب في البلاطات الهوردي ثنائية الاتجاه عن الأكبر من 0.05م والمسافة الصافية بين الأعصاب مقسوم على 12.
                   </p>
                 </div>
-                <img src="/3d-conditions_images/slide2image8.png" alt />
               </div>
             </div>
             <div style={{ backgroundColor: '#ddefec !important', justifyItems: 'center', borderRadius: '0 0 25px 25px !important', maxHeight: '2.8rem' }}>
@@ -2078,7 +2024,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["الشطفة الخارجية"] === true}
+                        conditionStutes["سمك البلاطة فوق الأعصاب "] === true}
                       id="cbtest-31" />
                     <label htmlFor="cbtest-31" className="check-box" />
                   </div>
@@ -2088,7 +2034,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["الشطفة الخارجية"] === false}
+                        conditionStutes["سمك البلاطة فوق الأعصاب "] === false}
                       id="cbtest-32" />
                     <label htmlFor="cbtest-32" className="check-box" />
                   </div>
@@ -2098,7 +2044,163 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        !Object.prototype.hasOwnProperty.call(conditionStutes, "الشطفة الخارجية")}
+                        !Object.prototype.hasOwnProperty.call(conditionStutes, "سمك البلاطة فوق الأعصاب ")}
+                      id="cbtest-33" />
+                    <label htmlFor="cbtest-33" className="check-box" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="cond">
+            <div className="header">
+              <img src="/3d-conditions_images/house.png" alt />
+              <div className="main-header">
+                <p className="header-body">جدران الخزانات</p>
+              </div>
+            </div>
+            <div className="box">
+              <div className="content">
+                <div style={{ minWidth: '50%' }}>
+                  <p className="content-body">
+                    يجب أن يكون لجدران الخزانات سماكة لا تقل عن 0.2 م وفي حالة البحور الصافية التي تزيد عن 3.5م يجب ألا تقل السماكة عن 0.3 م.
+
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div style={{ backgroundColor: '#ddefec !important', justifyItems: 'center', borderRadius: '0 0 25px 25px !important', maxHeight: '2.8rem' }}>
+              <div className="footer">
+                <div className="check">
+                  <p>تحقق</p>
+                  <div className="checkbox-wrapper-19">
+                    <input type="checkbox"
+                      checked={
+                        conditionStutes["جدران الخزانات"] === true}
+                      id="cbtest-25" />
+                    <label htmlFor="cbtest-25" className="check-box" />
+                  </div>
+                </div>
+                <div className="check">
+                  <p>لم يتحقق</p>
+                  <div className="checkbox-wrapper-19">
+                    <input type="checkbox"
+                      checked={
+                        conditionStutes["جدران الخزانات"] === false}
+                      id="cbtest-26" />
+                    <label htmlFor="cbtest-26" className="check-box" />
+                  </div>
+                </div>
+                <div className="check">
+                  <p>لا ينطبق</p>
+                  <div className="checkbox-wrapper-19">
+                    <input type="checkbox"
+                      checked={
+                        !Object.prototype.hasOwnProperty.call(conditionStutes, "جدران الخزانات")}
+                      id="cbtest-27" />
+                    <label htmlFor="cbtest-27" className="check-box" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="cond">
+            <div className="header">
+              <img src="/3d-conditions_images/house.png" alt />
+              <div className="main-header">
+                <p className="header-body">أرضيات الخزانات </p>
+              </div>
+            </div>
+            <div className="box">
+              <div className="content">
+                <div style={{ minWidth: '50%' }}>
+                  <p className="content-body">
+                    يجب ان أن يكون لأرضيات الخزانات سماكة لا تقل عن 0.2 م وفي حالة البحور الصافية التي تزيد عن 3.5م يجب ألا تقل السماكة عن0.3 م
+
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div style={{ backgroundColor: '#ddefec !important', justifyItems: 'center', borderRadius: '0 0 25px 25px !important', maxHeight: '2.8rem' }}>
+              <div className="footer">
+                <div className="check">
+                  <p>تحقق</p>
+                  <div className="checkbox-wrapper-19">
+                    <input type="checkbox"
+                      checked={
+                        conditionStutes["أرضيات الخزانات "] === true}
+                      id="cbtest-28" />
+                    <label htmlFor="cbtest-28" className="check-box" />
+                  </div>
+                </div>
+                <div className="check">
+                  <p>لم يتحقق</p>
+                  <div className="checkbox-wrapper-19">
+                    <input type="checkbox"
+                      checked={
+                        conditionStutes["أرضيات الخزانات "] === false}
+                      id="cbtest-29" />
+                    <label htmlFor="cbtest-29" className="check-box" />
+                  </div>
+                </div>
+                <div className="check">
+                  <p>لا ينطبق</p>
+                  <div className="checkbox-wrapper-19">
+                    <input type="checkbox"
+
+                      checked={
+                        !Object.prototype.hasOwnProperty.call(conditionStutes, "أرضيات الخزانات ")}
+                      id="cbtest-30" />
+                    <label htmlFor="cbtest-30" className="check-box" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="cond">
+            <div className="header">
+              <img src="/3d-conditions_images/house.png" alt />
+              <div className="main-header">
+                <p className="header-body">جدارن القبو</p>
+              </div>
+            </div>
+            <div className="box">
+              <div className="content">
+                <div style={{ minWidth: '50%' }}>
+                  <p className="content-body">
+                    يجب أن يكون لجدران القبو سماكة لا تقل. عن 0.2 م وفي حالة البحور الصافية التي تزيد عن 3.5 م يجب ألا تقل السماكة عن 0.3 م.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div style={{ backgroundColor: '#ddefec !important', justifyItems: 'center', borderRadius: '0 0 25px 25px !important', maxHeight: '2.8rem' }}>
+              <div className="footer">
+                <div className="check">
+                  <p>تحقق</p>
+                  <div className="checkbox-wrapper-19">
+                    <input type="checkbox"
+                      checked={
+                        conditionStutes["جدارن القبو"] === true}
+                      id="cbtest-31" />
+                    <label htmlFor="cbtest-31" className="check-box" />
+                  </div>
+                </div>
+                <div className="check">
+                  <p>لم يتحقق</p>
+                  <div className="checkbox-wrapper-19">
+                    <input type="checkbox"
+                      checked={
+                        conditionStutes["جدارن القبو"] === false}
+                      id="cbtest-32" />
+                    <label htmlFor="cbtest-32" className="check-box" />
+                  </div>
+                </div>
+                <div className="check">
+                  <p>لا ينطبق</p>
+                  <div className="checkbox-wrapper-19">
+                    <input type="checkbox"
+                      checked={
+                        !Object.prototype.hasOwnProperty.call(conditionStutes, "جدارن القبو")}
                       id="cbtest-33" />
                     <label htmlFor="cbtest-33" className="check-box" />
                   </div>
@@ -2114,26 +2216,25 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
 
         <div className="section-header">
           <img src="/3d-conditions_images/image.png" alt />
-          <h1 className="section-title">المتطلبات المعمارية</h1>
+          <h1 className="section-title">المتطلبات الإنشائية</h1>
         </div>
         <div className="conditions-grid">
           <div className="cond">
             <div className="header">
               <img src="/3d-conditions_images/house.png" alt />
               <div className="main-header">
-                <p className="header-title">المتطلبات الخارجية</p>
-                <p className="header-body">السور الخارجي</p>
+                <p className="header-body" style={{ fontSize: '18px' }}>للكمرات أو العوارض الخرسانية المسلحة التى لاترتكز أو ترفق بقواطيع أوتشييدات أخر </p>
               </div>
             </div>
             <div className="box">
               <div className="content">
                 <div style={{ minWidth: '50%' }}>
                   <p className="content-body">
-                    مراجعة شكل وارتفاعات السور الخارجي وفقاً لاشتراطات الامانات
-                    والبلديات.
+                    بالنسبة للكمرات أو العوارض الخرسانية المسلحة التى لاترتكز أو ترفق بقواطيع أوتشييدات أخرى من المحتمل تضررها بالإنحرافات الكبيرة فإنه يجب ألا يقل عمق الكمرة عن القيم المحددة فى ‎table 5C-1 or section 5C4.1.2‏
+
                   </p>
                 </div>
-                <img src="/3d-conditions_images/slide3image1.png" alt />
+                <img src="/Str/slide3image1.png" alt />
               </div>
             </div>
             <div style={{ backgroundColor: '#ddefec !important', justifyItems: 'center', borderRadius: '0 0 25px 25px !important', maxHeight: '2.8rem' }}>
@@ -2143,7 +2244,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["السور الخارجي"] === true}
+                        conditionStutes["للكمرات أو العوارض الخرسانية المسلحة التى لاترتكز أو ترفق بقواطيع أوتشييدات أخر "] === true}
                       id="cbtest-7" />
                     <label htmlFor="cbtest-7" className="check-box" />
                   </div>
@@ -2153,7 +2254,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["السور الخارجي"] === false}
+                        conditionStutes["للكمرات أو العوارض الخرسانية المسلحة التى لاترتكز أو ترفق بقواطيع أوتشييدات أخر "] === false}
                       id="cbtest-8" />
                     <label htmlFor="cbtest-8" className="check-box" />
                   </div>
@@ -2163,7 +2264,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        !Object.prototype.hasOwnProperty.call(conditionStutes, "السور الخارجي")}
+                        !Object.prototype.hasOwnProperty.call(conditionStutes, "للكمرات أو العوارض الخرسانية المسلحة التى لاترتكز أو ترفق بقواطيع أوتشييدات أخر ")}
                       id="cbtest-9" />
                     <label htmlFor="cbtest-9" className="check-box" />
                   </div>
@@ -2175,19 +2276,18 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
             <div className="header">
               <img src="/3d-conditions_images/house.png" alt />
               <div className="main-header">
-                <p className="header-title">متطلبات السلالم</p>
-                <p className="header-body">عرض السلالم الداخلية</p>
+                <p className="header-body" style={{ fontSize: '18px' }}>السماكة الكلية للبلاطة  <br />الخرسانية المصمتة المرتكزة على كمرات</p>
               </div>
             </div>
             <div className="box">
-              <div className="content">
+              <div className="content" style={{ display: 'flex', flexDirection: 'column', alignItems: 'end' }}>
                 <div style={{ minWidth: '50%' }}>
                   <p className="content-body">
-                    الحد الأدنى لصافي عرض الدرج الرئيسي والبسطة 0.9م في الفلل
-                    السكنية.
+                    يجب ألا تقل السماكة الكلية للبلاطة الخرسانية المصمتة المرتكزة على كمرات فى جميع الجهات عن المعادلة رقم ‎ .5B-1‏
+
                   </p>
                 </div>
-                <img src="/3d-conditions_images/slide3image2.png" alt />
+                <img src="/Str/slide3image2.png" style={{ margin: '2.5rem' }} />
               </div>
             </div>
             <div style={{ backgroundColor: '#ddefec !important', justifyItems: 'center', borderRadius: '0 0 25px 25px !important', maxHeight: '2.8rem' }}>
@@ -2197,7 +2297,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["عرض السلالم الداخلية"] === true}
+                        conditionStutes["السماكة الكلية للبلاطة الخرسانية المصمتة المرتكزة على كمرات"] === true}
                       id="cbtest-10" />
                     <label htmlFor="cbtest-10" className="check-box" />
                   </div>
@@ -2207,7 +2307,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["عرض السلالم الداخلية"] === false}
+                        conditionStutes["السماكة الكلية للبلاطة الخرسانية المصمتة المرتكزة على كمرات"] === false}
                       id="cbtest-11" />
                     <label htmlFor="cbtest-11" className="check-box" />
                   </div>
@@ -2217,7 +2317,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        !Object.prototype.hasOwnProperty.call(conditionStutes, "عرض السلالم الداخلية")}
+                        !Object.prototype.hasOwnProperty.call(conditionStutes, ">السماكة الكلية للبلاطة الخرسانية المصمتة المرتكزة على كمرا")}
                       id="cbtest-12" />
                     <label htmlFor="cbtest-12" className="check-box" />
                   </div>
@@ -2229,20 +2329,21 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
             <div className="header">
               <img src="/3d-conditions_images/house.png" alt />
               <div className="main-header">
-                <p className="header-title">متطلبات السلالم</p>
-                <p className="header-body">أبعاد الدرج</p>
+                <p className="header-body" style={{ fontSize: '1.rem' }}>السماكة الكلية للبلاطة الخرسانية المصمتة أحادية الإتجاه</p>
               </div>
             </div>
             <div className="box">
               <div className="content">
-                <div style={{ minWidth: '50%' }}>
-                  <p className="content-body">
-                    الحد الأقصى لارتفاع الدرجة الواحدة (القائم) لا تزيد عن 0.18 م،
-                    والحد الأدنى لعرض الدرجة (النائمة) لا تقل عن 0.25 م وفق
-                    متطلبات واشتراطات كود البناء السعودي.
+                <div style={{ maxWidth: '50%' }}>
+                  <p className="content-body" style={{ fontSize: '11px' }} >
+                    يجب ألا تقل السماكة الكلية للبلاطة الخرسانية المصمتة أحادية الإتجاه والتى لا تحمل أو تتصل بقواطيع أو غيرها من المنشآت المحتمل تضررها بقيم الترخيم الكبيرة عن القيم الواردة فى ,  table 5-2,table 5-1 -504.2  في حالة وجود عناصر تتأثر بالترخيم
                   </p>
                 </div>
-                <img src="/3d-conditions_images/slide3image3.png" alt />
+                <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', width: '100%' }}>
+
+                  <img src="/Str/slide3image3 part1.png" style={{ height: '4rem' }} />
+                  <img src="/Str/slide3image3 part2.png" />
+                </div>
               </div>
             </div>
             <div style={{ backgroundColor: '#ddefec !important', justifyItems: 'center', borderRadius: '0 0 25px 25px !important', maxHeight: '2.8rem' }}>
@@ -2252,7 +2353,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["أبعاد الدرج"] === true}
+                        conditionStutes["السماكة الكلية للبلاطة الخرسانية المصمتة أحادية الإتجاه"] === true}
                       id="cbtest-13" />
                     <label htmlFor="cbtest-13" className="check-box" />
                   </div>
@@ -2262,7 +2363,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["أبعاد الدرج"] === false}
+                        conditionStutes["السماكة الكلية للبلاطة الخرسانية المصمتة أحادية الإتجاه"] === false}
                       id="cbtest-14" />
                     <label htmlFor="cbtest-14" className="check-box" />
                   </div>
@@ -2272,7 +2373,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        !Object.prototype.hasOwnProperty.call(conditionStutes, "أبعاد الدرج")}
+                        !Object.prototype.hasOwnProperty.call(conditionStutes, "السماكة الكلية للبلاطة الخرسانية المصمتة أحادية الإتجاه")}
                       id="cbtest-15" />
                     <label htmlFor="cbtest-15" className="check-box" />
                   </div>
@@ -2280,87 +2381,62 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
               </div>
             </div>
           </div>
-        </div>
-        <div className="cond" style={{ marginLeft: '0.5rem', marginRight: '0.5rem' }}>
-          <div className="header">
-            <img src="/3d-conditions_images/house.png" alt />
-            <div className="main-header">
-              <p className="header-title">متطلبات المناور</p>
-              <p className="header-body">متطلبات المناور الداخلية</p>
-            </div>
-          </div>
-          <div className="box2" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'end' }}>
-            <div className="content">
-              <div style={{ minWidth: '50%' }}>
-                <p className="content-body">
-                  يسمح بالتهوية الميكانيكية والاضاءة الصناعية للحمامات ودورات
-                  المياه و لا يشترط وجود مناور. يجب أن يبقى المنور مكشوفاً لكل
-                  الأدوار ولا يسمح بتغطيته أو البناء فوقه بأي ارتفاع ويزود
-                  بالتجهيزات اللازمة لصرف مياه الأمطار والغسيل.
-                </p>
-              </div>
-              <img src="/3d-conditions_images/slide3image4.png" alt style={{ width: '45%' }} />
-            </div>
-            <div style={{ marginTop: '-4rem', display: 'flex', flexDirection: 'row', alignItems: 'flex-start', maxWidth: '70%', textAlign: 'right', gap: '.5rem', justifyContent: 'space-between', padding: '0 1rem' }}>
-              <div>
-                <p ><span style={{ fontSize: '1.5rem', fontWeight: 'bolder', color: 'gray' }}> المناور الداخلية </span>بارتفاع(دورين) </p>
-                <p>
-                  منور بارتفاع دورين يحتوي على نوافذ تفتح من جهة واحدة أو جهتين
-                  غير متقابلتين والحد الادنى للعرض 1.5 م والطول 1.8 م
-                </p>
-                <p>
-                  منور بارتفاع دورين يحتوي على نوافذ تفتح من جهتين متقابلتين أو
-                  على جميع الجهات والحد الادنى للعرض 1.8 م والطول 1.8 م
-                </p>
-              </div>
-              <div>
-                <p ><span style={{ fontSize: '1.5rem', fontWeight: 'bolder', color: 'gray' }}> المناور الداخلية </span> بارتفاع (3 أدوار)</p>
-                <p>
-                  منور بارتفاع (3 أدوار) يحتوي على نوافذ تفتح من جهة واحدة أو
-                  جهتين غير متقابلتين والحد الادنى للعرض 1.8 م والطول 2.4 م
-                </p>
-                <p>
-                  منور بارتفاع (3 أدوار) يحتوي على نوافذ تفتح من جهتين متقابلتين
-                  أو على جميع الجهات والحد الادنى للعرض 2.1 م والطول 2.4 م
-                </p>
+          <div className="cond">
+            <div className="header">
+              <img src="/3d-conditions_images/house.png" alt />
+              <div className="main-header">
+                <p className="header-body" style={{ fontSize: '18px' }}>السماكة الكلية للبلاطة  <br />الخرسانية المصمتة المرتكزة على كمرات</p>
               </div>
             </div>
-          </div>
-          <div style={{ backgroundColor: '#ddefec !important', justifyItems: 'center', borderRadius: '0 0 25px 25px !important', maxHeight: '2.8rem', width: '100%' }}>
-            <div className="footer1">
-              <div className="check">
-                <p>تحقق</p>
-                <div className="checkbox-wrapper-19">
-                  <input type="checkbox"
-                    checked={
-                      conditionStutes["متطلبات المناور الداخلية"] === true}
-                    id="cbtest-34" />
-                  <label htmlFor="cbtest-34" className="check-box" />
-                </div>
-              </div>
-              <div className="check">
-                <p>لم يتحقق</p>
-                <div className="checkbox-wrapper-19">
-                  <input type="checkbox"
-                    checked={
-                      conditionStutes["متطلبات المناور الداخلية"] === false}
-                    id="cbtest-35" />
-                  <label htmlFor="cbtest-35" className="check-box" />
-                </div>
-              </div>
-              <div className="check">
-                <p>لا ينطبق</p>
-                <div className="checkbox-wrapper-19">
-                  <input type="checkbox"
-                    checked={
-                      !Object.prototype.hasOwnProperty.call(conditionStutes, "متطلبات المناور الداخلية")}
+            <div className="box">
+              <div className="content"  >
+                <div style={{ minWidth: '50%' }}>
+                  <p className="content-body">
+                    بالنسبة للعوارض والكمرات الخرسانية المسلحة الداعمة لعناصر غير إنشائية مبنية من مواد محتمل تضررها بالإنحرافات الكبيرة فإنه يجب ألا يقل عمق الكمرة عن القيم المحددة فى ‎table 5C-2 or section 5C4.1.2‏
 
-                    id="cbtest-36" />
-                  <label htmlFor="cbtest-36" className="check-box" />
+                  </p>
+                </div>
+                <img src="/Str/slide3image4.png" />
+              </div>
+            </div>
+            <div style={{ backgroundColor: '#ddefec !important', justifyItems: 'center', borderRadius: '0 0 25px 25px !important', maxHeight: '2.8rem' }}>
+              <div className="footer">
+                <div className="check">
+                  <p>تحقق</p>
+                  <div className="checkbox-wrapper-19">
+                    <input type="checkbox"
+                      checked={
+                        conditionStutes['السماكة الكلية للبلاطة الخرسانية المصمتة المرتكزة على كمرات '] === true}
+                      id="cbtest-10" />
+                    <label htmlFor="cbtest-10" className="check-box" />
+                  </div>
+                </div>
+                <div className="check">
+                  <p>لم يتحقق</p>
+                  <div className="checkbox-wrapper-19">
+                    <input type="checkbox"
+                      checked={
+                        conditionStutes['السماكة الكلية للبلاطة الخرسانية المصمتة المرتكزة على كمرات '] === false}
+                      id="cbtest-11" />
+                    <label htmlFor="cbtest-11" className="check-box" />
+                  </div>
+                </div>
+                <div className="check">
+                  <p>لا ينطبق</p>
+                  <div className="checkbox-wrapper-19">
+                    <input type="checkbox"
+                      checked={
+                        !Object.prototype.hasOwnProperty.call(conditionStutes, 'السماكة الكلية للبلاطة الخرسانية المصمتة المرتكزة على كمرات ')}
+                      id="cbtest-12" />
+                    <label htmlFor="cbtest-12" className="check-box" />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+
+
+
         </div>
 
       </div>
@@ -2369,4 +2445,4 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
   );
 });
 
-export default ArcReport;
+export default StrReport;

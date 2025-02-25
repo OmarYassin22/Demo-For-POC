@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import DataTable from "../../DataTable";
 import BackButton from '../../common/BackButton';
 import { ArrowLeft, Download } from "lucide-react"; // Replace Printer with Download
-import { ArcReportComponent } from "../../ArcReport/ArcReport";
 import { jsPDF } from "jspdf";
-import html2canvas from "html2canvas";
-import ReactDOMServer from "react-dom/server"; // Add this import
+import { toPng } from "html-to-image"; // Alternative for high-quality PDF images
+import ArcReport from "../../ArcReport/ArcReport";
+import html2canvas from 'html2canvas';
+import StrReport from "../../ArcReport/StrReport";
+
 
 // Add this interface for type safety
 interface CategoryStatus {
@@ -34,8 +36,7 @@ const InspectionReport = () => {
     const ComplianceResultData = JSON.parse(localStorage.getItem("ComplianceResultData") || "{}");
     const visualCategoryDict = JSON.parse(localStorage.getItem("visualCategory") || "{}");
     const key = Object.keys(ComplianceResultData)[0];
-    console.log(visualCategoryDict);
-    console.log(ComplianceResultData[key].Results);
+
 
     const checkConditions = (category: string) => {
       let passedCount = 0;
@@ -64,7 +65,6 @@ const InspectionReport = () => {
     // Store the visual category status in local storage
     localStorage.setItem("visualCategoryStatus", JSON.stringify(visualCategoryStatus));
 
-    console.log("Visual Category Status:", visualCategoryStatus);
 
     // Add this to existing useEffect:
     const storedVisualStatus = localStorage.getItem("visualCategoryStatus");
@@ -99,56 +99,67 @@ const InspectionReport = () => {
   const data = parsedData[dynamicKey]?.Results;
 
   const handleAction = (id: string) => {
-    console.log("Action triggered for ID:", id);
   };
 
 
   const handleBackAction = () => {
     navigate(`/offices/${officeId}/request/${requestId}`);
   };
-
+  const reportRef = useRef(null);
   const handleDownloadReport = async () => {
-    const input = document.createElement("div");
-    document.body.appendChild(input);
-    input.style.position = "absolute";
-    input.style.top = "-9999px";
-    input.style.width = "210mm"; // A4 width in mm
-    input.style.height = "297mm"; // A4 height in mm
-    input.style.backgroundColor = "white";
-    input.style.padding = "20px";
-    input.style.boxSizing = "border-box";
-    input.innerHTML = ReactDOMServer.renderToString(
-      <ArcReportComponent visualCategoryStatus={visualStatus} />
-    );
-    const canvas = await html2canvas(input);
-    const imgData = canvas.toDataURL("image/png");
-    const pdf = new jsPDF("p", "mm", "a4");
-    pdf.addImage(imgData, "PNG", 0, 0, 210, 297);
-    pdf.save("ArcReport.pdf");
-
-    document.body.removeChild(input);
-  };
-
-  // Add filter handling functions
-  const handleFilter = (filterType) => {
-    let filtered;
-    switch (filterType) {
-      case 'matched':
-        filtered = data.filter(item => item.Status === true);
-        break;
-      case 'unmatched':
-        filtered = data.filter(item => item.Status === false && item.Result !== "اخري");
-        break;
-      case 'other':
-        filtered = data.filter(item => item.Status !== true && item.Result === "اخري");
-        break;
-      default:
-        filtered = null;
+    if (!reportRef.current) {
+      console.error("ArcReport is not ready yet!");
+      return;
     }
-    setFilteredData(filtered);
+
+
+    try {
+      const pdf = new jsPDF({
+        orientation: "p",
+        unit: "mm",
+        format: "a4",
+        compress: true,
+      });
+
+      const pdfWidth = 210;
+      const pdfHeight = 297;
+      const marginLeft = 10;
+      const marginTop = 15;
+      const contentWidth = pdfWidth - 2 * marginLeft;
+      const contentHeight = pdfHeight - 2 * marginTop;
+
+      const sections = reportRef.current.querySelectorAll(".page-section");
+
+      for (let i = 0; i < sections.length; i++) {
+        const section = sections[i];
+
+        const canvas = await html2canvas(section, {
+          scale: 1.5,
+          backgroundColor: "#ffffff",
+          useCORS: true,
+        });
+
+        const imgData = canvas.toDataURL("image/jpeg", 0.7); // ✅ Use JPEG for smaller file size
+
+        const imgWidth = contentWidth; // ✅ Fit exactly inside margins
+        let imgHeight = (canvas.height * imgWidth) / canvas.width; // ✅ Maintain aspect ratio
+
+        if (imgHeight > contentHeight) {
+          imgHeight = contentHeight;
+        }
+
+        if (i > 0) {
+          pdf.addPage();
+        }
+        pdf.addImage(imgData, "JPEG", marginLeft, marginTop, imgWidth, imgHeight, "", "MEDIUM");
+      }
+
+      pdf.save("ArcReport.pdf");
+    } catch (error) {
+      console.error("Error generating PDF:", error);
+    }
   };
 
-  // Add new columns configuration with status indicators
   const columns = [
     {
       accessorKey: "Description",
@@ -222,6 +233,21 @@ const InspectionReport = () => {
           <Download size={20} />
           <span>تحميل التقرير</span>
         </button>
+      </div>
+      <div
+        ref={reportRef}
+        style={{
+          position: "absolute",
+          left: "-9999px",
+          top: "0",
+          width: "100%",
+          height: "auto",
+          padding: '20px',
+          opacity: 0,
+          pointerEvents: "none",
+        }}
+      >
+        {localStorage.getItem("reportType") === "arc" ? <ArcReport /> : <StrReport />}
       </div>
       <div className="max-w-7xl mx-auto space-y-6"> {/* Increased max-width for better split view */}
         {/* Main Title */}
@@ -467,8 +493,8 @@ const InspectionReport = () => {
                 <div className="flex justify-between items-center mb-2">
                   <h3 className="font-medium">{category}</h3>
                   <span className={`px-3 py-1 rounded-full text-sm ${status.passed === status.total
-                      ? 'bg-green-100 text-green-700'
-                      : 'bg-red-100 text-red-700'
+                    ? 'bg-green-100 text-green-700'
+                    : 'bg-red-100 text-red-700'
                     }`}>
                     {status.passed === status.total ? 'تحقق' : 'لم يتحقق'}
                   </span>

@@ -9,6 +9,8 @@ import Conditions from "./Components/requests/Conditions";
 import InspectionReport from './Components/requests/Request/InspectionReport'
 import AutodeskResultViewer from './Components/Autodesk/AutodeskResultViewer'
 import ViewCompliance from './Components/Autodesk/ViewCompliance'
+import ArcReport from "./Components/ArcReport/ArcReport";
+import StrReport from "./Components/ArcReport/StrReport";
  
 function App() {
   return (
@@ -26,6 +28,7 @@ function App() {
             <Route path="/InspectionReport/:krookiNumber" element={<InspectionReport />} />
             <Route path="/AutodeskResultViewer" element={<AutodeskResultViewer />} />
             <Route path="/ViewCompliance" element={<ViewCompliance />} />
+            <Route path="/test" element={<StrReport/>} />
              <Route path="*" element={<h1>Page Not Found</h1>} />
           </Routes>
         </div>

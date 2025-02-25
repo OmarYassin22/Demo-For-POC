@@ -195,6 +195,9 @@ requestId:requestId,
   const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedOption(event.target.value); // Set the selected radio button value
     formik.setFieldValue("ComplianceType", event.target.value); // Update formik value
+    // Store the report type in local storage
+    const reportType = event.target.value === "1" ? "arc" : "str";
+    localStorage.setItem("reportType", reportType);
   };
 
   // useEffect(() => {

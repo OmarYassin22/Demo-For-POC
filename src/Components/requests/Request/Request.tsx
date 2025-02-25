@@ -21,7 +21,6 @@ export default function Component({data, officeId}: {data: RequestData, officeId
     }
   });
   const { ownerName, number, platformName, ownerId,waitingApproval, creationTime } = data;
-  debugger;
   const formattedDate = creationTime 
   ? new Date(creationTime).toLocaleDateString('ar-SA', {
       year: 'numeric',
