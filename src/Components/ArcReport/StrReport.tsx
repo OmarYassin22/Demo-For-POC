@@ -1110,22 +1110,22 @@ const StyleWrapper = styled.div`
 interface ConditionStates {
   [key: string]: boolean;
 }
-
-const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
+interface StrReportProps {
+  onLoaded?: () => void;
+}
+const StrReport = forwardRef<HTMLDivElement, StrReportProps>((props, ref) => {
 
   const [conditionStutes, setConditionState] = useState<ConditionStates>({});
   useEffect(() => {
-
     const storedData = localStorage.getItem("visualCategoryStatus");
     if (storedData) {
       setConditionState(JSON.parse(storedData));
-
-
+      // Notify parent that dictionary is loaded
+      if (props.onLoaded) {
+        props.onLoaded();
+      }
     }
-
-
-
-  }, []);
+  }, [props]);
   return (
     <StyleWrapper ref={ref} style={{ direction: "rtl" }}> {/* ✅ Attach ref properly */}
       <div className="page-section">
@@ -1167,7 +1167,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["العمود المستطيل"] === true}
+                        conditionStutes["العمود المستطيل"] == true}
                       readOnly
                       id="العمود المستطيل 1" />
                     <label
@@ -1180,7 +1180,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <p>لم يتحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["العمود المستطيل"] === false}
+                      conditionStutes["العمود المستطيل"] == false}
                       readOnly id="العمود المستطيل -1" />
                     <label
                       htmlFor="العمود المستطيل -1"
@@ -1233,7 +1233,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <p>تحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["العمود الدائري"] === true}
+                      conditionStutes["العمود الدائري"] == true}
                       readOnly id="العمود الدائري 1" />
                     <label htmlFor="العمود الدائري 1" className="check-box" />
                   </div>
@@ -1243,7 +1243,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["العمود الدائري"] === false}
+                        conditionStutes["العمود الدائري"] == false}
                       readOnly
                       id="العمود الدائري -1" />
                     <label
@@ -1296,7 +1296,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                     <input type="checkbox"
 
                       checked={
-                        conditionStutes["سمك الجدار"] === true}
+                        conditionStutes["سمك الجدار"] == true}
                       readOnly
                       id="سمك الجدار 1" />
                     <label
@@ -1309,7 +1309,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <p>لم يتحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["سمك الجدار"] === false}
+                      conditionStutes["سمك الجدار"] == false}
                       readOnly id="سمك الجدار -1" />
                     <label
                       htmlFor="سمك الجدار -1"
@@ -1362,7 +1362,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <p>تحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes?.["بعد القاعدة الأصغر"] === true}
+                      conditionStutes?.["بعد القاعدة الأصغر"] == true}
                       readOnly id="بعد القاعدة الأصغر 1" />
                     <label htmlFor="بعد القاعدة الأصغر 1" className="check-box" />
                   </div>
@@ -1371,7 +1371,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <p>لم يتحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["بعد القاعدة الأصغر"] === false}
+                      conditionStutes["بعد القاعدة الأصغر"] == false}
                       readOnly id="بعد القاعدة الأصغر -1" />
                     <label
                       htmlFor="بعد القاعدة الأصغر -1"
@@ -1420,7 +1420,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <p>تحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["المسافة بين سطح التربة والقاعدة"] === true}
+                      conditionStutes["المسافة بين سطح التربة والقاعدة"] == true}
                       readOnly id="المسافة بين سطح التربة والقاعدة 1" />
                     <label htmlFor="المسافة بين سطح التربة والقاعدة 1" className="check-box" />
                   </div>
@@ -1429,7 +1429,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <p>لم يتحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["المسافة بين سطح التربة والقاعدة"] === false}
+                      conditionStutes["المسافة بين سطح التربة والقاعدة"] == false}
                       readOnly id="المسافة بين سطح التربة والقاعدة -1" />
                     <label htmlFor="المسافة بين سطح التربة والقاعدة -1" className="check-box" />
                   </div>
@@ -1479,7 +1479,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <p>تحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["أبعاد الكمرة"] === true}
+                      conditionStutes["أبعاد الكمرة"] == true}
                       readOnly id="أبعاد الكمرة 1" />
                     <label htmlFor="أبعاد الكمرة 1" className="check-box" />
                   </div>
@@ -1488,7 +1488,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <p>لم يتحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["أبعاد الكمرة"] === false}
+                      conditionStutes["أبعاد الكمرة"] == false}
                       readOnly id="أبعاد الكمرة -1" />
                     <label htmlFor="أبعاد الكمرة -1" className="check-box" />
                   </div>
@@ -1535,7 +1535,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <p>تحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["عمق القاعدة فوق التسليح السفلي"] === true}
+                      conditionStutes["عمق القاعدة فوق التسليح السفلي"] == true}
                       readOnly id="عمق القاعدة فوق التسليح السفلي 1" />
                     <label htmlFor="عمق القاعدة فوق التسليح السفلي 1" className="check-box" />
                   </div>
@@ -1544,7 +1544,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <p>لم يتحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["عمق القاعدة فوق التسليح السفلي"] === false}
+                      conditionStutes["عمق القاعدة فوق التسليح السفلي"] == false}
                       readOnly id="عمق القاعدة فوق التسليح السفلي -1" />
                     <label htmlFor="عمق القاعدة فوق التسليح السفلي -1" className="check-box" />
                   </div>
@@ -1591,7 +1591,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <p>تحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["الخزانات"] === true}
+                      conditionStutes["الخزانات"] == true}
                       readOnly id="الخزانات 1" />
                     <label htmlFor="الخزانات 1" className="check-box" />
                   </div>
@@ -1600,7 +1600,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <p>لم يتحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["الخزانات"] === false}
+                      conditionStutes["الخزانات"] == false}
                       readOnly id="الخزانات -1" />
                     <label htmlFor="الخزانات -1" className="check-box" />
                   </div>
@@ -1655,7 +1655,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <p>تحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["عرض العصب"] === true}
+                      conditionStutes["عرض العصب"] == true}
                       readOnly id="cbtest-1" />
                     <label htmlFor="cbtest-1" className="check-box" />
                   </div>
@@ -1664,7 +1664,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <p>لم يتحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["عرض العصب"] === false}
+                      conditionStutes["عرض العصب"] == false}
                       readOnly id="cbtest-2" />
                     <label htmlFor="cbtest-2" className="check-box" />
                   </div>
@@ -1709,7 +1709,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["ارتفاع الكلي للعصب"] === true}
+                        conditionStutes["ارتفاع الكلي للعصب"] == true}
                       id="cbtest-4" defaultChecked />
                     <label htmlFor="cbtest-4" className="check-box" />
                   </div>
@@ -1719,7 +1719,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["ارتفاع الكلي للعصب"] === false}
+                        conditionStutes["ارتفاع الكلي للعصب"] == false}
                       id="cbtest-5" />
                     <label htmlFor="cbtest-5" className="check-box" />
                   </div>
@@ -1762,7 +1762,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["ملحق علوي"] === true}
+                        conditionStutes["ملحق علوي"] == true}
                       id="cbtest-16" />
                     <label htmlFor="cbtest-16" className="check-box" />
                   </div>
@@ -1772,7 +1772,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["ملحق علوي"] === false}
+                        conditionStutes["ملحق علوي"] == false}
                       id="cbtest-17" />
                     <label htmlFor="cbtest-17" className="check-box" />
                   </div>
@@ -1814,7 +1814,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["سمك البلاطة فوق الاعصاب"] === true}
+                        conditionStutes["سمك البلاطة فوق الاعصاب"] == true}
                       id="cbtest-19" />
                     <label htmlFor="cbtest-19" className="check-box" />
                   </div>
@@ -1824,7 +1824,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["سمك البلاطة فوق الاعصاب"] === false}
+                        conditionStutes["سمك البلاطة فوق الاعصاب"] == false}
                       id="cbtest-20" />
                     <label htmlFor="cbtest-20" className="check-box" />
                   </div>
@@ -1866,7 +1866,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["عرض العصب"] === true}
+                        conditionStutes["عرض العصب"] == true}
                       id="cbtest-22" />
                     <label htmlFor="cbtest-22" className="check-box" />
                   </div>
@@ -1876,7 +1876,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["عرض العصب"] === false}
+                        conditionStutes["عرض العصب"] == false}
                       id="cbtest-23" />
                     <label htmlFor="cbtest-23" className="check-box" />
                   </div>
@@ -1919,7 +1919,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["ارتفاع الكلي للعصب"] === true}
+                        conditionStutes["ارتفاع الكلي للعصب"] == true}
                       id="cbtest-25" />
                     <label htmlFor="cbtest-25" className="check-box" />
                   </div>
@@ -1929,7 +1929,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["ارتفاع الكلي للعصب"] === false}
+                        conditionStutes["ارتفاع الكلي للعصب"] == false}
                       id="cbtest-26" />
                     <label htmlFor="cbtest-26" className="check-box" />
                   </div>
@@ -1972,7 +1972,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["المسافة الصافية بين الأعصاب "] === true}
+                        conditionStutes["المسافة الصافية بين الأعصاب "] == true}
                       id="cbtest-28" />
                     <label htmlFor="cbtest-28" className="check-box" />
                   </div>
@@ -1982,7 +1982,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["المسافة الصافية بين الأعصاب "] === false}
+                        conditionStutes["المسافة الصافية بين الأعصاب "] == false}
                       id="cbtest-29" />
                     <label htmlFor="cbtest-29" className="check-box" />
                   </div>
@@ -2025,7 +2025,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["سمك البلاطة فوق الأعصاب "] === true}
+                        conditionStutes["سمك البلاطة فوق الأعصاب "] == true}
                       id="cbtest-31" />
                     <label htmlFor="cbtest-31" className="check-box" />
                   </div>
@@ -2035,7 +2035,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["سمك البلاطة فوق الأعصاب "] === false}
+                        conditionStutes["سمك البلاطة فوق الأعصاب "] == false}
                       id="cbtest-32" />
                     <label htmlFor="cbtest-32" className="check-box" />
                   </div>
@@ -2077,7 +2077,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["جدران الخزانات"] === true}
+                        conditionStutes["جدران الخزانات"] == true}
                       id="cbtest-25" />
                     <label htmlFor="cbtest-25" className="check-box" />
                   </div>
@@ -2087,7 +2087,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["جدران الخزانات"] === false}
+                        conditionStutes["جدران الخزانات"] == false}
                       id="cbtest-26" />
                     <label htmlFor="cbtest-26" className="check-box" />
                   </div>
@@ -2129,7 +2129,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["أرضيات الخزانات "] === true}
+                        conditionStutes["أرضيات الخزانات "] == true}
                       id="cbtest-28" />
                     <label htmlFor="cbtest-28" className="check-box" />
                   </div>
@@ -2139,7 +2139,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["أرضيات الخزانات "] === false}
+                        conditionStutes["أرضيات الخزانات "] == false}
                       id="cbtest-29" />
                     <label htmlFor="cbtest-29" className="check-box" />
                   </div>
@@ -2181,7 +2181,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["جدارن القبو"] === true}
+                        conditionStutes["جدارن القبو"] == true}
                       id="cbtest-31" />
                     <label htmlFor="cbtest-31" className="check-box" />
                   </div>
@@ -2191,7 +2191,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["جدارن القبو"] === false}
+                        conditionStutes["جدارن القبو"] == false}
                       id="cbtest-32" />
                     <label htmlFor="cbtest-32" className="check-box" />
                   </div>
@@ -2245,7 +2245,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["للكمرات أو العوارض الخرسانية المسلحة التى لاترتكز أو ترفق بقواطيع أوتشييدات أخر "] === true}
+                        conditionStutes["للكمرات أو العوارض الخرسانية المسلحة التى لاترتكز أو ترفق بقواطيع أوتشييدات أخر "] == true}
                       id="cbtest-7" />
                     <label htmlFor="cbtest-7" className="check-box" />
                   </div>
@@ -2255,7 +2255,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["للكمرات أو العوارض الخرسانية المسلحة التى لاترتكز أو ترفق بقواطيع أوتشييدات أخر "] === false}
+                        conditionStutes["للكمرات أو العوارض الخرسانية المسلحة التى لاترتكز أو ترفق بقواطيع أوتشييدات أخر "] == false}
                       id="cbtest-8" />
                     <label htmlFor="cbtest-8" className="check-box" />
                   </div>
@@ -2298,7 +2298,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["السماكة الكلية للبلاطة الخرسانية المصمتة المرتكزة على كمرات"] === true}
+                        conditionStutes["السماكة الكلية للبلاطة الخرسانية المصمتة المرتكزة على كمرات"] == true}
                       id="cbtest-10" />
                     <label htmlFor="cbtest-10" className="check-box" />
                   </div>
@@ -2308,7 +2308,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["السماكة الكلية للبلاطة الخرسانية المصمتة المرتكزة على كمرات"] === false}
+                        conditionStutes["السماكة الكلية للبلاطة الخرسانية المصمتة المرتكزة على كمرات"] == false}
                       id="cbtest-11" />
                     <label htmlFor="cbtest-11" className="check-box" />
                   </div>
@@ -2354,7 +2354,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["السماكة الكلية للبلاطة الخرسانية المصمتة أحادية الإتجاه"] === true}
+                        conditionStutes["السماكة الكلية للبلاطة الخرسانية المصمتة أحادية الإتجاه"] == true}
                       id="cbtest-13" />
                     <label htmlFor="cbtest-13" className="check-box" />
                   </div>
@@ -2364,7 +2364,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["السماكة الكلية للبلاطة الخرسانية المصمتة أحادية الإتجاه"] === false}
+                        conditionStutes["السماكة الكلية للبلاطة الخرسانية المصمتة أحادية الإتجاه"] == false}
                       id="cbtest-14" />
                     <label htmlFor="cbtest-14" className="check-box" />
                   </div>
@@ -2407,7 +2407,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes['السماكة الكلية للبلاطة الخرسانية المصمتة المرتكزة على كمرات '] === true}
+                        conditionStutes['السماكة الكلية للبلاطة الخرسانية المصمتة المرتكزة على كمرات '] == true}
                       id="cbtest-10" />
                     <label htmlFor="cbtest-10" className="check-box" />
                   </div>
@@ -2417,7 +2417,7 @@ const StrReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes['السماكة الكلية للبلاطة الخرسانية المصمتة المرتكزة على كمرات '] === false}
+                        conditionStutes['السماكة الكلية للبلاطة الخرسانية المصمتة المرتكزة على كمرات '] == false}
                       id="cbtest-11" />
                     <label htmlFor="cbtest-11" className="check-box" />
                   </div>

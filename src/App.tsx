@@ -29,7 +29,8 @@ function App() {
             <Route path="/InspectionReport/:krookiNumber" element={<InspectionReport />} />
             <Route path="/AutodeskResultViewer" element={<AutodeskResultViewer />} />
             <Route path="/ViewCompliance" element={<ViewCompliance />} />
-            <Route path="/test" element={<ArcReport/>} />
+            <Route path="/arc" element={<ArcReport/>} />
+            <Route path="/str" element={<StrReport/>} />
              <Route path="*" element={<h1>Page Not Found</h1>} />
           </Routes>
         </div>

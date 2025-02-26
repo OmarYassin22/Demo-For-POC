@@ -1109,21 +1109,23 @@ interface ConditionStates {
   [key: string]: boolean;
 }
 
-const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
+interface ArcReportProps {
+  onLoaded?: () => void;
+}
+
+const ArcReport = forwardRef<HTMLDivElement, ArcReportProps>((props, ref) => {
 
   const [conditionStutes, setConditionState] = useState<ConditionStates>({});
   useEffect(() => {
-
     const storedData = localStorage.getItem("visualCategoryStatus");
     if (storedData) {
       setConditionState(JSON.parse(storedData));
-
-
+      // Notify parent that dictionary is loaded
+      if (props.onLoaded) {
+        props.onLoaded();
+      }
     }
-
-
-
-  }, []);
+  }, [props]);
   return (
     <StyleWrapper ref={ref} style={{ direction: "rtl" }}> {/* ✅ Attach ref properly */}
       <div className="page-section">

@@ -106,6 +106,8 @@ const InspectionReport = () => {
     navigate(`/offices/${officeId}/request/${requestId}`);
   };
   const reportRef = useRef(null);
+  const [reportLoaded, setReportLoaded] = useState(false);
+
   const handleDownloadReport = async () => {
     if (!reportRef.current) {
       console.error("ArcReport is not ready yet!");
@@ -153,6 +155,12 @@ const InspectionReport = () => {
         }
         pdf.addImage(imgData, "JPEG", marginLeft, marginTop, imgWidth, imgHeight, "", "MEDIUM");
       }
+      if (!reportLoaded) {
+        pdf.addPage();
+        setReportLoaded(true);
+        pdf.addImage(imgData, "JPEG", marginLeft, marginTop, imgWidth, imgHeight, "", "MEDIUM");
+      }
+
       if (localStorage.getItem("reportType") == 'str')
         pdf.save("نتائج الفحص الإنشائى.pdf");
       else
@@ -161,6 +169,9 @@ const InspectionReport = () => {
       console.error("Error generating PDF:", error);
     }
   };
+
+
+
 
   const columns = [
     {
@@ -249,7 +260,7 @@ const InspectionReport = () => {
           pointerEvents: "none",
         }}
       >
-        {localStorage.getItem("reportType") === "arc" ? <ArcReport /> : <StrReport />}
+        {localStorage.getItem("reportType") === "arc" ? <ArcReport onLoaded={() => setReportLoaded(true)} /> : <StrReport onLoaded={() => setReportLoaded(true)} />}
       </div>
       <div className="max-w-7xl mx-auto space-y-6"> {/* Increased max-width for better split view */}
         {/* Main Title */}
