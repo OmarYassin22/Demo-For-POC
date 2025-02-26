@@ -1,7 +1,7 @@
-import React, { forwardRef, useEffect, useState } from "react";
+import React, {  forwardRef, useEffect, useState } from "react";
 import styled from "styled-components";
 
-// CSS-in-JS styles
+// CSS-in-JS styles (similar to ArcReport but with structural-specific styling)
 const StyleWrapper = styled.div`
   body {
     font-family: Arial, sans-serif;
@@ -22,9 +22,9 @@ const StyleWrapper = styled.div`
 
   h2 {
     font-size: 1.8em;
-    color: #007bff;
+    color: #af4c4c; /* Changed color htmlFor structural report */
     margin-bottom: 10px;
-    border-bottom: 2px solid #007bff;
+    border-bottom: 2px solid #af4c4c; /* Changed color htmlFor structural report */
     padding-bottom: 5px;
   }
 
@@ -36,7 +36,7 @@ const StyleWrapper = styled.div`
   .box {
     border-left: 4px #8080803d solid;
     border-top: 4px #8080803d solid;
-    border-right: 4px #0a984586 solid;
+    border-right: 4px #af4c4c86 solid; /* Changed color htmlFor structural report */
     border-radius: 20px 0 0 0;
     padding: 1rem;
     position: relative;
@@ -49,17 +49,17 @@ const StyleWrapper = styled.div`
     position: absolute;
     top: 50%;
     right: 0px;
-    transform: translateY(-50%);
+    transhtmlForm: translateY(-50%);
     width: 0;
     height: 0;
     border-style: solid;
     border-width: 8px 8px 8px 0; /* Triangle size */
-    border-color: transparent #0a984586 transparent transparent; /* Triangle color */
+    border-color: transparent #af4c4c86 transparent transparent; /* Changed color htmlFor structural report */
   }
     .box2 {
     border-left: 4px #8080803d solid;
     border-top: 4px #8080803d solid;
-    border-right: 4px #0a984586 solid;
+    border-right: 4px #af4c4c86 solid; /* Changed color htmlFor structural report */
     border-radius: 20px 0 0 0;
     padding: 1rem;
     position: relative;
@@ -70,12 +70,12 @@ const StyleWrapper = styled.div`
     position: absolute;
     top: 50%;
     right: 0px;
-    transform: translateY(-50%);
+    transhtmlForm: translateY(-50%);
     width: 0;
     height: 0;
     border-style: solid;
     border-width: 8px 8px 8px 0; /* Triangle size */
-    border-color: transparent #0a984586 transparent transparent; /* Triangle color */
+    border-color: transparent #af4c4c86 transparent transparent; /* Changed color htmlFor structural report */
   }
 
   .row {
@@ -121,7 +121,7 @@ const StyleWrapper = styled.div`
   }
 
   .header-title {
-    color: #2f9a4f;
+    color: #af4c4c; /* Changed color htmlFor structural report */
     text-align: right;
     margin: 0;
   }
@@ -273,7 +273,7 @@ const StyleWrapper = styled.div`
     cursor: pointer;
   }
 
-  .checkbox-wrapper-19 .check-box::before,
+  .checkbox-wrapper-19 .check-box::behtmlFore,
   .checkbox-wrapper-19 .check-box::after {
     box-sizing: border-box;
     position: absolute;
@@ -281,24 +281,24 @@ const StyleWrapper = styled.div`
     width: calc(var(--checkbox-height) * 0.2);
     background-color: #34b93d;
     display: inline-block;
-    transform-origin: left top;
+    transhtmlForm-origin: left top;
     border-radius: 5px;
     content: " ";
     transition: opacity ease 0.5;
   }
 
-  .checkbox-wrapper-19 .check-box::before {
+  .checkbox-wrapper-19 .check-box::behtmlFore {
     top: calc(var(--checkbox-height) * 0.72);
     left: calc(var(--checkbox-height) * 0.41);
     box-shadow: 0 0 0 calc(var(--checkbox-height) * 0.05)
       var(--background-color);
-    transform: rotate(-135deg);
+    transhtmlForm: rotate(-135deg);
   }
 
   .checkbox-wrapper-19 .check-box::after {
     top: calc(var(--checkbox-height) * 0.37);
     left: calc(var(--checkbox-height) * 0.05);
-    transform: rotate(-45deg);
+    transhtmlForm: rotate(-45deg);
   }
 
   .checkbox-wrapper-19 input[type="checkbox"]:checked + .check-box,
@@ -309,13 +309,13 @@ const StyleWrapper = styled.div`
   .checkbox-wrapper-19 input[type="checkbox"]:checked + .check-box::after,
   .checkbox-wrapper-19 .check-box.checked::after {
     height: calc(var(--checkbox-height) / 2);
-    animation: dothabottomcheck-19 0.2s ease 0s forwards;
+    animation: dothabottomcheck-19 0.2s ease 0s htmlForwards;
   }
 
-  .checkbox-wrapper-19 input[type="checkbox"]:checked + .check-box::before,
-  .checkbox-wrapper-19 .check-box.checked::before {
+  .checkbox-wrapper-19 input[type="checkbox"]:checked + .check-box::behtmlFore,
+  .checkbox-wrapper-19 .check-box.checked::behtmlFore {
     height: calc(var(--checkbox-height) * 1.2);
-    animation: dothatopcheck-19 0.4s ease 0s forwards;
+    animation: dothatopcheck-19 0.4s ease 0s htmlForwards;
   }
 
   /* Improved structure and print styles */
@@ -364,7 +364,7 @@ const StyleWrapper = styled.div`
     gap: 1.5rem;
   }
 
-  /* Update the .row class inside the last category box */
+  /* Update the .row className inside the last category box */
   .box .row {
     display: flex;
     flex-direction: column;
@@ -396,7 +396,7 @@ const StyleWrapper = styled.div`
     }
 
     .page-section {
-      page-break-before: auto !important; /* Changed from always */
+      page-break-behtmlFore: auto !important; /* Changed from always */
       page-break-after: auto !important; /* Changed from always */
       page-break-inside: avoid !important;
       padding: 0.5cm;
@@ -407,9 +407,9 @@ const StyleWrapper = styled.div`
       flex-direction: column;
     }
 
-    /* Only force page break before new sections (except first) */
+    /* Only htmlForce page break behtmlFore new sections (except first) */
     .page-section:not(:first-child) {
-      page-break-before: always !important;
+      page-break-behtmlFore: always !important;
     }
 
     /* Ensure proper container sizing */
@@ -419,8 +419,8 @@ const StyleWrapper = styled.div`
       margin-bottom: 0 !important;
     }
 
-    /* Remove any forced height calculations */
-    [class*="calc"] {
+    /* Remove any htmlForced height calculations */
+    [className*="calc"] {
       height: auto !important;
       min-height: 0 !important;
     }
@@ -443,8 +443,8 @@ const StyleWrapper = styled.div`
     }
 
     .cond {
-      transform: scale(0.9);
-      transform-origin: top right;
+      transhtmlForm: scale(0.9);
+      transhtmlForm-origin: top right;
       margin: 0 !important;
       padding: 0.2cm !important;
       height: auto !important;
@@ -510,7 +510,7 @@ const StyleWrapper = styled.div`
       min-height: calc((297mm - 8cm) / 2 - 2rem) !important;
     }
 
-    /* Force items to fit in container */
+    /* htmlForce items to fit in container */
     .conditions-grid > * {
       overflow: hidden !important;
       display: flex !important;
@@ -622,7 +622,7 @@ const StyleWrapper = styled.div`
       padding-bottom: 0 !important;
     }
 
-    /* Special case for larger content areas */
+    /* Special case htmlFor larger content areas */
     .cond[style*="flex: 1 1 100%"] .content img {
       max-width: 20% !important;
     }
@@ -652,7 +652,7 @@ const StyleWrapper = styled.div`
       align-self: flex-start !important;
     }
 
-    /* Special case for larger content */
+    /* Special case htmlFor larger content */
     .cond[style*="flex: 1 1 100%"] .content {
       flex-direction: row-reverse !important;
     }
@@ -693,7 +693,7 @@ const StyleWrapper = styled.div`
     .content img {
       max-width: 28% !important;
       height: auto !important;
-      order: -1 !important; /* Force image to left side */
+      order: -1 !important; /* htmlForce image to left side */
       margin: 0 !important;
       align-self: center !important;
     }
@@ -705,7 +705,7 @@ const StyleWrapper = styled.div`
       margin-right: 0.5rem !important;
     }
 
-    /* Special cases for full-width boxes */
+    /* Special cases htmlFor full-width boxes */
     .cond[style*="flex: 1 1 100%"] .content img {
       max-width: 25% !important;
     }
@@ -722,7 +722,7 @@ const StyleWrapper = styled.div`
 
     /* Fix page break and overflow issues */
     .page-section {
-      page-break-before: auto !important;
+      page-break-behtmlFore: auto !important;
       page-break-after: avoid !important; /* Changed from auto to avoid */
       page-break-inside: avoid !important;
       min-height: auto !important; /* Remove fixed height */
@@ -732,9 +732,9 @@ const StyleWrapper = styled.div`
       overflow: visible !important;
     }
 
-    /* Only force first page break */
+    /* Only htmlForce first page break */
     .page-section:not(:first-child) {
-      page-break-before: always !important;
+      page-break-behtmlFore: always !important;
     }
 
     /* Adjust grid layout */
@@ -748,7 +748,7 @@ const StyleWrapper = styled.div`
     }
 
     /* Remove all fixed height calculations */
-    [class*="calc"],
+    [className*="calc"],
     [style*="height"],
     [style*="min-height"] {
       height: auto !important;
@@ -766,10 +766,10 @@ const StyleWrapper = styled.div`
     .page-section {
       display: block !important;
       position: relative !important;
-      break-before: auto !important;
+      break-behtmlFore: auto !important;
       break-after: auto !important;
       break-inside: avoid !important;
-      page-break-before: auto !important;
+      page-break-behtmlFore: auto !important;
       page-break-after: auto !important;
       page-break-inside: avoid !important;
       height: auto !important;
@@ -778,9 +778,9 @@ const StyleWrapper = styled.div`
       padding: 0.5cm !important;
     }
 
-    /* Force new page only for sections after first */
+    /* htmlForce new page only htmlFor sections after first */
     .page-section + .page-section {
-      page-break-before: always !important;
+      page-break-behtmlFore: always !important;
     }
 
     /* Fix content layout */
@@ -819,7 +819,7 @@ const StyleWrapper = styled.div`
     /* Remove any fixed heights */
     [style*="height"],
     [style*="min-height"],
-    [class*="calc"] {
+    [className*="calc"] {
       height: auto !important;
       min-height: 0 !important;
     }
@@ -833,10 +833,10 @@ const StyleWrapper = styled.div`
 
     .page-section {
       position: relative !important;
-      page-break-before: auto !important;
+      page-break-behtmlFore: auto !important;
       page-break-after: avoid !important;
       page-break-inside: avoid !important;
-      break-before: auto !important;
+      break-behtmlFore: auto !important;
       break-after: avoid !important;
       break-inside: avoid !important;
       height: auto !important;
@@ -848,9 +848,9 @@ const StyleWrapper = styled.div`
       overflow: visible !important;
     }
 
-    /* Only force page break between sections */
+    /* Only htmlForce page break between sections */
     .page-section + .page-section {
-      page-break-before: always !important;
+      page-break-behtmlFore: always !important;
     }
 
     /* Adjust grid container */
@@ -891,7 +891,7 @@ const StyleWrapper = styled.div`
     [style*="height"],
     [style*="min-height"],
     [style*="max-height"],
-    [class*="calc"] {
+    [className*="calc"] {
       height: auto !important;
       min-height: unset !important;
       max-height: none !important;
@@ -907,14 +907,14 @@ const StyleWrapper = styled.div`
     /* Ensure consistent content layout */
     .content {
       display: flex !important;
-      flex-direction: row !important; /* Force direction */
+      flex-direction: row !important; /* htmlForce direction */
       justify-content: flex-start !important;
       align-items: flex-start !important;
       gap: 1rem !important;
       padding: 0.3rem !important;
     }
 
-    /* Force image to left side */
+    /* htmlForce image to left side */
     .content img {
       order: -1 !important;
       width: 35% !important;
@@ -942,7 +942,7 @@ const StyleWrapper = styled.div`
     .content *,
     .box * {
       float: none !important;
-      transform: none !important;
+      transhtmlForm: none !important;
     }
 
     /* Override any direction changes */
@@ -963,7 +963,7 @@ const StyleWrapper = styled.div`
 
     /* Fix page layout */
     .page-section {
-      page-break-before: auto !important;
+      page-break-behtmlFore: auto !important;
       page-break-inside: avoid !important;
       page-break-after: auto !important;
       margin: 0 !important;
@@ -975,9 +975,9 @@ const StyleWrapper = styled.div`
       width: auto !important;
     }
 
-    /* Force page breaks between sections */
+    /* htmlForce page breaks between sections */
     .page-section + .page-section {
-      page-break-before: always !important;
+      page-break-behtmlFore: always !important;
     }
 
     /* Grid layout adjustments */
@@ -999,9 +999,9 @@ const StyleWrapper = styled.div`
       flex-direction: column !important;
     }
 
-    /* Remove transforms that might cause issues */
+    /* Remove transhtmlForms that might cause issues */
     .cond {
-      transform: none !important;
+      transhtmlForm: none !important;
       height: auto !important;
     }
 
@@ -1014,7 +1014,7 @@ const StyleWrapper = styled.div`
     [style*="height"],
     [style*="min-height"],
     [style*="max-height"],
-    [class*="calc"] {
+    [className*="calc"] {
       height: auto !important;
       min-height: 0 !important;
       max-height: none !important;
@@ -1067,28 +1067,28 @@ const StyleWrapper = styled.div`
   }
 
   @media print {
-    /* Default image size for all sections */
+    /* Default image size htmlFor all sections */
     .content img {
       max-width: 30% !important;
       width: auto !important;
       height: auto !important;
     }
 
-    /* Larger images specifically for second page-section */
+    /* Larger images specifically htmlFor second page-section */
     .page-section:nth-of-type(2) .content img {
       max-width: 40% !important;
       width: auto !important;
       height: auto !important;
     }
 
-    /* Adjust content div width for second page-section to accommodate larger images */
+    /* Adjust content div width htmlFor second page-section to accommodate larger images */
     .page-section:nth-of-type(2) .content > div {
       min-width: 55% !important;
     }
   }
 
   @media print {
-    /* Add specific selector for slide1image2 */
+    /* Add specific selector htmlFor slide1image2 */
     img[src*="slide1image2"] {
       max-width: 28% !important;
       max-height: 3cm !important; /* Reduce height */
@@ -1097,7 +1097,7 @@ const StyleWrapper = styled.div`
       object-fit: contain !important;
     }
 
-    /* Adjust content container for this specific case */
+    /* Adjust content container htmlFor this specific case */
     img[src*="slide1image2"] + div,
     img[src*="slide1image2"] ~ div {
       min-height: 3cm !important;
@@ -1207,7 +1207,7 @@ const StrReport = forwardRef<HTMLDivElement, StrReportProps>((props, ref) => {
           <div className="cond">
             <div className="header">
               <img src="/3d-conditions_images/house.png" alt />
-              <div classname="main-header">
+              <div className="main-header">
                 <p className="header-body">العمود الدائري</p>
               </div>
             </div>
@@ -1267,7 +1267,7 @@ const StrReport = forwardRef<HTMLDivElement, StrReportProps>((props, ref) => {
           <div className="cond">
             <div className="header">
               <img src="/3d-conditions_images/house.png" alt />
-              <div classname="main-header">
+              <div className="main-header">
                 <p className="header-body">سمك الجدار</p>
               </div>
             </div>
@@ -1335,7 +1335,7 @@ const StrReport = forwardRef<HTMLDivElement, StrReportProps>((props, ref) => {
           <div className="cond">
             <div className="header">
               <img src="/3d-conditions_images/house.png" alt />
-              <div classname="main-header">
+              <div className="main-header">
                 <p className="header-body">بعد القاعدة الأصغر</p>
               </div>
             </div>
@@ -1394,7 +1394,7 @@ const StrReport = forwardRef<HTMLDivElement, StrReportProps>((props, ref) => {
           <div className="cond">
             <div className="header">
               <img src="/3d-conditions_images/house.png" alt />
-              <div classname="main-header">
+              <div className="main-header">
                 <p className="header-body">المسافة بين سطح التربة والقاعدة</p>
               </div>
             </div>
@@ -1449,7 +1449,7 @@ const StrReport = forwardRef<HTMLDivElement, StrReportProps>((props, ref) => {
           <div className="cond">
             <div className="header">
               <img src="/3d-conditions_images/house.png" alt />
-              <div classname="main-header">
+              <div className="main-header">
                 <p className="header-body">أبعاد الكمرة</p>
               </div>
             </div>
@@ -1508,7 +1508,7 @@ const StrReport = forwardRef<HTMLDivElement, StrReportProps>((props, ref) => {
           <div className="cond">
             <div className="header">
               <img src="/3d-conditions_images/house.png" alt />
-              <div classname="main-header">
+              <div className="main-header">
                 <p className="header-body">عمق القاعدة فوق التسليح السفلي</p>
               </div>
             </div>
@@ -1564,7 +1564,7 @@ const StrReport = forwardRef<HTMLDivElement, StrReportProps>((props, ref) => {
           <div className="cond">
             <div className="header">
               <img src="/3d-conditions_images/house.png" alt />
-              <div classname="main-header">
+              <div className="main-header">
                 <p className="header-body">الخزانات</p>
               </div>
             </div>

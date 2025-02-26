@@ -40,7 +40,9 @@ const StyleWrapper = styled.div`
     border-radius: 20px 0 0 0;
     padding: 1rem;
     position: relative;
-    height: 14rem;
+    height: 19rem;
+    display: flex;
+    align-items: center;
   }
 
   .box::after {
@@ -134,9 +136,12 @@ const StyleWrapper = styled.div`
 
   .content {
     display: flex;
-    align-items: center;
-    
+    justify-content : space-between;
+    height: 100%;
   }
+ .content img {
+ width: 50%;
+ }
 
   .content-body {
     text-align: right;
@@ -144,7 +149,7 @@ const StyleWrapper = styled.div`
 
   .content p {
     margin-left: 20px;
-    font-size: 10px;
+    font-size: 15px;
     font-weight: 500;
   }
 
@@ -477,6 +482,7 @@ const StyleWrapper = styled.div`
     }
 
     .content {
+    height: 100%;
       gap: 0.2rem !important;
       flex: 1 !important;
       min-height: calc((297mm - 10cm) / 4 - 3rem) !important;
@@ -490,7 +496,7 @@ const StyleWrapper = styled.div`
     }
 
     .content img {
-      max-width: 25% !important;
+      min-width: 11rem !important;
       left: 0;
     }
 
@@ -597,6 +603,7 @@ const StyleWrapper = styled.div`
 
     /* Adjust content and images */
     .content {
+    
       gap: 0.2rem !important;
       padding-bottom: 0.3rem !important;
     }
@@ -636,6 +643,7 @@ const StyleWrapper = styled.div`
       justify-content: flex-start !important;
       gap: 0.5rem !important;
       align-items: flex-start !important;
+      
     }
 
     .content > div {
@@ -910,6 +918,8 @@ const StyleWrapper = styled.div`
       align-items: flex-start !important;
       gap: 1rem !important;
       padding: 0.3rem !important;
+          height: 100% !important;
+
     }
 
     /* Force image to left side */
@@ -1138,7 +1148,7 @@ const ArcReport = forwardRef<HTMLDivElement, ArcReportProps>((props, ref) => {
           <div className="cond">
             <div className="header">
               <img src="/3d-conditions_images/house.png" />
-              <div classname="main-header">
+              <div className="main-header">
                 <p className="header-title">الفراغات الداخلية</p>
                 <p className="header-body">مساحة الغرف السكنية</p>
               </div>
@@ -2019,7 +2029,7 @@ const ArcReport = forwardRef<HTMLDivElement, ArcReportProps>((props, ref) => {
                     والبلديات.
                   </p>
                 </div>
-                <img src="/3d-conditions_images/slide2image7.png" style={{ width:'54%'}} />
+                <img src="/3d-conditions_images/slide2image7.png" style={{ width: '54%' }} />
               </div>
             </div>
             <div style={{ backgroundColor: '#ddefec !important', justifyItems: 'center', borderRadius: '0 0 25px 25px !important', maxHeight: '2.8rem' }}>

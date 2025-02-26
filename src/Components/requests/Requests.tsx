@@ -40,14 +40,14 @@ export default function Requests() {
         }
       );
       //console.log(response.data.access_token);
-   
+
 
       localStorage.setItem("Token", response.data.access_token);
       const expiresInSeconds = parseInt(response.data.expires_in, 10); // Convert "17999" to number
       const expirationTime = Date.now() + expiresInSeconds * 1000;
       localStorage.setItem("tokenExpiration", expirationTime.toString());
     } catch (err: any) {
-      
+
     }
   };
 
@@ -61,7 +61,7 @@ export default function Requests() {
       }
 
     }
-    if(!localStorage.getItem('Token')){
+    if (!localStorage.getItem('Token')) {
       fetchToken();
     }
   }, []);
@@ -76,13 +76,13 @@ export default function Requests() {
       pageNo: 1,
       pageSize: 10000
     };
-    const token=localStorage.getItem('Token');
+    const token = localStorage.getItem('Token');
     const headers = {
       'Content-Type': 'application/x-www-form-urlencoded',
       'loginIdentityType': '1',
       'loginIdentityId': '1000115574',
-      'Authorization': 'Bearer '+ token,
-       };
+      'Authorization': 'Bearer ' + token,
+    };
 
     axios.get(url, { params, headers })
       .then(response => {
@@ -100,13 +100,59 @@ export default function Requests() {
         request.number.toLowerCase().includes(searchTerm.toLowerCase()) ||
         request.ownerName.toLowerCase().includes(searchTerm.toLowerCase()))
     );
-    console.log(filteredRequests);
+  console.log(filteredRequests);
 
   // Pagination logic
   const totalPages = Math.ceil((filteredRequests?.length || 0) / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const paginatedRequests = filteredRequests?.slice(startIndex, startIndex + itemsPerPage);
-console.log(paginatedRequests);
+  console.log(paginatedRequests);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!id) return;
+    const url = 'https://apiservicesstg.balady.gov.sa/v1/baladybusiness-services/delegate-requests/search';
+    const params = {
+      providerId: id,
+      serviceId: '62f38b0a96686c87e1dd2850',
+      orderBy: 'Descending',
+      pageNo: 1,
+      pageSize: 10000
+    };
+    const token = localStorage.getItem('Token');
+    const headers = {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'loginIdentityType': '1',
+      'loginIdentityId': '1000115574',
+      'Authorization': 'Bearer ' + token,
+    };
+
+    setLoading(true);
+    axios.get(url, { params, headers })
+      .then(response => {
+        console.log(response.data.data.result.items);
+        setOffice(response.data.data.result.items);
+      })
+      .catch(error => {
+        console.error('Error:', error.response ? error.response.data : error.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-100 p-4 flex items-center justify-center">
+        <div className="text-center">
+          <div className="spinner-border animate-spin inline-block w-12 h-12 border-4 rounded-full text-green-500 border-t-transparent"></div>
+          <p className="mt-4 text-gray-600">جاري تحميل البيانات...</p>
+        </div>
+      </div>
+    );
+  }
+
+
   return (
     <div className="min-h-screen bg-gray-50 p-6" style={{ direction: "rtl" }}>
       <div className="flex absolute left-10 top-24 justify-end mb-4">
@@ -172,8 +218,8 @@ console.log(paginatedRequests);
                 key={page}
                 onClick={() => setCurrentPage(page)}
                 className={`w-10 h-10 rounded-lg border ${currentPage === page
-                    ? 'bg-primary text-white'
-                    : 'hover:bg-gray-50'
+                  ? 'bg-primary text-white'
+                  : 'hover:bg-gray-50'
                   }`}
               >
                 {page}
@@ -190,6 +236,8 @@ console.log(paginatedRequests);
           </div>
         )}
       </div>
-    </div>
+    </div>// existing return JSX
   );
+
+
 }
