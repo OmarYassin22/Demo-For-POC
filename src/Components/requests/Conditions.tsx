@@ -302,50 +302,14 @@ const Conditions: React.FC = () => {
         },
         // withCredentials: true,
       });
-      setConditionsData(response.data.data.result);
-      const visualCategoryCodes: { [key: string]: string[] } = {
-        "أبعاد الدرج": ["504.2"],
-        "أبعاد الكمرة": ["503.3"],
-        "أرضيات الخزانات": ["506.2"],
-        "ارتداد الملحق العلوي": ["3.2", "10.2"],
-        "ارتفاع الكلي للعصب": ["507.2", "507.6"],
-        "ارتفاع المبنى": ["20"],
-        "الإضاءة الطبيعية": ["403"],
-        "الارتداد الامامي": ["2.2", "3.17", "4.7", "9", "10.3"],
-        "الارتداد في حالة جار": ["2.3", "2.6", "8", "73"],
-        "الارتداد في حالة شوارع جانبية": ["4.07", "7", "10.4", "70"],
-        "الارتفاعات الداخلية": ["17", "18", "400", "401"],
-        "الخزانات": ["506.3"],
-        "السماكة الكلية للبلاطة الخرسانية المصمتة أحادية الإتجاه": ["505.1", "505.2"],
-        "السماكة الكلية للبلاطة الخرسانية المصمتة المرتكزة على كمرات": ["505.3"],
-        "السور الخارجي": ["3.16"],
-        "الشطفة الخارجية": ["2.5", "3.8", "40", "42"],
-        "العمود الدائري": ["500.2"],
-        "العمود المستطيل": ["500.1"],
-        "المدخل الخارجي": ["308", "309", "408"],
-        "المسافة الصافية بين الأعصاب": ["507.3", "507.7"],
-        "المسافة بين سطح التربة والقاعدة": ["502.1"],
-        "الملحق العلوي": ["4", "69"],
-        "الممرات الداخلية": ["412"],
-        "بعد القاعدة الأصغر": ["502.2"],
-        "جدارن القبو": ["501.2"],
-        "جدران الخزانات": ["506.1"],
-        "داربزين الحماية": ["402"],
-        "دور القبو": ["10.8", "25", "26"],
-        "سترة السطح": ["2.11", "3.14", "21", "23"],
-        "سمك البلاطة فوق الأعصاب": ["507.8", "507.4"],
-        "سمك الجدار": ["501.1"],
-        "عرض السلالم الداخلية": ["406", "504.1", "504.3"],
-        "عرض العصب": ["507.1", "507.5"],
-        "عمق القاعدة فوق التسليح السفلي": ["502.3"],
-        "للعوارض والكمرات الخرسانية المسلحة الداعمة لعناصر غير إنشائية": ["503.2"],
-        "للكمرات أو العوارض الخرسانية المسلحة التى لاترتكز أو ترفق بقواطيع أوتشييدات أخر": ["503.1"],
-        "متطلبات المناور الداخلية": ["66", "419"],
-        "مساحة الغرف السكنية": ["410", "411"],
-        "نسب البناء": ["1", "2", "11", "68"]
-      };
 
-      localStorage.setItem("visualCategory", JSON.stringify(visualCategoryCodes));
+
+
+      setConditionsData(response.data.data.result.conditions);
+
+
+
+
 
       setError(null);
 
@@ -371,6 +335,19 @@ const Conditions: React.FC = () => {
         console.log(filteredConditions);
         setConditionsData(filteredConditions);
         console.log(conditionsData);
+
+
+        const groupedByVisualCategory = filteredConditions.filter(({ visualCategory }) => visualCategory !== null).reduce<Record<string, string[]>>((acc, { visualCategory, code }) => {
+          if (!acc[visualCategory]) { acc[visualCategory] = []; }
+          acc[visualCategory].trim().push(code); return acc;
+        }, {});
+
+
+        localStorage.setItem("visualCategory", JSON.stringify(groupedByVisualCategory));
+
+
+
+
       } else {
         // This block will run if either conditionsData or conditionsData?.conditions is null or undefined
         // alert("Conditions Data or conditions is null or undefined");
@@ -450,8 +427,8 @@ const Conditions: React.FC = () => {
           <div className="relative px-6 py-4 bg-white border-b">
             <div className="flex justify-between items-center">
               <h2 className="text-2xl font-bold text-gray-800">
-الإشتراطات
-                {localStorage.getItem("reportType") === "arc" ? ' المعمارية ' : '  الأنشائية '} 
+                الإشتراطات
+                {localStorage.getItem("reportType") === "arc" ? ' المعمارية ' : '  الأنشائية '}
               </h2>
             </div>
             <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray-100">
@@ -482,7 +459,7 @@ const Conditions: React.FC = () => {
                   }}
                 >
                   <div className="grid grid-cols-2 gap-6"> {/* increased gap */}
-                    {conditionsData.map((condition, index) => (
+                    {conditionsData?.map((condition, index) => (
                       <div
                         key={index}
                         className="group bg-white rounded-xl p-6 transition-all duration-300
@@ -668,8 +645,8 @@ const Conditions: React.FC = () => {
             >
               بدء الفحص            </button>
           </div>
-          </div>   </div>   </div>
-    
+        </div>   </div>   </div>
+
   );
 };
 

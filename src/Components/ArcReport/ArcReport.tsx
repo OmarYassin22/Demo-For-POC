@@ -1124,9 +1124,9 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
   return (
     <StyleWrapper ref={ref} style={{ direction: "rtl" }}> {/* ✅ Attach ref properly */}
       <div className="page-section">
-      <img src="/header.png" style={{width:'100%'}} alt="" />
+        <img src="/header.png" style={{ width: '100%' }} alt="" />
         <div className="section-header">
-          <img src="/3d-conditions_images/image.png" style={{marginTop:'1rem'}} alt="" />
+          <img src="/3d-conditions_images/image.png" style={{ marginTop: '1rem' }} alt="" />
           <h1 className="section-title">المتطلبات المعمارية</h1>
         </div>
         <div className="conditions-grid">
@@ -1166,7 +1166,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["مساحة الغرف السكنية"] === true}
+                        conditionStutes["مساحة الغرف السكنية"] == true}
                       readOnly
                       id="مساحة الغرف السكنية 1" />
                     <label
@@ -1179,7 +1179,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <p>لم يتحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["مساحة الغرف السكنية"] === false}
+                      conditionStutes["مساحة الغرف السكنية"] == false}
                       readOnly id="مساحة الغرف السكنية -1" />
                     <label
                       htmlFor="مساحة الغرف السكنية -1"
@@ -1233,7 +1233,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <p>تحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["الممرات الداخلية"] === true}
+                      conditionStutes["الممرات الداخلية"] == true}
                       readOnly id="الممرات الداخلية 1" />
                     <label htmlFor="الممرات الداخلية 1" className="check-box" />
                   </div>
@@ -1243,7 +1243,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["الممرات الداخلية"] === false}
+                        conditionStutes["الممرات الداخلية"] == false}
                       readOnly
                       id="الممرات الداخلية -1" />
                     <label
@@ -1303,7 +1303,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                     <input type="checkbox"
 
                       checked={
-                        conditionStutes["الارتفاعات الداخلية"] === true}
+                        conditionStutes["الارتفاعات الداخلية"] == true}
                       readOnly
                       id="الارتفاعات الداخلية 1" />
                     <label
@@ -1316,7 +1316,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <p>لم يتحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["الارتفاعات الداخلية"] === false}
+                      conditionStutes["الارتفاعات الداخلية"] == false}
                       readOnly id="الارتفاعات الداخلية -1" />
                     <label
                       htmlFor="الارتفاعات الداخلية -1"
@@ -1378,7 +1378,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <p>تحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["الإضاءة الطبيعية"] === true}
+                      conditionStutes["الإضاءة الطبيعية"] == true}
                       readOnly id="الإضاءة الطبيعية 1" />
                     <label htmlFor="الإضاءة الطبيعية 1" className="check-box" />
                   </div>
@@ -1387,7 +1387,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <p>لم يتحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["الإضاءة الطبيعية"] === false}
+                      conditionStutes["الإضاءة الطبيعية"] == false}
                       readOnly id="الإضاءة الطبيعية -1" />
                     <label
                       htmlFor="الإضاءة الطبيعية -1"
@@ -1438,7 +1438,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <p>تحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["داربزين الحماية"] === true}
+                      conditionStutes["داربزين الحماية"] == true}
                       readOnly id="داربزين الحماية 1" />
                     <label htmlFor="داربزين الحماية 1" className="check-box" />
                   </div>
@@ -1447,7 +1447,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <p>لم يتحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["داربزين الحماية"] === false}
+                      conditionStutes["داربزين الحماية"] == false}
                       readOnly id="داربزين الحماية -1" />
                     <label htmlFor="داربزين الحماية -1" className="check-box" />
                   </div>
@@ -1499,7 +1499,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <p>تحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["ارتفاع المبنى"] === true}
+                      conditionStutes["ارتفاع المبنى"] == true}
                       readOnly id="ارتفاع المبنى 1" />
                     <label htmlFor="ارتفاع المبنى 1" className="check-box" />
                   </div>
@@ -1508,7 +1508,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <p>لم يتحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["ارتفاع المبنى"] === false}
+                      conditionStutes["ارتفاع المبنى"] == false}
                       readOnly id="ارتفاع المبنى -1" />
                     <label htmlFor="ارتفاع المبنى -1" className="check-box" />
                   </div>
@@ -1563,7 +1563,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <p>تحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["سترة السطح"] === true}
+                      conditionStutes["سترة السطح"] == true}
                       readOnly id="سترة السطح 1" />
                     <label htmlFor="سترة السطح 1" className="check-box" />
                   </div>
@@ -1572,7 +1572,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <p>لم يتحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["سترة السطح"] === false}
+                      conditionStutes["سترة السطح"] == false}
                       readOnly id="سترة السطح -1" />
                     <label htmlFor="سترة السطح -1" className="check-box" />
                   </div>
@@ -1629,7 +1629,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <p>تحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["المدخل الخارجي"] === true}
+                      conditionStutes["المدخل الخارجي"] == true}
                       readOnly id="المدخل الخارجي 1" />
                     <label htmlFor="المدخل الخارجي 1" className="check-box" />
                   </div>
@@ -1638,7 +1638,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <p>لم يتحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["المدخل الخارجي"] === false}
+                      conditionStutes["المدخل الخارجي"] == false}
                       readOnly id="المدخل الخارجي -1" />
                     <label htmlFor="المدخل الخارجي -1" className="check-box" />
                   </div>
@@ -1698,7 +1698,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <p>تحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["نسب البناء"] === true}
+                      conditionStutes["نسب البناء "] == true}
                       readOnly id="cbtest-1" />
                     <label htmlFor="cbtest-1" className="check-box" />
                   </div>
@@ -1707,7 +1707,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <p>لم يتحقق</p>
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox" checked={
-                      conditionStutes["نسب البناء"] === false}
+                      conditionStutes["نسب البناء "] == false}
                       readOnly id="cbtest-2" />
                     <label htmlFor="cbtest-2" className="check-box" />
                   </div>
@@ -1717,7 +1717,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        !Object.prototype.hasOwnProperty.call(conditionStutes, "نسب البناء")}
+                        !Object.prototype.hasOwnProperty.call(conditionStutes, "نسب البناء ")}
                       readOnly
                       id="cbtest-3" />
                     <label htmlFor="cbtest-3" className="check-box" />
@@ -1756,7 +1756,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["الارتداد في حالة شوارع جانبية"] === true}
+                        conditionStutes["الارتداد في حالة شوارع جانبية"] == true}
                       id="cbtest-4" defaultChecked />
                     <label htmlFor="cbtest-4" className="check-box" />
                   </div>
@@ -1766,7 +1766,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["الارتداد في حالة شوارع جانبية"] === false}
+                        conditionStutes["الارتداد في حالة شوارع جانبية"] == false}
                       id="cbtest-5" />
                     <label htmlFor="cbtest-5" className="check-box" />
                   </div>
@@ -1789,7 +1789,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
               <img src="/3d-conditions_images/house.png" alt />
               <div className="main-header">
                 <p className="header-title">الفراغات الداخلية</p>
-                <p className="header-body">ملحق علوي</p>
+                <p className="header-body">الملحق العلوي</p>
               </div>
             </div>
             <div className="box">
@@ -1810,7 +1810,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["ملحق علوي"] === true}
+                        conditionStutes["الملحق العلوي"] == true}
                       id="cbtest-16" />
                     <label htmlFor="cbtest-16" className="check-box" />
                   </div>
@@ -1820,7 +1820,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["ملحق علوي"] === false}
+                        conditionStutes["الملحق العلوي"] == false}
                       id="cbtest-17" />
                     <label htmlFor="cbtest-17" className="check-box" />
                   </div>
@@ -1830,7 +1830,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        !Object.prototype.hasOwnProperty.call(conditionStutes, "ملحق علوي")}
+                        !Object.prototype.hasOwnProperty.call(conditionStutes, "الملحق العلوي")}
                       id="cbtest-18" />
                     <label htmlFor="cbtest-18" className="check-box" />
                   </div>
@@ -1863,7 +1863,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["الارتداد في حالة الجار"] === true}
+                        conditionStutes["الارتداد في حالة الجار"] == true}
                       id="cbtest-19" />
                     <label htmlFor="cbtest-19" className="check-box" />
                   </div>
@@ -1873,7 +1873,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["الارتداد في حالة الجار"] === false}
+                        conditionStutes["الارتداد في حالة الجار"] == false}
                       id="cbtest-20" />
                     <label htmlFor="cbtest-20" className="check-box" />
                   </div>
@@ -1916,7 +1916,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["دور القبو"] === true}
+                        conditionStutes["دور القبو"] == true}
                       id="cbtest-22" />
                     <label htmlFor="cbtest-22" className="check-box" />
                   </div>
@@ -1926,7 +1926,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["دور القبو"] === false}
+                        conditionStutes["دور القبو"] == false}
                       id="cbtest-23" />
                     <label htmlFor="cbtest-23" className="check-box" />
                   </div>
@@ -1970,7 +1970,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["ارتداد الملحق العلوي"] === true}
+                        conditionStutes["ارتداد الملحق العلوي"] == true}
                       id="cbtest-25" />
                     <label htmlFor="cbtest-25" className="check-box" />
                   </div>
@@ -1980,7 +1980,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["ارتداد الملحق العلوي"] === false}
+                        conditionStutes["ارتداد الملحق العلوي"] == false}
                       id="cbtest-26" />
                     <label htmlFor="cbtest-26" className="check-box" />
                   </div>
@@ -2024,7 +2024,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["الارتداد الأمامي"] === true}
+                        conditionStutes["الارتداد الامامي"] == true}
                       id="cbtest-28" />
                     <label htmlFor="cbtest-28" className="check-box" />
                   </div>
@@ -2034,7 +2034,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["الارتداد الأمامي"] === false}
+                        conditionStutes["الارتداد الامامي"] == false}
                       id="cbtest-29" />
                     <label htmlFor="cbtest-29" className="check-box" />
                   </div>
@@ -2045,7 +2045,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                     <input type="checkbox"
 
                       checked={
-                        !Object.prototype.hasOwnProperty.call(conditionStutes, "الارتداد الأمامي")}
+                        !Object.prototype.hasOwnProperty.call(conditionStutes, "الارتداد الامامي")}
                       id="cbtest-30" />
                     <label htmlFor="cbtest-30" className="check-box" />
                   </div>
@@ -2078,7 +2078,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["الشطفة الخارجية"] === true}
+                        conditionStutes["الشطفة الخارجية"] == true}
                       id="cbtest-31" />
                     <label htmlFor="cbtest-31" className="check-box" />
                   </div>
@@ -2088,7 +2088,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["الشطفة الخارجية"] === false}
+                        conditionStutes["الشطفة الخارجية"] == false}
                       id="cbtest-32" />
                     <label htmlFor="cbtest-32" className="check-box" />
                   </div>
@@ -2143,7 +2143,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["السور الخارجي"] === true}
+                        conditionStutes["السور الخارجي"] == true}
                       id="cbtest-7" />
                     <label htmlFor="cbtest-7" className="check-box" />
                   </div>
@@ -2153,7 +2153,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["السور الخارجي"] === false}
+                        conditionStutes["السور الخارجي"] == false}
                       id="cbtest-8" />
                     <label htmlFor="cbtest-8" className="check-box" />
                   </div>
@@ -2197,7 +2197,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["عرض السلالم الداخلية"] === true}
+                        conditionStutes["عرض السلالم الداخلية"] == true}
                       id="cbtest-10" />
                     <label htmlFor="cbtest-10" className="check-box" />
                   </div>
@@ -2207,7 +2207,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["عرض السلالم الداخلية"] === false}
+                        conditionStutes["عرض السلالم الداخلية"] == false}
                       id="cbtest-11" />
                     <label htmlFor="cbtest-11" className="check-box" />
                   </div>
@@ -2252,7 +2252,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["أبعاد الدرج"] === true}
+                        conditionStutes["أبعاد الدرج"] == true}
                       id="cbtest-13" />
                     <label htmlFor="cbtest-13" className="check-box" />
                   </div>
@@ -2262,7 +2262,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                   <div className="checkbox-wrapper-19">
                     <input type="checkbox"
                       checked={
-                        conditionStutes["أبعاد الدرج"] === false}
+                        conditionStutes["أبعاد الدرج"] == false}
                       id="cbtest-14" />
                     <label htmlFor="cbtest-14" className="check-box" />
                   </div>
@@ -2333,7 +2333,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                 <div className="checkbox-wrapper-19">
                   <input type="checkbox"
                     checked={
-                      conditionStutes["متطلبات المناور الداخلية"] === true}
+                      conditionStutes["متطلبات المناور الداخلية"] == true}
                     id="cbtest-34" />
                   <label htmlFor="cbtest-34" className="check-box" />
                 </div>
@@ -2343,7 +2343,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                 <div className="checkbox-wrapper-19">
                   <input type="checkbox"
                     checked={
-                      conditionStutes["متطلبات المناور الداخلية"] === false}
+                      conditionStutes["متطلبات المناور الداخلية"] == false}
                     id="cbtest-35" />
                   <label htmlFor="cbtest-35" className="check-box" />
                 </div>
