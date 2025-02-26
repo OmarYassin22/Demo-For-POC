@@ -111,12 +111,13 @@ const StyleWrapper = styled.div`
   }
 
   .header {
-    display: flex;
+  display: flex;
     gap: 10px;
-    height: 70px;
-    justify-content: start;
+    height: 45px;
+    justify-content: flex-start;
     margin-bottom: 0.5rem;
-    align-items: end;
+    text-align: right;
+    align-items: center;
   }
 
   .header-title {
@@ -145,7 +146,7 @@ const StyleWrapper = styled.div`
 
   .content p {
     margin-left: 20px;
-    font-size: 13px;
+    font-size: 10px;
     font-weight: 500;
   }
 

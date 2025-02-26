@@ -40,7 +40,7 @@ const StyleWrapper = styled.div`
     border-radius: 20px 0 0 0;
     padding: 1rem;
     position: relative;
-    height: 17rem;
+    height: 14rem;
   }
 
   .box::after {
@@ -110,11 +110,13 @@ const StyleWrapper = styled.div`
   }
 
   .header {
-    display: flex;
-    gap: 20px;
-    height: 70px;
-    justify-content: start;
+ display: flex;
+    gap: 10px;
+    height: 45px;
+    justify-content: flex-start;
     margin-bottom: 0.5rem;
+    text-align: right;
+    align-items: center;
   }
 
   .header-title {
@@ -133,6 +135,7 @@ const StyleWrapper = styled.div`
   .content {
     display: flex;
     align-items: center;
+    
   }
 
   .content-body {
@@ -141,7 +144,7 @@ const StyleWrapper = styled.div`
 
   .content p {
     margin-left: 20px;
-    font-size: 13px;
+    font-size: 10px;
     font-weight: 500;
   }
 
@@ -2014,7 +2017,7 @@ const ArcReport = forwardRef<HTMLDivElement>((props, ref) => {
                     والبلديات.
                   </p>
                 </div>
-                <img src="/3d-conditions_images/slide2image7.png" alt />
+                <img src="/3d-conditions_images/slide2image7.png" style={{ width:'54%'}} />
               </div>
             </div>
             <div style={{ backgroundColor: '#ddefec !important', justifyItems: 'center', borderRadius: '0 0 25px 25px !important', maxHeight: '2.8rem' }}>

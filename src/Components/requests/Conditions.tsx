@@ -335,13 +335,13 @@ const Conditions: React.FC = () => {
         console.log(filteredConditions);
         setConditionsData(filteredConditions);
         console.log(conditionsData);
+        debugger;
 
-
-        const groupedByVisualCategory = filteredConditions.filter(({ visualCategory }) => visualCategory !== null).reduce<Record<string, string[]>>((acc, { visualCategory, code }) => {
+        const groupedByVisualCategory = filteredConditions.filter(({ visualCategory }) => visualCategory !== null).reduce<Record<string, string[]>>((acc: Record<string, string[]>, { visualCategory, code }: { visualCategory: string; code: string }) => {
           if (!acc[visualCategory]) { acc[visualCategory] = []; }
-          acc[visualCategory].trim().push(code); return acc;
+          acc[visualCategory].push(code); return acc;
         }, {});
-
+        
 
         localStorage.setItem("visualCategory", JSON.stringify(groupedByVisualCategory));
 
