@@ -44,6 +44,11 @@ export default function Navbar() {
 
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("visualCategory");
+    localStorage.removeItem("visualCategoryStatus");
+    localStorage.removeItem("reportType");
+    localStorage.removeItem("ComplianceResultData");
+    localStorage.removeItem("urn");
     setIsLoggedIn(false);
     navigate("/");
   };

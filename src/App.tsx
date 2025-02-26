@@ -12,8 +12,25 @@ import ViewCompliance from './Components/Autodesk/ViewCompliance'
 import ArcReport from "./Components/ArcReport/ArcReport";
 import StrReport from "./Components/ArcReport/StrReport";
 import Footer from "./Components/Footer/Footer";
+import { useEffect } from "react";
  
 function App() {
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      localStorage.removeItem("isLoggedIn");
+      localStorage.removeItem("visualCategory");
+      localStorage.removeItem("visualCategoryStatus");
+      localStorage.removeItem("reportType");
+      localStorage.removeItem("ComplianceResultData");
+      localStorage.removeItem("urn");
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
   return (
     <BrowserRouter>
       <div className="min-h-screen bg-gray-50">
