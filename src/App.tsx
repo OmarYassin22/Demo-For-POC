@@ -11,6 +11,7 @@ import AutodeskResultViewer from './Components/Autodesk/AutodeskResultViewer'
 import ViewCompliance from './Components/Autodesk/ViewCompliance'
 import ArcReport from "./Components/ArcReport/ArcReport";
 import StrReport from "./Components/ArcReport/StrReport";
+import Footer from "./Components/Footer/Footer";
  
 function App() {
   return (
@@ -28,10 +29,11 @@ function App() {
             <Route path="/InspectionReport/:krookiNumber" element={<InspectionReport />} />
             <Route path="/AutodeskResultViewer" element={<AutodeskResultViewer />} />
             <Route path="/ViewCompliance" element={<ViewCompliance />} />
-            <Route path="/test" element={<StrReport/>} />
+            <Route path="/test" element={<ArcReport/>} />
              <Route path="*" element={<h1>Page Not Found</h1>} />
           </Routes>
         </div>
+        <Footer/>
       </div>
     </BrowserRouter>
   );

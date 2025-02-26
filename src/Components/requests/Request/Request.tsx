@@ -17,8 +17,12 @@ export default function Component({data, officeId}: {data: RequestData, officeId
   
   useEffect(() => {
     if (localStorage.getItem("isLoggedIn") !== "true") {
+
       navigate("/login");
+
+
     }
+    
   });
   const { ownerName, number, platformName, ownerId,waitingApproval, creationTime } = data;
   const formattedDate = creationTime 
