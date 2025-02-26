@@ -146,7 +146,7 @@ const StyleWrapper = styled.div`
 
   .content p {
     margin-left: 20px;
-    font-size: 10px;
+    font-size: 13px;
     font-weight: 500;
   }
 

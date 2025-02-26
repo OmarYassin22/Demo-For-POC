@@ -40,7 +40,7 @@ const StyleWrapper = styled.div`
     border-radius: 20px 0 0 0;
     padding: 1rem;
     position: relative;
-    height: 19rem;
+    min-height: 19rem;
     display: flex;
     align-items: center;
   }
@@ -149,7 +149,7 @@ const StyleWrapper = styled.div`
 
   .content p {
     margin-left: 20px;
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 500;
   }
 
@@ -364,8 +364,7 @@ const StyleWrapper = styled.div`
   .conditions-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(45%, 1fr));
-    gap: 1.5rem;
-  }
+    row-gap: 5rem;  }
 
   /* Update the .row class inside the last category box */
   .box .row {
