@@ -117,7 +117,7 @@ export default function Offices() {
                   </h3>
                 </div>
 
-                <div className="flex justify-between text-sm text-gray-600 mt-4">
+                {/* <div className="flex justify-between text-sm text-gray-600 mt-4">
                   <div>
                     <span className="font-medium">{office.requestCount}</span>{" "}
                     طلب
@@ -126,7 +126,7 @@ export default function Offices() {
                     <span className="font-medium">{office.activeRequests}</span>{" "}
                     نشط
                   </div>
-                </div>
+                </div> */}
               </div>
             </Link>
           ))}
