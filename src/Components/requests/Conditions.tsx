@@ -445,14 +445,12 @@ const Conditions: React.FC = () => {
 
 
 
-        {/* Conditions Section */}
-
         <div className="bg-white rounded-xl shadow-lg overflow-hidden">
           {/* Header with progress bar */}
           <div className="relative px-6 py-4 bg-white border-b">
             <div className="flex justify-between items-center">
               <h2 className="text-2xl font-bold text-gray-800">
-الإشطراتات
+الإشتراطات
                 {localStorage.getItem("reportType") === "arc" ? ' المعمارية ' : '  الأنشائية '} 
               </h2>
             </div>
@@ -670,9 +668,8 @@ const Conditions: React.FC = () => {
             >
               بدء الفحص            </button>
           </div>
-        </div>
-      </div>
-    </div>
+          </div>   </div>   </div>
+    
   );
 };
 

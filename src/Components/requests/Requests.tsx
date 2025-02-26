@@ -150,7 +150,9 @@ console.log(paginatedRequests);
             <Component
               key={request.platformRequestId}
               data={request}
-              officeId={id || ''}
+              providerId={id || ''}
+
+              officeId={request.officeId || ''}
             />
           ))}
         </div>

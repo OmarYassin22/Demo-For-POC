@@ -12,7 +12,7 @@ interface RequestData {
   creationTime: string|null;
 }
 
-export default function Component({data, officeId}: {data: RequestData, officeId: string}) {
+export default function Component({data, officeId,providerId}: {data: RequestData, officeId: string,providerId:""}) {
   const navigate = useNavigate();
   
   useEffect(() => {
@@ -34,7 +34,7 @@ export default function Component({data, officeId}: {data: RequestData, officeId
   : " ";
 
   return (
-    <Link to={`/offices/${officeId}/request/${number}`} state={{ waitingApproval, ownerId, platformName}}className="w-full block hover:scale-[1.02] transition-transform">
+    <Link to={`/offices/${providerId}/request/${number}`} state={{ waitingApproval, ownerId, platformName,officeId}}className="w-full block hover:scale-[1.02] transition-transform">
       <Card className="w-full my-3 rounded-lg shadow-md hover:shadow-xl transition-shadow">
         <div className="flex flex-col gap-4">
           <div className="flex justify-between items-center">
