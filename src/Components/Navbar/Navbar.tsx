@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate ,useLocation} from "react-router-dom";
 import { LogOut, UserCircle } from "lucide-react";
 import logo from "../../Assets/image/favicon.ico"; // Import the logo
 
@@ -36,11 +36,11 @@ export default function Navbar() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
+  const location = useLocation();
   useEffect(() => {
     const loginStatus = localStorage.getItem("isLoggedIn");
     setIsLoggedIn(loginStatus === "true");
-  }, []);
+  }, [location]); // ✅ Now runs on every page navigation
 
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");
