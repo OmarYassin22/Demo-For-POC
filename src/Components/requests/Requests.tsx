@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 // import data from "../../mocks/OfficeMock.json";
 import axios from "axios";
 import Component from "./Request/Request";
-import { Building2, ChevronRight, ChevronLeft, Search, ArrowLeft } from "lucide-react";
+import { Building2, ChevronRight, ChevronLeft, Search, ArrowLeft, Loader2 } from "lucide-react";
 
 export default function Requests() {
   const navigate = useNavigate();
@@ -140,30 +140,33 @@ export default function Requests() {
         setLoading(false);
       });
   }, [id]);
-
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-100 p-4 flex items-center justify-center">
-        <div className="text-center">
-          <div className="spinner-border animate-spin inline-block w-12 h-12 border-4 rounded-full text-green-500 border-t-transparent"></div>
-          <p className="mt-4 text-gray-600">جاري تحميل البيانات...</p>
+      <div className="min-h-screen bg-gray-50 p-4 flex items-center justify-center">
+        <div className="text-center bg-white p-8 rounded-lg shadow-md">
+          <Loader2 className="h-12 w-12 animate-spin text-emerald-600 mx-auto" />
+          <p className="mt-4 text-lg font-medium text-gray-700">جاري تحميل البيانات...</p>
+          <p className="text-sm text-gray-500 mt-2">يرجى الانتظار قليلاً</p>
         </div>
       </div>
     );
   }
-
+  const handleBack = () => {
+    navigate(-1);
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 p-6" style={{ direction: "rtl" }}>
-      <div className="flex absolute left-10 top-24 justify-end mb-4">
+      <div className="max-w-7xl mx-auto mb-6">
         <button
-          onClick={() => { navigate(-1) }}
-          className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-blue-600 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-200 border border-gray-200"
+          onClick={(handleBack)}
+          className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-emerald-600 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-200 border border-gray-200"
         >
           <ArrowLeft className="w-5 h-5" />
           <span className="font-medium">العودة</span>
         </button>
       </div>
+
       <div className="max-w-7xl mx-auto">
         <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
           <div className="flex items-center gap-3 mb-4">
