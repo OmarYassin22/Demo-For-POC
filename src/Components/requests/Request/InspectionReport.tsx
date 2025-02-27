@@ -1,9 +1,29 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 import { useReactToPrint } from 'react-to-print';
 import DataTable from "../../DataTable";
 import BackButton from '../../common/BackButton';
-import { ArrowLeft, Download, FileText, Grid, CheckCircle2, XCircle, HelpCircle, ClipboardList, BuildingIcon } from "lucide-react";
+import {
+  ArrowLeft,
+  Download,
+  FileText,
+  Grid,
+  CheckCircle2,
+  XCircle,
+  HelpCircle,
+  ClipboardList,
+  BuildingIcon,
+  Calendar,
+  Map,
+  MapPin,
+  FileBarChart2,
+  Printer,
+  Filter,
+  Layers,
+  Loader2,
+  AlertCircle,
+  User
+} from "lucide-react";
 import ArcReport from "../../ArcReport/ArcReport";
 import StrReport from "../../ArcReport/StrReport";
 import { jsPDF } from 'jspdf';
@@ -22,121 +42,117 @@ interface CategoryStatus {
 }
 
 const InspectionReport = () => {
-  // Access the location state using useLocation
+  // Access the location state using useLocation and useParams
   const location = useLocation();
   const navigate = useNavigate();
+  const { id, requestid } = useParams();
   const { officeId, requestId, instructure } = location.state || {};
   const [filteredData, setFilteredData] = useState(null);
   const [visualStatus, setVisualStatus] = useState({});
   const [categoryStatuses, setCategoryStatuses] = useState<CategoryStatus>({});
   const [activeTab, setActiveTab] = useState<'inspection' | 'report'>('inspection');
   const [reportType, setReportType] = useState<'arc' | 'str'>('arc');
-
   const [reportLoaded, setReportLoaded] = useState(false);
-
-  
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Load report type from localStorage if available
-    const savedReportType = localStorage.getItem("reportType");
-    if (savedReportType && (savedReportType === 'arc' || 'str')) {
-      setReportType(savedReportType as 'arc' | 'str');
-    }
+    const loadData = async () => {
+      try {
+        setLoading(true);
 
-    // Load any other data needed for the report
-    const ComplianceResultData = JSON.parse(localStorage.getItem("ComplianceResultData") || "{}");
-    const visualCategoryDict = JSON.parse(localStorage.getItem("visualCategory") || "{}");
-    const key = Object.keys(ComplianceResultData)[0];
-    console.log(visualCategoryDict);
-    console.log(ComplianceResultData[key].Results);
-
-    const checkConditions = (category: string) => {
-      let passedCount = 0;
-
-      const conditionIds = visualCategoryDict[category] || [];
-
-
-      ComplianceResultData[key].Results.forEach(condition => {
-        if (conditionIds.includes(condition.Code) && condition.Status) {
-          passedCount++;
+        // Load report type from localStorage if available
+        const savedReportType = localStorage.getItem("reportType");
+        if (savedReportType && (savedReportType === 'arc' || savedReportType === 'str')) {
+          setReportType(savedReportType as 'arc' | 'str');
         }
-      });
 
-      return passedCount === conditionIds.length;
+        // Simulate data loading - in a real app, you would fetch this from an API
+        await new Promise(resolve => setTimeout(resolve, 800));
 
+        // Load any other data needed for the report
+        const ComplianceResultData = JSON.parse(localStorage.getItem("ComplianceResultData") || "{}");
+        const visualCategoryDict = JSON.parse(localStorage.getItem("visualCategory") || "{}");
+
+        const key = Object.keys(ComplianceResultData)[0];
+        if (!key) {
+          throw new Error("No compliance data found");
+        }
+
+        // Process the data
+        const checkConditions = (category: string) => {
+          let passedCount = 0;
+          const conditionIds = visualCategoryDict[category] || [];
+          ComplianceResultData[key].Results.forEach(condition => {
+            if (conditionIds.includes(condition.Code) && condition.Status) {
+              passedCount++;
+            }
+          });
+          return passedCount === conditionIds.length;
+        };
+
+        // Example usage: Check if conditions for each visual category are passed
+        const visualCategories = Object.keys(visualCategoryDict);
+        const visualCategoryStatus: { [key: string]: boolean } = {};
+
+        visualCategories.forEach((category) => {
+          visualCategoryStatus[category] = checkConditions(category);
+        });
+
+        // Store the visual category status in local storage
+        localStorage.setItem("visualCategoryStatus", JSON.stringify(visualCategoryStatus));
+        setVisualStatus(visualCategoryStatus);
+
+        // Process categories and conditions
+        const CondintionsCodeBenaa = JSON.parse(localStorage.getItem("CondintionsCodeBenaa") || "{}");
+        const statuses: CategoryStatus = {};
+
+        Object.entries(CondintionsCodeBenaa).forEach(([category, codes]) => {
+          const conditionStatuses = (codes as string[]).map(code => ({
+            code,
+            status: ComplianceResultData[key].Results.find(r => r.Code === code)?.Status || false
+          }));
+
+          statuses[category] = {
+            total: conditionStatuses.length,
+            passed: conditionStatuses.filter(c => c.status).length,
+            conditions: conditionStatuses
+          };
+        });
+
+        setCategoryStatuses(statuses);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error loading report data:", error);
+        setError("حدث خطأ في تحميل بيانات التقرير");
+        setLoading(false);
+      }
     };
 
-    // Example usage: Check if conditions for each visual category are passed
-    const visualCategories = Object.keys(visualCategoryDict);
-    const visualCategoryStatus: { [key: string]: boolean } = {};
-
-    visualCategories.forEach((category) => {
-      visualCategoryStatus[category] = checkConditions(category);
-    });
-
-    // Store the visual category status in local storage
-    localStorage.setItem("visualCategoryStatus", JSON.stringify(visualCategoryStatus));
-
-    console.log("Visual Category Status:", visualCategoryStatus);
-
-    // Add this to existing useEffect:
-    const storedVisualStatus = localStorage.getItem("visualCategoryStatus");
-    if (storedVisualStatus) {
-      setVisualStatus(JSON.parse(storedVisualStatus));
-    }
-
-    const CondintionsCodeBenaa = JSON.parse(localStorage.getItem("CondintionsCodeBenaa") || "{}");
-
-    // Group conditions by category and check their status
-    const statuses: CategoryStatus = {};
-
-    Object.entries(CondintionsCodeBenaa).forEach(([category, codes]) => {
-      const conditionStatuses = (codes as string[]).map(code => ({
-        code,
-        status: ComplianceResultData[key].Results.find(r => r.Code === code)?.Status || false
-      }));
-
-      statuses[category] = {
-        total: conditionStatuses.length,
-        passed: conditionStatuses.filter(c => c.status).length,
-        conditions: conditionStatuses
-      };
-    });
-
-    setCategoryStatuses(statuses);
-
-    return () => {
-    };
+    loadData();
   }, []);
-
-  // Function to clear local storage
-
 
   const handleTabChange = (tab: 'inspection' | 'report') => {
     setActiveTab(tab);
   };
 
+  // Get data from localStorage - if this were a real app, you'd fetch from an API
   const storedData = localStorage.getItem('ComplianceResultData');
-  const parsedData = JSON.parse(storedData);
+  const parsedData = storedData ? JSON.parse(storedData) : { Results: [] };
   const dynamicKey = Object.keys(parsedData)[0];
-  const data = parsedData[dynamicKey]?.Results;
-
-  const handleAction = (id: string) => {
-    console.log("Action triggered for ID:", id);
-  };
-
+  const data = dynamicKey ? parsedData[dynamicKey]?.Results : [];
 
   const handleBackAction = () => {
-    navigate(`/offices/${officeId}/request/${requestId}`);
+    navigate(`/offices/${id || officeId}/request/${requestid || requestId}`);
   };
+
   const reportRef = useRef(null);
 
   const handleDownloadReport = async () => {
     if (!reportRef.current) {
-      console.error("ArcReport is not ready yet!");
+      console.error("Report is not ready yet!");
       return;
     }
-
 
     try {
       const pdf = new jsPDF({
@@ -164,10 +180,10 @@ const InspectionReport = () => {
           useCORS: true,
         });
 
-        const imgData = canvas.toDataURL("image/jpeg", 0.7); // ✅ Use JPEG for smaller file size
+        const imgData = canvas.toDataURL("image/jpeg", 0.7);
 
-        const imgWidth = contentWidth; // ✅ Fit exactly inside margins
-        let imgHeight = (canvas.height * imgWidth) / canvas.width; // ✅ Maintain aspect ratio
+        const imgWidth = contentWidth;
+        let imgHeight = (canvas.height * imgWidth) / canvas.width;
 
         if (imgHeight > contentHeight) {
           imgHeight = contentHeight;
@@ -178,13 +194,13 @@ const InspectionReport = () => {
         }
         pdf.addImage(imgData, "JPEG", marginLeft, marginTop, imgWidth, imgHeight, "", "MEDIUM");
       }
+
       if (!reportLoaded) {
         pdf.addPage();
         setReportLoaded(true);
-        // pdf.addImage(imgData, "JPEG", marginLeft, marginTop, imgWidth, imgHeight, "", "MEDIUM");
       }
 
-      if (localStorage.getItem("reportType") == 'str')
+      if (reportType === 'str')
         pdf.save("نتائج الفحص الإنشائى.pdf");
       else
         pdf.save("نتائج الفحص المعمارى.pdf");
@@ -193,7 +209,7 @@ const InspectionReport = () => {
     }
   };
 
-  // Add filter handling functions
+  // Filter handling functions
   const handleFilter = (filterType) => {
     let filtered;
     switch (filterType) {
@@ -212,7 +228,7 @@ const InspectionReport = () => {
     setFilteredData(filtered);
   };
 
-  // Add new columns configuration with status indicators
+  // Table columns configuration with status indicators
   const columns = [
     {
       accessorKey: "Description",
@@ -228,10 +244,7 @@ const InspectionReport = () => {
       header: "مكان الاختبار",
       cell: (props: any) => (
         <div className="flex items-center gap-2">
-          <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-          </svg>
+          <MapPin className="w-4 h-4 text-gray-400" />
           <span>{props.getValue()}</span>
         </div>
       )
@@ -250,13 +263,13 @@ const InspectionReport = () => {
                 ? 'bg-yellow-100 text-yellow-700'
                 : 'bg-red-100 text-red-700'
             }`}>
-            <span className="w-2 h-2 mr-2 rounded-full 
-              ${status 
-                ? 'bg-green-400' 
+            <span className={`w-2 h-2 mr-2 rounded-full 
+              ${status
+                ? 'bg-green-400'
                 : result === 'اخري'
                   ? 'bg-yellow-400'
                   : 'bg-red-400'
-              }"></span>
+              }`}></span>
             {result}
           </div>
         );
@@ -272,312 +285,358 @@ const InspectionReport = () => {
       )
     }
   ];
+  const handleBack = () => {
+    navigate(-1);
+  };
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 p-4 flex items-center justify-center">
+        <div className="text-center bg-white p-8 rounded-lg shadow-md">
+          <Loader2 className="h-12 w-12 animate-spin text-emerald-600 mx-auto" />
+          <p className="mt-4 text-lg font-medium text-gray-700">جاري تحميل التقرير...</p>
+          <p className="text-sm text-gray-500 mt-2">يرجى الانتظار قليلاً</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gray-50 p-4 flex items-center justify-center">
+        <div className="text-center bg-white p-8 rounded-lg shadow-md max-w-md w-full">
+          <div className="inline-flex h-14 w-14 rounded-full bg-red-100 p-4 mx-auto">
+            <AlertCircle className="h-6 w-6 text-red-600" />
+          </div>
+          <h2 className="mt-4 text-lg font-semibold text-gray-800">حدث خطأ</h2>
+          <p className="mt-2 text-gray-600">{error}</p>
+          <button
+            onClick={() => window.location.reload()}
+            className="mt-4 px-4 py-2 bg-emerald-600 text-white rounded-md hover:bg-emerald-700 transition-colors"
+          >
+            إعادة المحاولة
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
-
-
-    <div className="flex min-h-screen bg-gray-100" style={{ direction: "rtl" }}>
+    <div className="flex bg-gray-50" style={{ direction: "rtl" }}>
       {/* Sidebar */}
-      <div className="w-64 bg-white shadow-md mt-9 mb-8 rounded-lg">
-        <div className="p-4 border-b">
-          <h2 className="text-xl font-semibold text-gray-800">التقارير</h2>
+      <div className="w-64 bg-white shadow-md rounded-lg mt-4 ml-4 mb-4 sticky top-4 h-fit">
+        <div className="p-4 border-b border-gray-100">
+          <h2 className="text-xl font-semibold text-gray-800 border-r-4 border-emerald-500 pr-3">التقارير</h2>
         </div>
 
-        <nav className="mt-5">
+        <nav className="p-2">
           <div
-            className={`flex items-center p-3 cursor-pointer transition-colors ${activeTab === 'inspection' ? 'bg-blue-50 text-blue-600 border-r-4 border-blue-600' : 'text-gray-600 hover:bg-gray-50'}`}
+            className={`flex items-center p-3 mb-2 cursor-pointer rounded-lg transition-colors ${activeTab === 'inspection'
+              ? 'bg-emerald-600 text-white'
+              : 'bg-gray-50 text-gray-700 hover:bg-gray-100'
+              }`}
             onClick={() => handleTabChange('inspection')}
           >
-            <ClipboardList size={18} className="mr-2" />
-            <span className="mr-2">نتائج الفحص</span>
+            <ClipboardList size={18} className="ml-2" />
+            <span>نتائج الفحص</span>
           </div>
 
           <div
-            className={`flex items-center p-3 cursor-pointer transition-colors ${activeTab === 'report' ? 'bg-blue-50 text-blue-600 border-r-4 border-blue-600' : 'text-gray-600 hover:bg-gray-50'}`}
+            className={`flex items-center p-3 mb-2 cursor-pointer rounded-lg transition-colors ${activeTab === 'report'
+              ? 'bg-emerald-600 text-white'
+              : 'bg-gray-50 text-gray-700 hover:bg-gray-100'
+              }`}
             onClick={() => handleTabChange('report')}
           >
-            <BuildingIcon size={18} className="mr-2" />
-            <span className="mr-2">
-              عرض التقرير
-              {/* {reportType === 'arc' ? 'التقرير المعماري' : 'التقرير الإنشائي'} */}
-            </span>
+            <FileBarChart2 size={18} className="ml-2" />
+            <span></span>
+            {reportType === 'arc' ? 'التقرير المعماري' : 'التقرير الإنشائي'}
+
           </div>
         </nav>
 
         {activeTab === 'report' && (
-          <div className="p-4 border-t">
+          <div className="p-4 border-t border-gray-100">
             <button
-              className="w-full flex items-center justify-center py-2 px-4 bg-blue-600 text-white rounded hover:bg-blue-700"
+              className="w-full flex items-center justify-center py-2 px-4 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors"
               onClick={handleDownloadReport}
             >
-              <Download size={18} className="ml-2" />
+              <Printer size={18} className="ml-2" />
               طباعة التقرير
             </button>
           </div>
         )}
 
-        <div className="p-4 border-t mt-auto">
-          <BackButton
-            
-            onClick={() => handleBackAction()} // for vercel
-            label="العودة"
-          />
+        <div className="p-4 border-t border-gray-100 mt-auto">
+          <div className="max-w-7xl mx-auto mb-6">
+            <button
+              onClick={handleBack}
+              className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-emerald-600 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-200 border border-gray-200"
+            >
+              <ArrowLeft className="w-5 h-5" />
+              <span className="font-medium">العودة</span>
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 p-8 overflow-auto">
-        {/* Header */}
-        {/* <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-bold text-gray-800">
-            {activeTab === 'inspection' ? 'نتائج الفحص' : reportType === 'arc' ? 'التقرير المعماري' : 'التقرير الإنشائي'}
-          </h1>
-        </div> */}
-
-        {/* Tab Content */}
+      <div className="flex-1 p-4">
         {activeTab === 'inspection' ? (
           <div className="max-w-7xl mx-auto space-y-6">
-            {/* Your existing inspection content */}
-            <div className="bg-white rounded-xl shadow-md overflow-hidden p-6">
-              <h3 className="text-xl font-semibold mb-4">نتائج الفحص</h3>
-              {/* Your inspection content here */}
-              <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-                <div className="relative px-6 py-4 bg-white border-b">
-                  <h1 className="text-2xl font-bold text-gray-800">تقرير الفحص والمعلومات</h1>
-                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-green-600"></div>
-                </div>
-              </div>
+            {/* Header Section */}
+            <div className="bg-gradient-to-r from-emerald-700 to-emerald-500 rounded-t-lg p-6 shadow-lg">
+              <h1 className="text-2xl font-bold text-white">تقرير الفحص</h1>
+              <p className="text-emerald-50 mt-1">نتائج التحقق من المخططات</p>
+            </div>
 
-              {/* Report Summary Card */}
-              <div className="bg-white rounded-xl shadow-lg p-6">
-                <div className="grid grid-cols-2 gap-6">
-                  <div className="flex items-center gap-3">
-                    <div className="flex-shrink-0 w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center">
-                      <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-500">رقم القرار المساحي</p>
-                      <p className="font-semibold text-gray-900">450815034595</p>
-                    </div>
+            {/* Report Summary Card */}
+            <div className="bg-white rounded-b-lg shadow-lg p-6 border-t-4 border-emerald-500">
+              <div className="grid grid-cols-2 gap-6">
+                <div className="flex items-center gap-3">
+                  <div className="flex-shrink-0 bg-emerald-100 p-2 rounded-full">
+                    <MapPin className="w-5 h-5 text-emerald-600" />
                   </div>
-                  <div className="flex items-center gap-3">
-                    <div className="flex-shrink-0 w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center">
-                      <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-500">تاريخ الطلب</p>
-                      <p className="font-semibold text-gray-900">15/08/2024</p>
-                    </div>
+                  <div>
+                    <p className="text-sm text-gray-600">رقم القرار المساحي</p>
+                    <p className="font-semibold text-gray-900">450815034595</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="flex-shrink-0 bg-emerald-100 p-2 rounded-full">
+                    <Calendar className="w-5 h-5 text-emerald-600" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-600">تاريخ الطلب</p>
+                    <p className="font-semibold text-gray-900">15/08/2024</p>
                   </div>
                 </div>
               </div>
+            </div>
 
-              {/* Applicant Information */}
-              <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-                <div className="relative px-6 py-4 bg-white border-b">
-                  <h2 className="text-xl font-semibold text-gray-800">بيانات مقدم الطلب</h2>
-                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-green-600"></div>
-                </div>
-                <div className="p-6">
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div className="flex flex-col">
-                      <span className="text-sm text-gray-500">اسم المالك</span>
-                      <span className="mt-1 font-semibold text-gray-900">زياد محمد صالح المصعبي</span>
-                    </div>
-                    <div className="flex flex-col">
-                      <span className="text-sm text-gray-500">اسم مقدم الطلب</span>
-                      <span className="mt-1 font-semibold text-gray-900">زياد محمد صالح المصعبي</span>
-                    </div>
-                    <div className="flex flex-col">
-                      <span className="text-sm text-gray-500">رقم الهوية</span>
-                      <span className="mt-1 font-semibold text-gray-900">4535652448</span>
-                    </div>
-                  </div>
-                </div>
+            {/* Applicant Information */}
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+              <div className="relative px-6 py-4 bg-white border-b border-gray-100">
+                <h2 className="text-lg font-semibold text-gray-800 border-r-4 border-emerald-500 pr-3">بيانات مقدم الطلب</h2>
               </div>
-
-              {/* Plot Information */}
-              <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-                <div className="relative px-6 py-4 bg-white border-b">
-                  <h2 className="text-xl font-semibold text-gray-800">بيانات القطعة</h2>
-                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-green-600"></div>
-                </div>
-                <div className="p-6">
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                    {[
-                      { label: "رقم القطعة", value: "11" },
-                      { label: "رقم النموذج", value: "1" },
-                      { label: "نوع المبنى", value: "سكني" },
-                      { label: "المساحة", value: "150 متر" },
-                    ].map((item, index) => (
-                      <div key={index} className="flex flex-col">
-                        <span className="text-sm text-gray-500">{item.label}</span>
-                        <span className="mt-1 font-semibold text-gray-900">{item.value}</span>
+              <div className="p-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {[
+                    { label: "اسم المالك", value: "زياد محمد صالح المصعبي", icon: <User className="w-5 h-5 text-emerald-600" /> },
+                    { label: "اسم مقدم الطلب", value: "زياد محمد صالح المصعبي", icon: <User className="w-5 h-5 text-emerald-600" /> },
+                    { label: "رقم الهوية", value: "4535652448", icon: <FileText className="w-5 h-5 text-emerald-600" /> }
+                  ].map((item, index) => (
+                    <div key={index} className="flex items-center gap-3 bg-gray-50 p-4 rounded-lg">
+                      <div className="flex-shrink-0 bg-emerald-100 p-2 rounded-full">
+                        {item.icon}
                       </div>
-                    ))}
-                  </div>
+                      <div>
+                        <p className="text-sm text-gray-600">{item.label}</p>
+                        <p className="font-semibold text-gray-900">{item.value}</p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
-              {/* Statistics */}
-              <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-                <div className="relative px-6 py-4 bg-white border-b">
-                  <h2 className="text-xl font-semibold text-gray-800">إحصائيات الفحص</h2>
-                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-green-600"></div>
+            </div>
+
+            {/* Plot Information */}
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+              <div className="relative px-6 py-4 bg-white border-b border-gray-100">
+                <h2 className="text-lg font-semibold text-gray-800 border-r-4 border-emerald-500 pr-3">بيانات القطعة</h2>
+              </div>
+              <div className="p-6">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                  {[
+                    { label: "رقم القطعة", value: "11", icon: <Map className="w-5 h-5 text-emerald-600" /> },
+                    { label: "رقم النموذج", value: "1", icon: <Grid className="w-5 h-5 text-emerald-600" /> },
+                    { label: "نوع المبنى", value: "سكني", icon: <BuildingIcon className="w-5 h-5 text-emerald-600" /> },
+                    { label: "المساحة", value: "150 مربع متر", icon: <Layers className="w-5 h-5 text-emerald-600" /> },
+                  ].map((item, index) => (
+                    <div key={index} className="flex items-center gap-3 bg-gray-50 p-4 rounded-lg">
+                      <div className="flex-shrink-0 bg-emerald-100 p-2 rounded-full">
+                        {item.icon}
+                      </div>
+                      <div>
+                        <p className="text-sm text-gray-600">{item.label}</p>
+                        <p className="font-semibold text-gray-900">{item.value}</p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-                <div className="p-6">
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                    {[
-                      { label: "إجمالي الاشتراطات", value: data.length },
-                      { label: "الاشتراطات المطابقة", value: data.filter(item => item.Status === true).length },
-                      { label: "الاشتراطات غير المطابقة", value: data.filter(item => item.Status === false && item.Result != "اخري").length },
-                      { label: "أخرى", value: data.filter(item => item.Status !== true && item.Result == "اخري").length }
-                    ].map((stat, index) => (
-                      <div key={index} className={`rounded-lg p-4 ${stat.label === 'الاشتراطات المطابقة' ? 'bg-green-50' :
-                        stat.label === 'الاشتراطات غير المطابقة' ? 'bg-red-50' :
-                          stat.label === 'أخرى' ? 'bg-yellow-50' : 'bg-gray-100'
-                        }`}>
+              </div>
+            </div>
+
+            {/* Statistics */}
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+              <div className="relative px-6 py-4 bg-white border-b border-gray-100">
+                <h2 className="text-lg font-semibold text-gray-800 border-r-4 border-emerald-500 pr-3">إحصائيات الفحص</h2>
+              </div>
+              <div className="p-6">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                  {[
+                    {
+                      label: "إجمالي الاشتراطات",
+                      value: data?.length || 0,
+                      bgColor: "bg-gray-50",
+                      textColor: "text-gray-800",
+                      icon: <ClipboardList className="w-6 h-6 text-gray-600" />
+                    },
+                    {
+                      label: "الاشتراطات المطابقة",
+                      value: data?.filter(item => item.Status === true).length || 0,
+                      bgColor: "bg-green-50",
+                      textColor: "text-green-800",
+                      icon: <CheckCircle2 className="w-6 h-6 text-green-600" />
+                    },
+                    {
+                      label: "الاشتراطات غير المطابقة",
+                      value: data?.filter(item => item.Status === false && item.Result !== "اخري").length || 0,
+                      bgColor: "bg-red-50",
+                      textColor: "text-red-800",
+                      icon: <XCircle className="w-6 h-6 text-red-600" />
+                    },
+                    {
+                      label: "أخرى",
+                      value: data?.filter(item => item.Status !== true && item.Result === "اخري").length || 0,
+                      bgColor: "bg-yellow-50",
+                      textColor: "text-yellow-800",
+                      icon: <HelpCircle className="w-6 h-6 text-yellow-600" />
+                    }
+                  ].map((stat, index) => (
+                    <div
+                      key={index}
+                      className={`${stat.bgColor} rounded-lg p-4 shadow-sm border border-gray-100`}
+                    >
+                      <div className="flex items-center justify-between mb-2">
                         <p className="text-sm text-gray-500">{stat.label}</p>
-                        <p className="text-2xl font-bold text-gray-900 mt-1">{stat.value}</p>
+                        {stat.icon}
                       </div>
-                    ))}
+                      <p className={`text-2xl font-bold ${stat.textColor}`}>{stat.value}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Requirements Results */}
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+              <div className="relative px-6 py-4 bg-white border-b border-gray-100">
+                <div className="flex justify-between items-center">
+                  <h2 className="text-lg font-semibold text-gray-800 border-r-4 border-emerald-500 pr-3">نتائج فحص الاشتراطات</h2>
+                  <div className="flex items-center gap-2">
+                    <Filter className="w-5 h-5 text-gray-500" />
+                    <span className="text-sm text-gray-500">فلترة:</span>
                   </div>
                 </div>
               </div>
-              {/* Requirements Results - Updated Design */}
-              <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-                <div className="relative px-6 py-4 bg-white border-b">
-                  <div className="flex justify-between items-center">
-                    <h2 className="text-xl font-semibold text-gray-800">نتائج فحص الاشتراطات</h2>
-                    <div className="flex items-center gap-4">
-                      <div className="flex items-center gap-2">
-                        {/* <span className="w-3 h-3 rounded-full bg-green-400"></span> */}
-                        <span
-                          className={`text-sm px-3 py-1 rounded-full transition-colors cursor-pointer flex items-center gap-2
-                    ${filteredData && filteredData === data.filter(item => item.Status === true)
-                              ? 'bg-green-100 text-green-700'
-                              : 'hover:bg-green-50 text-gray-600 hover:text-green-600'}`}
-                          onClick={() => handleFilter('matched')}
-                        >
-                          <span>مطابق</span>
-                          <span className="inline-flex items-center justify-center px-2 py-0.5 text-xs font-medium rounded-full bg-green-200 text-green-800">
-                            {data.filter(item => item.Status === true).length}
-                          </span>
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        {/* <span className="w-3 h-3 rounded-full bg-red-400"></span> */}
-                        <span
-                          className={`text-sm px-3 py-1 rounded-full transition-colors cursor-pointer flex items-center gap-2
-                    ${filteredData && filteredData === data.filter(item => item.Status === false && item.Result !== "اخري")
-                              ? 'bg-red-100 text-red-700'
-                              : 'hover:bg-red-50 text-gray-600 hover:text-red-600'}`}
-                          onClick={() => handleFilter('unmatched')}
-                        >
-                          <span>غير مطابق</span>
-                          <span className="inline-flex items-center justify-center px-2 py-0.5 text-xs font-medium rounded-full bg-red-200 text-red-800">
-                            {data.filter(item => item.Status !== true && item.Result !== "اخري").length}
-                          </span>
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        {/* <span className="w-3 h-3 rounded-full bg-yellow-400"></span> */}
-                        <span
-                          className={`text-sm px-3 py-1 rounded-full transition-colors cursor-pointer flex items-center gap-2
-                    ${filteredData && filteredData === data.filter(item => item.Status === false && item.Result === "اخري")
-                              ? 'bg-yellow-100 text-yellow-700'
-                              : 'hover:bg-yellow-50 text-gray-600 hover:text-yellow-600'}`}
-                          onClick={() => handleFilter('other')}
-                        >
-                          <span>أخرى</span>
-                          <span className="inline-flex items-center justify-center px-2 py-0.5 text-xs font-medium rounded-full bg-yellow-200 text-yellow-800">
-                            {data.filter(item => item.Status !== true && item.Result === "اخري").length}
-                          </span>
-                        </span>
-                      </div>
 
-                      <button
-                        onClick={() => setFilteredData(null)}
-                        className="text-sm px-3 py-1 rounded-full text-gray-500 hover:text-gray-700 
-                             hover:bg-gray-50 transition-colors flex items-center gap-2"
-                      >
-                        <span>إظهار الكل</span>
-                        <span className="inline-flex items-center justify-center px-2 py-0.5 text-xs font-medium rounded-full bg-gray-200 text-gray-800">
-                          {data.length}
-                        </span>
-                      </button>
-
-                    </div>
-                  </div>
-                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-green-600"></div>
-                </div>
-
-                {/* Requirements Table - Full Width */}
-                <div className="relative">
-                  <div className="max-h-[50vh] overflow-y-auto">
-                    <div className="p-6">
-                      <div className="overflow-hidden rounded-lg border border-gray-200">
-                        <DataTable
-                          data={filteredData || data}
-                          columns={columns}
-                          onAction={handleAction}
-                          className="[&_thead_th]:bg-gray-50 [&_thead_th]:text-gray-600 
-                      [&_thead_th]:font-semibold [&_thead_th]:px-4 [&_thead_th]:py-3
-                      [&_tbody_td]:px-4 [&_tbody_td]:py-3
-                      [&_tbody_tr:hover]:bg-green-50
-                      [&_tbody_tr]:border-t [&_tbody_tr]:border-gray-100 "
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Scroll Indicators */}
-                  <div className="absolute top-0 left-0 right-0 h-4 bg-gradient-to-b from-white to-transparent pointer-events-none"></div>
-                  <div className="absolute bottom-0 left-0 right-0 h-4 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
-                </div>
-              </div>
-
-              {/* 3D Viewer - New Row */}
-              <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-                <div className="relative px-6 py-4 bg-white border-b">
-                  <div className="flex items-center justify-between">
-                    <h2 className="text-xl font-semibold text-gray-800">نموذج المبنى</h2>
-                    <span className="px-3 py-1 bg-green-50 text-green-700 rounded-full text-sm font-medium">
-                      3D عرض
+              <div className="px-6 py-3 bg-gray-50 border-b border-gray-100">
+                <div className="flex flex-wrap items-center gap-3">
+                  <span
+                    className={`text-sm px-3 py-1 rounded-full transition-colors cursor-pointer flex items-center gap-2
+                      ${filteredData && filteredData === data?.filter(item => item.Status === true)
+                        ? 'bg-green-100 text-green-700 border border-green-200'
+                        : 'bg-white text-gray-700 border border-gray-200 hover:border-green-200 hover:bg-green-50 hover:text-green-600'}`}
+                    onClick={() => handleFilter('matched')}
+                  >
+                    <span>مطابق</span>
+                    <span className="inline-flex items-center justify-center px-2 py-0.5 text-xs font-medium rounded-full bg-green-200 text-green-800">
+                      {data?.filter(item => item.Status === true).length || 0}
                     </span>
-                  </div>
-                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-green-600"></div>
-                </div>
+                  </span>
 
-                <div className="p-6">
-                  <div className="relative h-[50vh] rounded-lg overflow-hidden shadow-inner bg-white">
-                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900/5 to-white/5 pointer-events-none"></div>
-                    <iframe
-                      id="viewer-iframe"
-                      src="/model.html"
-                      // src={url}
-                      title="Autodesk Viewer"
-                      className="w-full h-full rounded-lg"
-                      style={{
-                        border: 'none',
-                        filter: 'drop-shadow(0 4px 6px rgb(0 0 0 / 0.1))',
-                        marginTop: '-69px', // Add this to hide the header
-                        height: 'calc(100% + 50px)', // Compensate for the negative margin
-                      }}
-                      frameBorder="0"
-                      scrolling="no"
+                  <span
+                    className={`text-sm px-3 py-1 rounded-full transition-colors cursor-pointer flex items-center gap-2
+                      ${filteredData && filteredData === data?.filter(item => item.Status === false && item.Result !== "اخري")
+                        ? 'bg-red-100 text-red-700 border border-red-200'
+                        : 'bg-white text-gray-700 border border-gray-200 hover:border-red-200 hover:bg-red-50 hover:text-red-600'}`}
+                    onClick={() => handleFilter('unmatched')}
+                  >
+                    <span>غير مطابق</span>
+                    <span className="inline-flex items-center justify-center px-2 py-0.5 text-xs font-medium rounded-full bg-red-200 text-red-800">
+                      {data?.filter(item => item.Status !== true && item.Result !== "اخري").length || 0}
+                    </span>
+                  </span>
+
+                  <span
+                    className={`text-sm px-3 py-1 rounded-full transition-colors cursor-pointer flex items-center gap-2
+                      ${filteredData && filteredData === data?.filter(item => item.Status === false && item.Result === "اخري")
+                        ? 'bg-yellow-100 text-yellow-700 border border-yellow-200'
+                        : 'bg-white text-gray-700 border border-gray-200 hover:border-yellow-200 hover:bg-yellow-50 hover:text-yellow-600'}`}
+                    onClick={() => handleFilter('other')}
+                  >
+                    <span>أخرى</span>
+                    <span className="inline-flex items-center justify-center px-2 py-0.5 text-xs font-medium rounded-full bg-yellow-200 text-yellow-800">
+                      {data?.filter(item => item.Status !== true && item.Result === "اخري").length || 0}
+                    </span>
+                  </span>
+
+                  <button
+                    onClick={() => setFilteredData(null)}
+                    className="text-sm px-3 py-1 rounded-full text-gray-700 bg-white border border-gray-200
+                      hover:bg-gray-50 transition-colors flex items-center gap-2"
+                  >
+                    <span>إظهار الكل</span>
+                    <span className="inline-flex items-center justify-center px-2 py-0.5 text-xs font-medium rounded-full bg-gray-200 text-gray-800">
+                      {data?.length || 0}
+                    </span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Requirements Table */}
+              <div className="p-6">
+                <div className="overflow-hidden rounded-lg border border-gray-200">
+                  <div className="max-h-[500px] overflow-auto">
+                    <DataTable
+                      data={filteredData || data || []}
+                      columns={columns}
+                      onAction={() => { }}
+                      className="[&_thead_th]:bg-gray-50 [&_thead_th]:text-gray-600 
+                        [&_thead_th]:font-semibold [&_thead_th]:px-4 [&_thead_th]:py-3
+                        [&_thead_th]:sticky [&_thead_th]:top-0 [&_thead_th]:z-10
+                        [&_tbody_td]:px-4 [&_tbody_td]:py-3
+                        [&_tbody_tr:hover]:bg-green-50
+                        [&_tbody_tr]:border-t [&_tbody_tr]:border-gray-100"
                     />
                   </div>
                 </div>
               </div>
 
             </div>
+
+            {/* 3D Viewer */}
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden"></div>
+            <div className="relative px-6 py-4 bg-white border-b border-gray-100">
+              <div className="flex items-center justify-between">
+                <h2 className="text-lg font-semibold text-gray-800 border-r-4 border-emerald-500 pr-3">نموذج المبنى</h2>
+                <span className="px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full text-sm font-medium border border-emerald-100">
+                  عرض 3D
+                </span>
+              </div>
+            </div>
+
+            <div className="p-6">
+              <div className="relative h-[50vh] rounded-lg overflow-hidden shadow-inner bg-white border border-gray-200">
+                <iframe
+                  id="viewer-iframe"
+                  src="/model.html"
+                  title="Autodesk Viewer"
+                  className="w-full h-full rounded-lg"
+                  style={{
+                    border: 'none',
+                    filter: 'drop-shadow(0 4px 6px rgb(0 0 0 / 0.1))',
+                    marginTop: '-69px',
+                    height: 'calc(100% + 50px)',
+                  }}
+                  frameBorder="0"
+                  scrolling="no"
+                />
+              </div>
+            </div>
           </div>
         ) : (
-          <div className="max-w-7xl mx-auto bg-white rounded-xl shadow-md overflow-hidden p-1">
+          <div className="max-w-7xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
             {reportType === 'arc' ? (
               <ArcReport ref={reportRef} />
             ) : (

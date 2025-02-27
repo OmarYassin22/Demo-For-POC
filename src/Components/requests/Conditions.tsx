@@ -3,7 +3,7 @@ import axios from "axios";
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import '../../styles/conditionModal.css'
 import { log } from "console";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Loader2 } from "lucide-react";
 import BackButton from '../common/BackButton';
 //import MockStrConditions from "../../mocks/MockStrConditions.json";
 
@@ -483,13 +483,13 @@ let filteredConditions : Condition[]=response.data.data.result.conditions;
 
 
 
-
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-100 p-4 flex items-center justify-center">
-        <div className="text-center">
-          <div className="spinner-border animate-spin inline-block w-12 h-12 border-4 rounded-full text-blue-500 border-t-transparent"></div>
-          <p className="mt-4 text-gray-600" style={{ direction: "rtl" }}>جاري تحميل البيانات...</p>
+      <div className="min-h-screen bg-gray-50 p-4 flex items-center justify-center">
+        <div className="text-center bg-white p-8 rounded-lg shadow-md">
+          <Loader2 className="h-12 w-12 animate-spin text-emerald-600 mx-auto" />
+          <p className="mt-4 text-lg font-medium text-gray-700">جاري تحميل البيانات...</p>
+          <p className="text-sm text-gray-500 mt-2">يرجى الانتظار قليلاً</p>
         </div>
       </div>
     );
@@ -508,7 +508,7 @@ let filteredConditions : Condition[]=response.data.data.result.conditions;
             <div className="flex justify-between items-center">
               <h2 className="text-2xl font-bold text-gray-800">
                 الإشتراطات
-                {localStorage.getItem("reportType") === "arc" ? ' المعمارية ' : '  الأنشائية '}
+                {localStorage.getItem("reportType") === "arc" ? ' المعمارية ' : '  الإنشائية '}
               </h2>
             </div>
             <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray-100">
@@ -653,7 +653,7 @@ let filteredConditions : Condition[]=response.data.data.result.conditions;
         {/* Upload Section - Moved below conditions */}
         <div className="bg-white rounded-xl shadow-lg p-6">
           <div className="text-center mb-6">
-            <h2 className="text-2xl font-bold text-gray-800 mb-2">رفع ملف التصميم {localStorage.getItem("reportType") === "arc" ? 'المعماري' : 'الأنشائي'}
+            <h2 className="text-2xl font-bold text-gray-800 mb-2">رفع ملف التصميم {localStorage.getItem("reportType") === "arc" ? 'المعماري' : 'الإنشائي'}
             </h2>
             <p className="text-gray-600">يرجى رفع ملف Revit (.rvt)</p>
           </div>
