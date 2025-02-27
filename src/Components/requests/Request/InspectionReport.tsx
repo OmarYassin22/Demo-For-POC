@@ -341,7 +341,7 @@ const InspectionReport = () => {
 
         <div className="p-4 border-t mt-auto">
           <BackButton
-            onClick={() => navigate(-1)}
+            onClick={() => handleBackAction()}
             label="العودة"
           />
         </div>
