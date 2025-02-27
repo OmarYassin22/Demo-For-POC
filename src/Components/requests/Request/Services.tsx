@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import jsonData from "../../../mocks/OfficeRequestServices.json";
 import { useParams } from 'react-router-dom';
-import { Building2, ClipboardList, Map, User, FileText, Loader2, MapPin } from "lucide-react";
+import { Building2, ClipboardList, Map, User, FileText, Loader2, MapPin, AlarmClock } from "lucide-react";
 
 interface LocationData {
   AmanahCode: string;
@@ -152,6 +152,10 @@ const Services: React.FC<ServicesProps> = ({
   const [error, setError] = useState<string | null>(null);
   const [selectedOption, setSelectedOption] = useState<string>("1");
 
+  // Add state for map coordinates (defaulting to Riyadh)
+  const [mapCenter, setMapCenter] = useState({ lat: 24.7136, lng: 46.6753 });
+  const [hasCoordinates, setHasCoordinates] = useState(false);
+
   // Form validation schema
   const validationSchema = Yup.object({
     description: Yup.string().required("وصف المبني مطلوب"),
@@ -288,6 +292,24 @@ const Services: React.FC<ServicesProps> = ({
     fetchData();
   }, [KrookiNumber, requestData]);
 
+  useEffect(() => {
+    // Extract coordinates if available
+    if (filteredData?.CoordinatesListData && filteredData.CoordinatesListData.length > 0) {
+      try {
+        const firstCoord = filteredData.CoordinatesListData[0];
+        const lat = parseFloat(firstCoord.Latitude);
+        const lng = parseFloat(firstCoord.Longitude);
+        
+        if (!isNaN(lat) && !isNaN(lng)) {
+          setMapCenter({ lat, lng });
+          setHasCoordinates(true);
+        }
+      } catch (error) {
+        console.error("Error parsing coordinates:", error);
+      }
+    }
+  }, [filteredData]);
+
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 p-4 flex items-center justify-center">
@@ -373,6 +395,71 @@ const Services: React.FC<ServicesProps> = ({
               <p className="font-medium text-gray-900">{filteredData?.LocationData?.PlanNumber || "غير متوفر"}</p>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Map Section - Add here */}
+      <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
+        <h2 className="text-xl font-semibold mb-4 text-gray-800 flex items-center">
+          <Map className="w-5 h-5 text-emerald-600 mr-2" />
+          خريطة الموقع
+        </h2>
+        
+        <div className="h-80 rounded-lg overflow-hidden border border-gray-300 mb-4">
+          {/* Google Maps Static Image */}
+          <img 
+            src={`https://maps.googleapis.com/maps/api/staticmap?center=${mapCenter.lat},${mapCenter.lng}&zoom=15&size=600x400&maptype=roadmap&markers=color:green%7C${mapCenter.lat},${mapCenter.lng}&key=YOUR_API_KEY`} 
+            alt="موقع الخريطة" 
+            className="w-full h-full object-cover"
+            onError={(e) => {
+              e.currentTarget.src = "https://via.placeholder.com/600x400?text=Map+Image+Unavailable";
+            }}
+          />
+        </div>
+        
+        {/* Coming Soon Banner */}
+        <div className="relative">
+          <div className="absolute inset-0 bg-gray-900 bg-opacity-70 flex items-center justify-center z-10 rounded-lg">
+            <div className="text-center bg-white px-6 py-4 rounded-lg shadow-lg">
+              <AlarmClock className="h-10 w-10 text-emerald-600 mx-auto mb-2" />
+              <h3 className="text-lg font-bold text-gray-800">قريباً</h3>
+              <p className="text-gray-600">سيتم إضافة خرائط تفاعلية قريبًا</p>
+            </div>
+          </div>
+          
+          {/* Coordinates Table */}
+          {filteredData?.CoordinatesListData && filteredData.CoordinatesListData.length > 0 ? (
+            <div className="overflow-x-auto mt-4">
+              <h3 className="text-lg font-medium text-gray-800 mb-2">إحداثيات الموقع</h3>
+              <table className="w-full text-sm text-right text-gray-700">
+                <thead className="text-xs uppercase bg-gray-50">
+                  <tr>
+                    <th scope="col" className="px-6 py-3">رقم النقطة</th>
+                    <th scope="col" className="px-6 py-3">خط الطول</th>
+                    <th scope="col" className="px-6 py-3">خط العرض</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredData.CoordinatesListData.slice(0, 5).map((coord, index) => (
+                    <tr key={`coord-${index}`} className="bg-white border-b">
+                      <td className="px-6 py-3">{coord.CoordinateNumber}</td>
+                      <td className="px-6 py-3">{coord.Longitude}</td>
+                      <td className="px-6 py-3">{coord.Latitude}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              {filteredData.CoordinatesListData.length > 5 && (
+                <p className="text-sm text-gray-500 mt-2 text-center">
+                  عرض {filteredData.CoordinatesListData.slice(0, 5).length} من أصل {filteredData.CoordinatesListData.length} نقطة
+                </p>
+              )}
+            </div>
+          ) : (
+            <div className="text-center py-4 text-gray-500">
+              لا توجد بيانات إحداثيات متاحة
+            </div>
+          )}
         </div>
       </div>
 
