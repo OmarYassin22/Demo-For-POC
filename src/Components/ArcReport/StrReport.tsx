@@ -1,4 +1,4 @@
-import React, {  forwardRef, useEffect, useState } from "react";
+import React, { forwardRef, useEffect, useState } from "react";
 import styled from "styled-components";
 
 // CSS-in-JS styles (similar to ArcReport but with structural-specific styling)
@@ -22,7 +22,7 @@ const StyleWrapper = styled.div`
 
   h2 {
     font-size: 1.8em;
-    color: #af4c4c; /* Changed color htmlFor structural report */
+    color: #2f9a4f; /* Changed color htmlFor structural report */
     margin-bottom: 10px;
     border-bottom: 2px solid #af4c4c; /* Changed color htmlFor structural report */
     padding-bottom: 5px;
@@ -121,7 +121,7 @@ const StyleWrapper = styled.div`
   }
 
   .header-title {
-    color: #af4c4c; /* Changed color htmlFor structural report */
+    color: #2f9a4f;
     text-align: right;
     margin: 0;
   }
@@ -1907,7 +1907,7 @@ const StrReport = forwardRef<HTMLDivElement, StrReportProps>((props, ref) => {
               </div>
             </div>
             <div style={{ backgroundColor: '#ddefec !important', justifyItems: 'center', borderRadius: '0 0 25px 25px !important', maxHeight: '2.8rem' }}>
-              <div className="footer"></div>
+              <div className="footer">
                 <div className="check">
                   <p>تحقق</p>
                   <div className="checkbox-wrapper-19">
@@ -1941,269 +1941,270 @@ const StrReport = forwardRef<HTMLDivElement, StrReportProps>((props, ref) => {
               </div>
             </div>
           </div>
-          <div className="cond">
-            <div className="header">
-              <img src="/3d-conditions_images/house.png" alt />
-              <div className="main-header">
-                <p className="header-title">البلاطات الهوردي ثنائية الاتجاه   </p>
-                <p className="header-body">المسافة الصافية بين الأعصاب </p>
-              </div>
+        </div>
+        <div className="cond">
+          <div className="header">
+            <img src="/3d-conditions_images/house.png" alt />
+            <div className="main-header">
+              <p className="header-title">البلاطات الهوردي ثنائية الاتجاه   </p>
+              <p className="header-body">المسافة الصافية بين الأعصاب </p>
             </div>
-            <div className="box">
-              <div className="content">
-                <div style={{ minWidth: '50%' }}>
-                  <p className="content-body">
-                    يجب ألا تزيد المسافة الصافية بين الأعصاب في البلاطات الهوردي ثنائية الاتجاه عن 0.75 م.
+          </div>
+          <div className="box">
+            <div className="content">
+              <div style={{ minWidth: '50%' }}>
+                <p className="content-body">
+                  يجب ألا تزيد المسافة الصافية بين الأعصاب في البلاطات الهوردي ثنائية الاتجاه عن 0.75 م.
 
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div style={{ backgroundColor: '#ddefec !important', justifyItems: 'center', borderRadius: '0 0 25px 25px !important', maxHeight: '2.8rem' }}>
-              <div className="footer">
-                <div className="check">
-                  <p>تحقق</p>
-                  <div className="checkbox-wrapper-19">
-                    <input type="checkbox"
-                      checked={
-                        conditionStutes["المسافة الصافية بين الأعصاب "] == true}
-                      id="cbtest-28" />
-                    <label htmlFor="cbtest-28" className="check-box" />
-                  </div>
-                </div>
-                <div className="check">
-                  <p>لم يتحقق</p>
-                  <div className="checkbox-wrapper-19">
-                    <input type="checkbox"
-                      checked={
-                        conditionStutes["المسافة الصافية بين الأعصاب "] == false}
-                      id="cbtest-29" />
-                    <label htmlFor="cbtest-29" className="check-box" />
-                  </div>
-                </div>
-                <div className="check">
-                  <p>لا ينطبق</p>
-                  <div className="checkbox-wrapper-19">
-                    <input type="checkbox"
-
-                      checked={
-                        !Object.prototype.hasOwnProperty.call(conditionStutes, "المسافة الصافية بين الأعصاب ")}
-                      id="cbtest-30" />
-                    <label htmlFor="cbtest-30" className="check-box" />
-                  </div>
-                </div>
+                </p>
               </div>
             </div>
           </div>
-          <div className="cond">
-            <div className="header">
-              <img src="/3d-conditions_images/house.png" alt />
-              <div className="main-header">
-                <p className="header-title">البلاطات الهوردي ثنائية الاتجاه   </p>
-                <p className="header-body">سمك البلاطة فوق الأعصاب </p>
-              </div>
-            </div>
-            <div className="box">
-              <div className="content">
-                <div style={{ minWidth: '50%' }}>
-                  <p className="content-body">
-                    يجب ألا يقل سمك البلاطة فوق الأعصاب في البلاطات الهوردي ثنائية الاتجاه عن الأكبر من 0.05م والمسافة الصافية بين الأعصاب مقسوم على 12.
-                  </p>
+          <div style={{ backgroundColor: '#ddefec !important', justifyItems: 'center', borderRadius: '0 0 25px 25px !important', maxHeight: '2.8rem' }}>
+            <div className="footer">
+              <div className="check">
+                <p>تحقق</p>
+                <div className="checkbox-wrapper-19">
+                  <input type="checkbox"
+                    checked={
+                      conditionStutes["المسافة الصافية بين الأعصاب "] == true}
+                    id="cbtest-28" />
+                  <label htmlFor="cbtest-28" className="check-box" />
                 </div>
               </div>
-            </div>
-            <div style={{ backgroundColor: '#ddefec !important', justifyItems: 'center', borderRadius: '0 0 25px 25px !important', maxHeight: '2.8rem' }}>
-              <div className="footer">
-                <div className="check">
-                  <p>تحقق</p>
-                  <div className="checkbox-wrapper-19">
-                    <input type="checkbox"
-                      checked={
-                        conditionStutes["سمك البلاطة فوق الأعصاب "] == true}
-                      id="cbtest-31" />
-                    <label htmlFor="cbtest-31" className="check-box" />
-                  </div>
-                </div>
-                <div className="check">
-                  <p>لم يتحقق</p>
-                  <div className="checkbox-wrapper-19">
-                    <input type="checkbox"
-                      checked={
-                        conditionStutes["سمك البلاطة فوق الأعصاب "] == false}
-                      id="cbtest-32" />
-                    <label htmlFor="cbtest-32" className="check-box" />
-                  </div>
-                </div>
-                <div className="check">
-                  <p>لا ينطبق</p>
-                  <div className="checkbox-wrapper-19">
-                    <input type="checkbox"
-                      checked={
-                        !Object.prototype.hasOwnProperty.call(conditionStutes, "سمك البلاطة فوق الأعصاب ")}
-                      id="cbtest-33" />
-                    <label htmlFor="cbtest-33" className="check-box" />
-                  </div>
+              <div className="check">
+                <p>لم يتحقق</p>
+                <div className="checkbox-wrapper-19">
+                  <input type="checkbox"
+                    checked={
+                      conditionStutes["المسافة الصافية بين الأعصاب "] == false}
+                    id="cbtest-29" />
+                  <label htmlFor="cbtest-29" className="check-box" />
                 </div>
               </div>
-            </div>
-          </div>
-          <div className="cond">
-            <div className="header">
-              <img src="/3d-conditions_images/house.png" alt />
-              <div className="main-header">
-                <p className="header-body">جدران الخزانات</p>
-              </div>
-            </div>
-            <div className="box">
-              <div className="content">
-                <div style={{ minWidth: '50%' }}>
-                  <p className="content-body">
-                    يجب أن يكون لجدران الخزانات سماكة لا تقل عن 0.2 م وفي حالة البحور الصافية التي تزيد عن 3.5م يجب ألا تقل السماكة عن 0.3 م.
+              <div className="check">
+                <p>لا ينطبق</p>
+                <div className="checkbox-wrapper-19">
+                  <input type="checkbox"
 
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div style={{ backgroundColor: '#ddefec !important', justifyItems: 'center', borderRadius: '0 0 25px 25px !important', maxHeight: '2.8rem' }}>
-              <div className="footer">
-                <div className="check">
-                  <p>تحقق</p>
-                  <div className="checkbox-wrapper-19">
-                    <input type="checkbox"
-                      checked={
-                        conditionStutes["جدران الخزانات"] == true}
-                      id="cbtest-25" />
-                    <label htmlFor="cbtest-25" className="check-box" />
-                  </div>
-                </div>
-                <div className="check">
-                  <p>لم يتحقق</p>
-                  <div className="checkbox-wrapper-19">
-                    <input type="checkbox"
-                      checked={
-                        conditionStutes["جدران الخزانات"] == false}
-                      id="cbtest-26" />
-                    <label htmlFor="cbtest-26" className="check-box" />
-                  </div>
-                </div>
-                <div className="check">
-                  <p>لا ينطبق</p>
-                  <div className="checkbox-wrapper-19">
-                    <input type="checkbox"
-                      checked={
-                        !Object.prototype.hasOwnProperty.call(conditionStutes, "جدران الخزانات")}
-                      id="cbtest-27" />
-                    <label htmlFor="cbtest-27" className="check-box" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="cond">
-            <div className="header">
-              <img src="/3d-conditions_images/house.png" alt />
-              <div className="main-header">
-                <p className="header-body">أرضيات الخزانات </p>
-              </div>
-            </div>
-            <div className="box">
-              <div className="content">
-                <div style={{ minWidth: '50%' }}>
-                  <p className="content-body">
-                    يجب ان أن يكون لأرضيات الخزانات سماكة لا تقل عن 0.2 م وفي حالة البحور الصافية التي تزيد عن 3.5م يجب ألا تقل السماكة عن0.3 م
-
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div style={{ backgroundColor: '#ddefec !important', justifyItems: 'center', borderRadius: '0 0 25px 25px !important', maxHeight: '2.8rem' }}>
-              <div className="footer">
-                <div className="check">
-                  <p>تحقق</p>
-                  <div className="checkbox-wrapper-19">
-                    <input type="checkbox"
-                      checked={
-                        conditionStutes["أرضيات الخزانات "] == true}
-                      id="cbtest-28" />
-                    <label htmlFor="cbtest-28" className="check-box" />
-                  </div>
-                </div>
-                <div className="check">
-                  <p>لم يتحقق</p>
-                  <div className="checkbox-wrapper-19">
-                    <input type="checkbox"
-                      checked={
-                        conditionStutes["أرضيات الخزانات "] == false}
-                      id="cbtest-29" />
-                    <label htmlFor="cbtest-29" className="check-box" />
-                  </div>
-                </div>
-                <div className="check">
-                  <p>لا ينطبق</p>
-                  <div className="checkbox-wrapper-19">
-                    <input type="checkbox"
-
-                      checked={
-                        !Object.prototype.hasOwnProperty.call(conditionStutes, "أرضيات الخزانات ")}
-                      id="cbtest-30" />
-                    <label htmlFor="cbtest-30" className="check-box" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="cond">
-            <div className="header">
-              <img src="/3d-conditions_images/house.png" alt />
-              <div className="main-header">
-                <p className="header-body">جدارن القبو</p>
-              </div>
-            </div>
-            <div className="box">
-              <div className="content">
-                <div style={{ minWidth: '50%' }}>
-                  <p className="content-body">
-                    يجب أن يكون لجدران القبو سماكة لا تقل. عن 0.2 م وفي حالة البحور الصافية التي تزيد عن 3.5 م يجب ألا تقل السماكة عن 0.3 م.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div style={{ backgroundColor: '#ddefec !important', justifyItems: 'center', borderRadius: '0 0 25px 25px !important', maxHeight: '2.8rem' }}>
-              <div className="footer">
-                <div className="check">
-                  <p>تحقق</p>
-                  <div className="checkbox-wrapper-19">
-                    <input type="checkbox"
-                      checked={
-                        conditionStutes["جدارن القبو"] == true}
-                      id="cbtest-31" />
-                    <label htmlFor="cbtest-31" className="check-box" />
-                  </div>
-                </div>
-                <div className="check">
-                  <p>لم يتحقق</p>
-                  <div className="checkbox-wrapper-19">
-                    <input type="checkbox"
-                      checked={
-                        conditionStutes["جدارن القبو"] == false}
-                      id="cbtest-32" />
-                    <label htmlFor="cbtest-32" className="check-box" />
-                  </div>
-                </div>
-                <div className="check">
-                  <p>لا ينطبق</p>
-                  <div className="checkbox-wrapper-19">
-                    <input type="checkbox"
-                      checked={
-                        !Object.prototype.hasOwnProperty.call(conditionStutes, "جدارن القبو")}
-                      id="cbtest-33" />
-                    <label htmlFor="cbtest-33" className="check-box" />
-                  </div>
+                    checked={
+                      !Object.prototype.hasOwnProperty.call(conditionStutes, "المسافة الصافية بين الأعصاب ")}
+                    id="cbtest-30" />
+                  <label htmlFor="cbtest-30" className="check-box" />
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <div className="cond">
+          <div className="header">
+            <img src="/3d-conditions_images/house.png" alt />
+            <div className="main-header">
+              <p className="header-title">البلاطات الهوردي ثنائية الاتجاه   </p>
+              <p className="header-body">سمك البلاطة فوق الأعصاب </p>
+            </div>
+          </div>
+          <div className="box">
+            <div className="content">
+              <div style={{ minWidth: '50%' }}>
+                <p className="content-body">
+                  يجب ألا يقل سمك البلاطة فوق الأعصاب في البلاطات الهوردي ثنائية الاتجاه عن الأكبر من 0.05م والمسافة الصافية بين الأعصاب مقسوم على 12.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div style={{ backgroundColor: '#ddefec !important', justifyItems: 'center', borderRadius: '0 0 25px 25px !important', maxHeight: '2.8rem' }}>
+            <div className="footer">
+              <div className="check">
+                <p>تحقق</p>
+                <div className="checkbox-wrapper-19">
+                  <input type="checkbox"
+                    checked={
+                      conditionStutes["سمك البلاطة فوق الأعصاب "] == true}
+                    id="cbtest-31" />
+                  <label htmlFor="cbtest-31" className="check-box" />
+                </div>
+              </div>
+              <div className="check">
+                <p>لم يتحقق</p>
+                <div className="checkbox-wrapper-19">
+                  <input type="checkbox"
+                    checked={
+                      conditionStutes["سمك البلاطة فوق الأعصاب "] == false}
+                    id="cbtest-32" />
+                  <label htmlFor="cbtest-32" className="check-box" />
+                </div>
+              </div>
+              <div className="check">
+                <p>لا ينطبق</p>
+                <div className="checkbox-wrapper-19">
+                  <input type="checkbox"
+                    checked={
+                      !Object.prototype.hasOwnProperty.call(conditionStutes, "سمك البلاطة فوق الأعصاب ")}
+                    id="cbtest-33" />
+                  <label htmlFor="cbtest-33" className="check-box" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="cond">
+          <div className="header">
+            <img src="/3d-conditions_images/house.png" alt />
+            <div className="main-header">
+              <p className="header-body">جدران الخزانات</p>
+            </div>
+          </div>
+          <div className="box">
+            <div className="content">
+              <div style={{ minWidth: '50%' }}>
+                <p className="content-body">
+                  يجب أن يكون لجدران الخزانات سماكة لا تقل عن 0.2 م وفي حالة البحور الصافية التي تزيد عن 3.5م يجب ألا تقل السماكة عن 0.3 م.
+
+                </p>
+              </div>
+            </div>
+          </div>
+          <div style={{ backgroundColor: '#ddefec !important', justifyItems: 'center', borderRadius: '0 0 25px 25px !important', maxHeight: '2.8rem' }}>
+            <div className="footer">
+              <div className="check">
+                <p>تحقق</p>
+                <div className="checkbox-wrapper-19">
+                  <input type="checkbox"
+                    checked={
+                      conditionStutes["جدران الخزانات"] == true}
+                    id="cbtest-25" />
+                  <label htmlFor="cbtest-25" className="check-box" />
+                </div>
+              </div>
+              <div className="check">
+                <p>لم يتحقق</p>
+                <div className="checkbox-wrapper-19">
+                  <input type="checkbox"
+                    checked={
+                      conditionStutes["جدران الخزانات"] == false}
+                    id="cbtest-26" />
+                  <label htmlFor="cbtest-26" className="check-box" />
+                </div>
+              </div>
+              <div className="check">
+                <p>لا ينطبق</p>
+                <div className="checkbox-wrapper-19">
+                  <input type="checkbox"
+                    checked={
+                      !Object.prototype.hasOwnProperty.call(conditionStutes, "جدران الخزانات")}
+                    id="cbtest-27" />
+                  <label htmlFor="cbtest-27" className="check-box" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="cond">
+          <div className="header">
+            <img src="/3d-conditions_images/house.png" alt />
+            <div className="main-header">
+              <p className="header-body">أرضيات الخزانات </p>
+            </div>
+          </div>
+          <div className="box">
+            <div className="content">
+              <div style={{ minWidth: '50%' }}>
+                <p className="content-body">
+                  يجب ان أن يكون لأرضيات الخزانات سماكة لا تقل عن 0.2 م وفي حالة البحور الصافية التي تزيد عن 3.5م يجب ألا تقل السماكة عن0.3 م
+
+                </p>
+              </div>
+            </div>
+          </div>
+          <div style={{ backgroundColor: '#ddefec !important', justifyItems: 'center', borderRadius: '0 0 25px 25px !important', maxHeight: '2.8rem' }}>
+            <div className="footer">
+              <div className="check">
+                <p>تحقق</p>
+                <div className="checkbox-wrapper-19">
+                  <input type="checkbox"
+                    checked={
+                      conditionStutes["أرضيات الخزانات "] == true}
+                    id="cbtest-28" />
+                  <label htmlFor="cbtest-28" className="check-box" />
+                </div>
+              </div>
+              <div className="check">
+                <p>لم يتحقق</p>
+                <div className="checkbox-wrapper-19">
+                  <input type="checkbox"
+                    checked={
+                      conditionStutes["أرضيات الخزانات "] == false}
+                    id="cbtest-29" />
+                  <label htmlFor="cbtest-29" className="check-box" />
+                </div>
+              </div>
+              <div className="check">
+                <p>لا ينطبق</p>
+                <div className="checkbox-wrapper-19">
+                  <input type="checkbox"
+
+                    checked={
+                      !Object.prototype.hasOwnProperty.call(conditionStutes, "أرضيات الخزانات ")}
+                    id="cbtest-30" />
+                  <label htmlFor="cbtest-30" className="check-box" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="cond">
+          <div className="header">
+            <img src="/3d-conditions_images/house.png" alt />
+            <div className="main-header">
+              <p className="header-body">جدارن القبو</p>
+            </div>
+          </div>
+          <div className="box">
+            <div className="content">
+              <div style={{ minWidth: '50%' }}>
+                <p className="content-body">
+                  يجب أن يكون لجدران القبو سماكة لا تقل. عن 0.2 م وفي حالة البحور الصافية التي تزيد عن 3.5 م يجب ألا تقل السماكة عن 0.3 م.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div style={{ backgroundColor: '#ddefec !important', justifyItems: 'center', borderRadius: '0 0 25px 25px !important', maxHeight: '2.8rem' }}>
+            <div className="footer">
+              <div className="check">
+                <p>تحقق</p>
+                <div className="checkbox-wrapper-19">
+                  <input type="checkbox"
+                    checked={
+                      conditionStutes["جدارن القبو"] == true}
+                    id="cbtest-31" />
+                  <label htmlFor="cbtest-31" className="check-box" />
+                </div>
+              </div>
+              <div className="check">
+                <p>لم يتحقق</p>
+                <div className="checkbox-wrapper-19">
+                  <input type="checkbox"
+                    checked={
+                      conditionStutes["جدارن القبو"] == false}
+                    id="cbtest-32" />
+                  <label htmlFor="cbtest-32" className="check-box" />
+                </div>
+              </div>
+              <div className="check">
+                <p>لا ينطبق</p>
+                <div className="checkbox-wrapper-19">
+                  <input type="checkbox"
+                    checked={
+                      !Object.prototype.hasOwnProperty.call(conditionStutes, "جدارن القبو")}
+                    id="cbtest-33" />
+                  <label htmlFor="cbtest-33" className="check-box" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div className="page-section">
         <img src="/header.png" style={{ width: '100%' }} alt="" />
