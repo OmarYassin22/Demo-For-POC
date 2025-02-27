@@ -264,7 +264,7 @@ const StyleWrapper = styled.div`
     height: var(--checkbox-height);
     width: var(--checkbox-height);
     background-color: white;
-    border: calc(var(--checkbox-height) * 0.01) solid #000;
+    border: 2px solid #000;
     border-radius: 5px;
     position: relative;
     display: inline-block;
@@ -273,49 +273,43 @@ const StyleWrapper = styled.div`
     cursor: pointer;
   }
 
-  .checkbox-wrapper-19 .check-box::behtmlFore,
+  .checkbox-wrapper-19 .check-box::before,
   .checkbox-wrapper-19 .check-box::after {
-    box-sizing: border-box;
+    content: "";
     position: absolute;
     height: 0;
     width: calc(var(--checkbox-height) * 0.2);
     background-color: #34b93d;
     display: inline-block;
-    transhtmlForm-origin: left top;
+    transform-origin: left top;
     border-radius: 5px;
-    content: " ";
-    transition: opacity ease 0.5;
+    transition: opacity ease 0.5s;
   }
 
-  .checkbox-wrapper-19 .check-box::behtmlFore {
+  .checkbox-wrapper-19 .check-box::before {
     top: calc(var(--checkbox-height) * 0.72);
     left: calc(var(--checkbox-height) * 0.41);
-    box-shadow: 0 0 0 calc(var(--checkbox-height) * 0.05)
-      var(--background-color);
-    transhtmlForm: rotate(-135deg);
+    transform: rotate(-135deg);
   }
 
   .checkbox-wrapper-19 .check-box::after {
     top: calc(var(--checkbox-height) * 0.37);
     left: calc(var(--checkbox-height) * 0.05);
-    transhtmlForm: rotate(-45deg);
+    transform: rotate(-45deg);
   }
 
-  .checkbox-wrapper-19 input[type="checkbox"]:checked + .check-box,
-  .checkbox-wrapper-19 .check-box.checked {
+  .checkbox-wrapper-19 input[type="checkbox"]:checked + .check-box {
     border-color: #34b93d;
   }
 
-  .checkbox-wrapper-19 input[type="checkbox"]:checked + .check-box::after,
-  .checkbox-wrapper-19 .check-box.checked::after {
+  .checkbox-wrapper-19 input[type="checkbox"]:checked + .check-box::after {
     height: calc(var(--checkbox-height) / 2);
-    animation: dothabottomcheck-19 0.2s ease 0s htmlForwards;
+    animation: dothabottomcheck-19 0.2s ease forwards;
   }
 
-  .checkbox-wrapper-19 input[type="checkbox"]:checked + .check-box::behtmlFore,
-  .checkbox-wrapper-19 .check-box.checked::behtmlFore {
+  .checkbox-wrapper-19 input[type="checkbox"]:checked + .check-box::before {
     height: calc(var(--checkbox-height) * 1.2);
-    animation: dothatopcheck-19 0.4s ease 0s htmlForwards;
+    animation: dothatopcheck-19 0.4s ease forwards;
   }
 
   /* Improved structure and print styles */
@@ -1913,7 +1907,7 @@ const StrReport = forwardRef<HTMLDivElement, StrReportProps>((props, ref) => {
               </div>
             </div>
             <div style={{ backgroundColor: '#ddefec !important', justifyItems: 'center', borderRadius: '0 0 25px 25px !important', maxHeight: '2.8rem' }}>
-              <div className="footer">
+              <div className="footer"></div>
                 <div className="check">
                   <p>تحقق</p>
                   <div className="checkbox-wrapper-19">
@@ -2211,7 +2205,6 @@ const StrReport = forwardRef<HTMLDivElement, StrReportProps>((props, ref) => {
           </div>
         </div>
 
-      </div>
       <div className="page-section">
         <img src="/header.png" style={{ width: '100%' }} alt="" />
 
