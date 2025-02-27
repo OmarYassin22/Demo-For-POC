@@ -199,7 +199,7 @@ const InspectionReport = () => {
         if (i > 0) {
           pdf.addPage();
         }
-        pdf.addImage(imgData , "JPEG", marginLeft, marginTop, imgWidth, imgHeight, "", "MEDIUM");
+        pdf.addImage(imgData, "JPEG", marginLeft, marginTop, imgWidth, imgHeight, "", "MEDIUM");
       }
       if (!reportLoaded) {
         pdf.addPage();
@@ -301,7 +301,7 @@ const InspectionReport = () => {
 
     <div className="flex min-h-screen bg-gray-100" style={{ direction: "rtl" }}>
       {/* Sidebar */}
-      <div className="w-64 bg-white shadow-md">
+      <div className="w-64 bg-white shadow-md mt-9 mb-8 rounded-lg">
         <div className="p-4 border-b">
           <h2 className="text-xl font-semibold text-gray-800">التقارير</h2>
         </div>
@@ -323,7 +323,7 @@ const InspectionReport = () => {
             <span className="mr-2">
               عرض التقرير
               {/* {reportType === 'arc' ? 'التقرير المعماري' : 'التقرير الإنشائي'} */}
-              </span>
+            </span>
           </div>
         </nav>
 
@@ -593,38 +593,6 @@ const InspectionReport = () => {
                       scrolling="no"
                     />
                   </div>
-                </div>
-              </div>
-
-              {/* Category Statuses */}
-              <div className="bg-white rounded-xl shadow-lg p-6">
-                <h2 className="text-xl font-semibold mb-4">نتائج التحقق حسب الفئة</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {Object.entries(categoryStatuses).map(([category, status]) => (
-                    <div key={category} className="border rounded-lg p-4">
-                      <div className="flex justify-between items-center mb-2">
-                        <h3 className="font-medium">{category}</h3>
-                        <span className={`px-3 py-1 rounded-full text-sm ${status.passed === status.total
-                          ? 'bg-green-100 text-green-700'
-                          : 'bg-red-100 text-red-700'
-                          }`}>
-                          {status.passed === status.total ? 'تحقق' : 'لم يتحقق'}
-                        </span>
-                      </div>
-                      <div className="text-sm text-gray-500">
-                        {status.passed} من {status.total} اشتراطات مطابقة
-                      </div>
-                      <div className="mt-2 space-y-1">
-                        {status.conditions.map((condition) => (
-                          <div key={condition.code} className="flex items-center gap-2 text-sm">
-                            <span className={`w-2 h-2 rounded-full ${condition.status ? 'bg-green-400' : 'bg-red-400'
-                              }`}></span>
-                            <span>{condition.code}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
                 </div>
               </div>
 

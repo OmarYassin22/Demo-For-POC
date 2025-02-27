@@ -87,6 +87,7 @@ const Conditions: React.FC = () => {
   const [complianceResult, setComplianceResult] = useState<ApiResponse | null>(null);
   const [canStartService, setCanStartService] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [isStartingService, setIsStartingService] = useState<boolean>(false);
   // Handles file selection
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>): void => {
     if (event.target.files) {
@@ -114,7 +115,7 @@ const Conditions: React.FC = () => {
     // Append the selected file for 'RvtFileUpload' (user's file)
     formData.append('uploadRevitFile', file);
 
-    
+
     const responseObject = {
       success: true,
       errors: [],
@@ -135,13 +136,13 @@ const Conditions: React.FC = () => {
     formData.append('conditionJsonFile', blob, 'MockStrConditions.json');
 
     // Prepare and append the 'Data' field (as JSON string)
-   
+
     formData.append("bucketKey", "8a24sv5a1dnxsews2cyuveknzabko4j4fdfdsux17ajq1dui-designautomation");
-  
+
     try {
       // Send the POST request to your API
-   //   const response = await fetch('http://localhost:8080/api/Handle/BundleUpload', {
-       const response = await fetch('https://poc-backend.runasp.net/api/Handle/BundleUpload', {
+      //   const response = await fetch('http://localhost:8080/api/Handle/BundleUpload', {
+      const response = await fetch('https://poc-backend.runasp.net/api/Handle/BundleUpload', {
 
         method: 'POST',  // No CORS check for the request
         body: formData,
@@ -152,9 +153,9 @@ const Conditions: React.FC = () => {
         const jsonResponse: bundleUploadResponse = await response.json();
         setBundleResponse(jsonResponse);
 
-        
-      localStorage.setItem("reviturn", jsonResponse?.Revit);
-      localStorage.setItem("Conditionsurn", jsonResponse?.JSON);
+
+        localStorage.setItem("reviturn", jsonResponse?.Revit);
+        localStorage.setItem("Conditionsurn", jsonResponse?.JSON);
         //await handleApiCall(jsonResponse, false);
         // await ComplianceBundleData();
       } else {
@@ -193,94 +194,96 @@ const Conditions: React.FC = () => {
   //       body: formData,
   //       headers: { "Content-Type": "multipart/form-data" },
   //     });
-  
+
   //     if (!response.ok) throw new Error("Request failed");
-  
+
   //     const responseData: ApiResponse = await response.json();
   //     console.log("Success:", responseData);
   //   } catch (error) {
   //     console.error("Error:", error);
   //   }
   // };
-  
+
   const ComplianceBundleData = async () => {
     const formData = new FormData();
-  
+
     formData.append('Data', JSON.stringify({
       activityName: "BenaaDA4R.BenaRevitPlugin_bundle_zipActivity+$LATEST",
       browserConnectionId: "dKXiIePC_lcgHxe97GPBHw"
     }));
-  
+
     formData.append('objectIdsUrns', JSON.stringify({
       Revit: localStorage.getItem("reviturn"),
       JSON: localStorage.getItem("Conditionsurn")
     }));
-  
+
     try {
       //
       const response = await axios.post('https://poc-backend.runasp.net/api/Handle/Bundle',
-      //const response = await axios.post('http://localhost:8080/api/Handle/Bundle',
-       formData, {
+        //const response = await axios.post('http://localhost:8080/api/Handle/Bundle',
+        formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       });
       console.log('Response:', response.data);
-      console.log('Response URL:',response.data.Value.apiRes.Data.Data.url);
-      
-      localStorage.setItem("urn",response.data.Value.apiRes.Data.TranslatedUrn);
+      console.log('Response URL:', response.data.Value.apiRes.Data.Data.url);
+
+      localStorage.setItem("urn", response.data.Value.apiRes.Data.TranslatedUrn);
       await handleApiCall({ URL: response.data.Value.apiRes.Data.Data.url });
     } catch (error) {
       console.error('Error:', error);
     }
   };
   const handleApiCall = async ({ URL }: { URL: string }) => {
-   
-    
-      const requestBody = {
-        url: URL,
-      };
 
-      try {
-        // const response = await fetch('http://localhost:8080/api/Handle/getResponse', {
-        const response = await fetch('https://poc-backend.runasp.net/api/Handle/getResponse', {
 
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(requestBody),
-        });
+    const requestBody = {
+      url: URL,
+    };
 
-        if (!response.ok) {
-          throw new Error(`Error: ${response.statusText}`);
-        }
+    try {
+      // const response = await fetch('http://localhost:8080/api/Handle/getResponse', {
+      const response = await fetch('https://poc-backend.runasp.net/api/Handle/getResponse', {
 
-        const jsonData = await response.json();
-        setComplianceResult(jsonData);
-        localStorage.setItem("ComplianceResultData", JSON.stringify(jsonData));
-        console.log(complianceResult);
-        debugger;
-        navigate(`/InspectionReport/${krookiNumber}`, {
-          state: {
-  
-            officeId: officeId,
-            requestId: requestId,
-            instructure: instructure
-  
-          }
-        });
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody),
+      });
 
-      } catch (error) {
-        console.error('Error making API call:', error);
+      if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`);
       }
-    
+
+      const jsonData = await response.json();
+      setComplianceResult(jsonData);
+      localStorage.setItem("ComplianceResultData", JSON.stringify(jsonData));
+      console.log(complianceResult);
+      debugger;
+      navigate(`/InspectionReport/${krookiNumber}`, {
+        state: {
+
+          officeId: officeId,
+          requestId: requestId,
+          instructure: instructure
+
+        }
+      });
+
+    } catch (error) {
+      console.error('Error making API call:', error);
+    }
+
 
   };
 
   const handleStartService = async () => {
     if (bundleResponse) {
+      setIsStartingService(true);
       await ComplianceBundleData();
+      setIsStartingService(false);
     }
   };
 
@@ -310,15 +313,16 @@ const Conditions: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   // Remove pagination states and calculations
   // Add scroll handler
-  // const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
-  //   const { scrollTop, scrollHeight, clientHeight } = event.currentTarget;
-  //   const progress = (scrollTop / (scrollHeight - clientHeight)) * 100;
-  //   setScrollProgress(progress);
+  const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
+    const { scrollTop, scrollHeight, clientHeight } = event.currentTarget;
+    const progress = (scrollTop / (scrollHeight - clientHeight)) * 100;
+    setScrollProgress(progress);
 
-  //   if (progress > 95) {
-  //     setCanStartService(true);
-  //   }
-  // };
+    // Remove forced scroll condition
+    // if (progress > 95) {
+    //   setCanStartService(true);
+    // }
+  };
 
   // Fetch Token
   const fetchToken = async () => {
@@ -412,7 +416,7 @@ const Conditions: React.FC = () => {
           if (!acc[visualCategory]) { acc[visualCategory] = []; }
           acc[visualCategory].push(code); return acc;
         }, {});
-        
+
 
         localStorage.setItem("visualCategory", JSON.stringify(groupedByVisualCategory));
 
@@ -523,7 +527,7 @@ const Conditions: React.FC = () => {
                 {/* Updated Conditions container */}
                 <div
                   className="overflow-y-auto max-h-[75vh] px-2"
-                  // onScroll={handleScroll}
+                  onScroll={handleScroll}
                   style={{
                     scrollbarWidth: 'thin',
                     scrollBehavior: 'smooth',
@@ -601,7 +605,7 @@ const Conditions: React.FC = () => {
                   </div>
 
                   {/* Scroll indicator */}
-                  {/* {!canStartService && (
+                  {!canStartService && (
                     <div className="sticky bottom-0 text-center py-3 bg-gradient-to-t from-white via-white">
                       <div className="text-gray-500 text-xs mb-1">
                         اسحب لأسفل لقراءة جميع الشروط
@@ -612,7 +616,7 @@ const Conditions: React.FC = () => {
                         </svg>
                       </div>
                     </div>
-                  )} */}
+                  )}
                 </div>
 
 
@@ -708,13 +712,24 @@ const Conditions: React.FC = () => {
 
             <button
               onClick={handleStartService}
-              disabled={!canStartService || !uploadSuccess}
+              disabled={!uploadSuccess || isStartingService} // Disable button when starting service
               className={`flex items-center gap-2 px-8 py-3 rounded-lg transition-all duration-300 
-                ${(canStartService && uploadSuccess)
+                ${uploadSuccess && !isStartingService
                   ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-md hover:shadow-lg'
                   : 'bg-gray-200 text-gray-400 cursor-not-allowed'}`}
             >
-              بدء الفحص            </button>
+              {isStartingService ? (
+                <>
+                  <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                  </svg>
+                  <span>جاري الفحص...</span>
+                </>
+              ) : (
+                <span>بدء الفحص</span>
+              )}
+            </button>
           </div>
         </div>   </div>   </div>
 
