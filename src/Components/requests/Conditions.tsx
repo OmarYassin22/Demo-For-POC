@@ -141,7 +141,7 @@ const Conditions: React.FC = () => {
     try {
       // Send the POST request to your API
    //   const response = await fetch('http://localhost:8080/api/Handle/BundleUpload', {
-       const response = await fetch('https://poc-backend.runasp.net/api/Handle/Bundle', {
+       const response = await fetch('https://poc-backend.runasp.net/api/Handle/BundleUpload', {
 
         method: 'POST',  // No CORS check for the request
         body: formData,
