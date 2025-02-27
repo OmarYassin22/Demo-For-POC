@@ -9,6 +9,10 @@ import BackButton from '../common/BackButton';
 
 
 
+interface bundleUploadResponse {
+  Revit: string;
+  JSON: string;
+}
 
 
 interface ApiResponse {
@@ -77,7 +81,7 @@ const Conditions: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [file, setFile] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState<boolean>(false);
-  const [bundleResponse, setBundleResponse] = useState<ApiResponse | null>(null);
+  const [bundleResponse, setBundleResponse] = useState<bundleUploadResponse | null>(null);
   const [uploadSuccess, setUploadSuccess] = useState(false);
 
   const [complianceResult, setComplianceResult] = useState<ApiResponse | null>(null);
@@ -108,8 +112,9 @@ const Conditions: React.FC = () => {
     const formData = new FormData();
 
     // Append the selected file for 'RvtFileUpload' (user's file)
-    formData.append('RvtFileUpload', file);
+    formData.append('uploadRevitFile', file);
 
+    
     const responseObject = {
       success: true,
       errors: [],
@@ -127,19 +132,16 @@ const Conditions: React.FC = () => {
 
 
     // Append the Blob to FormData with a filename
-    formData.append('InputJsonFile', blob, 'MockStrConditions.json');
+    formData.append('conditionJsonFile', blob, 'MockStrConditions.json');
 
     // Prepare and append the 'Data' field (as JSON string)
-    const data = JSON.stringify({
-      activityName: "BenaaDA4R.BenaRevitPlugin_bundle_zipActivity+$LATEST",
-      browserConnectionId: "dKXiIePC_lcgHxe97GPBHw",
-    });
-    formData.append('Data', data);
-
+   
+    formData.append("bucketKey", "8a24sv5a1dnxsews2cyuveknzabko4j4fdfdsux17ajq1dui-designautomation");
+  
     try {
       // Send the POST request to your API
-      // const response = await fetch('http://localhost:8080/api/Handle/Bundle', {
-      const response = await fetch('https://poc-backend.runasp.net/api/Handle/Bundle', {
+   //   const response = await fetch('http://localhost:8080/api/Handle/BundleUpload', {
+       const response = await fetch('https://poc-backend.runasp.net/api/Handle/BundleUpload', {
 
         method: 'POST',  // No CORS check for the request
         body: formData,
@@ -147,9 +149,14 @@ const Conditions: React.FC = () => {
 
       if (response.ok) {
         setUploadSuccess(true);
-        const jsonResponse: ApiResponse = await response.json();
+        const jsonResponse: bundleUploadResponse = await response.json();
         setBundleResponse(jsonResponse);
-        await handleApiCall(jsonResponse, false);
+
+        
+      localStorage.setItem("reviturn", jsonResponse?.Revit);
+      localStorage.setItem("Conditionsurn", jsonResponse?.JSON);
+        //await handleApiCall(jsonResponse, false);
+        // await ComplianceBundleData();
       } else {
         console.error('File upload failed:', response.statusText);
       }
@@ -159,25 +166,80 @@ const Conditions: React.FC = () => {
       setIsUploading(false);
     }
   };
-  const handleApiCall = async (jsonResponse: any, shouldNavigate: boolean = false) => {
-    if (shouldNavigate) {
-      navigate(`/InspectionReport/${krookiNumber}`, {
-        state: {
 
-          officeId: officeId,
-          requestId: requestId,
-          instructure: instructure
+  interface BundleRequest {
+    activityName: string;
+    browserConnectionId: string;
+  }
+  // const sendBundleData = async () => {
+  //   const requestData: BundleRequest = {
+  //     activityName: "BenaaDA4R.BenaRevitPlugin_bundle_zipActivity+$LATEST",
+  //     browserConnectionId: "dKXiIePC_lcgHxe97GPBHw",
+  //   };
 
+  //   // localStorage.setItem("reviturn", jsonResponse?.Revit);
+  //   //   localStorage.setItem("Conditionsurn", jsonResponse?.JSON);
+  //   const objectIds = {
+  //     Revit:  localStorage.getItem("reviturn"),
+  //     JSON: localStorage.getItem("Conditionsurn"),
+  //   };
+  //   const formData = new FormData();
+  //   formData.append("Data", JSON.stringify(requestData));
+  //   formData.append("objectIdsUrns", JSON.stringify(objectIds)); // Convert dictionary to JSON string
+
+  //   try {
+  //     const response = await fetch("http://localhost:8080/api/Handle/Bundle", {
+  //       method: "POST",
+  //       body: formData,
+  //       headers: { "Content-Type": "multipart/form-data" },
+  //     });
+  
+  //     if (!response.ok) throw new Error("Request failed");
+  
+  //     const responseData: ApiResponse = await response.json();
+  //     console.log("Success:", responseData);
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //   }
+  // };
+  
+  const ComplianceBundleData = async () => {
+    const formData = new FormData();
+  
+    formData.append('Data', JSON.stringify({
+      activityName: "BenaaDA4R.BenaRevitPlugin_bundle_zipActivity+$LATEST",
+      browserConnectionId: "dKXiIePC_lcgHxe97GPBHw"
+    }));
+  
+    formData.append('objectIdsUrns', JSON.stringify({
+      Revit: localStorage.getItem("reviturn"),
+      JSON: localStorage.getItem("Conditionsurn")
+    }));
+  
+    try {
+      //
+      const response = await axios.post('https://poc-backend.runasp.net/api/Handle/Bundle',
+      //const response = await axios.post('http://localhost:8080/api/Handle/Bundle',
+       formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
         }
       });
-    } else {
-      if (!jsonResponse?.Value.apiRes.Data.Data.url) {
-        return;
-      }
+      console.log('Response:', response.data);
+      console.log('Response URL:',response.data.Value.apiRes.Data.Data.url);
+      
+      localStorage.setItem("urn",response.data.Value.apiRes.Data.TranslatedUrn);
+      await handleApiCall({ URL: response.data.Value.apiRes.Data.Data.url });
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+  const handleApiCall = async ({ URL }: { URL: string }) => {
+   
+    
       const requestBody = {
-        url: jsonResponse?.Value.apiRes.Data.Data.url,
+        url: URL,
       };
-      localStorage.setItem("urn", jsonResponse?.Value.apiRes.Data.TranslatedUrn);
 
       try {
         // const response = await fetch('http://localhost:8080/api/Handle/getResponse', {
@@ -198,18 +260,27 @@ const Conditions: React.FC = () => {
         setComplianceResult(jsonData);
         localStorage.setItem("ComplianceResultData", JSON.stringify(jsonData));
         console.log(complianceResult);
-
+        debugger;
+        navigate(`/InspectionReport/${krookiNumber}`, {
+          state: {
+  
+            officeId: officeId,
+            requestId: requestId,
+            instructure: instructure
+  
+          }
+        });
 
       } catch (error) {
         console.error('Error making API call:', error);
       }
-    }
+    
 
   };
 
   const handleStartService = async () => {
     if (bundleResponse) {
-      await handleApiCall(bundleResponse, true);
+      await ComplianceBundleData();
     }
   };
 
@@ -597,7 +668,7 @@ const Conditions: React.FC = () => {
                   <svg className="w-16 h-16 text-green-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <p className="text-green-600 font-medium">تم الفحص بنجاح!</p>
+                  <p className="text-green-600 font-medium">تم الرفع بنجاح!</p>
                 </>
               ) : (
                 <div>
