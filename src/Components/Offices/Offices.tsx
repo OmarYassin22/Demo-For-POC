@@ -1,4 +1,4 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   Building2,
@@ -13,12 +13,24 @@ import BackButton from "../common/BackButton";
 
 export default function Offices() {
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     if (localStorage.getItem("isLoggedIn") !== "true") {
       navigate("/login");
+      // Function to clear local storage
+
+
     }
   });
+  const clearLocalStorage = () => {
+    localStorage.removeItem("reportType");
+    localStorage.removeItem("ComplianceResultData");
+    localStorage.removeItem("visualCategory");
+    localStorage.removeItem("visualCategoryStatus");
+    localStorage.removeItem("CondintionsCodeBenaa");
+  };
+  useEffect(() => { clearLocalStorage(); }, []);
+
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
@@ -35,31 +47,31 @@ export default function Offices() {
   //   );
 
   const offices = Object.entries(data)
-  .map(([id, office]) => {
-    // First, filter the requests by excluding the ones that contain "dlg" in their number
-    const filteredRequests = office.requests.filter(
-      (r) => !r.number.toLowerCase().includes("dlg")
-    );
-// alert(office.requests.length);
-// alert(filteredRequests.length);
-    // Now calculate the counts based on the filtered requests
-    const requestCount = filteredRequests.length;
-    const activeRequests = filteredRequests.filter(
-      (r) => !r.waitingApproval // Filter out requests that are waiting for approval
-    ).length;
+    .map(([id, office]) => {
+      // First, filter the requests by excluding the ones that contain "dlg" in their number
+      const filteredRequests = office.requests.filter(
+        (r) => !r.number.toLowerCase().includes("dlg")
+      );
+      // alert(office.requests.length);
+      // alert(filteredRequests.length);
+      // Now calculate the counts based on the filtered requests
+      const requestCount = filteredRequests.length;
+      const activeRequests = filteredRequests.filter(
+        (r) => !r.waitingApproval // Filter out requests that are waiting for approval
+      ).length;
 
-    return {
-      id,
-      name: office.name,
-      requestCount,
-      activeRequests,
-      filteredRequests, // Include the filtered requests (after filtering out "dlg" requests)
-    };
-  })
-  .filter((office) =>
-    office.name.toLowerCase().includes(searchTerm.toLowerCase()) // Filter offices based on searchTerm
-  &&office.filteredRequests.length > 0
-  );
+      return {
+        id,
+        name: office.name,
+        requestCount,
+        activeRequests,
+        filteredRequests, // Include the filtered requests (after filtering out "dlg" requests)
+      };
+    })
+    .filter((office) =>
+      office.name.toLowerCase().includes(searchTerm.toLowerCase()) // Filter offices based on searchTerm
+      && office.filteredRequests.length > 0
+    );
 
   const totalPages = Math.ceil(offices.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -72,11 +84,11 @@ export default function Offices() {
   return (
     <div
       className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8"
-      dir= "rtl"
+      dir="rtl"
     >
       <BackButton onClick={handleBackAction} />
 
-       {/* <div className="flex absolute left-10 top-24 justify-end mb-4">
+      {/* <div className="flex absolute left-10 top-24 justify-end mb-4">
         <button
           onClick={() => { navigate(-1) }}
           className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:text-blue-600 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-200 border border-gray-200"
@@ -88,7 +100,7 @@ export default function Offices() {
       <div className="max-w-7xl mx-auto">
         <div className="mb-12 space-y-6">
           <h1 className="text-4xl font-bold text-primary text-center">
-         المكاتب
+            المكاتب
           </h1>
 
           <div className="max-w-md mx-auto">
@@ -97,7 +109,7 @@ export default function Offices() {
               <input
                 type="text"
                 placeholder={
-                 "ابحث عن مكتب..."
+                  "ابحث عن مكتب..."
                 }
                 className="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary"
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -109,7 +121,7 @@ export default function Offices() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {paginatedOffices.map((office) => (
             <Link to={`/offices/${office.id}/requests`} key={office.id}>
-              <div className="bg-white rounded-xl shadow-sm hover:shadow-lg transition-shadow p-6 border border-gray-100" style={{minHeight:"9rem"}}>
+              <div className="bg-white rounded-xl shadow-sm hover:shadow-lg transition-shadow p-6 border border-gray-100" style={{ minHeight: "9rem" }}>
                 <div className="flex items-center gap-3 mb-4">
                   <Building2 className="w-6 h-6 text-primary" />
                   <h3 className="text-xl font-semibold text-gray-900">
@@ -145,11 +157,10 @@ export default function Offices() {
             <button
               key={page}
               onClick={() => setCurrentPage(page)}
-              className={`w-10 h-10 rounded-lg border ${
-                currentPage === page
+              className={`w-10 h-10 rounded-lg border ${currentPage === page
                   ? "bg-primary text-white"
                   : "hover:bg-gray-50"
-              }`}
+                }`}
             >
               {page}
             </button>

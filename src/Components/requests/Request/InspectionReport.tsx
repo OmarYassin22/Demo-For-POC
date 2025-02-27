@@ -60,7 +60,7 @@ const InspectionReport = () => {
   useEffect(() => {
     // Load report type from localStorage if available
     const savedReportType = localStorage.getItem("reportType");
-    if (savedReportType && (savedReportType === 'arc' || savedReportType === 'str')) {
+    if (savedReportType && (savedReportType === 'arc' || 'str')) {
       setReportType(savedReportType as 'arc' | 'str');
     }
 
@@ -125,15 +125,13 @@ const InspectionReport = () => {
     });
 
     setCategoryStatuses(statuses);
+
+    return () => {
+    };
   }, []);
 
-  const renderReport = () => {
-    if (reportType === 'arc') {
-      return <ArcReport ref={arcReportRef} />;
-    } else {
-      return <StrReport ref={strReportRef} />;
-    }
-  };
+  // Function to clear local storage
+
 
   const handleTabChange = (tab: 'inspection' | 'report') => {
     setActiveTab(tab);

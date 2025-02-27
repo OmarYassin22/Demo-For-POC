@@ -373,8 +373,8 @@ setWaitingApprovalStatus(false);
       <div className="flex">
         {/* Sidebar */}
         <div
-          className={`fixed inset-y-0 right-0   z-10 transform ${
-            isSidebarOpen ? "translate-x-0" : "translate-x-full"
+          className={`fixed inset-y-0 right-0    z-10 transform ${
+            isSidebarOpen ? "translate-x-0 mt-32" : "translate-x-full  mt-0"
           } transition-transform duration-300 ease-in-out md:relative md:translate-x-0 w-full md:w-1/4 bg-white rounded-lg shadow-lg p-6 mb-4 md:mb-0`}
         >
           <div className="flex flex-col gap-4">
