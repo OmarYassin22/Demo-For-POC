@@ -34,28 +34,7 @@ const InspectionReport = () => {
 
   const [reportLoaded, setReportLoaded] = useState(false);
 
-  const handlePrint = useReactToPrint({
-    content: () => reportType === 'arc' ? arcReportRef.current : strReportRef.current,
-    documentTitle: `${reportType === 'arc' ? 'Architectural' : 'Structural'} Report`,
-    onAfterPrint: () => console.log('Printed report successfully!'),
-    pageStyle: `
-      @page {
-        size: A4;
-        margin: 0.5cm;
-      }
-      @media print {
-        body {
-          padding: 0;
-          margin: 0;
-        }
-        * {
-          -webkit-print-color-adjust: exact !important;
-          print-color-adjust: exact !important;
-          color-adjust: exact !important;
-        }
-      }
-    `,
-  });
+  
 
   useEffect(() => {
     // Load report type from localStorage if available

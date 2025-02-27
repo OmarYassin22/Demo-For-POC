@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Services from "../Services";
-import { useParams, useNavigate,useLocation } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import {
   User,
   Calendar,
@@ -97,7 +97,7 @@ interface ResultData {
   KrookiHijriIssueDate: string;
   KrookiIssueDate: string;
   PurposeID: number;
-  Note:string;
+  Note: string;
   Area: number;
   PurposeName: string;
   MainUsedCode: number;
@@ -160,188 +160,189 @@ export interface RequestData {
 //import Conditions from "../../Conditions";
 export default function RequestDetails() {
   const location = useLocation();
-  const { waitingApproval, ownerId, platformName,officeId } = location.state || {}; // Fallback if state is missing
+  const { waitingApproval, ownerId, platformName, officeId } = location.state || {}; // Fallback if state is missing
 
   const { id, requestid } = useParams();
   const navigate = useNavigate();
-  // const office = data[id];
+  const [loading, setLoading] = useState<boolean>(true);
   const [request, setRequest] = useState<ResultData | null>(null);
 
   const [requestBasic, setRequestBasic] = useState<Result | null>(null);
-  
- // Fetch Token
- const fetchToken = async () => {
-  const url = "https://apiservicesstg.balady.gov.sa/oauth/v1/token";
-  const username = "7WVXK2rO9fGn16uIGM7ixGhswAu2uGHd";
-  const password = "TCz3GQGRssBq7maT";
-  const basicAuth = btoa(`${username}:${password}`);
-  try {
-    const response = await axios.post(
-      url,
-      new URLSearchParams({ grant_type: "client_credentials" }).toString(),
-      {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-          Authorization: `Basic ${basicAuth}`,
-        },
-      }
-    );
-    //console.log(response.data.access_token);
- 
 
-    localStorage.setItem("Token", response.data.access_token);
-    const expiresInSeconds = parseInt(response.data.expires_in, 10); // Convert "17999" to number
-    const expirationTime = Date.now() + expiresInSeconds * 1000;
-    localStorage.setItem("tokenExpiration", expirationTime.toString());
-  } catch (err: any) {
-    console.log("Unable to fetch token. Please try again.");
-    //setLoading(false);
-  }
-};
-
-// Fetch Office Data
-const fetchOfficeData = async (officeId: string, providerId: string): Promise<RequestData> => {
-  const url = `https://apiservicesstg.balady.gov.sa/v1/cad-engine/benaa-office/${providerId}/${officeId}`;
-  
-  const token = localStorage.getItem("Token") || ""; // Prevent "Bearer null" issue
-
-  const headers = {
-    loginIdentityType: "1",
-    loginIdentityId: "1000115574",
-    Authorization: `Bearer ${token}`,
-  };
-
-  try {
-     ;
-    const response = await axios.get<{ result: RequestData }>(url, { headers });
-     ;
-    console.log(response.data) ; // Ensure it correctly extracts `result`
-setRequestBasic(response.data.data.result);
- ;
-
-     await fetchSurveyReport(response.data.data.result.krokiNo);
-  
-   
-  } catch (error: any) {
-    console.error("Error fetching office data:", error.response?.data || error.message);
-    throw new Error("Failed to fetch office data"); // Throw a new error with a user-friendly message
-  }
-};
+  // Fetch Token
+  const fetchToken = async () => {
+    const url = "https://apiservicesstg.balady.gov.sa/oauth/v1/token";
+    const username = "7WVXK2rO9fGn16uIGM7ixGhswAu2uGHd";
+    const password = "TCz3GQGRssBq7maT";
+    const basicAuth = btoa(`${username}:${password}`);
+    try {
+      const response = await axios.post(
+        url,
+        new URLSearchParams({ grant_type: "client_credentials" }).toString(),
+        {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            Authorization: `Basic ${basicAuth}`,
+          },
+        }
+      );
+      //console.log(response.data.access_token);
 
 
-// Get Office Details
-const getOfficeDetails = async () => {
-  try {
-     ;
-    if (!id || !requestid) throw new Error("Missing ID parameters");
-     await fetchOfficeData(id, requestid);
-   
-  } catch (error) {
-    console.error("Failed to retrieve office data.");
-  } finally {
-    //setLoading(false);
-  }
-};
-
-
-const fetchSurveyReport = async (krokiNumber: number): Promise<SurveyReportResponse> => {
-  const url = "https://apiservicesstg.balady.gov.sa/v1/BuildingLicenseInfo/construction-survey-report";
-
-  const headers = {
-    "Content-Type": "application/json",
-    "Authorization": `Bearer ${localStorage.getItem('Token')}`,
-  };
-
-  const requestData = {
-    krokiNumber,
-    queryMode: "BY_LICENSE_NUMBER",
-  };
-
-  try {
-    const response = await axios.post<SurveyReportResponse>(url, requestData, { headers });
-     ;
-   console.log("ob");
-   console.log(response.data.data.result[0]);
-
-    setRequest(response.data.data.result[0]);
-
-    
-  } catch (error: any) {
-    console.error("Error fetching survey report:", error.response?.data || error.message);
-    throw error;
-  }
-};
-
-useEffect(() => {
-   ;
-  
-  const fetchData = async () => {
-    if (localStorage.getItem("isLoggedIn") !== "true") {
-      navigate("/login");
-      return;
+      localStorage.setItem("Token", response.data.access_token);
+      const expiresInSeconds = parseInt(response.data.expires_in, 10); // Convert "17999" to number
+      const expirationTime = Date.now() + expiresInSeconds * 1000;
+      localStorage.setItem("tokenExpiration", expirationTime.toString());
+    } catch (err: any) {
+      console.log("Unable to fetch token. Please try again.");
+      //setLoading(false);
     }
- ;
-    const expiration = localStorage.getItem("tokenExpiration");
-  if (localStorage.getItem('Token')) {
-
-    const expired = expiration ? Date.now() > Number(expiration) : true;
-    if (expired) {
-     await fetchToken();
-    }
-
-  }
-  if(!localStorage.getItem('Token')){
-    await fetchToken();
-  }
-    await getOfficeDetails();
   };
 
-  fetchData();
-}, [id, requestid, navigate]);
+  // Fetch Office Data
+  const fetchOfficeData = async (officeId: string, providerId: string): Promise<RequestData> => {
+    const url = `https://apiservicesstg.balady.gov.sa/v1/cad-engine/benaa-office/${providerId}/${officeId}`;
 
- 
+    const token = localStorage.getItem("Token") || ""; // Prevent "Bearer null" issue
 
-const[waitingApprovalStatus,setWaitingApprovalStatus]=useState(waitingApproval);
-const [isFormTabVisible, setIsFormTabVisible] = useState(!waitingApproval);
+    const headers = {
+      loginIdentityType: "1",
+      loginIdentityId: "1000115574",
+      Authorization: `Bearer ${token}`,
+    };
+     try {
+      ;
+      const response = await axios.get<{ result: RequestData }>(url, { headers });
+      ;
+      console.log(response.data); // Ensure it correctly extracts `result`
+      setRequestBasic(response.data.data.result);
 
-const approveRequest = async ( type: "approve" | "reject") => {
-  //console.log(officeId +" re  "+requestid+"  فخنث :"+localStorage.getItem('Token'));
-  try {
-    const response = await axios.post(
-      "https://apiservicesstg.balady.gov.sa/v1/cad-engine/benaa/action",
-      {
-        type, // Dynamic type ("approve" or "reject")
-        channel: "balady-services",
-        reqNo: requestid, // Dynamic requestId
-        notes: "notes",
-      },
-      {
-        headers: {
-          officeId: officeId,
-          loginIdentityType: "2",
-          loginIdentityId: "1000100873",
-          "x-platform-id": "baladybusiness",
-          "x-provider-id": "64ed91f79d5cf006de8e3471",
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${localStorage.getItem('Token')}` // Replace with actual token
-        },
+      ;
+
+      await fetchSurveyReport(response.data.data.result.krokiNo);
+
+
+    } catch (error: any) {
+      console.error("Error fetching office data:", error.response?.data || error.message);
+      throw new Error("Failed to fetch office data"); // Throw a new error with a user-friendly message
+    }
+  };
+
+
+  // Get Office Details
+  const getOfficeDetails = async () => {
+    try {
+      ;
+      if (!id || !requestid) throw new Error("Missing ID parameters");
+      await fetchOfficeData(id, requestid);
+
+    } catch (error) {
+      console.error("Failed to retrieve office data.");
+    } finally {
+      //setLoading(false);
+    }
+  };
+
+
+  const fetchSurveyReport = async (krokiNumber: number): Promise<SurveyReportResponse> => {
+    const url = "https://apiservicesstg.balady.gov.sa/v1/BuildingLicenseInfo/construction-survey-report";
+
+    const headers = {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${localStorage.getItem('Token')}`,
+    };
+
+    const requestData = {
+      krokiNumber,
+      queryMode: "BY_LICENSE_NUMBER",
+    };
+
+    try {
+      const response = await axios.post<SurveyReportResponse>(url, requestData, { headers });
+      ;
+      console.log("ob");
+      console.log(response.data.data.result[0]);
+
+      setRequest(response.data.data.result[0]);
+
+
+    } catch (error: any) {
+      console.error("Error fetching survey report:", error.response?.data || error.message);
+      throw error;
+    }
+  };
+
+  useEffect(() => {
+    ;
+
+    const fetchData = async () => {
+      if (localStorage.getItem("isLoggedIn") !== "true") {
+        navigate("/login");
+        return;
       }
-    );
+      ;
+      const expiration = localStorage.getItem("tokenExpiration");
+      if (localStorage.getItem('Token')) {
 
-    if( response.data.statusDetails.code==200) {
-setWaitingApprovalStatus(false);
-    }   
-  } catch (error) {
-    console.error("Error:", error);
-  }
-};
-  const handleAccept = async() => {
+        const expired = expiration ? Date.now() > Number(expiration) : true;
+        if (expired) {
+          await fetchToken();
+        }
+
+      }
+      if (!localStorage.getItem('Token')) {
+        await fetchToken();
+      }
+      await getOfficeDetails();
+      setLoading(false);
+    };
+
+    fetchData();
+  }, [id, requestid, navigate]);
+
+
+
+  const [waitingApprovalStatus, setWaitingApprovalStatus] = useState(waitingApproval);
+  const [isFormTabVisible, setIsFormTabVisible] = useState(!waitingApproval);
+
+  const approveRequest = async (type: "approve" | "reject") => {
+    //console.log(officeId +" re  "+requestid+"  فخنث :"+localStorage.getItem('Token'));
+    try {
+      const response = await axios.post(
+        "https://apiservicesstg.balady.gov.sa/v1/cad-engine/benaa/action",
+        {
+          type, // Dynamic type ("approve" or "reject")
+          channel: "balady-services",
+          reqNo: requestid, // Dynamic requestId
+          notes: "notes",
+        },
+        {
+          headers: {
+            officeId: officeId,
+            loginIdentityType: "2",
+            loginIdentityId: "1000100873",
+            "x-platform-id": "baladybusiness",
+            "x-provider-id": "64ed91f79d5cf006de8e3471",
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${localStorage.getItem('Token')}` // Replace with actual token
+          },
+        }
+      );
+
+      if (response.data.statusDetails.code == 200) {
+        setWaitingApprovalStatus(false);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+  const handleAccept = async () => {
     await approveRequest("approve");
     setIsFormTabVisible(true);
     alert("تم قبول الطلب بنجاح");
   };
 
-  const handleReject =async () => {
+  const handleReject = async () => {
     await approveRequest("reject");
     alert("تم رفض الطلب");
     navigate(`/offices/${id}/requests`);
@@ -366,36 +367,42 @@ setWaitingApprovalStatus(false);
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
-
+if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-100 p-4 flex items-center justify-center">
+        <div className="text-center">
+          <div className="spinner-border animate-spin inline-block w-12 h-12 border-4 rounded-full text-blue-500 border-t-transparent"></div>
+          <p className="mt-4 text-gray-600" style={{ direction: "rtl" }}>جاري تحميل البيانات...</p>
+        </div>
+      </div>
+    );
+  }
   return (
- 
+
     <div className="min-h-screen bg-gray-50 p-6" style={{ direction: "rtl" }}>
       <div className="flex">
         {/* Sidebar */}
         <div
-          className={`fixed inset-y-0 right-0    z-10 transform ${
-            isSidebarOpen ? "translate-x-0 mt-32" : "translate-x-full  mt-0"
-          } transition-transform duration-300 ease-in-out md:relative md:translate-x-0 w-full md:w-1/4 bg-white rounded-lg shadow-lg p-6 mb-4 md:mb-0`}
+          className={`fixed inset-y-0 right-0    z-10 transform ${isSidebarOpen ? "translate-x-0 mt-32" : "translate-x-full  mt-0"
+            } transition-transform duration-300 ease-in-out md:relative md:translate-x-0 w-full md:w-1/4 bg-white rounded-lg shadow-lg p-6 mb-4 md:mb-0`}
         >
           <div className="flex flex-col gap-4">
             <button
               onClick={() => handleTabChange("details")}
-              className={`px-4 py-2 rounded-lg ${
-                activeTab === "details"
-                  ? "bg-teal-600 text-white"
-                  : "bg-gray-200 text-gray-800"
-              }`}
+              className={`px-4 py-2 rounded-lg ${activeTab === "details"
+                ? "bg-teal-600 text-white"
+                : "bg-gray-200 text-gray-800"
+                }`}
             >
               تفاصيل الطلب
             </button>
             {isFormTabVisible && (
               <button
                 onClick={() => handleTabChange("form")}
-                className={`px-4 py-2 rounded-lg ${
-                  activeTab === "form"
-                    ? "bg-teal-600 text-white"
-                    : "bg-gray-200 text-gray-800"
-                }`}
+                className={`px-4 py-2 rounded-lg ${activeTab === "form"
+                  ? "bg-teal-600 text-white"
+                  : "bg-gray-200 text-gray-800"
+                  }`}
               >
                 خدمات{" "}
               </button>
@@ -436,11 +443,10 @@ setWaitingApprovalStatus(false);
                     </h1>
                   </div>
                   <span
-                    className={`px-4 py-2 rounded-full text-sm ${
-                      waitingApprovalStatus
-                        ? "bg-yellow-100 text-yellow-800"
-                        : "bg-green-100 text-green-800"
-                    }`}
+                    className={`px-4 py-2 rounded-full text-sm ${waitingApprovalStatus
+                      ? "bg-yellow-100 text-yellow-800"
+                      : "bg-green-100 text-green-800"
+                      }`}
                   >
                     {waitingApprovalStatus ? "قيد الانتظار" : "مكتمل"}
                   </span>
@@ -454,8 +460,8 @@ setWaitingApprovalStatus(false);
                       <div>
                         <p className="text-sm text-gray-600">صاحب الطلب</p>
                         <p className="font-medium">
-  {request?.OwnersListData?.length > 0 ? request.OwnersListData[0]?.OwnerName : ""}
-</p>
+                          {request?.OwnersListData?.length > 0 ? request.OwnersListData[0]?.OwnerName : ""}
+                        </p>
 
                       </div>
                     </div>
@@ -464,14 +470,14 @@ setWaitingApprovalStatus(false);
                       <div>
                         <p className="text-sm text-gray-600">تاريخ الطلب</p>
                         <p className="font-medium">
-  {request?.KrookiIssueDate
-    ? new Date(request.KrookiIssueDate).toLocaleDateString("ar-SA", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      })
-    : ""} {/* Fallback message in Arabic for "Date not available" */}
-</p>
+                          {request?.KrookiIssueDate
+                            ? new Date(request.KrookiIssueDate).toLocaleDateString("ar-SA", {
+                              year: "numeric",
+                              month: "long",
+                              day: "numeric",
+                            })
+                            : ""} {/* Fallback message in Arabic for "Date not available" */}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -518,7 +524,7 @@ setWaitingApprovalStatus(false);
               )}
 
               {/* Result Section */}
-              {!waitingApprovalStatus  && (
+              {!waitingApprovalStatus && (
                 <div className="bg-white rounded-lg shadow-lg p-6">
                   <h2 className="text-xl font-semibold mb-4">نتيجة الطلب</h2>
                   <div className="space-y-4">
@@ -549,7 +555,7 @@ setWaitingApprovalStatus(false);
           )}
 
           {activeTab === "form" && (
-            <Services KrookiNumber={requestBasic?.krokiNo }  officeId={id?id:""} requestId={requestid?requestid:""}></Services>
+            <Services KrookiNumber={requestBasic?.krokiNo} officeId={id ? id : ""} requestId={requestid ? requestid : ""}></Services>
           )}
         </div>
       </div>
