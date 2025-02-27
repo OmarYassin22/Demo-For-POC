@@ -239,15 +239,15 @@ const Conditions: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   // Remove pagination states and calculations
   // Add scroll handler
-  const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
-    const { scrollTop, scrollHeight, clientHeight } = event.currentTarget;
-    const progress = (scrollTop / (scrollHeight - clientHeight)) * 100;
-    setScrollProgress(progress);
+  // const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
+  //   const { scrollTop, scrollHeight, clientHeight } = event.currentTarget;
+  //   const progress = (scrollTop / (scrollHeight - clientHeight)) * 100;
+  //   setScrollProgress(progress);
 
-    if (progress > 95) {
-      setCanStartService(true);
-    }
-  };
+  //   if (progress > 95) {
+  //     setCanStartService(true);
+  //   }
+  // };
 
   // Fetch Token
   const fetchToken = async () => {
@@ -452,7 +452,7 @@ const Conditions: React.FC = () => {
                 {/* Updated Conditions container */}
                 <div
                   className="overflow-y-auto max-h-[75vh] px-2"
-                  onScroll={handleScroll}
+                  // onScroll={handleScroll}
                   style={{
                     scrollbarWidth: 'thin',
                     scrollBehavior: 'smooth',
@@ -530,7 +530,7 @@ const Conditions: React.FC = () => {
                   </div>
 
                   {/* Scroll indicator */}
-                  {!canStartService && (
+                  {/* {!canStartService && (
                     <div className="sticky bottom-0 text-center py-3 bg-gradient-to-t from-white via-white">
                       <div className="text-gray-500 text-xs mb-1">
                         اسحب لأسفل لقراءة جميع الشروط
@@ -541,7 +541,7 @@ const Conditions: React.FC = () => {
                         </svg>
                       </div>
                     </div>
-                  )}
+                  )} */}
                 </div>
 
 

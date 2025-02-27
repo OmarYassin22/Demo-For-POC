@@ -312,7 +312,7 @@ const InspectionReport = () => {
             onClick={() => handleTabChange('inspection')}
           >
             <ClipboardList size={18} className="mr-2" />
-            <span className="mr-2">تقرير الفحص</span>
+            <span className="mr-2">نتائج الفحص</span>
           </div>
 
           <div
@@ -320,7 +320,10 @@ const InspectionReport = () => {
             onClick={() => handleTabChange('report')}
           >
             <BuildingIcon size={18} className="mr-2" />
-            <span className="mr-2">{reportType === 'arc' ? 'التقرير المعماري' : 'التقرير الإنشائي'}</span>
+            <span className="mr-2">
+              عرض التقرير
+              {/* {reportType === 'arc' ? 'التقرير المعماري' : 'التقرير الإنشائي'} */}
+              </span>
           </div>
         </nav>
 
@@ -347,11 +350,11 @@ const InspectionReport = () => {
       {/* Main Content */}
       <div className="flex-1 p-8 overflow-auto">
         {/* Header */}
-        <div className="flex justify-between items-center mb-6">
+        {/* <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold text-gray-800">
             {activeTab === 'inspection' ? 'نتائج الفحص' : reportType === 'arc' ? 'التقرير المعماري' : 'التقرير الإنشائي'}
           </h1>
-        </div>
+        </div> */}
 
         {/* Tab Content */}
         {activeTab === 'inspection' ? (
