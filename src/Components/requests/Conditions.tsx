@@ -63,6 +63,7 @@ interface Condition {
   description: string;
   place: string;
   visualCategory?: string;
+  active?: boolean;
 }
 
 interface ConditionsResponse {
@@ -380,30 +381,34 @@ const Conditions: React.FC = () => {
 
 
 
-      setConditionsData(response.data.data.result.conditions);
+      //setConditionsData(response.data.data.result.conditions);
 
 
 
 
 
       setError(null);
+      console.log( response.data);
+let filteredConditions : Condition[]=response.data.data.result.conditions;
+      console.log( filteredConditions);
+      filteredConditions = 
+  response?.data?.data?.result?.conditions?.filter(
+    (condition) => condition.condition.active === true
+  ) || [];
 
-
-
-      let filteredConditions = response.data.data.result;
-      filteredConditions?.conditions.filter(
-        (condition) => condition.active == true
-      );
-      if (filteredConditions?.conditions) {
+  //filteredConditions.forEach((condition) => console.log(condition.condition));
+      console.log("activeCon");
+      console.log(filteredConditions);
+      if (filteredConditions) {
         if (instructure === "1") {
           // If instructure is 1, filter where code < 500
-          filteredConditions = filteredConditions?.conditions.filter(
-            (condition) => parseInt(condition.code, 10) < 500
+          filteredConditions = filteredConditions?.filter(
+            (condition) => parseFloat(condition.code) < 500
           );
         } else {
           // Otherwise, filter where code >= 500
-          filteredConditions = filteredConditions?.conditions.filter(
-            (condition) => parseInt(condition.code, 10) >= 500
+          filteredConditions = filteredConditions?.filter(
+            (condition) => parseFloat(condition.code) >= 500
           );
         }
         console.log("filteredConditions");
