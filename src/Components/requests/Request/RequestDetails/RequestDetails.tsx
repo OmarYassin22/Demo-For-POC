@@ -526,11 +526,11 @@ if (loading) {
               {/* Result Section */}
               {!waitingApprovalStatus && (
                 <div className="bg-white rounded-lg shadow-lg p-6">
-                  <h2 className="text-xl font-semibold mb-4">نتيجة الطلب</h2>
+                  <h2 className="text-xl font-semibold mb-4">حالة الطلب</h2>
                   <div className="space-y-4">
                     <div className="p-4 bg-gray-50 rounded-lg">
-                      <h3 className="font-medium mb-2">الحالة</h3>
-                      <p>تم قبول الطلب</p>
+                      <h3 className="font-medium mb-2">تم اعتماده</h3>
+                    
                     </div>
                     {request?.Note && (
                       <div className="p-4 bg-gray-50 rounded-lg">
