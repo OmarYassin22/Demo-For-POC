@@ -81,6 +81,8 @@ const Conditions: React.FC = () => {
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [file, setFile] = useState<File | null>(null);
+  const [errorUpload, setErrorUpload] = useState<string|null>(null);
+  
   const [isUploading, setIsUploading] = useState<boolean>(false);
   const [bundleResponse, setBundleResponse] = useState<bundleUploadResponse | null>(null);
   const [uploadSuccess, setUploadSuccess] = useState(false);
@@ -90,10 +92,34 @@ const Conditions: React.FC = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isStartingService, setIsStartingService] = useState<boolean>(false);
   // Handles file selection
+  // const handleFileChange = (event: ChangeEvent<HTMLInputElement>): void => {
+  //   if (event.target.files) {
+  //     setFile(event.target.files[0]);
+  //   }
+  // };
+
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    if (event.target.files) {
-      setFile(event.target.files[0]);
+    const selectedFile = event.target.files?.[0];
+
+    if (selectedFile) {
+      const allowedExtensions = [".rvt", ".rte"];
+      const fileExtension = selectedFile.name.slice(selectedFile.name.lastIndexOf(".")).toLowerCase();
+
+      if (!allowedExtensions.includes(fileExtension)) {
+        //setErrorUpload("Only .rvt and .rte files are allowed.");
+        setErrorUpload("يُسمح فقط بملفات .rvt و .rte.");
+        setFile(null);
+        return;
+      }
+      setErrorUpload("");
+      setError(null);
+      setFile(selectedFile);
     }
+  };
+
+  const handleRemoveFile = () => {
+    setFile(null);
+    setErrorUpload(null);
   };
 
   // Submit the form and upload the files
@@ -388,17 +414,26 @@ const Conditions: React.FC = () => {
 
 
       setError(null);
-      console.log( response.data);
-let filteredConditions : Condition[]=response.data.data.result.conditions;
-      console.log( filteredConditions);
-      filteredConditions = 
-  response?.data?.data?.result?.conditions?.filter(
-    (condition) => condition.condition.active === true
-  ) || [];
+      console.log(response.data);
+      let filteredConditions: Condition[] = response.data.data.result.conditions;
+      console.log(filteredConditions);
+      if (filteredConditions.length == 0) {
+        setError("لا يوجد إشتراطات لهذا المكان");
+        return;
+      }
+      filteredConditions =
+        response?.data?.data?.result?.conditions?.filter(
+          (condition) => condition.condition.active === true
+        ) || [];
 
-  //filteredConditions.forEach((condition) => console.log(condition.condition));
+      if (filteredConditions.length == 0) {
+        setError("لا يوجد إشتراطات لهذا المكان");
+        return;
+      }
+      //filteredConditions.forEach((condition) => console.log(condition.condition));
       console.log("activeCon");
       console.log(filteredConditions);
+
       if (filteredConditions) {
         if (instructure === "1") {
           // If instructure is 1, filter where code < 500
@@ -415,6 +450,11 @@ let filteredConditions : Condition[]=response.data.data.result.conditions;
         console.log(filteredConditions);
         setConditionsData(filteredConditions);
         console.log(conditionsData);
+        if (filteredConditions.length == 0) {
+
+          setError("لا يوجد إشتراطات لهذا المكان");
+          return;
+        }
         debugger;
 
         const groupedByVisualCategory = filteredConditions.filter(({ visualCategory }) => visualCategory !== null).reduce<Record<string, string[]>>((acc: Record<string, string[]>, { visualCategory, code }: { visualCategory: string; code: string }) => {
@@ -436,7 +476,7 @@ let filteredConditions : Condition[]=response.data.data.result.conditions;
 
 
     } catch (err: any) {
-      setError("Unable to fetch conditions. Please try again.");
+      setError("حدث خطأ في تحميل الشروط للطلب.");
     } finally {
       setLoading(false);
     }
@@ -469,7 +509,19 @@ let filteredConditions : Condition[]=response.data.data.result.conditions;
   }, [location.state]);
 
   useEffect(() => {
-    if (localStorage.getItem('Token')) fetchConditions();
+    if (localStorage.getItem('Token')) {
+      debugger;
+      if (buildingType != 1) {
+
+        setError("لا يوجد إشتراطات لهذا النوع من المبني");
+
+        setLoading(false);
+      } else {
+        fetchConditions();
+      }
+
+    }
+
   }, []);
 
   const handleClose = () => {
@@ -651,92 +703,111 @@ let filteredConditions : Condition[]=response.data.data.result.conditions;
         </div>
 
         {/* Upload Section - Moved below conditions */}
-        <div className="bg-white rounded-xl shadow-lg p-6">
-          <div className="text-center mb-6">
-            <h2 className="text-2xl font-bold text-gray-800 mb-2">رفع ملف التصميم {localStorage.getItem("reportType") === "arc" ? 'المعماري' : 'الإنشائي'}
-            </h2>
-            <p className="text-gray-600">يرجى رفع ملف Revit (.rvt)</p>
-          </div>
+        {!error &&
+          <div className="bg-white rounded-xl shadow-lg p-6">
+            <div className="text-center mb-6">
+              <h2 className="text-2xl font-bold text-gray-800 mb-2">رفع ملف التصميم {localStorage.getItem("reportType") === "arc" ? 'المعماري' : 'الإنشائي'}
+              </h2>
+              <p className="text-gray-600">يرجى رفع ملف Revit (.rvt - .rte)</p>
+            </div>
 
-          <div className={`border-2 border-dashed rounded-lg p-8 transition-colors mb-6
+            <div className={`border-2 border-dashed rounded-lg p-8 transition-colors mb-6
             ${uploadSuccess ? 'border-green-500 bg-green-50' : 'border-gray-200 hover:border-green-400'}`}>
-            <input
-              type="file"
-              onChange={handleFileChange}
-              className="hidden"
-              id="file-upload"
-              accept=".rvt"
-              disabled={isUploading}
-            />
-            <label
-              htmlFor="file-upload"
-              className="cursor-pointer flex flex-col items-center"
-            >
-              {uploadSuccess ? (
-                <>
-                  <svg className="w-16 h-16 text-green-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <p className="text-green-600 font-medium">تم الرفع بنجاح!</p>
-                </>
-              ) : (
-                <div>
-                  <p className="text-gray-600 text-lg">اضغط هنا لرفع الملف</p>
-                  <p className="text-gray-500 text-sm mt-1">أو اسحب وأفلت الملف هنا</p>
-                  {file && (
-                    <div className="mt-4 text-gray-600">
-                      <p className="text-lg">الملف المختار: <strong>{file.name}</strong></p>
-                    </div>
-                  )}
-                </div>
-              )}
-            </label>
-          </div>
+              <input
+                type="file"
+                onChange={handleFileChange}
+                className="hidden"
+                id="file-upload"
+               accept=".rvt,.rte"
+                disabled={isUploading}
+              />
+              <label
+                htmlFor="file-upload"
+                className="cursor-pointer flex flex-col items-center"
+              >
+                {uploadSuccess ? (
+                  <>
+                    <svg className="w-16 h-16 text-green-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <p className="text-green-600 font-medium">تم الرفع بنجاح!</p>
+                  </>
+                ) : (
+                  <div className="p-4 border rounded-lg text-center">
+                    <label className="cursor-pointer block">
+                      <p className="text-gray-600 text-lg">اضغط هنا لرفع الملف</p>
+                      <p className="text-gray-500 text-sm mt-1">أو اسحب وأفلت الملف هنا</p>
+                      <input
+                        type="file"
+                        accept=".rvt,.rte"
+                        className="hidden"
+                        onChange={handleFileChange}
 
-          {/* Action Buttons - Redesigned */}
-          <div className="flex justify-center gap-4">
-            <button
-              onClick={handleSubmit}
-              disabled={!file || isUploading || uploadSuccess}
-              className="flex items-center gap-2 px-8 py-3 bg-green-600 text-white rounded-lg
+                      />
+
+                    </label>
+                    {file && (
+                      <div className="mt-4 text-gray-600">
+                        <p className="text-lg">الملف المختار: <strong>{file.name}</strong></p>
+                        <button
+                          onClick={handleRemoveFile}
+                          className="mt-2 bg-red-500 text-white px-3 py-1 rounded">
+                          تغيير الملف
+                        </button>
+                      </div>
+                    )}
+                       {errorUpload && <p className="text-red-500">{errorUpload}</p>}
+                  </div>
+                )}
+              </label>
+            </div>
+
+            {/* Action Buttons - Redesigned */}
+            <div className="flex justify-center gap-4">
+              <button
+                onClick={handleSubmit}
+                disabled={!file || isUploading || uploadSuccess || error}
+                className="flex items-center gap-2 px-8 py-3 bg-green-600 text-white rounded-lg
                 hover:bg-green-700 transition-all duration-300 disabled:bg-gray-300 disabled:cursor-not-allowed
                 shadow-md hover:shadow-lg"
-            >
-              {isUploading ? (
-                <>
-                  <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                  </svg>
-                  <span>جاري الرفع...</span>
-                </>
-              ) : (
-                <span>رفع الملف </span>
-              )}
-            </button>
+              >
+                {isUploading ? (
+                  <>
+                    <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                    </svg>
+                    <span>جاري الرفع...</span>
+                  </>
+                ) : (
+                  <span>رفع الملف </span>
+                )}
+              </button>
 
-            <button
-              onClick={handleStartService}
-              disabled={!uploadSuccess || isStartingService} // Disable button when starting service
-              className={`flex items-center gap-2 px-8 py-3 rounded-lg transition-all duration-300 
+              <button
+                onClick={handleStartService}
+                disabled={!uploadSuccess || isStartingService} // Disable button when starting service
+                className={`flex items-center gap-2 px-8 py-3 rounded-lg transition-all duration-300 
                 ${uploadSuccess && !isStartingService
-                  ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-md hover:shadow-lg'
-                  : 'bg-gray-200 text-gray-400 cursor-not-allowed'}`}
-            >
-              {isStartingService ? (
-                <>
-                  <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                  </svg>
-                  <span>جاري الفحص...</span>
-                </>
-              ) : (
-                <span>بدء الفحص</span>
-              )}
-            </button>
+                    ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-md hover:shadow-lg'
+                    : 'bg-gray-200 text-gray-400 cursor-not-allowed'}`}
+              >
+                {isStartingService ? (
+                  <>
+                    <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                    </svg>
+                    <span>جاري الفحص...</span>
+                  </>
+                ) : (
+                  <span>بدء الفحص</span>
+                )}
+              </button>
+            </div>
           </div>
-        </div>   </div>   </div>
+        }
+      </div>   </div>
 
   );
 };

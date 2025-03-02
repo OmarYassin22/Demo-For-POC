@@ -183,7 +183,7 @@ const Services: React.FC<ServicesProps> = ({
                 ? 2
                 : filteredData?.SubUsedCode === 698
                   ? 8
-                  : 1,
+                  : 10,
           instructure: selectedOption || "1",
           complianceType: selectedOption || "1"
         },
@@ -265,6 +265,8 @@ const Services: React.FC<ServicesProps> = ({
       } else {
         setFilteredData(filtered[0]);
         setLoading(false);
+
+        
       }
     };
 
@@ -495,7 +497,10 @@ const Services: React.FC<ServicesProps> = ({
               <input
                 id="SubUsedName"
                 name="SubUsedName"
-                value={filteredData?.SubUsedName}
+                value={filteredData?.SubUsedName 
+                  // +" " +  filteredData?.SubUsedCode
+
+                }
                 className="mt-1 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-emerald-500 focus:border-emerald-500 block w-full p-2.5"
                 disabled
               />
