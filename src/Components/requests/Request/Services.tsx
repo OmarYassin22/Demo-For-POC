@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import jsonData from "../../../mocks/OfficeRequestServices.json";
 import { useParams } from 'react-router-dom';
 import { Building2, ClipboardList, Map, User, FileText, Loader2, MapPin } from "lucide-react";
+// Import our new map component
+import PropertyMap from "../../common/PropertyMap";
 
 interface LocationData {
   AmanahCode: string;
@@ -136,13 +138,13 @@ interface ServicesProps {
   requestData?: FormDataobj; // Add this prop to receive request data
 }
 
-const Services: React.FC<ServicesProps> = ({ 
-  KrookiNumber, 
-  officeId, 
-  requestId, 
-  amanaName, 
+const Services: React.FC<ServicesProps> = ({
+  KrookiNumber,
+  officeId,
+  requestId,
+  amanaName,
   baladiaName,
-  requestData // Receive request data from parent component
+  requestData // We'll use this prop instead of fetching the data again
 }) => {
   const [accessToken, setAccessToken] = useState<string>("");
   const navigate = useNavigate();
@@ -175,13 +177,13 @@ const Services: React.FC<ServicesProps> = ({
           Land: filteredData?.LocationData.PlanNumber || "",
           buildingType:
             filteredData?.SubUsedCode === 26 ||
-            filteredData?.SubUsedCode === 699
+              filteredData?.SubUsedCode === 699
               ? 1
               : filteredData?.SubUsedCode === 24
-              ? 2
-              : filteredData?.SubUsedCode === 698
-              ? 8
-              : 1,
+                ? 2
+                : filteredData?.SubUsedCode === 698
+                  ? 8
+                  : 1,
           instructure: selectedOption || "1",
           complianceType: selectedOption || "1"
         },
@@ -208,7 +210,7 @@ const Services: React.FC<ServicesProps> = ({
       };
       const body = new URLSearchParams();
       body.append('grant_type', 'client_credentials');
-      
+
       const response = await axios.post(url, body.toString(), { headers });
       const token = response.data.access_token;
       setAccessToken(token);
@@ -231,32 +233,13 @@ const Services: React.FC<ServicesProps> = ({
 
       const response = await fetch(url, { method: 'GET', headers });
       const data = await response.json();
-      await getdatabykrooki(access_token, data.data.result.krokiNo);
+      
+      // Since we're using the data passed from RequestDetails.tsx,
+      // we don't need to call fetchSurveyReport here anymore
+      setLoading(false);
     } catch (error) {
       console.error('Error:', error);
       setError("حدث خطأ أثناء جلب بيانات المكتب");
-      setLoading(false);
-    }
-  };
-
-  const getdatabykrooki = async (access_token: string, krokiData: string) => {
-    try {
-      const url = 'https://apiservicesstg.balady.gov.sa/v1/BuildingLicenseInfo/construction-survey-report';
-      const headers = {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${access_token}`,
-      };
-      const body = {
-        krokiNumber: krokiData,
-        queryMode: 'BY_LICENSE_NUMBER',
-      };
-
-      const response = await axios.post(url, body, { headers });
-      setFilteredData(response.data.data.result[0]);
-      setLoading(false);
-    } catch (error) {
-      console.error('Error:', error);
-      setError("حدث خطأ أثناء جلب بيانات الكروكي");
       setLoading(false);
     }
   };
@@ -275,7 +258,7 @@ const Services: React.FC<ServicesProps> = ({
       const filtered = jsonData.filter((item: FormDataobj) => {
         return item.KrookiNumber === KrookiNumber;
       });
-      
+
       if (filtered.length === 0) {
         setLoading(true);
         await getToken();
@@ -284,7 +267,7 @@ const Services: React.FC<ServicesProps> = ({
         setLoading(false);
       }
     };
-    
+
     fetchData();
   }, [KrookiNumber, requestData]);
 
@@ -311,7 +294,7 @@ const Services: React.FC<ServicesProps> = ({
           </div>
           <h2 className="mt-4 text-lg font-semibold text-gray-800">حدث خطأ</h2>
           <p className="mt-2 text-gray-600">{error}</p>
-          <button 
+          <button
             onClick={() => window.location.reload()}
             className="mt-4 px-4 py-2 bg-emerald-600 text-white rounded-md hover:bg-emerald-700 transition-colors"
           >
@@ -325,11 +308,11 @@ const Services: React.FC<ServicesProps> = ({
   return (
     <div className="max-w-4xl mx-auto my-8 px-4">
       {/* Header Section */}
-       <div className="bg-gradient-to-r from-emerald-700 to-emerald-500 rounded-t-lg p-6 shadow-lg">
+      <div className="bg-gradient-to-r from-emerald-700 to-emerald-500 rounded-t-lg p-6 shadow-lg">
         <h1 className="text-2xl font-bold text-white">تفاصيل الطلب</h1>
         <p className="text-emerald-50 mt-1">رقم القرار: {filteredData?.KrookiNumber}</p>
       </div>
-      
+
       {/* Municipality Information Section - Enhanced with more location data */}
       <div className="bg-white rounded-b-lg shadow-lg p-6 mb-6 border-t-4 border-emerald-500">
         <h2 className="text-xl font-semibold mb-4 text-gray-800 flex items-center">
@@ -374,6 +357,59 @@ const Services: React.FC<ServicesProps> = ({
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Map Section - Updated to use PropertyMap */}
+      <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
+        <h2 className="text-xl font-semibold mb-4 text-gray-800 flex items-center">
+          <Map className="w-5 h-5 text-emerald-600 mr-2" />
+          خريطة الموقع
+        </h2>
+
+        <div className="h-96 rounded-lg overflow-hidden border border-gray-300 mb-4 z-0">
+          {/* React Leaflet Map with building type information */}
+          <PropertyMap
+            coordinates={filteredData?.CoordinatesListData || []}
+            height="100%"
+            buildingType={
+              filteredData?.SubUsedCode === 26 ? "residential" :
+                filteredData?.SubUsedCode === 24 ? "commercial" :
+                  filteredData?.SubUsedCode === 698 ? "industrial" :
+                    filteredData?.SubUsedCode === 699 ? "school" :
+                      "residential"
+            }
+          />
+        </div>
+
+        {/* Coordinates Table */}
+        {filteredData?.CoordinatesListData && filteredData.CoordinatesListData.length > 0 ? (
+          <div className="overflow-x-auto mt-4">
+            <h3 className="text-lg font-medium text-gray-800 mb-2">إحداثيات الموقع</h3>
+            <table className="w-full text-sm text-right text-gray-700">
+              <thead className="text-xs uppercase bg-gray-50">
+                <tr>
+                  <th scope="col" className="px-6 py-3">رقم النقطة</th>
+                  <th scope="col" className="px-6 py-3">خط الطول</th>
+                  <th scope="col" className="px-6 py-3">خط العرض</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredData.CoordinatesListData.map((coord, index) => (
+                  <tr key={`coord-${index}`} className="bg-white border-b">
+                    <td className="px-6 py-3">{coord.CoordinateNumber}</td>
+                    <td className="px-6 py-3">{coord.Longitude}</td>
+                    <td className="px-6 py-3">{coord.Latitude}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+          </div>
+        ) : (
+          <div className="text-center py-4 text-gray-500">
+            لا توجد بيانات إحداثيات متاحة
+          </div>
+        )}
       </div>
 
       {/* Request Details and Form */}
@@ -481,11 +517,10 @@ const Services: React.FC<ServicesProps> = ({
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 rows={4}
-                className={`block w-full py-3 px-4 text-gray-900 border rounded-lg focus:ring-2 focus:ring-emerald-500 bg-white ${
-                  formik.touched.description && formik.errors.description
+                className={`block w-full py-3 px-4 text-gray-900 border rounded-lg focus:ring-2 focus:ring-emerald-500 bg-white ${formik.touched.description && formik.errors.description
                     ? "border-red-500"
                     : "border-gray-300"
-                }`}
+                  }`}
               />
               {formik.touched.description && formik.errors.description && (
                 <p className="mt-1 text-sm text-red-600">
@@ -506,7 +541,6 @@ const Services: React.FC<ServicesProps> = ({
                   name="ComplianceType"
                   value="1"
                   required
-                  // checked={selectedOption === "1"}
                   onChange={handleRadioChange}
                   className="w-4 h-4 text-emerald-600 focus:ring-emerald-500"
                 />
