@@ -591,9 +591,8 @@ export default function RequestDetails() {
                 requestId={requestid ? requestid : ""}
                 amanaName={requestBasic?.amanaName}
                 baladiaName={requestBasic?.baladiaName}
-                // city={requestBasic?.LocationData.CityName}
-                // plan={requestBasic?.LocationData.PlanNumber}
-              ></Services>
+                requestData={request} // Pass the survey report data
+              />
             )}
           </div>
         </div>

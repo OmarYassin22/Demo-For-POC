@@ -144,7 +144,7 @@ const Services: React.FC<ServicesProps> = ({
   requestId,
   amanaName,
   baladiaName,
-  requestData // Receive request data from parent component
+  requestData // We'll use this prop instead of fetching the data again
 }) => {
   const [accessToken, setAccessToken] = useState<string>("");
   const navigate = useNavigate();
@@ -233,32 +233,13 @@ const Services: React.FC<ServicesProps> = ({
 
       const response = await fetch(url, { method: 'GET', headers });
       const data = await response.json();
-      await getdatabykrooki(access_token, data.data.result.krokiNo);
+      
+      // Since we're using the data passed from RequestDetails.tsx,
+      // we don't need to call fetchSurveyReport here anymore
+      setLoading(false);
     } catch (error) {
       console.error('Error:', error);
       setError("حدث خطأ أثناء جلب بيانات المكتب");
-      setLoading(false);
-    }
-  };
-
-  const getdatabykrooki = async (access_token: string, krokiData: string) => {
-    try {
-      const url = 'https://apiservicesstg.balady.gov.sa/v1/BuildingLicenseInfo/construction-survey-report';
-      const headers = {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${access_token}`,
-      };
-      const body = {
-        krokiNumber: krokiData,
-        queryMode: 'BY_LICENSE_NUMBER',
-      };
-
-      const response = await axios.post(url, body, { headers });
-      setFilteredData(response.data.data.result[0]);
-      setLoading(false);
-    } catch (error) {
-      console.error('Error:', error);
-      setError("حدث خطأ أثناء جلب بيانات الكروكي");
       setLoading(false);
     }
   };
@@ -422,7 +403,7 @@ const Services: React.FC<ServicesProps> = ({
                 ))}
               </tbody>
             </table>
-           
+
           </div>
         ) : (
           <div className="text-center py-4 text-gray-500">
@@ -536,11 +517,10 @@ const Services: React.FC<ServicesProps> = ({
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 rows={4}
-                className={`block w-full py-3 px-4 text-gray-900 border rounded-lg focus:ring-2 focus:ring-emerald-500 bg-white ${
-                  formik.touched.description && formik.errors.description
+                className={`block w-full py-3 px-4 text-gray-900 border rounded-lg focus:ring-2 focus:ring-emerald-500 bg-white ${formik.touched.description && formik.errors.description
                     ? "border-red-500"
                     : "border-gray-300"
-                }`}
+                  }`}
               />
               {formik.touched.description && formik.errors.description && (
                 <p className="mt-1 text-sm text-red-600">
