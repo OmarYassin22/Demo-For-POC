@@ -2,63 +2,62 @@ import { Building2, Phone, Mail, MapPin, ExternalLink, Github, Linkedin, Twitter
 
 export default function Footer() {
   return (
-    <footer className="bg-gradient-to-b from-gray-900 to-black text-white py-12 z-50">
+    <footer className="bg-gradient-to-b from-gray-900 to-black text-white py-12 z-50 " dir="rtl">
       <div className="container mx-auto px-4 md:px-8">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Company Info */}
-          <div className="text-center md:text-left">
+          <div className="text-center md:text-right">
             <div className="flex items-center justify-center md:justify-start space-x-2 mb-4">
               <Building2 className="h-7 w-7 text-green-400" />
               <span className="text-2xl font-bold text-white">Modern IT SA</span>
             </div>
-            <p className="text-gray-300 mb-4 max-w-md mx-auto md:mx-0">
-              Providing innovative technology solutions to businesses across Saudi Arabia and beyond.
-            </p>
+            <p className="text-gray-300 mb-4 max-w-md mx-auto md:mx-0 text-start">
+              توفير حلول تقنية مبتكرة للمبانى في جميع أنحاء المملكة العربية السعودية.            </p>
             <div className="flex space-x-4 items-center justify-center md:justify-start">
               <a href="https://github.com/OmarYassin22/Demo-For-POC" className="hover:text-green-400 transition-colors">
-                <Github className="h-5 w-5" />
+                <Github className="h-5 w-5 m-2" />
               </a>
               <a href="https://www.linkedin.com/company/modern-information-technologies/posts/?feedView=all" className="hover:text-green-400 transition-colors">
                 <Linkedin className="h-5 w-5" />
               </a>
-            
+
             </div>
           </div>
 
           {/* Quick Links */}
-          <div className="text-center md:text-left">
-            <h3 className="text-xl font-semibold mb-4 text-green-400">Quick Links</h3>
+          <div className="text-center md:text-right">
+            <h3 className="text-xl font-semibold mb-4 text-green-400">وصول سريع</h3>
             <ul className="space-y-2">
               <li><a href="#" className="text-gray-300 hover:text-white hover:underline transition-colors flex items-center justify-center md:justify-start">
-                <ExternalLink className="h-4 w-4 mr-2" /> Services
+                <ExternalLink className="h-4 w-4 mr-2" /> خدمات
               </a></li>
               <li><a href="#" className="text-gray-300 hover:text-white hover:underline transition-colors flex items-center justify-center md:justify-start">
-                <ExternalLink className="h-4 w-4 mr-2" /> About Us
+                <ExternalLink className="h-4 w-4 mr-2" /> نبذة عنا
               </a></li>
               <li><a href="#" className="text-gray-300 hover:text-white hover:underline transition-colors flex items-center justify-center md:justify-start">
-                <ExternalLink className="h-4 w-4 mr-2" /> Careers
+                <ExternalLink className="h-4 w-4 mr-2" />  مشاريعنا
               </a></li>
               <li><a href="#" className="text-gray-300 hover:text-white hover:underline transition-colors flex items-center justify-center md:justify-start">
-                <ExternalLink className="h-4 w-4 mr-2" /> Contact
+                <ExternalLink className="h-4 w-4 mr-2" />  اتصل بنا
               </a></li>
             </ul>
           </div>
 
           {/* Contact Info */}
-          <div className="text-center md:text-left">
-            <h3 className="text-xl font-semibold mb-4 text-green-400">Contact Us</h3>
+          <div className="text-center md:text-right">
+            <h3 className="text-xl font-semibold mb-4 text-green-400">تواصل معانا</h3>
             <div className="space-y-3">
               <p className="flex items-center justify-center md:justify-start">
-                <MapPin className="h-5 w-5 mr-2 text-green-400" /> 
-                <span className="text-gray-300">Riyadh, Saudi Arabia</span>
+                <MapPin className="h-5 w-5 mr-2 text-green-400" />
+                <span className="text-gray-300">الرياض, المملكة العربية السعودية</span>
               </p>
               <p className="flex items-center justify-center md:justify-start">
-                <Phone className="h-5 w-5 mr-2 text-green-400" /> 
+                <Phone className="h-5 w-5 mr-2 text-green-400" />
                 <span className="text-gray-300">+966 12 345 6789</span>
               </p>
               <p className="flex items-center justify-center md:justify-start">
-                <Mail className="h-5 w-5 mr-2 text-green-400" /> 
+                <Mail className="h-5 w-5 mr-2 text-green-400" />
                 <span className="text-gray-300">contact@modernitsa.com</span>
               </p>
             </div>
