@@ -435,7 +435,7 @@ const Services: React.FC<ServicesProps> = ({
         <form onSubmit={formik.handleSubmit} className="p-6">
           {/* Property Information Section */}
           <div className="bg-gray-50 p-6 rounded-lg mb-6">
-            <h3 className="text-lg font-medium text-gray-800 mb-4 border-r-4 border-emerald-500 pr-3">معلومات العقار</h3>
+            {/* <h3 className="text-lg font-medium text-gray-800 mb-4 border-r-4 border-emerald-500 pr-3">معلومات العقار</h3> */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700 mb-1">
