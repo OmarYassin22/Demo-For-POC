@@ -1,4 +1,4 @@
-  @tailwind base;
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -20,6 +20,42 @@
 [dir="rtl"] .space-x-8 > :not([hidden]) ~ :not([hidden]) {
   margin-left: 2rem;
   margin-right: 0;
+}
+
+/* Add these animations to your existing CSS */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeDown {
+  from { 
+    opacity: 0; 
+    transform: translateY(-10px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes loadingBar {
+  0% { width: 10%; }
+  50% { width: 70%; }
+  100% { width: 10%; }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-fadeDown {
+  animation: fadeDown 0.5s ease-out forwards;
+}
+
+.animate-loadingBar {
+  animation: loadingBar 2s ease-in-out infinite;
+  width: 30%;
 }
 
 /* Login */

@@ -1,21 +1,24 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate ,useLocation} from "react-router-dom";
-import { LogOut, UserCircle } from "lucide-react";
-import logo from "../../Assets/image/favicon.ico"; // Import the logo
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { LogOut, UserCircle, Menu, X } from "lucide-react";
+import logo from "../../Assets/image/favicon.ico";
 
 const BuildingVerificationLogo = ({ isScrolled }: { isScrolled: boolean }) => (
-  <div className="flex items-center gap-3">
-    <img
-      src={logo}
-      alt="Building Verification Logo"
-      className={`h-10 w-10 transition-all duration-300
-        ${isScrolled ? 'filter brightness-0' : 'filter brightness-0 invert'}`}
-    />
+  <div className="flex items-center gap-4">
+    <div className="relative overflow-hidden rounded-full bg-gradient-to-br from-green-100 to-green-50 p-1 shadow-lg transition-all duration-300 hover:shadow-green-200">
+      <img
+        src={logo}
+        alt="Building Verification Logo"
+        className={`h-11 w-11 transform transition-all duration-300 hover:scale-110
+          ${isScrolled ? 'bg-gray-200' : ' '}`}
+      />
+    </div>
     <div className="flex flex-col">
       <span className={`text-xl font-bold leading-tight transition-colors
         ${isScrolled ? 'text-gray-800' : 'text-white'}`}>
-        محرك مراجعة      </span>
-      <span className={`text-sm transition-colors
+        محرك مراجعة
+      </span>
+      <span className={`text-sm font-medium transition-all
         ${isScrolled ? 'text-green-600' : 'text-green-300'}`}>
         تصاميم البناء
       </span>
@@ -26,7 +29,9 @@ const BuildingVerificationLogo = ({ isScrolled }: { isScrolled: boolean }) => (
 export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,11 +41,12 @@ export default function Navbar() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-  const location = useLocation();
+
   useEffect(() => {
     const loginStatus = localStorage.getItem("isLoggedIn");
     setIsLoggedIn(loginStatus === "true");
-  }, [location]); // ✅ Now runs on every page navigation
+    setIsMobileMenuOpen(false); // Close mobile menu on navigation
+  }, [location]);
 
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");
@@ -53,74 +59,122 @@ export default function Navbar() {
     navigate("/");
   };
 
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 transition-all duration-300
-        ${isScrolled
-          ? 'bg-white text-green-800 shadow-md'
-          : 'bg-primary text-white'}`}
-      dir="rtl"
-      style={{zIndex: 10000}}
-    >
-      <Link to={isLoggedIn ? "/offices" : "/"} className="flex items-center">
-        <BuildingVerificationLogo isScrolled={isScrolled} />
-      </Link>
+    <>
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-3 transition-all duration-300
+          ${isScrolled
+            ? 'bg-white text-green-800 shadow-lg'
+            : 'bg-gradient-to-r from-primary to-green-700 text-white'}`}
+        dir="rtl"
+        style={{ zIndex: 10000 }}
+      >
+        <Link to={isLoggedIn ? "/offices" : "/"} className="flex items-center group transition-transform duration-300 hover:scale-105">
+          <BuildingVerificationLogo isScrolled={isScrolled} />
+        </Link>
 
-      {/* Rest of navbar */}
-      <div className="flex items-center space-x-8 space-x-reverse">
-        {/* Show navigation links only when not logged in */}
-        {!isLoggedIn && (
-          <div className="hidden md:flex space-x-8 space-x-reverse">
-            {/* <a
-              href="#services"
-              className="text-white text-xl mx-4 hover:text-gray-200"
+        {/* Desktop Menu */}
+        <div className="hidden md:flex items-center space-x-8 space-x-reverse">
+          {isLoggedIn && (
+            <Link
+              to="/offices"
+              className={`relative text-lg font-medium mx-4 transition-colors after:absolute after:bottom-0 after:right-0 after:h-0.5 after:w-0 after:bg-current after:transition-all after:duration-300 hover:after:w-full
+                ${isScrolled ? 'text-gray-800 hover:text-green-600' : 'text-white hover:text-green-200'}`}
             >
-              خدماتنا
-            </a>
-            <a
-              href="#projects"
-              className="text-white text-xl ml-4 hover:text-gray-200"
-            >
-              مشاريعنا
-            </a>
-            <a
-              href="#contact"
-              className="text-white text-xl ml-4 hover:text-gray-200"
-            >
-              اتصل بنا
-            </a> */}
-          </div>
-        )}
-        {isLoggedIn && (
-          <Link
-            to="/offices"
-            className={`text-xl mx-4 transition-colors
-              ${isScrolled ? 'text-gray-800 hover:text-gray-600' : 'text-white hover:text-gray-200'}`}
-          >
-            المكاتب
-          </Link>
-        )}
+              المكاتب
+            </Link>
+          )}
 
-        {isLoggedIn ? (
-          <button
-            onClick={handleLogout}
-            className={`flex items-center gap-2 transition-colors
-              ${isScrolled ? 'text-gray-800 hover:text-gray-600' : 'text-white hover:text-gray-200'}`}
-          >
-            <LogOut className="h-6 w-6" />
-            <span className="text-sm">تسجيل خروج</span>
-          </button>
-        ) : (
-          <Link
-            to="/"
-            className={`flex items-center gap-2 transition-colors
-              ${isScrolled ? 'text-gray-800 hover:text-gray-600' : 'text-white hover:text-gray-200'}`}
-          >
-            <UserCircle className="h-6 w-6" />
-            <span className="text-sm">تسجيل دخول</span>
-          </Link>
-        )}
+          {isLoggedIn ? (
+            <button
+              onClick={handleLogout}
+              className={`flex items-center gap-2 rounded-full bg-opacity-0 px-4 py-2 font-medium transition-all duration-300
+                ${isScrolled 
+                  ? 'bg-red-50 text-red-600 hover:bg-red-100' 
+                  : 'bg-white bg-opacity-10 text-white hover:bg-opacity-20'}`}
+            >
+              <LogOut className="h-5 w-5" />
+              <span>تسجيل خروج</span>
+            </button>
+          ) : (
+            <Link
+              to="/"
+              className={`flex items-center gap-2 rounded-full bg-opacity-0 px-4 py-2 font-medium transition-all duration-300
+                ${isScrolled 
+                  ? 'bg-green-50 text-green-600 hover:bg-green-100' 
+                  : 'bg-white bg-opacity-10 text-white hover:bg-opacity-20'}`}
+            >
+              <UserCircle className="h-5 w-5" />
+              <span>تسجيل دخول</span>
+            </Link>
+          )}
+        </div>
+
+        {/* Mobile Menu Button */}
+        <button 
+          className="md:hidden flex items-center justify-center h-10 w-10 rounded-full transition-colors duration-300"
+          onClick={toggleMobileMenu}
+        >
+          {isMobileMenuOpen ? (
+            <X className={`h-6 w-6 ${isScrolled ? 'text-gray-800' : 'text-white'}`} />
+          ) : (
+            <Menu className={`h-6 w-6 ${isScrolled ? 'text-gray-800' : 'text-white'}`} />
+          )}
+        </button>
+      </nav>
+
+      {/* Mobile Menu Dropdown */}
+      <div 
+        className={`fixed top-[72px] left-0 right-0 bg-white z-[9999] shadow-lg transform transition-transform duration-300 ease-in-out md:hidden
+          ${isMobileMenuOpen ? 'translate-y-0' : '-translate-y-full'}`}
+        dir="rtl"
+      >
+        <div className="flex flex-col p-4 space-y-4">
+          {isLoggedIn && (
+            <Link
+              to="/offices"
+              className="text-gray-800 text-lg font-medium py-2 px-4 rounded-md hover:bg-green-50"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              المكاتب
+            </Link>
+          )}
+          
+          {isLoggedIn ? (
+            <button
+              onClick={() => {
+                handleLogout();
+                setIsMobileMenuOpen(false);
+              }}
+              className="flex items-center gap-2 text-red-600 py-2 px-4 rounded-md hover:bg-red-50"
+            >
+              <LogOut className="h-5 w-5" />
+              <span>تسجيل خروج</span>
+            </button>
+          ) : (
+            <Link
+              to="/"
+              className="flex items-center gap-2 text-green-600 py-2 px-4 rounded-md hover:bg-green-50"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              <UserCircle className="h-5 w-5" />
+              <span>تسجيل دخول</span>
+            </Link>
+          )}
+        </div>
       </div>
-    </nav>
+      
+      {/* Semi-transparent overlay when mobile menu is open */}
+      {isMobileMenuOpen && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 z-[9998] md:hidden"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
+    </>
   );
 }
