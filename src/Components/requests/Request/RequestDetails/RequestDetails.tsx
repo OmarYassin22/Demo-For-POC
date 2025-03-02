@@ -245,6 +245,7 @@ export default function RequestDetails() {
   };
 
 
+  
   const fetchSurveyReport = async (krokiNumber: number): Promise<SurveyReportResponse> => {
     const url = "https://apiservicesstg.balady.gov.sa/v1/BuildingLicenseInfo/construction-survey-report";
 
