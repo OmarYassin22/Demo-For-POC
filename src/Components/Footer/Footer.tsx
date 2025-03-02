@@ -13,7 +13,7 @@ export default function Footer() {
               <span className="text-2xl font-bold text-white">Modern IT SA</span>
             </div>
             <p className="text-gray-300 mb-4 max-w-md mx-auto md:mx-0 text-start">
-              توفير حلول تقنية مبتكرة للمبانى في جميع أنحاء المملكة العربية السعودية.            </p>
+              توفير حلول تقنية مبتكرة لاصدار رخص المبانى في جميع أنحاء المملكة العربية السعودية.            </p>
             <div className="flex space-x-4 items-center justify-center md:justify-start">
               <a href="https://github.com/OmarYassin22/Demo-For-POC" className="hover:text-green-400 transition-colors">
                 <Github className="h-5 w-5 m-2" />
