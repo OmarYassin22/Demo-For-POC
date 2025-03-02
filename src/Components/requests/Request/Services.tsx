@@ -233,7 +233,7 @@ const Services: React.FC<ServicesProps> = ({
 
       const response = await fetch(url, { method: 'GET', headers });
       const data = await response.json();
-      
+
       // Since we're using the data passed from RequestDetails.tsx,
       // we don't need to call fetchSurveyReport here anymore
       setLoading(false);
@@ -309,16 +309,25 @@ const Services: React.FC<ServicesProps> = ({
     <div className="max-w-4xl mx-auto my-8 px-4">
       {/* Header Section */}
       <div className="bg-gradient-to-r from-emerald-700 to-emerald-500 rounded-t-lg p-6 shadow-lg">
-        <h1 className="text-2xl font-bold text-white">تفاصيل الطلب</h1>
-        <p className="text-emerald-50 mt-1">رقم القرار: {filteredData?.KrookiNumber}</p>
+        <h1 className="text-2xl font-bold text-white">
+          تفاصيل القرار المساحي
+        </h1>
+        <div className="mt-2 flex flex-wrap gap-2">
+          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">
+            رقم القرار: {filteredData?.KrookiNumber}
+          </span>
+          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+            تاريخ القرار: {filteredData?.KrookiIssueDate}
+          </span>
+        </div>
+
       </div>
 
       {/* Municipality Information Section - Enhanced with more location data */}
       <div className="bg-white rounded-b-lg shadow-lg p-6 mb-6 border-t-4 border-emerald-500">
-        <h2 className="text-xl font-semibold mb-4 text-gray-800 flex items-center">
+        {/* <h2 className="text-xl font-semibold mb-4 text-gray-800 flex items-center">
           <Building2 className="w-5 h-5 text-emerald-600 mr-2" />
-          معلومات البلدية
-        </h2>
+          تفاصيل القرار المساحي        </h2> */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="flex items-center gap-3 bg-gray-50 p-4 rounded-lg">
             <div className="flex-shrink-0 bg-emerald-100 p-2 rounded-full">
@@ -418,16 +427,9 @@ const Services: React.FC<ServicesProps> = ({
         <div className="p-6 border-b border-gray-200">
           <h2 className="text-xl font-semibold text-gray-800 flex items-center">
             <ClipboardList className="w-5 h-5 text-emerald-600 mr-2" />
-            تفاصيل الطلب
-          </h2>
-          <div className="mt-2 flex flex-wrap gap-2">
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">
-              رقم القرار: {filteredData?.KrookiNumber}
-            </span>
-            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-              تاريخ القرار: {filteredData?.KrookiIssueDate}
-            </span>
-          </div>
+            بيانات العقار          </h2>
+
+
         </div>
 
         <form onSubmit={formik.handleSubmit} className="p-6">
@@ -518,8 +520,8 @@ const Services: React.FC<ServicesProps> = ({
                 onBlur={formik.handleBlur}
                 rows={4}
                 className={`block w-full py-3 px-4 text-gray-900 border rounded-lg focus:ring-2 focus:ring-emerald-500 bg-white ${formik.touched.description && formik.errors.description
-                    ? "border-red-500"
-                    : "border-gray-300"
+                  ? "border-red-500"
+                  : "border-gray-300"
                   }`}
               />
               {formik.touched.description && formik.errors.description && (
