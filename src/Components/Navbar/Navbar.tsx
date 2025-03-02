@@ -60,6 +60,7 @@ export default function Navbar() {
           ? 'bg-white text-green-800 shadow-md'
           : 'bg-primary text-white'}`}
       dir="rtl"
+      style={{zIndex: 10000}}
     >
       <Link to={isLoggedIn ? "/offices" : "/"} className="flex items-center">
         <BuildingVerificationLogo isScrolled={isScrolled} />

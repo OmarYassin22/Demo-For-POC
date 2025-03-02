@@ -5,7 +5,9 @@ import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import jsonData from "../../../mocks/OfficeRequestServices.json";
 import { useParams } from 'react-router-dom';
-import { Building2, ClipboardList, Map, User, FileText, Loader2, MapPin, AlarmClock } from "lucide-react";
+import { Building2, ClipboardList, Map, User, FileText, Loader2, MapPin } from "lucide-react";
+// Import our new map component
+import PropertyMap from "../../common/PropertyMap";
 
 interface LocationData {
   AmanahCode: string;
@@ -136,11 +138,11 @@ interface ServicesProps {
   requestData?: FormDataobj; // Add this prop to receive request data
 }
 
-const Services: React.FC<ServicesProps> = ({ 
-  KrookiNumber, 
-  officeId, 
-  requestId, 
-  amanaName, 
+const Services: React.FC<ServicesProps> = ({
+  KrookiNumber,
+  officeId,
+  requestId,
+  amanaName,
   baladiaName,
   requestData // Receive request data from parent component
 }) => {
@@ -151,10 +153,6 @@ const Services: React.FC<ServicesProps> = ({
   const [loading, setLoading] = useState<boolean>(requestData ? false : true); // Only set loading to true if no requestData
   const [error, setError] = useState<string | null>(null);
   const [selectedOption, setSelectedOption] = useState<string>("1");
-
-  // Add state for map coordinates (defaulting to Riyadh)
-  const [mapCenter, setMapCenter] = useState({ lat: 24.7136, lng: 46.6753 });
-  const [hasCoordinates, setHasCoordinates] = useState(false);
 
   // Form validation schema
   const validationSchema = Yup.object({
@@ -179,13 +177,13 @@ const Services: React.FC<ServicesProps> = ({
           Land: filteredData?.LocationData.PlanNumber || "",
           buildingType:
             filteredData?.SubUsedCode === 26 ||
-            filteredData?.SubUsedCode === 699
+              filteredData?.SubUsedCode === 699
               ? 1
               : filteredData?.SubUsedCode === 24
-              ? 2
-              : filteredData?.SubUsedCode === 698
-              ? 8
-              : 1,
+                ? 2
+                : filteredData?.SubUsedCode === 698
+                  ? 8
+                  : 1,
           instructure: selectedOption || "1",
           complianceType: selectedOption || "1"
         },
@@ -212,7 +210,7 @@ const Services: React.FC<ServicesProps> = ({
       };
       const body = new URLSearchParams();
       body.append('grant_type', 'client_credentials');
-      
+
       const response = await axios.post(url, body.toString(), { headers });
       const token = response.data.access_token;
       setAccessToken(token);
@@ -279,7 +277,7 @@ const Services: React.FC<ServicesProps> = ({
       const filtered = jsonData.filter((item: FormDataobj) => {
         return item.KrookiNumber === KrookiNumber;
       });
-      
+
       if (filtered.length === 0) {
         setLoading(true);
         await getToken();
@@ -288,27 +286,9 @@ const Services: React.FC<ServicesProps> = ({
         setLoading(false);
       }
     };
-    
+
     fetchData();
   }, [KrookiNumber, requestData]);
-
-  useEffect(() => {
-    // Extract coordinates if available
-    if (filteredData?.CoordinatesListData && filteredData.CoordinatesListData.length > 0) {
-      try {
-        const firstCoord = filteredData.CoordinatesListData[0];
-        const lat = parseFloat(firstCoord.Latitude);
-        const lng = parseFloat(firstCoord.Longitude);
-        
-        if (!isNaN(lat) && !isNaN(lng)) {
-          setMapCenter({ lat, lng });
-          setHasCoordinates(true);
-        }
-      } catch (error) {
-        console.error("Error parsing coordinates:", error);
-      }
-    }
-  }, [filteredData]);
 
   if (loading) {
     return (
@@ -333,7 +313,7 @@ const Services: React.FC<ServicesProps> = ({
           </div>
           <h2 className="mt-4 text-lg font-semibold text-gray-800">حدث خطأ</h2>
           <p className="mt-2 text-gray-600">{error}</p>
-          <button 
+          <button
             onClick={() => window.location.reload()}
             className="mt-4 px-4 py-2 bg-emerald-600 text-white rounded-md hover:bg-emerald-700 transition-colors"
           >
@@ -347,11 +327,11 @@ const Services: React.FC<ServicesProps> = ({
   return (
     <div className="max-w-4xl mx-auto my-8 px-4">
       {/* Header Section */}
-       <div className="bg-gradient-to-r from-emerald-700 to-emerald-500 rounded-t-lg p-6 shadow-lg">
+      <div className="bg-gradient-to-r from-emerald-700 to-emerald-500 rounded-t-lg p-6 shadow-lg">
         <h1 className="text-2xl font-bold text-white">تفاصيل الطلب</h1>
         <p className="text-emerald-50 mt-1">رقم القرار: {filteredData?.KrookiNumber}</p>
       </div>
-      
+
       {/* Municipality Information Section - Enhanced with more location data */}
       <div className="bg-white rounded-b-lg shadow-lg p-6 mb-6 border-t-4 border-emerald-500">
         <h2 className="text-xl font-semibold mb-4 text-gray-800 flex items-center">
@@ -398,69 +378,57 @@ const Services: React.FC<ServicesProps> = ({
         </div>
       </div>
 
-      {/* Map Section - Add here */}
+      {/* Map Section - Updated to use PropertyMap */}
       <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
         <h2 className="text-xl font-semibold mb-4 text-gray-800 flex items-center">
           <Map className="w-5 h-5 text-emerald-600 mr-2" />
           خريطة الموقع
         </h2>
-        
-        <div className="h-80 rounded-lg overflow-hidden border border-gray-300 mb-4">
-          {/* Google Maps Static Image */}
-          <img 
-            src={`https://maps.googleapis.com/maps/api/staticmap?center=${mapCenter.lat},${mapCenter.lng}&zoom=15&size=600x400&maptype=roadmap&markers=color:green%7C${mapCenter.lat},${mapCenter.lng}&key=YOUR_API_KEY`} 
-            alt="موقع الخريطة" 
-            className="w-full h-full object-cover"
-            onError={(e) => {
-              e.currentTarget.src = "https://via.placeholder.com/600x400?text=Map+Image+Unavailable";
-            }}
+
+        <div className="h-96 rounded-lg overflow-hidden border border-gray-300 mb-4 z-0">
+          {/* React Leaflet Map with building type information */}
+          <PropertyMap
+            coordinates={filteredData?.CoordinatesListData || []}
+            height="100%"
+            buildingType={
+              filteredData?.SubUsedCode === 26 ? "residential" :
+                filteredData?.SubUsedCode === 24 ? "commercial" :
+                  filteredData?.SubUsedCode === 698 ? "industrial" :
+                    filteredData?.SubUsedCode === 699 ? "school" :
+                      "residential"
+            }
           />
         </div>
-        
-        {/* Coming Soon Banner */}
-        <div className="relative">
-          <div className="absolute inset-0 bg-gray-900 bg-opacity-70 flex items-center justify-center z-10 rounded-lg">
-            <div className="text-center bg-white px-6 py-4 rounded-lg shadow-lg">
-              <AlarmClock className="h-10 w-10 text-emerald-600 mx-auto mb-2" />
-              <h3 className="text-lg font-bold text-gray-800">قريباً</h3>
-              <p className="text-gray-600">سيتم إضافة خرائط تفاعلية قريبًا</p>
-            </div>
-          </div>
-          
-          {/* Coordinates Table */}
-          {filteredData?.CoordinatesListData && filteredData.CoordinatesListData.length > 0 ? (
-            <div className="overflow-x-auto mt-4">
-              <h3 className="text-lg font-medium text-gray-800 mb-2">إحداثيات الموقع</h3>
-              <table className="w-full text-sm text-right text-gray-700">
-                <thead className="text-xs uppercase bg-gray-50">
-                  <tr>
-                    <th scope="col" className="px-6 py-3">رقم النقطة</th>
-                    <th scope="col" className="px-6 py-3">خط الطول</th>
-                    <th scope="col" className="px-6 py-3">خط العرض</th>
+
+        {/* Coordinates Table */}
+        {filteredData?.CoordinatesListData && filteredData.CoordinatesListData.length > 0 ? (
+          <div className="overflow-x-auto mt-4">
+            <h3 className="text-lg font-medium text-gray-800 mb-2">إحداثيات الموقع</h3>
+            <table className="w-full text-sm text-right text-gray-700">
+              <thead className="text-xs uppercase bg-gray-50">
+                <tr>
+                  <th scope="col" className="px-6 py-3">رقم النقطة</th>
+                  <th scope="col" className="px-6 py-3">خط الطول</th>
+                  <th scope="col" className="px-6 py-3">خط العرض</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredData.CoordinatesListData.map((coord, index) => (
+                  <tr key={`coord-${index}`} className="bg-white border-b">
+                    <td className="px-6 py-3">{coord.CoordinateNumber}</td>
+                    <td className="px-6 py-3">{coord.Longitude}</td>
+                    <td className="px-6 py-3">{coord.Latitude}</td>
                   </tr>
-                </thead>
-                <tbody>
-                  {filteredData.CoordinatesListData.slice(0, 5).map((coord, index) => (
-                    <tr key={`coord-${index}`} className="bg-white border-b">
-                      <td className="px-6 py-3">{coord.CoordinateNumber}</td>
-                      <td className="px-6 py-3">{coord.Longitude}</td>
-                      <td className="px-6 py-3">{coord.Latitude}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              {filteredData.CoordinatesListData.length > 5 && (
-                <p className="text-sm text-gray-500 mt-2 text-center">
-                  عرض {filteredData.CoordinatesListData.slice(0, 5).length} من أصل {filteredData.CoordinatesListData.length} نقطة
-                </p>
-              )}
-            </div>
-          ) : (
-            <div className="text-center py-4 text-gray-500">
-              لا توجد بيانات إحداثيات متاحة
-            </div>
-          )}
-        </div>
+                ))}
+              </tbody>
+            </table>
+           
+          </div>
+        ) : (
+          <div className="text-center py-4 text-gray-500">
+            لا توجد بيانات إحداثيات متاحة
+          </div>
+        )}
       </div>
 
       {/* Request Details and Form */}
@@ -593,7 +561,6 @@ const Services: React.FC<ServicesProps> = ({
                   name="ComplianceType"
                   value="1"
                   required
-                  // checked={selectedOption === "1"}
                   onChange={handleRadioChange}
                   className="w-4 h-4 text-emerald-600 focus:ring-emerald-500"
                 />
