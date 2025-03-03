@@ -12,7 +12,7 @@ import BackButton from '../common/BackButton';
 interface bundleUploadResponse {
   Revit: string;
   JSON: string;
-  TranslatedUrn:string;
+  TranslatedUrn: string;
 }
 
 
@@ -121,7 +121,7 @@ const Conditions: React.FC = () => {
   const handleRemoveFile = () => {
     setFile(null);
     setErrorUpload("");
-  
+
     // Clear file input value (important for allowing re-selection of the same file)
     const fileInput = document.getElementById("file-upload");
     if (fileInput) {
@@ -252,11 +252,10 @@ const Conditions: React.FC = () => {
     formData.append('objectIdsUrns', JSON.stringify({
       Revit: localStorage.getItem("reviturn"),
       JSON: localStorage.getItem("Conditionsurn"),
-      TranslatedUrn: localStorage.getItem("urn"),
-      //TranslatedUrn
     }));
+    formData.append('TranslatedUrn', JSON.stringify(localStorage.getItem("urn")));
 
-    try {
+     try {
       //
       const response = await axios.post('https://poc-backend.runasp.net/api/Handle/Bundle',
         //const response = await axios.post('http://localhost:8080/api/Handle/Bundle',
@@ -787,7 +786,7 @@ const Conditions: React.FC = () => {
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                     </svg>
                     <span>جاري الرفع...</span>
-                    
+
                   </>
                 ) : (
 
