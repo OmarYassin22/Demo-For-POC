@@ -471,7 +471,7 @@ const InspectionReport = () => {
                   },
                   { 
                     label: "رقم النموذج", 
-                    value: requetData.BuildingModel || requetData.ModelNumber || "1", 
+                    value: requetData.LocationData.DistrictCode || requetData.ModelNumber || "1", 
                     icon: <Grid className="w-5 h-5 text-emerald-600" /> 
                   },
                   { 
