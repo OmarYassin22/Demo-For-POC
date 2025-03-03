@@ -5,7 +5,6 @@ import DataTable from "../../DataTable";
 import BackButton from '../../common/BackButton';
 import {
   ArrowLeft,
-  Download,
   FileText,
   Grid,
   CheckCircle2,
@@ -42,7 +41,6 @@ interface CategoryStatus {
 }
 
 const InspectionReport = () => {
-  // Access the location state using useLocation and useParams
   const location = useLocation();
   const navigate = useNavigate();
   const { id, requestid } = useParams();
@@ -55,6 +53,7 @@ const InspectionReport = () => {
   const [reportLoaded, setReportLoaded] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [requetData, setRequestData] = useState<string | null>(null);
 
   useEffect(() => {
     const loadData = async () => {
@@ -130,12 +129,18 @@ const InspectionReport = () => {
     };
 
     loadData();
+    setRequestData(JSON.parse(localStorage.getItem("inspectionReportData")));
+
   }, []);
 
   const handleTabChange = (tab: 'inspection' | 'report') => {
     setActiveTab(tab);
   };
 
+  useEffect(() => {
+
+    // console.log(requetData.OwnersListData[0].OwnerName);
+  }, [requetData]);
   // Get data from localStorage - if this were a real app, you'd fetch from an API
   const storedData = localStorage.getItem('ComplianceResultData');
   const parsedData = storedData ? JSON.parse(storedData) : { Results: [] };
@@ -420,10 +425,22 @@ const InspectionReport = () => {
               </div>
               <div className="p-6">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  {[
-                    { label: "اسم المالك", value: "زياد محمد صالح المصعبي", icon: <User className="w-5 h-5 text-emerald-600" /> },
-                    { label: "اسم مقدم الطلب", value: "زياد محمد صالح المصعبي", icon: <User className="w-5 h-5 text-emerald-600" /> },
-                    { label: "رقم الهوية", value: "4535652448", icon: <FileText className="w-5 h-5 text-emerald-600" /> }
+                  {requetData && [
+                    {
+                      label: "اسم المالك",
+                      value: requetData.OwnersListData?.[0]?.OwnerName || "غير متوفر",
+                      icon: <User className="w-5 h-5 text-emerald-600" />
+                    },
+                    {
+                      label: "اسم مقدم الطلب",
+                      value: requetData.EngOfficeData.OfficeName || "غير متوفر",
+                      icon: <User className="w-5 h-5 text-emerald-600" />
+                    },
+                    {
+                      label: "رقم الهوية",
+                      value: requetData.KrookiNumber || requetData.OwnersListData?.[0]?.IdentityNumber || "غير متوفر",
+                      icon: <FileText className="w-5 h-5 text-emerald-600" />
+                    }
                   ].map((item, index) => (
                     <div key={index} className="flex items-center gap-3 bg-gray-50 p-4 rounded-lg">
                       <div className="flex-shrink-0 bg-emerald-100 p-2 rounded-full">
@@ -446,21 +463,37 @@ const InspectionReport = () => {
               </div>
               <div className="p-6">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                  {[
-                    { label: "رقم القطعة", value: "11", icon: <Map className="w-5 h-5 text-emerald-600" /> },
-                    { label: "رقم النموذج", value: "1", icon: <Grid className="w-5 h-5 text-emerald-600" /> },
-                    { label: "نوع المبنى", value: "سكني", icon: <BuildingIcon className="w-5 h-5 text-emerald-600" /> },
-                    { label: "المساحة", value: "150 مربع متر", icon: <Layers className="w-5 h-5 text-emerald-600" /> },
+                  {requetData && [
+                  { 
+                    label: "رقم القطعة", 
+                      value: requetData.LocationData.PlanNumber || "غير متوفر", 
+                    icon: <Map className="w-5 h-5 text-emerald-600" /> 
+                  },
+                  { 
+                    label: "رقم النموذج", 
+                    value: requetData.BuildingModel || requetData.ModelNumber || "1", 
+                    icon: <Grid className="w-5 h-5 text-emerald-600" /> 
+                  },
+                  { 
+                    label: "نوع المبنى", 
+                    value: requetData.SubUsedName || "سكني", 
+                    icon: <BuildingIcon className="w-5 h-5 text-emerald-600" /> 
+                  },
+                  { 
+                    label: "المساحة", 
+                    value: (requetData.Area ? `${requetData.Area} متر مربع` : "غير متوفر"), 
+                    icon: <Layers className="w-5 h-5 text-emerald-600" /> 
+                  },
                   ].map((item, index) => (
-                    <div key={index} className="flex items-center gap-3 bg-gray-50 p-4 rounded-lg">
-                      <div className="flex-shrink-0 bg-emerald-100 p-2 rounded-full">
-                        {item.icon}
-                      </div>
-                      <div>
-                        <p className="text-sm text-gray-600">{item.label}</p>
-                        <p className="font-semibold text-gray-900">{item.value}</p>
-                      </div>
+                  <div key={index} className="flex items-center gap-3 bg-gray-50 p-4 rounded-lg">
+                    <div className="flex-shrink-0 bg-emerald-100 p-2 rounded-full">
+                    {item.icon}
                     </div>
+                    <div>
+                    <p className="text-sm text-gray-600">{item.label}</p>
+                    <p className="font-semibold text-gray-900">{item.value}</p>
+                    </div>
+                  </div>
                   ))}
                 </div>
               </div>

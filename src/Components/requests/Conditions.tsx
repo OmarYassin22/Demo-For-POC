@@ -288,8 +288,7 @@ const Conditions: React.FC = () => {
       setComplianceResult(jsonData);
       localStorage.setItem("ComplianceResultData", JSON.stringify(jsonData));
       console.log(complianceResult);
-      debugger;
-      navigate(`/InspectionReport/${krookiNumber}`, {
+       navigate(`/InspectionReport/${krookiNumber}`, {
         state: {
 
           officeId: officeId,
@@ -455,8 +454,7 @@ const Conditions: React.FC = () => {
           setError("لا يوجد إشتراطات لهذا المكان");
           return;
         }
-        debugger;
-
+ 
         const groupedByVisualCategory = filteredConditions.filter(({ visualCategory }) => visualCategory !== null).reduce<Record<string, string[]>>((acc: Record<string, string[]>, { visualCategory, code }: { visualCategory: string; code: string }) => {
           if (!acc[visualCategory]) { acc[visualCategory] = []; }
           acc[visualCategory].push(code); return acc;
@@ -510,8 +508,7 @@ const Conditions: React.FC = () => {
 
   useEffect(() => {
     if (localStorage.getItem('Token')) {
-      debugger;
-      if (buildingType != 1) {
+       if (buildingType != 1) {
 
         setError("لا يوجد إشتراطات لهذا النوع من المبني");
 
