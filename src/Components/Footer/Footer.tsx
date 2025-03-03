@@ -29,16 +29,16 @@ export default function Footer() {
           <div className="text-center md:text-right">
             <h3 className="text-xl font-semibold mb-4 text-green-400">وصول سريع</h3>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-300 hover:text-white hover:underline transition-colors flex items-center justify-center md:justify-start">
+              <li><a href="https://modernit.sa/#services" className="text-gray-300 hover:text-white hover:underline transition-colors flex items-center justify-center md:justify-start">
                 <ExternalLink className="h-4 w-4 mr-2" /> خدمات
               </a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white hover:underline transition-colors flex items-center justify-center md:justify-start">
+              <li><a href="https://modernit.sa/#about" className="text-gray-300 hover:text-white hover:underline transition-colors flex items-center justify-center md:justify-start">
                 <ExternalLink className="h-4 w-4 mr-2" /> نبذة عنا
               </a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white hover:underline transition-colors flex items-center justify-center md:justify-start">
+              <li><a href="https://modernit.sa/#projects" className="text-gray-300 hover:text-white hover:underline transition-colors flex items-center justify-center md:justify-start">
                 <ExternalLink className="h-4 w-4 mr-2" />  مشاريعنا
               </a></li>
-              <li><a href="#" className="text-gray-300 hover:text-white hover:underline transition-colors flex items-center justify-center md:justify-start">
+              <li><a href="https://modernit.sa/#contact" className="text-gray-300 hover:text-white hover:underline transition-colors flex items-center justify-center md:justify-start">
                 <ExternalLink className="h-4 w-4 mr-2" />  اتصل بنا
               </a></li>
             </ul>
