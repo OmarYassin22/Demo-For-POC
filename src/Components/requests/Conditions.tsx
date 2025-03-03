@@ -783,7 +783,7 @@ const Conditions: React.FC = () => {
                     <span>رفع الملف</span>
                     {uploadSuccess && (
                       <audio
-                        src="../../../public/sound/notification-pluck-off-269290.mp3"
+                        src="/sound/notification-pluck-off-269290.mp3"
                         autoPlay
                         onError={(e) => console.error("Error playing sound:", e)}
                       />
