@@ -12,6 +12,7 @@ import BackButton from '../common/BackButton';
 interface bundleUploadResponse {
   Revit: string;
   JSON: string;
+  TranslatedUrn:string;
 }
 
 
@@ -119,7 +120,13 @@ const Conditions: React.FC = () => {
 
   const handleRemoveFile = () => {
     setFile(null);
-    setErrorUpload(null);
+    setErrorUpload("");
+  
+    // Clear file input value (important for allowing re-selection of the same file)
+    const fileInput = document.getElementById("file-upload");
+    if (fileInput) {
+      fileInput.value = "";
+    }
   };
 
   // Submit the form and upload the files
@@ -183,6 +190,9 @@ const Conditions: React.FC = () => {
 
         localStorage.setItem("reviturn", jsonResponse?.Revit);
         localStorage.setItem("Conditionsurn", jsonResponse?.JSON);
+
+        localStorage.setItem("urn", jsonResponse?.TranslatedUrn);
+        //TranslatedUrn
         //await handleApiCall(jsonResponse, false);
         // await ComplianceBundleData();
       } else {
@@ -256,7 +266,7 @@ const Conditions: React.FC = () => {
       console.log('Response:', response.data);
       console.log('Response URL:', response.data.Value.apiRes.Data.Data.url);
 
-      localStorage.setItem("urn", response.data.Value.apiRes.Data.TranslatedUrn);
+      //localStorage.setItem("urn", response.data.Value.apiRes.Data.TranslatedUrn);
       await handleApiCall({ URL: response.data.Value.apiRes.Data.Data.url });
     } catch (error) {
       console.error('Error:', error);
