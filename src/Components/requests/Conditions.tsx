@@ -251,7 +251,9 @@ const Conditions: React.FC = () => {
 
     formData.append('objectIdsUrns', JSON.stringify({
       Revit: localStorage.getItem("reviturn"),
-      JSON: localStorage.getItem("Conditionsurn")
+      JSON: localStorage.getItem("Conditionsurn"),
+      TranslatedUrn: localStorage.getItem("urn"),
+      //TranslatedUrn
     }));
 
     try {
