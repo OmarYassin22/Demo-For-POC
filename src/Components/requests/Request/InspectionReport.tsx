@@ -403,7 +403,7 @@ const InspectionReport = () => {
                   </div>
                   <div>
                     <p className="text-sm text-gray-600">رقم القرار المساحي</p>
-                    <p className="font-semibold text-gray-900">450815034595</p>
+                    <p className="font-semibold text-gray-900">{requetData.KrookiNumber}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -464,36 +464,36 @@ const InspectionReport = () => {
               <div className="p-6">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                   {requetData && [
-                  { 
-                    label: "رقم القطعة", 
-                      value: requetData.LocationData.PlanNumber || "غير متوفر", 
-                    icon: <Map className="w-5 h-5 text-emerald-600" /> 
-                  },
-                  { 
-                    label: "رقم النموذج", 
-                    value: requetData.LocationData.DistrictCode || requetData.ModelNumber || "1", 
-                    icon: <Grid className="w-5 h-5 text-emerald-600" /> 
-                  },
-                  { 
-                    label: "نوع المبنى", 
-                    value: requetData.SubUsedName || "سكني", 
-                    icon: <BuildingIcon className="w-5 h-5 text-emerald-600" /> 
-                  },
-                  { 
-                    label: "المساحة", 
-                    value: (requetData.Area ? `${requetData.Area} متر مربع` : "غير متوفر"), 
-                    icon: <Layers className="w-5 h-5 text-emerald-600" /> 
-                  },
+                    {
+                      label: "رقم القطعة",
+                      value: requetData.LocationData.PlanNumber || "غير متوفر",
+                      icon: <Map className="w-5 h-5 text-emerald-600" />
+                    },
+                    {
+                      label: "رقم النموذج",
+                      value: requetData.LocationData.DistrictCode || requetData.ModelNumber || "1",
+                      icon: <Grid className="w-5 h-5 text-emerald-600" />
+                    },
+                    {
+                      label: "نوع المبنى",
+                      value: requetData.SubUsedName || "سكني",
+                      icon: <BuildingIcon className="w-5 h-5 text-emerald-600" />
+                    },
+                    {
+                      label: "المساحة",
+                      value: (requetData.Area ? `${requetData.Area} متر مربع` : "غير متوفر"),
+                      icon: <Layers className="w-5 h-5 text-emerald-600" />
+                    },
                   ].map((item, index) => (
-                  <div key={index} className="flex items-center gap-3 bg-gray-50 p-4 rounded-lg">
-                    <div className="flex-shrink-0 bg-emerald-100 p-2 rounded-full">
-                    {item.icon}
+                    <div key={index} className="flex items-center gap-3 bg-gray-50 p-4 rounded-lg">
+                      <div className="flex-shrink-0 bg-emerald-100 p-2 rounded-full">
+                        {item.icon}
+                      </div>
+                      <div>
+                        <p className="text-sm text-gray-600">{item.label}</p>
+                        <p className="font-semibold text-gray-900">{item.value}</p>
+                      </div>
                     </div>
-                    <div>
-                    <p className="text-sm text-gray-600">{item.label}</p>
-                    <p className="font-semibold text-gray-900">{item.value}</p>
-                    </div>
-                  </div>
                   ))}
                 </div>
               </div>
