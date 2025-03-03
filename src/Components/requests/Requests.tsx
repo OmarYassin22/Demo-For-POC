@@ -1,18 +1,22 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import Component from "./Request/Request";
-import { Building2, ChevronRight, ChevronLeft, Search, ArrowLeft, Loader2, AlertCircle, FileText } from "lucide-react";
+import { Building2, ChevronRight, ChevronLeft, Search, ArrowLeft, Loader2, FileText } from "lucide-react";
+import data from "../../mocks/OfficeMock.json";
+
 
 export default function Requests() {
   const navigate = useNavigate();
+  const location = useLocation();
+const {officeName} = location.state as any;
   const { id } = useParams();
   const [office, setOffice] = useState<any | undefined>(undefined);
-  const [officeName, setOfficeName] = useState<string>("المكتب الهندسي");
-  const [currentPage, setCurrentPage] = useState(1);
+   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
   const itemsPerPage = 9;
+
 
   const fetchToken = async () => {
     const url = "https://apiservicesstg.balady.gov.sa/oauth/v1/token";
@@ -55,7 +59,7 @@ export default function Requests() {
   // Fetch office details to get the name
   const fetchOfficeDetails = async () => {
     if (!id) return;
-    
+
     try {
       const token = localStorage.getItem('Token');
       const response = await axios.get(
@@ -69,9 +73,9 @@ export default function Requests() {
           }
         }
       );
-      
+
       if (response.data && response.data.data) {
-        setOfficeName(response.data.data.name || "المكتب الهندسي");
+        // setOfficeName(response.data.data.name || "المكتب الهندسي");
       }
     } catch (error) {
       console.error("Failed to fetch office details:", error);
@@ -106,11 +110,11 @@ export default function Requests() {
         const items = response.data.data.result.items;
         console.log(items);
         setOffice(items);
-        
+
         // Try to get office name from the first request if available
-        if (items && items.length > 0 && items[0].officeName) {
-          setOfficeName(items[0].officeName);
-        }
+        // if (items && items.length > 0 && items[0].officeName) {
+        //   setOfficeName(items[0].officeName);
+        // }
       })
       .catch(error => {
         console.error('Error:', error.response ? error.response.data : error.message);
@@ -175,13 +179,13 @@ export default function Requests() {
                 <Building2 className="w-7 h-7 text-emerald-600" />
               </div>
               <div>
-                <h1 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
+                <h1 className="text-2xl mb-2 p-2 md:text-3xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
                   {officeName}
                 </h1>
                 <p className="text-gray-500 text-sm md:text-base">إدارة ومتابعة طلبات المكتب الهندسي</p>
               </div>
             </div>
-            
+
             <div className="relative w-full md:w-64 group">
               <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 group-focus-within:text-emerald-500 transition-colors">
                 <Search className="w-5 h-5" />
@@ -218,7 +222,7 @@ export default function Requests() {
               لم يتم العثور على أي طلبات مطابقة لمعايير البحث، يرجى تغيير معايير البحث أو المحاولة لاحقاً
             </p>
             {searchTerm && (
-              <button 
+              <button
                 onClick={() => setSearchTerm("")}
                 className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors"
               >
@@ -229,7 +233,7 @@ export default function Requests() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 animate-fadeIn">
             {paginatedRequests?.map((request, index) => (
-              <div 
+              <div
                 key={request.platformRequestId}
                 className="transform transition-all duration-300 hover:-translate-y-1"
                 style={{ animationDelay: `${index * 0.05}s` }}
@@ -269,16 +273,15 @@ export default function Requests() {
                 } else {
                   pageToShow = currentPage - 2 + i;
                 }
-                
+
                 return (
                   <button
                     key={i}
                     onClick={() => setCurrentPage(pageToShow)}
-                    className={`w-10 h-10 rounded-lg border ${
-                      currentPage === pageToShow
+                    className={`w-10 h-10 rounded-lg border ${currentPage === pageToShow
                         ? 'bg-emerald-600 text-white border-emerald-600'
                         : 'hover:bg-gray-50 border-gray-200'
-                    } transition-all duration-200`}
+                      } transition-all duration-200`}
                   >
                     {pageToShow}
                   </button>

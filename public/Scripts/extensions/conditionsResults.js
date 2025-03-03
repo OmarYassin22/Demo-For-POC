@@ -78,9 +78,7 @@
 // }
 
 const responseJson = JSON.parse(localStorage.getItem("ComplianceResultData") || "{}");
-console.log("responseJson");
-console.log(localStorage.getItem("ComplianceResultData") );
-
+  
 const conditionsResults = responseJson[Object.keys(responseJson)[0]].Results;
 const failedConditions = conditionsResults.filter(item => item.Status == false);
 

@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom';
 import { Building2, ClipboardList, Map, User, FileText, Loader2, MapPin } from "lucide-react";
 // Import our new map component
 import PropertyMap from "../../common/PropertyMap";
-
+ 
 interface LocationData {
   AmanahCode: string;
   AmanahName: string;
@@ -130,22 +130,19 @@ interface FormDataobj {
 }
 
 interface ServicesProps {
-  KrookiNumber: number;
+  KrookiNumber: number | undefined;
   officeId: string;
   requestId: string;
-  amanaName?: string;
-  baladiaName?: string;
-  requestData?: FormDataobj; // Add this prop to receive request data
+  amanaName: string | undefined;
+  baladiaName: string | undefined;
+  requestData: any; // You can keep this for backward compatibility
 }
 
-const Services: React.FC<ServicesProps> = ({
-  KrookiNumber,
-  officeId,
-  requestId,
-  amanaName,
-  baladiaName,
-  requestData // We'll use this prop instead of fetching the data again
-}) => {
+const Services: React.FC<ServicesProps> = ({ KrookiNumber, officeId, requestId, amanaName, baladiaName, requestData }) => {
+  // Use the context to access survey report data
+   
+  // Now you can use surveyReportData which contains response.data.data from line 266
+  
   const [accessToken, setAccessToken] = useState<string>("");
   const navigate = useNavigate();
   const [filteredData, setFilteredData] = useState<FormDataobj | undefined>(requestData); // Initialize with requestData prop
@@ -435,8 +432,7 @@ const Services: React.FC<ServicesProps> = ({
         </div>
 
         <form onSubmit={formik.handleSubmit} className="p-6">
-          {/* Property Information Section */}
-          <div className="bg-gray-50 p-6 rounded-lg mb-6">
+           <div className="bg-gray-50 p-6 rounded-lg mb-6">
             {/* <h3 className="text-lg font-medium text-gray-800 mb-4 border-r-4 border-emerald-500 pr-3">معلومات العقار</h3> */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="mb-4">

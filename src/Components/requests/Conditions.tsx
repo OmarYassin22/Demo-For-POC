@@ -82,8 +82,8 @@ const Conditions: React.FC = () => {
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [file, setFile] = useState<File | null>(null);
-  const [errorUpload, setErrorUpload] = useState<string|null>(null);
-  
+  const [errorUpload, setErrorUpload] = useState<string | null>(null);
+
   const [isUploading, setIsUploading] = useState<boolean>(false);
   const [bundleResponse, setBundleResponse] = useState<bundleUploadResponse | null>(null);
   const [uploadSuccess, setUploadSuccess] = useState(false);
@@ -298,7 +298,6 @@ const Conditions: React.FC = () => {
       setComplianceResult(jsonData);
       localStorage.setItem("ComplianceResultData", JSON.stringify(jsonData));
       console.log(complianceResult);
-      debugger;
       navigate(`/InspectionReport/${krookiNumber}`, {
         state: {
 
@@ -465,7 +464,6 @@ const Conditions: React.FC = () => {
           setError("لا يوجد إشتراطات لهذا المكان");
           return;
         }
-        debugger;
 
         const groupedByVisualCategory = filteredConditions.filter(({ visualCategory }) => visualCategory !== null).reduce<Record<string, string[]>>((acc: Record<string, string[]>, { visualCategory, code }: { visualCategory: string; code: string }) => {
           if (!acc[visualCategory]) { acc[visualCategory] = []; }
@@ -520,7 +518,6 @@ const Conditions: React.FC = () => {
 
   useEffect(() => {
     if (localStorage.getItem('Token')) {
-      debugger;
       if (buildingType != 1) {
 
         setError("لا يوجد إشتراطات لهذا النوع من المبني");
@@ -728,7 +725,7 @@ const Conditions: React.FC = () => {
                 onChange={handleFileChange}
                 className="hidden"
                 id="file-upload"
-               accept=".rvt,.rte"
+                accept=".rvt,.rte"
                 disabled={isUploading}
               />
               <label
@@ -766,7 +763,7 @@ const Conditions: React.FC = () => {
                         </button>
                       </div>
                     )}
-                       {errorUpload && <p className="text-red-500">{errorUpload}</p>}
+                    {errorUpload && <p className="text-red-500">{errorUpload}</p>}
                   </div>
                 )}
               </label>
@@ -790,7 +787,17 @@ const Conditions: React.FC = () => {
                     <span>جاري الرفع...</span>
                   </>
                 ) : (
-                  <span>رفع الملف </span>
+
+                  <>
+                    <span>رفع الملف</span>
+                    {uploadSuccess && (
+                      <audio
+                        src="/sound/notification-pluck-off-269290.mp3"
+                        autoPlay
+                        onError={(e) => console.error("Error playing sound:", e)}
+                      />
+                    )}
+                  </>
                 )}
               </button>
 

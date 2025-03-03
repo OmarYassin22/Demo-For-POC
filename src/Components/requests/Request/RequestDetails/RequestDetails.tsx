@@ -17,7 +17,7 @@ import {
   AlertCircle,
   FileText
 } from "lucide-react";
-
+import { useSurveyReport } from "../../../../context/SurveyReportContext"; // Import the context
 
 interface StatusDetail {
   code: number;
@@ -211,10 +211,10 @@ export default function RequestDetails() {
       loginIdentityId: "1000115574",
       Authorization: `Bearer ${token}`,
     };
-     try {
-      
+    try {
+
       const response = await axios.get<{ result: RequestData }>(url, { headers });
-      
+
       console.log(response.data); // Ensure it correctly extracts `result`
       setRequestBasic(response.data.data.result);
 
@@ -245,7 +245,7 @@ export default function RequestDetails() {
   };
 
 
-  
+
   const fetchSurveyReport = async (krokiNumber: number): Promise<SurveyReportResponse> => {
     const url = "https://apiservicesstg.balady.gov.sa/v1/BuildingLicenseInfo/construction-survey-report";
 
@@ -266,6 +266,8 @@ export default function RequestDetails() {
       console.log(response.data.data.result[0]);
 
       setRequest(response.data.data.result[0]);
+      localStorage.setItem('inspectionReportData', JSON.stringify(response.data.data.result[0]));
+
 
 
     } catch (error: any) {
@@ -287,12 +289,12 @@ export default function RequestDetails() {
       try {
         const expiration = localStorage.getItem("tokenExpiration");
         if (localStorage.getItem('Token')) {
-  
+
           const expired = expiration ? Date.now() > Number(expiration) : true;
           if (expired) {
             await fetchToken();
           }
-  
+
         }
         if (!localStorage.getItem('Token')) {
           await fetchToken();
@@ -398,7 +400,7 @@ export default function RequestDetails() {
           </div>
           <h2 className="mt-4 text-lg font-semibold text-gray-800">حدث خطأ</h2>
           <p className="mt-2 text-gray-600">{error}</p>
-          <button 
+          <button
             onClick={() => window.location.reload()}
             className="mt-4 px-4 py-2 bg-emerald-600 text-white rounded-md hover:bg-emerald-700 transition-colors"
           >
@@ -429,15 +431,14 @@ export default function RequestDetails() {
           <div className="w-full md:w-1/4">
             <div className="bg-white rounded-lg shadow-lg p-5 sticky top-6">
               <h2 className="text-lg font-bold text-gray-800 mb-4 border-r-4 border-emerald-500 pr-3">القائمة</h2>
-              
+
               <div className="flex flex-col gap-3">
                 <button
                   onClick={() => handleTabChange("details")}
-                  className={`px-4 py-3 rounded-lg flex items-center gap-2 transition-colors ${
-                    activeTab === "details"
+                  className={`px-4 py-3 rounded-lg flex items-center gap-2 transition-colors ${activeTab === "details"
                       ? "bg-emerald-600 text-white"
                       : "bg-gray-100 text-gray-800 hover:bg-gray-200"
-                  }`}
+                    }`}
                 >
                   <FileText className="w-5 h-5" />
                   تفاصيل الطلب
@@ -445,11 +446,10 @@ export default function RequestDetails() {
                 {isFormTabVisible && (
                   <button
                     onClick={() => handleTabChange("form")}
-                    className={`px-4 py-3 rounded-lg flex items-center gap-2 transition-colors ${
-                      activeTab === "form"
+                    className={`px-4 py-3 rounded-lg flex items-center gap-2 transition-colors ${activeTab === "form"
                         ? "bg-emerald-600 text-white"
                         : "bg-gray-100 text-gray-800 hover:bg-gray-200"
-                    }`}
+                      }`}
                   >
                     <Map className="w-5 h-5" />
                     خدمات
@@ -529,7 +529,7 @@ export default function RequestDetails() {
                   </div>
                 </div>
 
-             
+
 
                 {/* Action Buttons */}
                 {waitingApprovalStatus && (
@@ -561,7 +561,7 @@ export default function RequestDetails() {
                     <div className="space-y-4">
                       <div className="p-4 bg-gray-50 rounded-lg">
                         <h3 className="font-medium mb-2">تم اعتماده</h3>
-                      
+
                       </div>
                       {request?.Note && (
                         <div className="p-4 bg-gray-50 rounded-lg">
@@ -586,7 +586,7 @@ export default function RequestDetails() {
             )}
 
             {activeTab === "form" && (
-              <Services 
+              <Services
                 KrookiNumber={requestBasic?.krokiNo}
                 officeId={id ? id : ""}
                 requestId={requestid ? requestid : ""}

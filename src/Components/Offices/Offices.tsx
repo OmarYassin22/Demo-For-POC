@@ -106,7 +106,11 @@ export default function Offices() {
         {paginatedOffices.length > 0 ? (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {paginatedOffices.map((office) => (
-              <Link to={`/offices/${office.id}/requests`} key={office.id} className="group">
+              <Link
+                to={`/offices/${office.id}/requests`}
+                key={office.id}
+                state={{ officeName: office.name }}
+                className="group">
                 <div 
                   className="bg-white rounded-xl shadow-sm group-hover:shadow-lg transition-all duration-300 p-6 border border-gray-100 transform group-hover:-translate-y-1" 
                   style={{ minHeight: "9rem" }}

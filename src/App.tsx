@@ -13,7 +13,7 @@ import ArcReport from "./Components/ArcReport/ArcReport";
 import StrReport from "./Components/ArcReport/StrReport";
 import Footer from "./Components/Footer/Footer";
 import { useEffect } from "react";
- 
+
 function App() {
   // useEffect(() => {
   //   const handleBeforeUnload = () => {
@@ -46,12 +46,12 @@ function App() {
             <Route path="/InspectionReport/:krookiNumber" element={<InspectionReport />} />
             <Route path="/AutodeskResultViewer" element={<AutodeskResultViewer />} />
             <Route path="/ViewCompliance" element={<ViewCompliance />} />
-            <Route path="/arc" element={<ArcReport/>} />
-            <Route path="/str" element={<StrReport/>} />
-             <Route path="*" element={<h1>Page Not Found</h1>} />
+            <Route path="/arc" element={<ArcReport />} />
+            <Route path="/str" element={<StrReport />} />
+            <Route path="*" element={<h1>Page Not Found</h1>} />
           </Routes>
         </div>
-        <Footer/>
+        <Footer />
       </div>
     </BrowserRouter>
   );

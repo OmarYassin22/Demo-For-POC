@@ -15,22 +15,22 @@ const DataTable = <T,>({ data, columns, onAction }: TableProps<T>) => {
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
-    initialState: { pagination: { pageSize: data.length} },
+    initialState: { pagination: { pageSize: data.length } },
   });
 
-  const getRowColor = (status: boolean,result:string) => {
-   
-   
-    if (status ===true) {
-      return ''; 
-    } else if (status === false&&result==="أخري") {
-     
-      return 'bg-yellow-100'; 
-    //  alert(result);
+  const getRowColor = (status: boolean, result: string) => {
+
+
+    if (status === true) {
+      return '';
+    } else if (status === false && result === "أخري") {
+
+      return 'bg-yellow-100';
+      //  alert(result);
     } else if (status === false) {
-      return 'bg-red-100'; 
+      return 'bg-red-100';
     }
-    return ''; 
+    return '';
   };
 
   return (
@@ -49,13 +49,13 @@ const DataTable = <T,>({ data, columns, onAction }: TableProps<T>) => {
         </thead>
         <tbody>
           {table.getRowModel().rows.map(row => {
-           const rowindex =Number(row.id  );
-           const status= data[rowindex].Status;
-           const Result=data[rowindex].Result
+            const rowindex = Number(row.id);
+            const status = data[rowindex].Status;
+            const Result = data[rowindex].Result
             // Assuming 'status' is the column you want to check
-          
+
             return (
-              <tr key={row.id} className={`border-b hover:bg-gray-50 ${getRowColor(status ,Result)}`}>
+              <tr key={row.id} className={`border-b hover:bg-gray-50 ${getRowColor(status, Result)}`}>
                 {row.getVisibleCells().map(cell => (
                   <td key={cell.id} className="px-4 py-2 text-right">
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -66,33 +66,6 @@ const DataTable = <T,>({ data, columns, onAction }: TableProps<T>) => {
           })}
         </tbody>
       </table>
-
-      {/* Pagination Controls */}
-      {/* <div className="flex justify-between items-center py-4 px-6 bg-gray-50">
-        <div className="flex items-center space-x-2">
-          <button
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-            className="bg-blue-500 text-white px-4 py-2 rounded-md disabled:bg-gray-300"
-          >
-            السابق
-          </button>
-          <span>
-            صفحة {table.getState().pagination.pageIndex + 1} من {table.getPageCount()}
-          </span>
-          <button
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-            className="bg-blue-500 text-white px-4 py-2 rounded-md disabled:bg-gray-300"
-          >
-            التالي
-          </button>
-        </div>
-
-        <div>
-   
-        </div>
-      </div> */}
     </div>
   );
 };
