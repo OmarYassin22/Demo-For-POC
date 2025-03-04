@@ -412,7 +412,7 @@ const InspectionReport = () => {
                   </div>
                   <div>
                     <p className="text-sm text-gray-600">تاريخ الطلب</p>
-                    <p className="font-semibold text-gray-900">15/08/2024</p>
+                    <p className="font-semibold text-gray-900">{requetData.KrookiIssueDate}</p>
                   </div>
                 </div>
               </div>
