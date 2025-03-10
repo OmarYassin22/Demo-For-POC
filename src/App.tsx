@@ -13,6 +13,7 @@ import ArcReport from "./Components/ArcReport/ArcReport";
 import StrReport from "./Components/ArcReport/StrReport";
 import Footer from "./Components/Footer/Footer";
 import { useEffect } from "react";
+import LandingPage from "./Components/LandingPage";
 
 function App() {
   // useEffect(() => {

@@ -87,6 +87,7 @@ const Conditions: React.FC = () => {
   const [isUploading, setIsUploading] = useState<boolean>(false);
   const [bundleResponse, setBundleResponse] = useState<bundleUploadResponse | null>(null);
   const [uploadSuccess, setUploadSuccess] = useState(false);
+  const [showModelViewer, setShowModelViewer] = useState(false); // Add this state variable
 
   const [complianceResult, setComplianceResult] = useState<ApiResponse | null>(null);
   const [canStartService, setCanStartService] = useState(false);
@@ -142,6 +143,7 @@ const Conditions: React.FC = () => {
 
     setIsUploading(true);
     setUploadSuccess(false);
+    setShowModelViewer(false); 
 
     // Prepare the FormData
     const formData = new FormData();
@@ -184,6 +186,7 @@ const Conditions: React.FC = () => {
 
       if (response.ok) {
         setUploadSuccess(true);
+        setShowModelViewer(true); 
         const jsonResponse: bundleUploadResponse = await response.json();
         setBundleResponse(jsonResponse);
 
@@ -824,6 +827,31 @@ const Conditions: React.FC = () => {
                 )}
               </button>
             </div>
+            
+            {showModelViewer && (
+              <div className="mt-8 border-t pt-6">
+                <h3 className="text-xl font-bold text-gray-800 mb-4">معاينة النموذج</h3>
+                <div className="relative h-[50vh] rounded-lg overflow-hidden shadow-inner bg-white border border-gray-200">
+                  <iframe
+                    id="viewer-iframe"
+                    src="/model.html"
+                    title="Autodesk Viewer"
+                    className="w-full h-full rounded-lg"
+                    style={{
+                      border: 'none',
+                      filter: 'drop-shadow(0 4px 6px rgb(0 0 0 / 0.1))',
+                      marginTop: '-69px',
+                      height: 'calc(100% + 50px)',
+                    }}
+                    frameBorder="0"
+                    scrolling="no"
+                  />
+                </div>
+                <p className="text-sm text-gray-600 mt-2 text-center">
+                  * يمكنك تدوير النموذج والتكبير والتصغير للتحقق من التفاصيل
+                </p>
+              </div>
+            )}
           </div>
         }
       </div>   </div>
