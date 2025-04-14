@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "vercel-build": "vite build && node vercel-build.cjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -20,7 +19,6 @@
     "axios": "^1.7.9",
     "flowbite-react": "^0.10.2",
     "formik": "^2.4.6",
-    "fs-extra": "^11.2.0",
     "html-to-image": "^1.11.13",
     "html2canvas": "^1.4.1",
     "html2pdf.js": "^0.10.2",
