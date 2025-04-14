@@ -2,7 +2,7 @@
   "client": {
     "name": "Modern IT SA",
     "shortName": "BuildPro",
-    "arabicName": "أمانة منطقة الرياض",
+    "arabicName": "محرك البحث",
     "logo": "/image/logo-dark.png",
     "favicon": "/image/logo-dark.png",
     "theme": {
@@ -90,7 +90,7 @@
           "logoTagline": "text-green-300"
         }
       },
-      "tagline": "RIYADH REGION MUNICIPLITY"
+      "tagline": "تصاميم البناء"
     },
     "hero": {
       "title": "Building Tomorrow's World Today",

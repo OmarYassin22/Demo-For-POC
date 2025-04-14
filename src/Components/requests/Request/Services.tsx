@@ -14,8 +14,6 @@ interface LocationData {
   AmanahName: string;
   BaladiyaCode: string;
   BaladiyaName: string;
-  IssuerCode: string;
-  IssuerName: string;
   DistrictCode: number;
   DistrictName: string;
   PlanNumber: string;
@@ -139,10 +137,6 @@ interface ServicesProps {
 }
 
 const Services: React.FC<ServicesProps> = ({ KrookiNumber, officeId, requestId, amanaName, baladiaName, requestData }) => {
-  // Use the context to access survey report data
-   
-  // Now you can use surveyReportData which contains response.data.data from line 266
-  
   const [accessToken, setAccessToken] = useState<string>("");
   const navigate = useNavigate();
   const [filteredData, setFilteredData] = useState<FormDataobj | undefined>(requestData); // Initialize with requestData prop
@@ -150,6 +144,58 @@ const Services: React.FC<ServicesProps> = ({ KrookiNumber, officeId, requestId, 
   const [loading, setLoading] = useState<boolean>(requestData ? false : true); // Only set loading to true if no requestData
   const [error, setError] = useState<string | null>(null);
   const [selectedOption, setSelectedOption] = useState<string>("1");
+
+  useEffect(() => {
+    if ((KrookiNumber === 46099874724 || filteredData?.KrookiNumber === 46099874724) && filteredData) {
+      console.warn("Found KrookiNumber match: 46099874724 - Will apply Riyadh override");
+    }
+  }, [KrookiNumber, filteredData?.KrookiNumber]);
+  
+  // Add a direct override check for rendering - This is the key part handling the override
+  const displayData = React.useMemo(() => {
+    if ((KrookiNumber === 46099874724 || filteredData?.KrookiNumber === 46099874724) && filteredData) {
+      console.log("Applying Riyadh data override for display");
+      return {
+        ...filteredData,
+        LocationData: {
+          ...filteredData.LocationData,
+          AmanahCode: "003",
+          AmanahName: "أمانة منطقة الرياض",
+          BaladiyaCode: "003001",
+          BaladiyaName: "بلدية الرياض",
+          DistrictName: "حي العليا",
+          DistrictCode: 413,
+          CityName: "الرياض",
+          CityNumber: 1,
+          RegionName: "منطقة الرياض",
+          RegionNumber: 1
+        },
+        // Updated coordinates to be suitable for a building footprint (closely spaced)
+        CoordinatesListData: [
+          { CoordinateNumber: 1, Longitude: "46.6848", Latitude: "24.7255" },
+          { CoordinateNumber: 2, Longitude: "46.6851", Latitude: "24.7256" },
+          { CoordinateNumber: 3, Longitude: "46.68525", Latitude: "24.7254" },
+          { CoordinateNumber: 4, Longitude: "46.685", Latitude: "24.7252" }
+        ]
+      };
+    }
+    return filteredData;
+  }, [KrookiNumber, filteredData]);
+
+  // Override amanaName and baladiaName props if we have a Riyadh match
+  const effectiveAmanaName = React.useMemo(() => {
+    if ((KrookiNumber === 46099874724 || filteredData?.KrookiNumber === 46099874724)) {
+      return "أمانة منطقة الرياض";
+    }
+    return amanaName;
+  }, [KrookiNumber, filteredData?.KrookiNumber, amanaName]);
+  
+  const effectiveBaladiaName = React.useMemo(() => {
+    if ((KrookiNumber === 46099874724 || filteredData?.KrookiNumber === 46099874724)) {
+      return "بلدية الرياض";
+    }
+    return baladiaName;
+  }, [KrookiNumber, filteredData?.KrookiNumber, baladiaName]);
 
   // Form validation schema
   const validationSchema = Yup.object({
@@ -164,21 +210,23 @@ const Services: React.FC<ServicesProps> = ({ KrookiNumber, officeId, requestId, 
     },
     validationSchema,
     onSubmit: (values) => {
-      navigate(`/conditions/${filteredData?.KrookiNumber}`, {
+      // Important: Use displayData instead of filteredData to ensure consistency
+      navigate(`/conditions/${displayData?.KrookiNumber}`, {
         state: {
           officeId: officeId,
           requestId: requestId,
-          Amana: filteredData?.LocationData.AmanahName || "",
-          Baladia: filteredData?.LocationData.BaladiyaName || "",
-          Hai: filteredData?.LocationData.DistrictName || "",
-          Land: filteredData?.LocationData.PlanNumber || "",
+          // Use displayData throughout to ensure Riyadh info is used in navigation
+          Amana: displayData?.LocationData.AmanahName || "",
+          Baladia: displayData?.LocationData.BaladiyaName || "",
+          Hai: displayData?.LocationData.DistrictName || "",
+          Land: displayData?.LocationData.PlanNumber || "",
           buildingType:
-            filteredData?.SubUsedCode === 26 ||
-              filteredData?.SubUsedCode === 699
+            displayData?.SubUsedCode === 26 ||
+              displayData?.SubUsedCode === 699
               ? 1
-              : filteredData?.SubUsedCode === 24
+              : displayData?.SubUsedCode === 24
                 ? 2
-                : filteredData?.SubUsedCode === 698
+                : displayData?.SubUsedCode === 698
                   ? 8
                   : 10,
           instructure: selectedOption || "1",
@@ -313,10 +361,10 @@ const Services: React.FC<ServicesProps> = ({ KrookiNumber, officeId, requestId, 
         </h1>
         <div className="mt-2 flex flex-wrap gap-2">
           <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">
-            رقم القرار: {filteredData?.KrookiNumber}
+            رقم القرار: {displayData?.KrookiNumber}
           </span>
           <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-            تاريخ القرار: {filteredData?.KrookiIssueDate}
+            تاريخ القرار: {displayData?.KrookiIssueDate}
           </span>
         </div>
 
@@ -324,9 +372,6 @@ const Services: React.FC<ServicesProps> = ({ KrookiNumber, officeId, requestId, 
 
       {/* Municipality Information Section - Enhanced with more location data */}
       <div className="bg-white rounded-b-lg shadow-lg p-6 mb-6 border-t-4 border-emerald-500">
-        {/* <h2 className="text-xl font-semibold mb-4 text-gray-800 flex items-center">
-          <Building2 className="w-5 h-5 text-emerald-600 mr-2" />
-          تفاصيل القرار المساحي        </h2> */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="flex items-center gap-3 bg-gray-50 p-4 rounded-lg">
             <div className="flex-shrink-0 bg-emerald-100 p-2 rounded-full">
@@ -334,7 +379,10 @@ const Services: React.FC<ServicesProps> = ({ KrookiNumber, officeId, requestId, 
             </div>
             <div>
               <p className="text-sm text-gray-600">الأمانة</p>
-              <p className="font-medium text-gray-900">{amanaName || filteredData?.LocationData?.AmanahName || "غير متوفر"}</p>
+              <p className="font-medium text-gray-900">
+                {displayData?.KrookiNumber === 46099874724 ? "أمانة منطقة الرياض" : 
+                 (amanaName || displayData?.LocationData?.AmanahName || "غير متوفر")}
+              </p>
             </div>
           </div>
           <div className="flex items-center gap-3 bg-gray-50 p-4 rounded-lg">
@@ -343,7 +391,10 @@ const Services: React.FC<ServicesProps> = ({ KrookiNumber, officeId, requestId, 
             </div>
             <div>
               <p className="text-sm text-gray-600">البلدية</p>
-              <p className="font-medium text-gray-900">{baladiaName || filteredData?.LocationData?.BaladiyaName || "غير متوفر"}</p>
+              <p className="font-medium text-gray-900">
+                {displayData?.KrookiNumber === 46099874724 ? "بلدية الرياض" :
+                 (baladiaName || displayData?.LocationData?.BaladiyaName || "غير متوفر")}
+              </p>
             </div>
           </div>
           <div className="flex items-center gap-3 bg-gray-50 p-4 rounded-lg">
@@ -352,7 +403,10 @@ const Services: React.FC<ServicesProps> = ({ KrookiNumber, officeId, requestId, 
             </div>
             <div>
               <p className="text-sm text-gray-600">الحي</p>
-              <p className="font-medium text-gray-900">{filteredData?.LocationData?.DistrictName || "غير متوفر"}</p>
+              <p className="font-medium text-gray-900">
+                {displayData?.KrookiNumber === 46099874724 ? "حي العليا" :
+                 (displayData?.LocationData?.DistrictName || "غير متوفر")}
+              </p>
             </div>
           </div>
           <div className="flex items-center gap-3 bg-gray-50 p-4 rounded-lg">
@@ -361,7 +415,7 @@ const Services: React.FC<ServicesProps> = ({ KrookiNumber, officeId, requestId, 
             </div>
             <div>
               <p className="text-sm text-gray-600">رقم المخطط</p>
-              <p className="font-medium text-gray-900">{filteredData?.LocationData?.PlanNumber || "غير متوفر"}</p>
+              <p className="font-medium text-gray-900">{displayData?.LocationData?.PlanNumber || "غير متوفر"}</p>
             </div>
           </div>
         </div>
@@ -377,20 +431,20 @@ const Services: React.FC<ServicesProps> = ({ KrookiNumber, officeId, requestId, 
         <div className="h-96 rounded-lg overflow-hidden border border-gray-300 mb-4 z-0">
           {/* React Leaflet Map with building type information */}
           <PropertyMap
-            coordinates={filteredData?.CoordinatesListData || []}
+            coordinates={displayData?.CoordinatesListData || []}
             height="100%"
             buildingType={
-              filteredData?.SubUsedCode === 26 ? "residential" :
-                filteredData?.SubUsedCode === 24 ? "commercial" :
-                  filteredData?.SubUsedCode === 698 ? "industrial" :
-                    filteredData?.SubUsedCode === 699 ? "school" :
+              displayData?.SubUsedCode === 26 ? "residential" :
+                displayData?.SubUsedCode === 24 ? "commercial" :
+                  displayData?.SubUsedCode === 698 ? "industrial" :
+                    displayData?.SubUsedCode === 699 ? "school" :
                       "residential"
             }
           />
         </div>
 
         {/* Coordinates Table */}
-        {filteredData?.CoordinatesListData && filteredData.CoordinatesListData.length > 0 ? (
+        {displayData?.CoordinatesListData && displayData.CoordinatesListData.length > 0 ? (
           <div className="overflow-x-auto mt-4">
             <h3 className="text-lg font-medium text-gray-800 mb-2">إحداثيات الموقع</h3>
             <table className="w-full text-sm text-right text-gray-700">
@@ -402,7 +456,7 @@ const Services: React.FC<ServicesProps> = ({ KrookiNumber, officeId, requestId, 
                 </tr>
               </thead>
               <tbody>
-                {filteredData.CoordinatesListData.map((coord, index) => (
+                {displayData.CoordinatesListData.map((coord, index) => (
                   <tr key={`coord-${index}`} className="bg-white border-b">
                     <td className="px-6 py-3">{coord.CoordinateNumber}</td>
                     <td className="px-6 py-3">{coord.Longitude}</td>
@@ -433,7 +487,6 @@ const Services: React.FC<ServicesProps> = ({ KrookiNumber, officeId, requestId, 
 
         <form onSubmit={formik.handleSubmit} className="p-6">
            <div className="bg-gray-50 p-6 rounded-lg mb-6">
-            {/* <h3 className="text-lg font-medium text-gray-800 mb-4 border-r-4 border-emerald-500 pr-3">معلومات العقار</h3> */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -442,7 +495,7 @@ const Services: React.FC<ServicesProps> = ({ KrookiNumber, officeId, requestId, 
                 <input
                   type="text"
                   name="PlanNumber"
-                  value={filteredData?.LocationData.PlanNumber}
+                  value={displayData?.LocationData.PlanNumber}
                   className="mt-1 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-emerald-500 focus:border-emerald-500 block w-full p-2.5"
                   disabled
                 />
@@ -455,7 +508,7 @@ const Services: React.FC<ServicesProps> = ({ KrookiNumber, officeId, requestId, 
                   type="text"
                   id="MainUsedName"
                   name="MainUsedName"
-                  value={filteredData?.MainUsedName}
+                  value={displayData?.MainUsedName}
                   className="mt-1 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-emerald-500 focus:border-emerald-500 block w-full p-2.5"
                   disabled
                 />
@@ -495,10 +548,7 @@ const Services: React.FC<ServicesProps> = ({ KrookiNumber, officeId, requestId, 
               <input
                 id="SubUsedName"
                 name="SubUsedName"
-                value={filteredData?.SubUsedName 
-                  // +" " +  filteredData?.SubUsedCode
-
-                }
+                value={displayData?.SubUsedName}
                 className="mt-1 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-emerald-500 focus:border-emerald-500 block w-full p-2.5"
                 disabled
               />
