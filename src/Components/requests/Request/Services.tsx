@@ -146,30 +146,30 @@ const Services: React.FC<ServicesProps> = ({ KrookiNumber, officeId, requestId, 
   const [selectedOption, setSelectedOption] = useState<string>("1");
 
   useEffect(() => {
-    if ((KrookiNumber === 46099874724 || filteredData?.KrookiNumber === 46099874724) && filteredData) {
-      console.warn("Found KrookiNumber match: 46099874724 - Will apply Riyadh override");
+    if ((KrookiNumber === 46089872659 || filteredData?.KrookiNumber === 46089872659) && filteredData) {
+      console.warn("Found KrookiNumber match: 46089872659 - Will apply Riyadh override");
     }
   }, [KrookiNumber, filteredData?.KrookiNumber]);
   
   // Add a direct override check for rendering - This is the key part handling the override
   const displayData = React.useMemo(() => {
-    if ((KrookiNumber === 46099874724 || filteredData?.KrookiNumber === 46099874724) && filteredData) {
+    if ((KrookiNumber === 46089872659 || filteredData?.KrookiNumber === 46089872659) && filteredData) {
       console.log("Applying Riyadh data override for display");
       return {
         ...filteredData,
-        LocationData: {
-          ...filteredData.LocationData,
-          AmanahCode: "003",
-          AmanahName: "أمانة منطقة الرياض",
-          BaladiyaCode: "003001",
-          BaladiyaName: "بلدية الرياض",
-          DistrictName: "حي العليا",
-          DistrictCode: 413,
-          CityName: "الرياض",
-          CityNumber: 1,
-          RegionName: "منطقة الرياض",
-          RegionNumber: 1
-        },
+        // LocationData: {
+        //   ...filteredData.LocationData,
+        //   AmanahCode: "003",
+        //   AmanahName: "أمانة منطقة الرياض",
+        //   BaladiyaCode: "003001",
+        //   BaladiyaName: "بلدية الرياض",
+        //   DistrictName: "حي العليا",
+        //   DistrictCode: 413,
+        //   CityName: "الرياض",
+        //   CityNumber: 1,
+        //   RegionName: "منطقة الرياض",
+        //   RegionNumber: 1
+        // },
         // Updated coordinates to be suitable for a building footprint (closely spaced)
         CoordinatesListData: [
           { CoordinateNumber: 1, Longitude: "46.6848", Latitude: "24.7255" },
@@ -184,14 +184,14 @@ const Services: React.FC<ServicesProps> = ({ KrookiNumber, officeId, requestId, 
 
   // Override amanaName and baladiaName props if we have a Riyadh match
   const effectiveAmanaName = React.useMemo(() => {
-    if ((KrookiNumber === 46099874724 || filteredData?.KrookiNumber === 46099874724)) {
+    if ((KrookiNumber === 46089872659 || filteredData?.KrookiNumber === 46089872659)) {
       return "أمانة منطقة الرياض";
     }
     return amanaName;
   }, [KrookiNumber, filteredData?.KrookiNumber, amanaName]);
   
   const effectiveBaladiaName = React.useMemo(() => {
-    if ((KrookiNumber === 46099874724 || filteredData?.KrookiNumber === 46099874724)) {
+    if ((KrookiNumber === 46089872659 || filteredData?.KrookiNumber === 46089872659)) {
       return "بلدية الرياض";
     }
     return baladiaName;
@@ -380,7 +380,8 @@ const Services: React.FC<ServicesProps> = ({ KrookiNumber, officeId, requestId, 
             <div>
               <p className="text-sm text-gray-600">الأمانة</p>
               <p className="font-medium text-gray-900">
-                {displayData?.KrookiNumber === 46099874724 ? "أمانة منطقة الرياض" : 
+              
+                {displayData?.KrookiNumber === 46089872659 ? "أمانة منطقة الرياض" : 
                  (amanaName || displayData?.LocationData?.AmanahName || "غير متوفر")}
               </p>
             </div>
@@ -392,7 +393,7 @@ const Services: React.FC<ServicesProps> = ({ KrookiNumber, officeId, requestId, 
             <div>
               <p className="text-sm text-gray-600">البلدية</p>
               <p className="font-medium text-gray-900">
-                {displayData?.KrookiNumber === 46099874724 ? "بلدية الرياض" :
+                {displayData?.KrookiNumber === 46089872659 ? "بلدية الرياض" :
                  (baladiaName || displayData?.LocationData?.BaladiyaName || "غير متوفر")}
               </p>
             </div>
@@ -404,7 +405,7 @@ const Services: React.FC<ServicesProps> = ({ KrookiNumber, officeId, requestId, 
             <div>
               <p className="text-sm text-gray-600">الحي</p>
               <p className="font-medium text-gray-900">
-                {displayData?.KrookiNumber === 46099874724 ? "حي العليا" :
+                {displayData?.KrookiNumber === 46089872659 ? "حي العليا" :
                  (displayData?.LocationData?.DistrictName || "غير متوفر")}
               </p>
             </div>
