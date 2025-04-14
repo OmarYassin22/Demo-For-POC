@@ -1,0 +1,63 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/offices",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/login",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/offices/:id/requests",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/offices/:id/request/:requestid",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/conditions/:krookiNumber",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/InspectionReport/:krookiNumber",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/AutodeskResultViewer",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/ViewCompliance",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/arc",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/str",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    }
+  ]
+}

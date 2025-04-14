@@ -16,22 +16,7 @@ import { useEffect } from "react";
 import LandingPage from "./Components/LandingPage";
 
 function App() {
-  // useEffect(() => {
-  //   const handleBeforeUnload = () => {
-  //     localStorage.removeItem("isLoggedIn");
-  //     localStorage.removeItem("visualCategory");
-  //     localStorage.removeItem("visualCategoryStatus");
-  //     localStorage.removeItem("reportType");
-  //     localStorage.removeItem("ComplianceResultData");
-  //     localStorage.removeItem("urn");
-  //   };
 
-  //   window.addEventListener("beforeunload", handleBeforeUnload);
-
-  //   return () => {
-  //     window.removeEventListener("beforeunload", handleBeforeUnload);
-  //   };
-  // }, []);
   return (
     <BrowserRouter>
       <div className="min-h-screen bg-gray-50">
