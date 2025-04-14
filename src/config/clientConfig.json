@@ -3,8 +3,8 @@
     "name": "Modern IT SA",
     "shortName": "BuildPro",
     "arabicName": "أمانة منطقة الرياض",
-    "logo": "../../public/image/logo-dark.png",
-    "favicon": "../../public/image/logo-dark.png",
+    "logo": "/image/logo-dark.png",
+    "favicon": "/image/logo-dark.png",
     "theme": {
       "primary": "#044442",
       "secondary": "#4CAF50",
@@ -27,7 +27,7 @@
     },
     "ministry": {
       "name": "أمانة منطقة الرياض",
-      "logo": "../../public/image/riad.png"
+      "logo": "/image/riad.png"
     },
     "login": {
       "title": "تسجيل الدخول",
@@ -37,7 +37,7 @@
       "buttonText": "تسجيل الدخول",
       "helpText": "تواجه مشاكل في تسجيل الدخول؟ يرجى التواصل مع الدعم الفني",
       "footerText": "جميع الحقوق محفوظة",
-      "backgroundImage": "../../public/image/Screenshot_18-1-2025_133036_ssoapp.balady.gov.sa.jpeg",
+      "backgroundImage": "/image/Screenshot_18-1-2025_133036_ssoapp.balady.gov.sa.jpeg",
       "idPlaceholder": "أدخل رقم الهوية",
       "passwordPlaceholder": "أدخل كلمة المرور",
       "idRequiredMessage": "رقم الهوية مطلوب",
