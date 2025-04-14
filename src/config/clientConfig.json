@@ -1,0 +1,132 @@
+{
+  "client": {
+    "name": "Modern IT SA",
+    "shortName": "BuildPro",
+    "arabicName": "أمانة منطقة الرياض",
+    "logo": "/src/Assets/image/logo-dark.png",
+    "favicon": "/src/Assets/image/logo-dark.png",
+    "theme": {
+      "primary": "#044442",
+      "secondary": "#4CAF50",
+      "accent": "#2f9a4f",
+      "error": "#af4c4c"
+    },
+    "footer": {
+      "copyright": "© 2024 Modern IT SA - جميع الحقوق محفوظة",
+      "slogan": "توفير حلول تقنية مبتكرة لاصدار رخص المبانى في جميع أنحاء المملكة العربية السعودية",
+      "socialLinks": {
+        "github": "https://github.com/OmarYassin22/Demo-For-POC",
+        "linkedin": "https://www.linkedin.com/company/modern-information-technologies/posts/?feedView=all",
+        "twitter": ""
+      }
+    },
+    "contact": {
+      "address": "الرياض, المملكة العربية السعودية",
+      "phone": "+966 12 345 6789",
+      "email": "contact@modernitsa.com"
+    },
+    "ministry": {
+      "name": "أمانة منطقة الرياض",
+      "logo": "/src/Assets/image/riad.png"
+    },
+    "login": {
+      "title": "تسجيل الدخول",
+      "subtitle": "الدخول الموحد",
+      "idLabel": "رقم الهوية / الاقامة",
+      "passwordLabel": "كلمة المرور",
+      "buttonText": "تسجيل الدخول",
+      "helpText": "تواجه مشاكل في تسجيل الدخول؟ يرجى التواصل مع الدعم الفني",
+      "footerText": "جميع الحقوق محفوظة",
+      "backgroundImage": "/src/Assets/image/Screenshot_18-1-2025_133036_ssoapp.balady.gov.sa.jpeg",
+      "idPlaceholder": "أدخل رقم الهوية",
+      "passwordPlaceholder": "أدخل كلمة المرور",
+      "idRequiredMessage": "رقم الهوية مطلوب",
+      "idMinLengthMessage": "رقم الهوية لايقل عن 9 حروف",
+      "passwordRequiredMessage": "كلمة المرور مطلوبة",
+      "invalidCredentialsMessage": "رقم الهوية أو كلمة المرور غير صحيحه.",
+      "correctUsername": "123123123",
+      "correctPassword": "password123",
+      "tokenUrl": "https://apiservicesstg.balady.gov.sa/oauth/v1/token",
+      "apiUsername": "7WVXK2rO9fGn16uIGM7ixGhswAu2uGHd",
+      "apiPassword": "TCz3GQGRssBq7maT",
+      "button": {
+        "backgroundColor": "#4CAF50",
+        "hoverBackgroundColor": "#044442",
+        "textColor": "#FFFFFF",
+        "hoverTextColor": "#FFFFFF",
+        "borderRadius": "0.75rem",
+        "padding": "0.875rem 1.5rem",
+        "shadow": "lg",
+        "fontSize": "1rem",
+        "fontWeight": "600",
+        "width": "full",
+        "transition": "all 0.3s ease-in-out",
+        "hoverTransform": "translateY(-2px) scale(1.01)",
+        "icon": "ArrowRight",
+        "iconPosition": "left"
+      }
+    },
+    "meta": {
+      "title": "Benaa Pro",
+      "description": "منصة لمراجعة وإصدار تراخيص البناء"
+    },
+    "navbar": {
+      "services": "خدمات",
+      "projects": "مشاريعنا",
+      "contact": "اتصل بنا",
+      "team": "فريقنا",
+      "testimonials": "آراء العملاء",
+      "colors": {
+        "scrolled": {
+          "background": "bg-white",
+          "text": "text-green-800",
+          "logoText": "text-gray-800",
+          "logoTagline": "text-green-600"
+        },
+        "notScrolled": {
+          "background": "bg-gradient-to-r from-green-700 to-green-500",
+          "text": "text-white",
+          "logoText": "text-white",
+          "logoTagline": "text-green-300"
+        }
+      },
+      "tagline": "RIYADH REGION MUNICIPLITY"
+    },
+    "hero": {
+      "title": "Building Tomorrow's World Today",
+      "subtitle": "التميز في البناء مع أكثر من 25 عاماً من الخبرة في تنفيذ المشاريع التجارية والسكنية المتميزة",
+      "cta": "ابدأ معنا",
+      "backgroundImage": "https://images.unsplash.com/photo-1541976590-713941681591?auto=format&fit=crop&q=80"
+    },
+    "stats": {
+      "projects": {
+        "value": "250+",
+        "label": "مشروع مكتمل"
+      },
+      "clients": {
+        "value": "1500+",
+        "label": "عميل سعيد"
+      },
+      "experience": {
+        "value": "25+",
+        "label": "سنوات خبرة"
+      },
+      "awards": {
+        "value": "50+",
+        "label": "جائزة"
+      }
+    },
+    "reports": {
+      "arcReport": {
+        "boxBorderColor": "#0a984586",
+        "headerTitleColor": "#2f9a4f",
+        "footerBackgroundColor": "#ddefec"
+      },
+      "strReport": {
+        "boxBorderColor": "#af4c4c86",
+        "headerTitleColor": "#af4c4c",
+        "footerBackgroundColor": "#ddefec"
+      }
+    }
+  }
+}
