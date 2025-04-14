@@ -1,27 +1,16 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { LogOut, UserCircle, Menu, X } from "lucide-react";
-import { getConfigValue, getThemeColor } from "../../config/clientConfigUtils";
+import { getConfigValue } from "../../config/clientConfigUtils";
 
 // Get client configuration
 const logoSrc = getConfigValue('logo', '../../Assets/image/favicon.ico');
 
-// Get navbar color variables from config
-const navbarScrolledBg = getConfigValue('navbar.colors.scrolled.background', 'bg-gray-100');
-const navbarNotScrolledBg = getConfigValue('navbar.colors.notScrolled.background', 'bg-gradient-to-r from-green-900 to-green-700');
-const navbarScrolledText = getConfigValue('navbar.colors.scrolled.text', 'text-green-900');
-const navbarNotScrolledText = getConfigValue('navbar.colors.notScrolled.text', 'text-white');
-
+// Using static styles instead of dynamic config values
 const BuildingVerificationLogo = ({ isScrolled }: { isScrolled: boolean }) => {
   const appName = getConfigValue('shortName', 'BuildPro');
   const arabicName = getConfigValue('arabicName', 'البناء برو');
   const appTagline = getConfigValue('navbar.tagline', 'تصاميم البناء');
-
-  // Logo text color variables from config
-  const logoTextScrolled = getConfigValue('navbar.colors.scrolled.logoText', 'text-gray-900');
-  const logoTextNotScrolled = getConfigValue('navbar.colors.notScrolled.logoText', 'text-white');
-  const logoTaglineScrolled = getConfigValue('navbar.colors.scrolled.logoTagline', 'text-green-700');
-  const logoTaglineNotScrolled = getConfigValue('navbar.colors.notScrolled.logoTagline', 'text-green-200');
 
   return (
     <div className="flex items-center gap-4">
@@ -35,11 +24,11 @@ const BuildingVerificationLogo = ({ isScrolled }: { isScrolled: boolean }) => {
       </div>
       <div className="flex flex-col">
         <span className={`text-xl font-bold leading-tight transition-colors
-          ${isScrolled ? logoTextScrolled : logoTextNotScrolled}`}>
+          ${isScrolled ? 'text-gray-800' : 'text-white'}`}>
           {arabicName}
         </span>
         <span className={`text-sm font-medium transition-all
-          ${isScrolled ? logoTaglineScrolled : logoTaglineNotScrolled}`}>
+          ${isScrolled ? 'text-green-600' : 'text-green-300'}`}>
           {appTagline}
         </span>
       </div>
@@ -89,8 +78,8 @@ export default function Navbar() {
       <nav
         className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-3 transition-all duration-300
           ${isScrolled 
-            ? `${navbarScrolledBg} ${navbarScrolledText} shadow-lg` 
-            : `${navbarNotScrolledBg} ${navbarNotScrolledText}`}`}
+            ? 'bg-white text-green-800 shadow-lg' 
+            : 'bg-gradient-to-r from-green-700 to-green-500 text-white'}`}
         dir="rtl"
         style={{ zIndex: 10000 }}
       >
