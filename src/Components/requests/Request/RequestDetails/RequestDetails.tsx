@@ -197,6 +197,7 @@ export default function RequestDetails() {
     } catch (err: any) {
       console.log("Unable to fetch token. Please try again.");
       setError("فشل في الحصول على رمز الوصول");
+      
     }
   };
 
