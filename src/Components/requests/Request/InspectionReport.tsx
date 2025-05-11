@@ -476,7 +476,8 @@ const InspectionReport = () => {
                     },
                     {
                       label: "نوع المبنى",
-                      value: requetData.SubUsedName || "سكني",
+                      //azza
+                      value:requetData.SubUsedCode==20||requetData.SubUsedCode==7041? "فيلا منفصلة":(requetData.SubUsedName || "سكني"),
                       icon: <BuildingIcon className="w-5 h-5 text-emerald-600" />
                     },
                     {

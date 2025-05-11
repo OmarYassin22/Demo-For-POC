@@ -308,7 +308,8 @@ interface FormDataobj {
                 type="text"
                 id="SubUsedName"
                 name="SubUsedName"
-                value={filteredData?.SubUsedName}
+                //azza
+                value={filteredData?.SubUsedCode==20||filteredData?.SubUsedCode==7041? "فيلا منفصلة":filteredData?.SubUsedName}
                 onChange={handleInputChange}
                 className="input"
               />
@@ -319,7 +320,8 @@ interface FormDataobj {
                 type="text"
                 id="SubUsedCode"
                 name="SubUsedCode"
-                 value={filteredData?.SubUsedCode}
+                //azza
+                 value={filteredData?.SubUsedCode==20?699:filteredData?.SubUsedCode}
                 onChange={handleInputChange}
                 className="input"
               />

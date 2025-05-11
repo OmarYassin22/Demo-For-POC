@@ -221,8 +221,11 @@ const Services: React.FC<ServicesProps> = ({ KrookiNumber, officeId, requestId, 
           Hai: displayData?.LocationData.DistrictName || "",
           Land: displayData?.LocationData.PlanNumber || "",
           buildingType:
-            displayData?.SubUsedCode === 26 ||
-              displayData?.SubUsedCode === 699
+            filteredData?.SubUsedCode === 26 ||
+              filteredData?.SubUsedCode === 699
+              //azza
+              ||filteredData?.SubUsedCode === 20
+              ||filteredData?.SubUsedCode === 7041
               ? 1
               : displayData?.SubUsedCode === 24
                 ? 2
@@ -435,10 +438,11 @@ const Services: React.FC<ServicesProps> = ({ KrookiNumber, officeId, requestId, 
             coordinates={displayData?.CoordinatesListData || []}
             height="100%"
             buildingType={
-              displayData?.SubUsedCode === 26 ? "residential" :
-                displayData?.SubUsedCode === 24 ? "commercial" :
-                  displayData?.SubUsedCode === 698 ? "industrial" :
-                    displayData?.SubUsedCode === 699 ? "school" :
+              filteredData?.SubUsedCode === 26 ? "residential" :
+                filteredData?.SubUsedCode === 24 ? "commercial" :
+                  filteredData?.SubUsedCode === 698 ? "industrial" :
+                  //azza
+                    filteredData?.SubUsedCode === 699 ||filteredData?.SubUsedCode===20? "school" :
                       "residential"
             }
           />
@@ -549,7 +553,12 @@ const Services: React.FC<ServicesProps> = ({ KrookiNumber, officeId, requestId, 
               <input
                 id="SubUsedName"
                 name="SubUsedName"
-                value={displayData?.SubUsedName}
+                //azza
+                value={filteredData?.SubUsedCode==20||filteredData.SubUsedCode==7041? "فيلا منفصلة":filteredData?.SubUsedName }
+                // {filteredData?.SubUsedName 
+                //   // +" " +  filteredData?.SubUsedCode
+
+                // }
                 className="mt-1 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-emerald-500 focus:border-emerald-500 block w-full p-2.5"
                 disabled
               />
