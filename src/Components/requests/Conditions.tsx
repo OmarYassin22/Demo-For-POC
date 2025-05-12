@@ -5,7 +5,7 @@ import '../../styles/conditionModal.css'
 import { log } from "console";
 import { ArrowLeft, Loader2 } from "lucide-react";
 import BackButton from '../common/BackButton';
-//import MockStrConditions from "../../mocks/MockStrConditions.json";
+import conditionsMock from "../../mocks/conditions.json";
 
 
 
@@ -93,6 +93,8 @@ const Conditions: React.FC = () => {
   const [canStartService, setCanStartService] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [isStartingService, setIsStartingService] = useState<boolean>(false);
+
+  const [useMock,setUseMock] = useState(true); 
   // Handles file selection
   // const handleFileChange = (event: ChangeEvent<HTMLInputElement>): void => {
   //   if (event.target.files) {
@@ -418,7 +420,12 @@ const Conditions: React.FC = () => {
         // withCredentials: true,
       });
 
-
+      if (useMock) {
+        // Mock data
+        console.log("Using mock data");
+        console.log(conditionsMock);
+        response.data = conditionsMock;
+      }
 
       //setConditionsData(response.data.data.result.conditions);
 
@@ -427,9 +434,9 @@ const Conditions: React.FC = () => {
 
 
       setError(null);
-      console.log(response.data);
+      // console.log(response.data);
       let filteredConditions: Condition[] = response.data.data.result.conditions;
-      console.log(filteredConditions);
+      // console.log(filteredConditions);
       if (filteredConditions.length == 0) {
         setError("لا يوجد إشتراطات لهذا المكان");
         return;
@@ -444,8 +451,8 @@ const Conditions: React.FC = () => {
         return;
       }
       //filteredConditions.forEach((condition) => console.log(condition.condition));
-      console.log("activeCon");
-      console.log(filteredConditions);
+      // console.log("activeCon");
+      // console.log(filteredConditions);
 
       if (filteredConditions) {
         if (instructure === "1") {
