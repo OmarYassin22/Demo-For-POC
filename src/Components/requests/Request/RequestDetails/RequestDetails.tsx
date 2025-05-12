@@ -18,6 +18,7 @@ import {
   FileText
 } from "lucide-react";
 import { useSurveyReport } from "../../../../context/SurveyReportContext"; // Import the context
+import surveyReportMock from "../../../../mocks/surveyReport.json";
 
 interface StatusDetail {
   code: number;
@@ -172,6 +173,7 @@ export default function RequestDetails() {
   const [request, setRequest] = useState<ResultData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [requestBasic, setRequestBasic] = useState<Result | null>(null);
+  const [useMock, setUseMock] = useState(true);
 
   // Fetch Token
   const fetchToken = async () => {
@@ -260,17 +262,37 @@ export default function RequestDetails() {
       queryMode: "BY_LICENSE_NUMBER",
     };
 
+    // For debugging purposes, log the requestid from URL
+ 
     try {
       const response = await axios.post<SurveyReportResponse>(url, requestData, { headers });
-      ;
-      console.log("ob");
-      console.log(response.data.data.result[0]);
 
+      if (useMock) {
+        console.log("Using mock data instead of API call");
+        
+        // Use the requestid from the URL to find corresponding mock data
+        const mockData = surveyReportMock[requestid];
+        
+        if (mockData) {
+          console.log("Mock data found for request ID:", requestid);
+          setRequest(mockData.data.result[0]);
+          localStorage.setItem('inspectionReportData', JSON.stringify(mockData.data.result[0]));
+          return mockData;
+        } else {
+          console.warn(`No mock data found for request ID: ${requestid}, using default mock data`);
+          // Use first entry as fallback
+          const firstMockEntry = Object.values(surveyReportMock)[0];
+          setRequest(firstMockEntry.data.result[0]);
+          localStorage.setItem('inspectionReportData', JSON.stringify(firstMockEntry.data.result[0]));
+          return firstMockEntry;
+        }
+      }
+      
+      // Original API call
+      console.log("API response:", response.data);
       setRequest(response.data.data.result[0]);
       localStorage.setItem('inspectionReportData', JSON.stringify(response.data.data.result[0]));
-
-
-
+      return response.data;
     } catch (error: any) {
       console.error("Error fetching survey report:", error.response?.data || error.message);
       setError("فشل في الحصول على تقرير المسح");

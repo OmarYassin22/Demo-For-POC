@@ -1,0 +1,219 @@
+{
+    "4617365267": {
+        "statusDetails": [
+            {
+                "code": 200,
+                "message": "Ok"
+            }
+        ],
+        "data": {
+            "responseCode": 1,
+            "responseMessage": "Success",
+            "result": [
+                {
+                    "OldLicense": "42085491246",
+                    "KrookiNumber": 46069864833,
+                    "KrookiHijriIssueDate": "1446/03/01",
+                    "KrookiIssueDate": "2024/09/04",
+                    "PurposeID": 111,
+                    "Area": 2528.97,
+                    "PurposeName": "اصدار رخصة بناء",
+                    "Note": null,
+                    "MainUsedCode": 13,
+                    "MainUsedName": "سكني",
+                    "SubUsedCode": 20,
+                    "SubUsedName": "سكن (عزاب-افراد)",
+                    "LandType": 113,
+                    "LandTypeName": "مخططة",
+                    "LandUsed": 654,
+                    "LandUsedName": "سكني تجاري",
+                    "HasNeighborhood": false,
+                    "IsLandMobtra": false,
+                    "IsFawry": false,
+                    "SiteType": null,
+                    "SiteTypeName": null,
+                    "LocationData": {
+                        "AmanahCode": "b65ec706-882f-492b-9eda-2e00b894cb11",
+                        "AmanahName": "أمانة محافظة الطائف",
+                        "BaladiyaCode": "584a9ac6-eeda-4c32-8e57-343dd036d58d",
+                        "BaladiyaName": "بلدية غرب الطائف الفرعية",
+                        "IssuerCode": "778d00f0-96db-494c-a3e9-4281de9e8a5e",
+                        "IssuerName": "أمانة محافظة الطائف",
+                        "DistrictCode": 9425,
+                        "DistrictName": "حي الفيصلية",
+                        "PlanNumber": "171",
+                        "BlockNumber": "بدون",
+                        "RegionNumber": null,
+                        "RegionName": null,
+                        "CityNumber": 4,
+                        "CityName": "الطائف                        "
+                    },
+                    "OwnershipData": {
+                        "OwnershipDocCode": 112,
+                        "OwnershipDocName": "صك",
+                        "OwnershipDocNumber": "68",
+                        "OwnershipDocDate": "1434/06/01"
+                    },
+                    "EngOfficeData": {
+                        "OfficeLicense": "5100001892",
+                        "OfficeName": "صروح البناء للاستشارات الهندسية"
+                    },
+                    "Attachments": [
+                        {
+                            "KrookiFile": "https://apiservicesstg.balady.gov.sa/v1/attachment/license-file/EA1CC247-15CC-4F72-A58B-B356FEBCEBCB",
+                            "KrookiCoordFile": null
+                        }
+                    ],
+                    "LocationBordersListData": [
+                        {
+                            "Side": 4,
+                            "Boundary": "شارعارض",
+                            "DeedBoundary": null,
+                            "BorderLength": 50.23,
+                            "DeedBorderLength": null,
+                            "Truncate": null,
+                            "LessReflections": 3,
+                            "MaxOutcropping": 3,
+                            "BorderType": null,
+                            "BorderTypeName": null,
+                            "DimensionsType": 2,
+                            "DimensionsTypeName": "غير منكسر",
+                            "BorderLengthDetail": null,
+                            "BorderLengthDetailWithType": [
+                                {
+                                    "length": 50.23,
+                                    "typeId": 1,
+                                    "typeName": "ضلع"
+                                }
+                            ]
+                        },
+                        {
+                            "Side": 1,
+                            "Boundary": "القطعة رقم 1619",
+                            "DeedBoundary": null,
+                            "BorderLength": 47.86,
+                            "DeedBorderLength": null,
+                            "Truncate": null,
+                            "LessReflections": 1,
+                            "MaxOutcropping": 5,
+                            "BorderType": null,
+                            "BorderTypeName": null,
+                            "DimensionsType": 2,
+                            "DimensionsTypeName": "غير منكسر",
+                            "BorderLengthDetail": null,
+                            "BorderLengthDetailWithType": [
+                                {
+                                    "length": 47.86,
+                                    "typeId": 1,
+                                    "typeName": "ضلع"
+                                }
+                            ]
+                        },
+                        {
+                            "Side": 3,
+                            "Boundary": "ليس موجهات",
+                            "DeedBoundary": null,
+                            "BorderLength": 58.46,
+                            "DeedBorderLength": null,
+                            "Truncate": null,
+                            "LessReflections": 3,
+                            "MaxOutcropping": 4,
+                            "BorderType": null,
+                            "BorderTypeName": null,
+                            "DimensionsType": 2,
+                            "DimensionsTypeName": "غير منكسر",
+                            "BorderLengthDetail": null,
+                            "BorderLengthDetailWithType": [
+                                {
+                                    "length": 58.46,
+                                    "typeId": 1,
+                                    "typeName": "ضلع"
+                                }
+                            ]
+                        },
+                        {
+                            "Side": 2,
+                            "Boundary": "طائف وليس موجهات",
+                            "DeedBoundary": null,
+                            "BorderLength": 45.2,
+                            "DeedBorderLength": null,
+                            "Truncate": null,
+                            "LessReflections": 3,
+                            "MaxOutcropping": 5,
+                            "BorderType": null,
+                            "BorderTypeName": null,
+                            "DimensionsType": 2,
+                            "DimensionsTypeName": "غير منكسر",
+                            "BorderLengthDetail": null,
+                            "BorderLengthDetailWithType": [
+                                {
+                                    "length": 45.2,
+                                    "typeId": 1,
+                                    "typeName": "ضلع"
+                                }
+                            ]
+                        }
+                    ],
+                    "CoordinatesListData": [
+                        {
+                            "CoordinateNumber": 12644589,
+                            "Longitude": "40.42409706900003",
+                            "Latitude": "21.30271083300005"
+                        },
+                        {
+                            "CoordinateNumber": 12644587,
+                            "Longitude": "40.424329327000066",
+                            "Latitude": "21.303089836000026"
+                        },
+                        {
+                            "CoordinateNumber": 12644586,
+                            "Longitude": "40.42477021000008",
+                            "Latitude": "21.302962878000073"
+                        },
+                        {
+                            "CoordinateNumber": 12644588,
+                            "Longitude": "40.42477021000008",
+                            "Latitude": "21.302962878000073"
+                        },
+                        {
+                            "CoordinateNumber": 12644591,
+                            "Longitude": "40.424080556000035",
+                            "Latitude": "21.30274395600003"
+                        },
+                        {
+                            "CoordinateNumber": 12644590,
+                            "Longitude": "40.424640930000066",
+                            "Latitude": "21.302573015000064"
+                        }
+                    ],
+                    "LandsListData": [
+                        {
+                            "LandNumber": "25",
+                            "LandArea": 2528.97,
+                            "RealestateID": null,
+                            "LandAreaAccordingToScheme": 2528.97,
+                            "partNumber": null
+                        }
+                    ],
+                    "OwnersListData": [
+                        {
+                            "OwnerIdentifierType": 1,
+                            "OwnerIdentifierTypeName": "هوية وطنية",
+                            "OwnerIdentifier": "1000100873",
+                            "OwnerName": "شاكر محمد مبارك القحطاني"
+                        }
+                    ],
+                    "BuildCondListData": {
+                        "BuildingPercentage": null,
+                        "MaxBuildingHeight": null,
+                        "FloorsNumber": null,
+                        "ConstructionFactor": null
+                    },
+                    "DeedListData": [],
+                    "UrbanBoundary": null,
+                    "RequestId": 4617353295
+                }
+            ]
+        }
+    }
+}
