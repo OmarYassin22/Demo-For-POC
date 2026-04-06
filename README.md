@@ -57,15 +57,6 @@ npm start
 
 ---
 
-🔐 Demo Access
-
-Use the following credentials to explore the system:
-
-Username: 123123123
-Password: password123
-
----
-
 📸 Screenshots
 
 Login page
@@ -80,6 +71,16 @@ Dashboard
 🔗 Live Demo
 
 👉 https://demo-for-poc.vercel.app/
+
+---
+
+🔐 Demo Access
+
+Use the following credentials to explore the system:
+
+Username: 123123123
+
+Password: password123
 
 ---
 
