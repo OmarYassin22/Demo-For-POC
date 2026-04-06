@@ -59,9 +59,10 @@ npm start
 
 ## 📸 Screenshots
 
-Login page
+### Login page
 <img width="1765" height="881" alt="image" src="https://github.com/user-attachments/assets/38a329b2-bfa9-4e7e-a825-ff0c564ad659" />
-Dashboard 
+
+### Dashboard 
 <img width="1747" height="619" alt="image" src="https://github.com/user-attachments/assets/f828b3b6-9243-4565-87f5-df929e12f18d" />
 <img width="1812" height="915" alt="image" src="https://github.com/user-attachments/assets/53634141-b0ac-40ba-8895-14544ba5caeb" />
 
